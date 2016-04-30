@@ -59,3 +59,7 @@ __TODO :__
     
     4.8 Si une opérande n’est pas correcte, elle est laissée sur la ligne de commande
         en attente d’une correction de l’utilisateur et un message d’erreur prévient l’utilisateur.  
+        
+  5. Opérateurs
+  
+  6. Litérales programmes 
