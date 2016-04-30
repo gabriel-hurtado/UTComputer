@@ -54,12 +54,8 @@ __TODO :__
         &nbsp;&nbsp;&nbsp;&nbsp;– si elle correspond à une variable, empilement de la littérale associée cette variable;  
         &nbsp;&nbsp;&nbsp;&nbsp;– si elle correspond à un programme, évaluation du programme associé (exécution du programme);  
         &nbsp;&nbsp;&nbsp;&nbsp;– sinon, provoque la création d’une nouvelle littérale expression.  
-    4.7. Le traitement d’un opérateur n-aire provoque le dépilement des n dernières littérales de la pile avec lesquelles
-sera effectuée l’opération. L’opération est effectué sur ces littérales. Le résultat de l’opération (s’il y en a un)
-est empilé. Si la pile ne contient pas assez de littérales pour exécuter un opérateur, la pile est laissée intacte
-et un message prévient de la non-validité de l’opération.
-Si, lors de son traitement, une opérande n’est pas correcte syntaxiquement, elle est laissée sur la ligne de commande
-en attente d’une correction de l’utilisateur et un message d’erreur adéquat prévient l’utilisateur. On remarque
-qu’une littérale expression ou une littérale programme n’est pas évaluée automatiquement; elle est simplement
-empilée sur la pile.
-
+        
+    4.7. Le traitement d’un opérateur n-aire: dépilement des n dernières littérales de la pile utiles. Le résultat de l’opération est       empilé. Si la pile ne contient pas assez d'éléments, elle est laissée intacte, un message est affiché    
+    
+    4.8 Si une opérande n’est pas correcte, elle est laissée sur la ligne de commande
+        en attente d’une correction de l’utilisateur et un message d’erreur prévient l’utilisateur.  
