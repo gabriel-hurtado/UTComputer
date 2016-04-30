@@ -65,3 +65,9 @@ __TODO :__
   6. Litérales programmes 
 
   7. Variables
+  
+  8. Restauration au lancement
+  
+  9. Undo et Redo 
+
+  
