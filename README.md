@@ -49,10 +49,11 @@ __TODO :__
     4.4. Les opérandes sont traitées une par une, de la gauche vers la droite.
     
     4.5. Le traitement d’une littérale "normale" provoque l’empilement.
-    4.6. Le traitement d’une littérale atome dépend des cas :
-        – si elle correspond à une variable, empilement de la littérale associée cette variable;
-        – si elle correspond à un programme, évaluation du programme associé (exécution du programme);
-        – sinon, provoque la création d’une nouvelle littérale expression avec la valeur de l’atome entre guillemets.
+    
+    4.6. Le traitement d’une littérale atome dépend des cas :   
+        &nbsp;&nbsp;&nbsp;&nbsp;– si elle correspond à une variable, empilement de la littérale associée cette variable;  
+        &nbsp;&nbsp;&nbsp;&nbsp;– si elle correspond à un programme, évaluation du programme associé (exécution du programme);  
+        &nbsp;&nbsp;&nbsp;&nbsp;– sinon, provoque la création d’une nouvelle littérale expression.  
     4.7. Le traitement d’un opérateur n-aire provoque le dépilement des n dernières littérales de la pile avec lesquelles
 sera effectuée l’opération. L’opération est effectué sur ces littérales. Le résultat de l’opération (s’il y en a un)
 est empilé. Si la pile ne contient pas assez de littérales pour exécuter un opérateur, la pile est laissée intacte
