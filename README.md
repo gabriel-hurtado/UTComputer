@@ -3,7 +3,7 @@ Scientific calculator
 
 __TODO :__
 
-  1. A partir du TD sur la calculette, choisir une architecture, facilement modifiable
+  1. A partir du TD sur la calculette, choisir une architecture, facilement évolutile
   
   2. A partir du TD sur Qt:
   
