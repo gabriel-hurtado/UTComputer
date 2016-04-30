@@ -7,7 +7,7 @@ __TODO :__
   
   2. A partir du TD sur Qt:
   
-    2.1.Dans sa vue principale:
+    2.1.Dans sa vue principale:  
         2.1.1. Affichage de l’état du calculateur (état de la pile, message pour l’utilisateur)  
         2.1.2. Barre de commande affichant la suite d’opérandes en train d’être saisie  
         2.1.3. Clavier cliquable à la souris comprenant un pavé numérique et les opérateurs les plus utilisés  
