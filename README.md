@@ -36,5 +36,5 @@ __TODO :__
     3.5. Littérale atome. Suite de caractères, identificateur d’une variable, d’un programme ou au nom d’un opérateur.
     
     3.6. Littérale expression. Suite de caractères entre guillemets, composée de littérales séparées par
-        des opérateurs numériques.  
+        des opérateurs numériques.    
     3.7. Littérale programme. Suite d’opérandes entourés de [].
