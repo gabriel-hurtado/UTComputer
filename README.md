@@ -9,7 +9,7 @@ __TODO :__
   
       2.1.Dans sa vue principale:  
           &nbsp;&nbsp;&nbsp;&nbsp;* Affichage de l’état du calculateur (état de la pile(!), message pour l’utilisateur)  
-          &nbsp;&nbsp;&nbsp;&nbsp;* Barre de commande affichant la suite d’opérandes en train d’être saisie  
+          &nbsp;&nbsp;&nbsp;&nbsp;* Barre de commande affichant la suite d’opérandes en train d’être saisie (! rectification)  
           &nbsp;&nbsp;&nbsp;&nbsp;* Clavier cliquable à la souris comprenant un pavé numérique et les opérateurs les plus utilisés  
           &nbsp;&nbsp;&nbsp;&nbsp;* Les X derniers éléments de la pile sont affichés (où X est paramétrable dans l’application).  
           &nbsp;&nbsp;&nbsp;&nbsp;* Le calculateur peut être utilisé à la souris ou directement en utilisant le clavier.  
