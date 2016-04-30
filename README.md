@@ -15,7 +15,11 @@ __TODO :__
           &nbsp;&nbsp;&nbsp;&nbsp;* Le calculateur peut être utilisé à la souris ou directement en utilisant le clavier.  
           &nbsp;&nbsp;&nbsp;&nbsp;* L’affichage ou non du clavier cliquable est une option paramétrable par l’utilisateur.  
           &nbsp;&nbsp;&nbsp;&nbsp;* L’affichage d’un nouveau message destiné à l’utilisateur peut s’accompagner d’un bip sonore qui peut être     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;désactivé par l’utilisateur.  
-      2.2. Une vue secondaire de l’application sera dédiée à la gestion et l’édition des variables stockées dans l’application.  
+
+      2.2. Une vue secondaire de l’application sera dédiée à la gestion et l’édition des variables stockées dans l’application. 
+      
       2.3. Une vue secondaire de l’application sera dédiée à la gestion et l’édition des (mini-)programmes utilisateurs  
-          stockés dans l’application.  
+            stockés dans l’application.  
+          
       2.4. Une vue secondaire de l’application sera dédiée à l’édition des paramètres du calculateur.
+      
