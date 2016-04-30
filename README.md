@@ -8,7 +8,7 @@ __TODO :__
   2. A partir du TD sur Qt:
   
       2.1.Dans sa vue principale:  
-          &nbsp;&nbsp;* Affichage de l’état du calculateur (état de la pile, message pour l’utilisateur)  
+          &nbsp;&nbsp;&nbsp;* Affichage de l’état du calculateur (état de la pile, message pour l’utilisateur)  
           * Barre de commande affichant la suite d’opérandes en train d’être saisie  
           * Clavier cliquable à la souris comprenant un pavé numérique et les opérateurs les plus utilisés  
           * Les X derniers éléments de la pile sont affichés (où X est paramétrable dans l’application).  
