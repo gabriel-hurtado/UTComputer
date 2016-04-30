@@ -3,7 +3,7 @@ Scientific calculator
 
 __TODO :__
 
-  1. A partir du TD sur la calculette, implémenter l'opérateur NEG
+  1. A partir du TD sur la calculette, choisir une architecture, facilement modifiable
   
   2. A partir du TD sur Qt:
   
