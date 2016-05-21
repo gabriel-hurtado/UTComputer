@@ -1,6 +1,17 @@
 #include "operande.h"
+#include "utils.h"
 #include <string>
 #include <sstream>
+#include <exception>
+
+class LitteraleException : public std::exception
+{
+	std::string info;
+public:
+	LitteraleException (std::string in) : info(in) {}
+	const std::string	getMessage() { return info; }
+};
+
 
 class Litterale : public Operande
 {
