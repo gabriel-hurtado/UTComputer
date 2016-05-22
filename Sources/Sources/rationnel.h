@@ -11,8 +11,8 @@
 
 class Rationnel : public LitteraleNumerique
 {
-	int numerateur;
-	int denominateur;
+    Entier numerateur;
+    Entier denominateur;
 public:
 	Rationnel(int n, int d=1){
 		if (d == 0)
@@ -21,18 +21,20 @@ public:
             int pg = pgcd(n, d);
 			n = n / pg;
 			d = d / pg;
-			numerateur = n;
-			denominateur = d;
+            numerateur = n;
+            denominateur = d;
 			}
 		}
 	Rationnel(const Entier& n, const Entier& d) { Rationnel(n.getValeur(), d.getValeur()); }
     ~Rationnel(){ }
-    int getNumerateur() const { return numerateur; }
-    int getDenominator() const { return denominateur; }
+    Entier getNumerateur() const { return numerateur; }
+    Entier getDenominator() const { return denominateur; }
     const std::string toString() const { std::stringstream st;
-									st << getNumerateur() << "/" << getDenominator();
+                                    st << getNumerateur().getValeur() << "/" << getDenominator().getValeur();
 									return st.str();
 									}
+    /*Opérateurs objets donc définis ailleurs*/
+    /*
 	Rationnel operator+(const Rationnel& r) {	int newDen=r.getDenominator()*getDenominator();
 												int newNum = r.getNumerateur()*getDenominator()+getNumerateur()*r.getDenominator();
 												return Rationnel(newDen, newNum);
@@ -42,6 +44,7 @@ public:
 												int newNum = r.getNumerateur()*getNumerateur();
 												return Rationnel(newDen, newNum);
 											}
+    */
 
 };
 

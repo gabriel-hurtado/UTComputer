@@ -13,9 +13,9 @@ public:
         else{mantisse=p;}
     }
     ~Reelle(){};
-    LitteraleNumerique& Simplification();
     Entier getPartieEntiere(){return p_entiere;}
     Entier getMantisse(){return mantisse;}
+    LitteraleNumerique& Simplification();
     const std::string toString() const;
 
 };
