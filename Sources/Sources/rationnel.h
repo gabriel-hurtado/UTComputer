@@ -1,6 +1,13 @@
+#include "operande.h"
+#include "utils.h"
 #include "entier.h"
+
 #ifndef H_RATIONNEL
 #define H_RATIONNEL
+/*
+ Pour éviter les inclusions circulaires :
+ http://www.segmentationfault.fr/applications/include-is-evil/
+*/
 
 class Rationnel : public LitteraleNumerique
 {
@@ -20,8 +27,8 @@ public:
 		}
 	Rationnel(const Entier& n, const Entier& d) { Rationnel(n.getValeur(), d.getValeur()); }
     ~Rationnel(){ }
-    const int getNumerateur() const { return numerateur; }
-    const int getDenominator() const { return denominateur; }
+    int getNumerateur() const { return numerateur; }
+    int getDenominator() const { return denominateur; }
     const std::string toString() const { std::stringstream st;
 									st << getNumerateur() << "/" << getDenominator();
 									return st.str();
