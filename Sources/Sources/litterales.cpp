@@ -75,7 +75,8 @@ const std::string Complexe::toString() const{
 
 
 /*------------Définition des méthodes de la classe Atome------------*/
- bool Atome::isValidAtomeName(std::string s){
+
+bool Atome::isValidAtomeName(std::string s){
     std::string::iterator it=s.begin();
     //On vérifie que le premier caractère est une majuscule;
     if(s.begin()!=s.end() && *it<'Z' && *it>'A'){
@@ -92,3 +93,18 @@ const std::string Complexe::toString() const{
     else
         return false;
 }
+
+Litterale* Atome::getCopy() const{return new Atome(nom);}
+
+
+
+/*------------Définition des méthodes de la classe Expression------------*/
+
+LitteraleComplexe* Expression::evaluer() const{ return nullptr;}
+
+Litterale* Expression::getCopy() const{return new Expression(value);}
+
+
+/*------------Définition des méthodes de la classe Expression------------*/
+
+Litterale* Programme::getCopy() const{return new Programme(valeur);}

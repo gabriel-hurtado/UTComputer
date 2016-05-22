@@ -194,13 +194,39 @@ class Atome : public LitteraleSimple{
 public:
     Atome(std::string n){
         std::string::iterator it=n.begin();
-        while(1){}
-    };
-    ~Atome();
-    std::string getNom(){return nom;}
-    const std::string toString() const;
-    Litterale* getCopy();
-    static bool isValidAtomeName(std::string);
+        if(isValidAtomeName(n))
+            nom=n;
+        else
+            throw LitteraleException("Nom d'atome invalide");
+    }
+    std::string getNom() const {return nom;}
+    const std::string toString() const {return getNom();}
+    Litterale* getCopy() const;
+    static bool isValidAtomeName(std::string s);
+};
+
+/*------------Classe Litterale Expression------------*/
+
+class Expression : public Litterale{
+    std::string value;
+public:
+    Expression(std::string v):value(v){};
+    std::string getExpression() const {return value;}
+    const std::string toString() const {return getExpression();}
+    LitteraleComplexe* evaluer() const;
+    Litterale* getCopy() const;
+};
+
+
+/*------------Classe Litterale Programme------------*/
+class Programme : public Litterale{
+    std::string valeur;
+public:
+    Programme(std::string p):valeur(p){}
+    std::string getProgramme() const {return valeur;}
+    const std::string toString() const {return getProgramme();}
+    Litterale* getCopy() const;
+
 };
 
 #endif
