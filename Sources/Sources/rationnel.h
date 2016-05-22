@@ -16,9 +16,9 @@ public:
 			}
 		}
 	Rationnel(const Entier& n, const Entier& d) { Rationnel(n.getValeur(), d.getValeur()); }
-	~Rationnel(){ LitteraleNumerique::~LitteraleNumerique(); }
-	const int getNumerateur() const{ return numerateur; }
-	const int getDenominator() const{ return denominateur; }
+    ~Rationnel(){ }
+    const int getNumerateur() const { return numerateur; }
+    const int getDenominator() const { return denominateur; }
 	const std::string afficher() { std::stringstream st;
 									st << getNumerateur() << "/" << getDenominator();
 									return st.str();
