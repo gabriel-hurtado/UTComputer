@@ -1,4 +1,7 @@
 #include "entier.h"
+#ifndef H_RATIONNEL
+#define H_RATIONNEL
+
 class Rationnel : public LitteraleNumerique
 {
 	int numerateur;
@@ -8,7 +11,7 @@ public:
 		if (d == 0)
 			throw LitteraleException("Le dénominateur ne peut être nul !");	
 		else {
-			int pg = pgcd(n, d);
+            int pg = pgcd(n, d);
 			n = n / pg;
 			d = d / pg;
 			numerateur = n;
@@ -19,7 +22,7 @@ public:
     ~Rationnel(){ }
     const int getNumerateur() const { return numerateur; }
     const int getDenominator() const { return denominateur; }
-	const std::string afficher() { std::stringstream st;
+    const std::string toString() const { std::stringstream st;
 									st << getNumerateur() << "/" << getDenominator();
 									return st.str();
 									}
@@ -34,3 +37,5 @@ public:
 											}
 
 };
+
+#endif
