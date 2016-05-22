@@ -1,4 +1,4 @@
-#include "rationnel.h"
+#include "litterales.h"
 
 int main() {
 
