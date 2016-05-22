@@ -162,4 +162,14 @@ public:
 
 /*------------Classe Litterale Complexe------------*/
 
+class Complexe : public LitteraleComplexe{
+    LitteraleNumerique& p_reelle;
+    LitteraleNumerique& p_imaginaire;
+public:
+    /*Le comportement par défaut du constructeur est suffisant car pas de pointeur*/
+    Complexe(LitteraleNumerique& pR,LitteraleNumerique& pI):p_reelle(LitteraleNumerique(pR)),p_imaginaire(LitteraleNumerique(pI)){}
+    const LitteraleNumerique& getPartieReelle(){return p_reelle;}
+    const LitteraleNumerique& getPartieImaginaire{return p_imaginaire;}
+
+};
 #endif
