@@ -29,6 +29,7 @@ public:
     /*Template method pour afficher utilisant toString()*/
     void afficher(std::ostream& f=std::cout){f<<toString();}
     virtual const std::string toString() const = 0;
+    //virtual Litterale* getCopy() const= 0;
 
 private:
 
@@ -60,6 +61,7 @@ class LitteraleNumerique : public LitteraleComplexe
 public:
 	LitteraleNumerique() {}
 	virtual ~LitteraleNumerique() {};
+    virtual LitteraleNumerique* getNumericCopy() const =0;
 
 private:
 
@@ -89,7 +91,11 @@ public:
     Entier(int v=0) :valeur(v) {}
     ~Entier() {};
     int getValeur() const { return valeur; }
-    const std::string toString() const { return std::to_string(getValeur()); }
+    const std::string toString() const { return std::to_string(getValeur());}
+    Litterale* getCopy() const {return getNumericCopy();}
+    LitteraleNumerique* getNumericCopy() const{return new Entier(*this);}
+
+
 
 
     /*Les opérateurs sont dorénavant des objets*/
@@ -116,7 +122,8 @@ public:
     ~Rationnel(){ }
     Entier getNumerateur() const { return numerateur; }
     Entier getDenominator() const { return denominateur; }
-
+    LitteraleNumerique* getNumericCopy() const{return new Rationnel(*this);}
+    Litterale* getCopy() const {return getNumericCopy();}
     const std::string toString() const;
     LitteraleNumerique& Simplification();
     /*Opérateurs objets donc définis ailleurs*/
@@ -153,7 +160,10 @@ public:
     Entier getPartieEntiere(){return p_entiere;}
     Entier getMantisse(){return mantisse;}
     LitteraleNumerique& Simplification();
+    LitteraleNumerique* getNumericCopy() const{return new Reelle(*this);}
+    Litterale* getCopy() const{return getNumericCopy();}
     const std::string toString() const;
+
 
 };
 
@@ -167,9 +177,30 @@ class Complexe : public LitteraleComplexe{
     LitteraleNumerique& p_imaginaire;
 public:
     /*Le comportement par défaut du constructeur est suffisant car pas de pointeur*/
-    Complexe(LitteraleNumerique& pR,LitteraleNumerique& pI):p_reelle(LitteraleNumerique(pR)),p_imaginaire(LitteraleNumerique(pI)){}
-    const LitteraleNumerique& getPartieReelle(){return p_reelle;}
-    const LitteraleNumerique& getPartieImaginaire{return p_imaginaire;}
+    Complexe(LitteraleNumerique& pR,LitteraleNumerique& pI):p_reelle(*pR.getNumericCopy()),p_imaginaire(*pI.getNumericCopy()){}
+    const LitteraleNumerique& getPartieReelle() const {return p_reelle;}
+    const LitteraleNumerique& getPartieImaginaire() const {return p_imaginaire;}
+    Litterale* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
+    const std::string toString() const;
+
 
 };
+
+
+
+/*------------Classe Litterale Atome------------*/
+class Atome : public LitteraleSimple{
+    std::string nom;
+public:
+    Atome(std::string n){
+        std::string::iterator it=n.begin();
+        while(1){}
+    };
+    ~Atome();
+    std::string getNom(){return nom;}
+    const std::string toString() const;
+    Litterale* getCopy();
+    static bool isValidAtomeName(std::string);
+};
+
 #endif

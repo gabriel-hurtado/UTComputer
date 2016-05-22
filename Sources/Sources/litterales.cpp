@@ -61,3 +61,34 @@ LitteraleNumerique& Rationnel::Simplification(){
 
 
 /*------------Définition des méthodes de la classe Entier------------*/
+
+
+/*------------Définition des méthodes de la classe Complexe------------*/
+const std::string Complexe::toString() const{
+    std::stringstream s;
+    s<<p_reelle.toString();
+    s<<'$';
+    s<<p_imaginaire.toString();
+    return s.str();
+}
+
+
+
+/*------------Définition des méthodes de la classe Atome------------*/
+ bool Atome::isValidAtomeName(std::string s){
+    std::string::iterator it=s.begin();
+    //On vérifie que le premier caractère est une majuscule;
+    if(s.begin()!=s.end() && *it<'Z' && *it>'A'){
+        //On doit alors vérifier que tout les caractères ne sont que des lettres majuscules ou des chiffres
+        while(it!=s.end()){
+            if(('A'<=*it && *it<='Z') || ('0'<=*it && *it<='9'))
+                continue;
+            else
+                return false;
+        }
+        return true;
+    }
+    //Si le premier caractère n'est pas une lettre majuscule, alors ce ne peut pas être un nom d'atome
+    else
+        return false;
+}
