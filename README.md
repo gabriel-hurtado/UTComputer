@@ -7,10 +7,10 @@ __TODO :__
       
   2. Construire la pile avec son memento
   
-  3. Construire les opérateurs
-    a. opérateurs numériques (+ * - /)
-    b. operateurs d'identification de littérale pour les instancier
-    c. chercher d'autres solutions pour les operateurs simples
+  3. Construire les opérateurs 
+    a. opérateurs numériques (+ * - /) 
+    b. operateurs d'identification de littérale pour les instancier 
+    c. chercher d'autres solutions pour les operateurs simples 
 
   4. Designer l'interface sous Qt
       
