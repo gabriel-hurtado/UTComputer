@@ -25,11 +25,12 @@ class Litterale : public Operande
 {
 public:
 	Litterale() {}
-	virtual ~Litterale() {};
+    virtual ~Litterale() {}
     /*Template method pour afficher utilisant toString()*/
-    void afficher(std::ostream& f=std::cout){f<<toString();}
+    std::ostream& afficher(std::ostream& f=std::cout){f<<toString();return f;}
     virtual const std::string toString() const = 0;
-    //virtual Litterale* getCopy() const= 0;
+    virtual Litterale* getCopy() const= 0;
+    Litterale* traitement(){return nullptr;}
 
 private:
 
@@ -40,8 +41,7 @@ class LitteraleSimple : public Litterale
 {
 public:
 	LitteraleSimple() {}
-	virtual ~LitteraleSimple() {};
-
+    virtual ~LitteraleSimple() {}
 private:
 
 };
@@ -50,7 +50,7 @@ class LitteraleComplexe : public LitteraleSimple
 {
 public:
 	LitteraleComplexe() {}
-	virtual ~LitteraleComplexe() {};
+    virtual ~LitteraleComplexe() {}
 
 private:
 
@@ -60,7 +60,7 @@ class LitteraleNumerique : public LitteraleComplexe
 {
 public:
 	LitteraleNumerique() {}
-	virtual ~LitteraleNumerique() {};
+    virtual ~LitteraleNumerique() {}
     virtual LitteraleNumerique* getNumericCopy() const =0;
 
 private:
@@ -89,7 +89,7 @@ class Entier : public LitteraleNumerique {
     int valeur;
 public:
     Entier(int v=0) :valeur(v) {}
-    ~Entier() {};
+    ~Entier() {}
     int getValeur() const { return valeur; }
     const std::string toString() const { return std::to_string(getValeur());}
     Litterale* getCopy() const {return getNumericCopy();}
@@ -156,7 +156,7 @@ public:
         if(m.getValeur()==0){LitteraleException("Construction: Mantisse nulle !");}
         else{mantisse=p;}
     }
-    ~Reelle(){};
+    ~Reelle(){}
     Entier getPartieEntiere(){return p_entiere;}
     Entier getMantisse(){return mantisse;}
     LitteraleNumerique& Simplification();
@@ -210,7 +210,7 @@ public:
 class Expression : public Litterale{
     std::string value;
 public:
-    Expression(std::string v):value(v){};
+    Expression(std::string v):value(v){}
     std::string getExpression() const {return value;}
     const std::string toString() const {return getExpression();}
     LitteraleComplexe* evaluer() const;

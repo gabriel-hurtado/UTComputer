@@ -5,12 +5,15 @@
 #ifndef H_OPERANDE
 #define H_OPERANDE
 
+class Litterale;
+
 class Operande
 {
 
 public:
 	Operande() {}
 	virtual ~Operande() {};
+    virtual Litterale* traitement() = 0;
 
 };
 
