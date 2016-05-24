@@ -1,9 +1,9 @@
-
+#include "operande.h"
+#include "litterales.h"
 
 #ifndef OPERATEUR_H
 #define OPERATEUR_H
-#include "operande.h"
-#include "litterales.h";
+
 
 
 class Operateur : public Operande
