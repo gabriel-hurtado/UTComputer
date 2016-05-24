@@ -43,6 +43,12 @@ public:
    OperateurAddition(Litterale* lit1=nullptr, Litterale* lit2=nullptr):OperateurBinaire(lit1,lit2){}
 };
 
+class OperateurDivision : public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+   OperateurDivision(Litterale* lit1=nullptr, Litterale* lit2=nullptr):OperateurBinaire(lit1,lit2){}
+};
+
 
 class OperateurMultiplication : public OperateurBinaire{
 public:

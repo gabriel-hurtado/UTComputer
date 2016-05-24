@@ -1,5 +1,6 @@
 #include "litterales.h"
 #include "utils.h"
+#include "operateur.h"
 
 /*Définition des méthodes de la classe Litterale*/
 
@@ -57,6 +58,11 @@ LitteraleNumerique& Rationnel::Simplification(){
     return *ptr;
 }
 
+
+Reelle Rationnel::roundValue() const{
+     double rounded= (numerateur.getValeur()/(double)(denominateur.getValeur()));
+     return Reelle(0,(int)(rounded));
+}
 
 
 

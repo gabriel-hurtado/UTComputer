@@ -100,23 +100,7 @@ public:
 
 
 
-/*------------Classe Litterale Rationnel------------*/
 
-class Rationnel : public LitteraleNumerique
-{
-    Entier numerateur;
-    Entier denominateur;
-public:
-    Rationnel(int n, int d=1);
-    Rationnel(const Entier& n, const Entier& d) { Rationnel(n.getValeur(), d.getValeur()); }
-    virtual ~Rationnel(){ }
-    Entier getNumerateur() const { return numerateur; }
-    Entier getDenominator() const { return denominateur; }
-    LitteraleNumerique* getNumericCopy() const{return new Rationnel(*this);}
-    const std::string toString() const;
-    LitteraleNumerique& Simplification();
-
-};
 
 
 
@@ -131,7 +115,7 @@ public:
     Reelle(Entier m,Entier p=0):p_entiere(p){
         /*Un réel ne peut pas être construit avec une mantisse nulle*/
         if(m.getValeur()==0){LitteraleException("Construction: Mantisse nulle !");}
-        else{mantisse=p;}
+        else{mantisse=m;}
     }
     virtual ~Reelle(){}
     Entier getPartieEntiere(){return p_entiere;}
@@ -143,6 +127,25 @@ public:
 
 };
 
+/*------------Classe Litterale Rationnel------------*/
+
+class Rationnel : public LitteraleNumerique
+{
+protected:
+    Entier numerateur;
+    Entier denominateur;
+public:
+    Rationnel(int n, int d=1);
+    Rationnel(const Entier& n, const Entier& d) { Rationnel(n.getValeur(), d.getValeur()); }
+    virtual ~Rationnel(){ }
+    Entier getNumerateur() const { return numerateur; }
+    Entier getDenominator() const { return denominateur; }
+    LitteraleNumerique* getNumericCopy() const{return new Rationnel(*this);}
+    const std::string toString() const;
+    LitteraleNumerique& Simplification();
+    Reelle roundValue() const;
+
+};
 
 
 
