@@ -1,7 +1,9 @@
-#include "litterales.h"
+
 
 #ifndef OPERATEUR_H
 #define OPERATEUR_H
+#include "operande.h"
+#include "litterales.h";
 
 
 class Operateur : public Operande
@@ -10,7 +12,7 @@ class Operateur : public Operande
     static int arite;
 public:
 
-    Operateur();
+    Operateur(){}
     static int getArite(){return arite;}
     static std::string getSymbole(){return symbole;}
     virtual void chargerContexte() = 0;
@@ -18,23 +20,33 @@ public:
     Litterale* traitement(){chargerContexte();return traitementOperateur();}
 };
 
+
 class OperateurBinaire : public Operateur{
+ protected:
     Litterale* l1;
     Litterale* l2;
 public:
-    void chargerContexte(){l1 = new Entier(1);l2= new Entier(2);}
+    void chargerContexte(){}
+    OperateurBinaire(Litterale* lit1=nullptr, Litterale* lit2=nullptr):l1(lit1),l2(lit2){chargerContexte();}
+
 
 };
+
 class OperateurUnaire  : public Operateur{
 
 };
 
 
-
 class OperateurAddition : public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+   OperateurAddition(Litterale* lit1=nullptr, Litterale* lit2=nullptr):OperateurBinaire(lit1,lit2){}
+};
+
+
+class OperateurMultiplication : public OperateurBinaire{
 public:
    Litterale* traitementOperateur();
 
 };
-
 #endif // OPERATEUR_H
