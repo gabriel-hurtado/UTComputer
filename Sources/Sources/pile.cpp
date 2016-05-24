@@ -1,5 +1,10 @@
 #include "pile.h"
 
+
+
+
+
+/*---------Méthodes de Pile-----------*/
 Pile* Pile::instancePile = nullptr;
 
 Pile& Pile::donnerInstance(){
@@ -14,21 +19,60 @@ void Pile::libererInstance(){
     instancePile = nullptr;
 }
 
-/*Cette méthode est réservée à un mementoPile*/
-
-Pile::Pile(const Pile& p){
-    /*
-        L'objectif est de créer une nouvelle pile
-        Il faut donc recopier toutes les valeurs de la pile p.
-    */
-    for(Litterale* n : p.emP){
-
-        emP.push_front(n);
-    }
-
-}
-
 void Pile::voirPile() const {
     for(Litterale* n : emP)
         std::cout<<n->toString()<<std::endl;
 }
+
+MementoPile* Pile::saveInMemento() const{
+    return new MementoPile(emP);
+}
+
+void Pile::restoreFromMemento(MementoPile* m){
+    emP= m->saved_emP;
+}
+
+/*---------Méthodes de MementoPile-----------*/
+
+MementoPile::MementoPile(const std::deque<Litterale* >& emP){
+    //On push par le back from the front
+    for(Litterale* n : emP)
+        saved_emP.push_back(n->getCopy());
+
+}
+
+/*---------Méthodes de GerantPile-----------*/
+GerantPile::GerantPile(unsigned int nbMax =1):nombreMaxDeMemento(nbMax),nombreDeMemento(0),savedMemento(new MementoPile[1]){}
+/*
+ Le destructeur du GerantPile doit détruire toutes les Litterale* sauvés dans des Memento puis le tableau des Memento
+ En effet le Memento ne doit pas supprimer tout seul
+*/
+GerantPile::~GerantPile(){
+    for(unsigned int i=0;i<nombreDeMemento;i++){
+        for(Litterale* n : savedMemento[i].saved_emP){
+            delete n;
+        }
+    }
+    delete savedMemento[i];
+}
+
+GerantPile& GerantPile::donnerInstance(){
+    if(instanceGerantPile==nullptr)
+        instanceGerantPile= new GerantPile;
+    return *instanceGerantPile;
+}
+
+void GerantPile::libererInstance(){
+    if(instanceGerantPile!=nullptr)
+        delete instanceGerantPile;
+    instanceGerantPile = nullptr;
+}
+
+void GerantPile::UNDO(){
+    if()
+}
+
+void GerantPile::REDO(){
+    //Destruction des Litterale* ici
+}
+
