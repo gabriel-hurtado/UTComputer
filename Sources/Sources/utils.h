@@ -1,7 +1,6 @@
-
 #ifndef H_UTILS
 #define H_UTILS
-const int pgcd(int a, int b) {
+int pgcd(int a, int b) {
     while (a*b!=0)
     {
         if (a > b)

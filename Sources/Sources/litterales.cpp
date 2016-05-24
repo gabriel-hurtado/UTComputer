@@ -76,6 +76,15 @@ const std::string Complexe::toString() const{
 
 /*------------Définition des méthodes de la classe Atome------------*/
 
+Atome::Atome(std::string n){
+    std::string::iterator it=n.begin();
+    if(isValidAtomeName(n))
+        nom=n;
+    else
+        throw LitteraleException("Nom d'atome invalide");
+}
+
+
 bool Atome::isValidAtomeName(std::string s){
     std::string::iterator it=s.begin();
     //On vérifie que le premier caractère est une majuscule;

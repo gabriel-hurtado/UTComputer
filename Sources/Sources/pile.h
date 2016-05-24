@@ -4,7 +4,7 @@
 #define PILE_H
 
 /*
-    Manuel pour utiliser un objet deque :
+    Manuel pour utiliser un objet "deque" :
     http://en.cppreference.com/w/cpp/container/deque
 */
 class Pile
@@ -16,11 +16,18 @@ class Pile
     ~Pile(){}
     void operator=(const Pile&);
 public:
-
-
+    Pile& operator<<(Litterale& l){emP.push_front(&l);return *this;}
+    Pile& operator>>(Litterale* l){*l=*emP.front();return *this;}
+    void voirPile() const;
     static Pile& donnerInstance();
     static void libererInstance();
 
+};
+
+class MementoPile{
+
+public:
+    friend class Pile;
 };
 
 #endif // PILE_H

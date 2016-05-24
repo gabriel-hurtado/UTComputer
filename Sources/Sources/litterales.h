@@ -29,7 +29,7 @@ public:
     /*Template method pour afficher utilisant toString()*/
     std::ostream& afficher(std::ostream& f=std::cout){f<<toString();return f;}
     virtual const std::string toString() const = 0;
-    virtual Litterale* getCopy() const= 0;
+    virtual Litterale* getCopy() const = 0;
     Litterale* traitement(){return nullptr;}
 
 private:
@@ -62,7 +62,7 @@ public:
 	LitteraleNumerique() {}
     virtual ~LitteraleNumerique() {}
     virtual LitteraleNumerique* getNumericCopy() const =0;
-
+    Litterale* getCopy() const {return getNumericCopy();}
 private:
 
 };
@@ -73,7 +73,7 @@ private:
 */
 template<typename L> L* estdeType(Litterale* Tobj){
     L* Lobj;
-    if(Lobj=dynamic_cast<L*>(Tobj))
+    if((Lobj=dynamic_cast<L*>(Tobj)))
         return Lobj;
     return nullptr;
 
@@ -89,22 +89,12 @@ class Entier : public LitteraleNumerique {
     int valeur;
 public:
     Entier(int v=0) :valeur(v) {}
-    ~Entier() {}
+    virtual ~Entier() {}
     int getValeur() const { return valeur; }
     const std::string toString() const { return std::to_string(getValeur());}
-    Litterale* getCopy() const {return getNumericCopy();}
+
     LitteraleNumerique* getNumericCopy() const{return new Entier(*this);}
 
-
-
-
-    /*Les opérateurs sont dorénavant des objets*/
-    /*
-    Entier operator+(Entier e) { return Entier(e.getValeur() + getValeur()); }
-    Entier operator+(int e) { return Entier(e+ getValeur()); }
-    Entier operator*(Entier e) { return Entier(e.getValeur() * getValeur()); }
-    Entier operator*(int e) { return Entier(e * getValeur()); }
-    */
 };
 
 
@@ -119,25 +109,12 @@ class Rationnel : public LitteraleNumerique
 public:
     Rationnel(int n, int d=1);
     Rationnel(const Entier& n, const Entier& d) { Rationnel(n.getValeur(), d.getValeur()); }
-    ~Rationnel(){ }
+    virtual ~Rationnel(){ }
     Entier getNumerateur() const { return numerateur; }
     Entier getDenominator() const { return denominateur; }
     LitteraleNumerique* getNumericCopy() const{return new Rationnel(*this);}
-    Litterale* getCopy() const {return getNumericCopy();}
     const std::string toString() const;
     LitteraleNumerique& Simplification();
-    /*Opérateurs objets donc définis ailleurs*/
-    /*
-    Rationnel operator+(const Rationnel& r) {	int newDen=r.getDenominator()*getDenominator();
-                                                int newNum = r.getNumerateur()*getDenominator()+getNumerateur()*r.getDenominator();
-                                                return Rationnel(newDen, newNum);
-                                            }
-    Rationnel operator*(const Rationnel& r) {
-                                                int newDen = r.getDenominator()*getDenominator();
-                                                int newNum = r.getNumerateur()*getNumerateur();
-                                                return Rationnel(newDen, newNum);
-                                            }
-    */
 
 };
 
@@ -156,12 +133,11 @@ public:
         if(m.getValeur()==0){LitteraleException("Construction: Mantisse nulle !");}
         else{mantisse=p;}
     }
-    ~Reelle(){}
+    virtual ~Reelle(){}
     Entier getPartieEntiere(){return p_entiere;}
     Entier getMantisse(){return mantisse;}
     LitteraleNumerique& Simplification();
     LitteraleNumerique* getNumericCopy() const{return new Reelle(*this);}
-    Litterale* getCopy() const{return getNumericCopy();}
     const std::string toString() const;
 
 
@@ -192,13 +168,7 @@ public:
 class Atome : public LitteraleSimple{
     std::string nom;
 public:
-    Atome(std::string n){
-        std::string::iterator it=n.begin();
-        if(isValidAtomeName(n))
-            nom=n;
-        else
-            throw LitteraleException("Nom d'atome invalide");
-    }
+    Atome(std::string n);
     std::string getNom() const {return nom;}
     const std::string toString() const {return getNom();}
     Litterale* getCopy() const;
@@ -219,6 +189,8 @@ public:
 
 
 /*------------Classe Litterale Programme------------*/
+
+
 class Programme : public Litterale{
     std::string valeur;
 public:

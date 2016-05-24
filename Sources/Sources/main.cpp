@@ -1,5 +1,6 @@
 #include "litterales.h"
 #include "operateur.h"
+#include "pile.h"
 
 int main() {
 
@@ -16,6 +17,14 @@ int main() {
         std::cout<<"Patate chaude"<<std::endl;
     else
         std::cout<<"Patate froide"<<std::endl;
+
+    /*
+        Tests pour la pile
+    */
+    Pile& p = Pile::donnerInstance();
+    p<<r;
+    p<<r2;
+    p.voirPile();
 
     return 0;
 }
