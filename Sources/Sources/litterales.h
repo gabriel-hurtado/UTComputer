@@ -170,8 +170,8 @@ class Complexe : public LitteraleComplexe{
 public:
     /*Le comportement par défaut du constructeur est suffisant car pas de pointeur*/
     Complexe(LitteraleNumerique& pR,LitteraleNumerique& pI):p_reelle(*pR.getNumericCopy()),p_imaginaire(*pI.getNumericCopy()){}
-    const LitteraleNumerique& getPartieReelle() const {return p_reelle;}
-    const LitteraleNumerique& getPartieImaginaire() const {return p_imaginaire;}
+    LitteraleNumerique* getPartieReelle() const {return p_reelle.getNumericCopy();}
+    LitteraleNumerique* getPartieImaginaire() const {return p_imaginaire.getNumericCopy();}
 
     LitteraleComplexe* neg(){p_reelle.neg();return getCopy();}
     LitteraleComplexe* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}

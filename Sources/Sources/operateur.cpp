@@ -3,11 +3,11 @@
 Litterale* OperateurAddition::traitementOperateur(){
 
 
-    LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
+    LitteraleComplexe* litC1=estdeType<LitteraleComplexe>(l1);
 
-    LitteraleNumerique* litNum2=estdeType<LitteraleNumerique>(l2);
+    LitteraleComplexe* litC2=estdeType<LitteraleComplexe>(l2);
 
-    if(litNum1 && litNum2) //si ce sont des littérales numériques
+    if(litC1 && litC2) //si ce sont des littérales numériques
     {
 
         Rationnel* r1=estdeType<Rationnel>(l1);
@@ -17,7 +17,7 @@ Litterale* OperateurAddition::traitementOperateur(){
         {
             int newDen=r1->getDenominator().getValeur()*r2->getDenominator().getValeur();
             int newNum = r1->getNumerateur().getValeur()*r2->getDenominator().getValeur()+r2->getNumerateur().getValeur()*r1->getDenominator().getValeur();
-            return (new Rationnel(newNum, newDen));
+            return &((new Rationnel(newNum, newDen))->Simplification());
         }
 
         Entier* e1=estdeType<Entier>(l1);
@@ -47,6 +47,14 @@ Litterale* OperateurAddition::traitementOperateur(){
 
 
         }
+        if(re1 && e2){ //si relle et entier
+           return(&(new Reelle(re1->getValeur()+e2->getValeur()))->Simplification());
+
+        }
+        if(re2 && e1){
+            OperateurAddition ad= OperateurAddition(re2,e1);
+            return ad.operation();
+        }
 
         if(re1 && r2) //si relle et rationelle
         {
@@ -55,13 +63,51 @@ Litterale* OperateurAddition::traitementOperateur(){
             return ad.operation();
 
         }
-        if(re2 && r1) //si relle et rationelle
+        if(re2 && r1) //idem
         {
             OperateurAddition ad = OperateurAddition(re2,r1);
             return ad.operation();
 
         }
 
+
+        Complexe* c1=estdeType<Complexe>(l1);
+        Complexe* c2=estdeType<Complexe>(l2);
+
+        if(c1 && c2){ //si deux complexe
+            LitteraleNumerique* pr1=c1->getPartieReelle();
+            LitteraleNumerique* pr2=c2->getPartieReelle();
+            OperateurAddition ad = OperateurAddition(pr1,pr2);
+            LitteraleNumerique* reel=estdeType<LitteraleNumerique>(ad.traitement());
+
+
+            LitteraleNumerique* pi1=c1->getPartieImaginaire();
+            LitteraleNumerique* pi2=c2->getPartieImaginaire();
+            OperateurAddition ad2 = OperateurAddition(pi1,pi2);
+
+            LitteraleNumerique* im=estdeType<LitteraleNumerique>(ad.traitement());
+                   return new Complexe(*reel,*im);
+        }
+        LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
+
+        LitteraleNumerique* litNum2=estdeType<LitteraleNumerique>(l2);
+        if(c1 && litNum2){ //si un complexe et une litNumérique
+
+            LitteraleNumerique* pr1=c1->getPartieReelle();
+
+            OperateurAddition ad = OperateurAddition(pr1,litNum2);
+            LitteraleNumerique* reel=estdeType<LitteraleNumerique>(ad.traitement());
+
+
+            LitteraleNumerique* im=c1->getPartieImaginaire();
+             return new Complexe(*reel,*im);
+
+        }
+
+        if(c2 && litNum1){
+            OperateurAddition ad = OperateurAddition(c2,litNum1);
+            return ad.traitement();
+        }
 
     }
     throw LitteraleException("Error in Addition");

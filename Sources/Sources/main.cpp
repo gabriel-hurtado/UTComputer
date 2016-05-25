@@ -7,16 +7,14 @@ int main() {
 
 	Rationnel r = Rationnel(13, 5);
 	Rationnel r2 = Rationnel(12, 5);
+
     Entier e= Entier(5);
+    Complexe c=Complexe(r,e);
     Litterale* ptr = &r;
-    OperateurAddition ad = OperateurAddition(&r,&e);
+    OperateurAddition ad = OperateurAddition(&c,&r2);
     ptr = ad.traitement();
     ptr->afficher();
     //system("pause");
-    if(estdeType<Rationnel>(ptr))
-        std::cout<<"Patate chaude"<<std::endl;
-    else
-        std::cout<<"Patate froide"<<std::endl;
 
     /*
         Tests pour la pile
