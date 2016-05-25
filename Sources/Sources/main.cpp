@@ -9,11 +9,8 @@ int main() {
 	Rationnel r2 = Rationnel(12, 5);
 
     Entier e= Entier(5);
-<<<<<<< HEAD
     Complexe c=Complexe(r,e);
-=======
     Entier f(7);
->>>>>>> 14f219cd1eda8c97f4c6eeb4c3c41aaea69287be
     Litterale* ptr = &r;
     OperateurAddition ad = OperateurAddition(&c,&r2);
     ptr = ad.traitement();
