@@ -50,19 +50,23 @@ public:
 };
 
 class GerantPile{
-    unsigned int nombreDeMemento;
     unsigned int nombreMaxDeMemento;
-    MementoPile* savedMemento;
-    GerantPile *instanceGerantPile;
+    unsigned int nombreDeMemento;
+    MementoPile** savedMemento;
+    static GerantPile *instanceGerantPile;
 
-    GerantPile();
+    GerantPile(unsigned int nbMax = 1);
     ~GerantPile();
     GerantPile(const GerantPile&);
-    operator=(const GerantPile& g);
+    void operator=(const GerantPile& g);
 
 public:
+    friend class MementoPile;
     static GerantPile& donnerInstance();
     static void libererInstance();
+    GerantPile& push_front(MementoPile* l);
+    MementoPile* pop_front();
+    void sauverPile();
     void UNDO();
     void REDO();
 

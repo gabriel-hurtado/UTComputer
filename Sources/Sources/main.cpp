@@ -26,6 +26,12 @@ int main() {
     p<<r;
     p<<r2;
     p.voirPile();
-
+    std::cout<<"On sauve la pile"<<std::endl;
+    GerantPile::donnerInstance().sauverPile();
+    p<<e;
+    p.voirPile();
+    std::cout<<"On recharge l'ancienne pile"<<std::endl;
+    GerantPile::donnerInstance().UNDO();
+    p.voirPile();
     return 0;
 }
