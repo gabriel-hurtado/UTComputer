@@ -11,6 +11,8 @@ class MementoPile;
 /*
     Pile est l'Originator du Memento
 */
+class GerantPile;
+
 class Pile
 {
     std::deque<Litterale*> emP;//emP stands for "embedded Pile"
@@ -24,14 +26,15 @@ class Pile
 
 public:
     friend class MementoPile; //Help for the constructor of a MementoPile
-    Pile& operator<<(Litterale& l){emP.push_front(&l);return *this;}
-    Pile& operator>>(Litterale* l){*l=*emP.front();return *this;}
+    Pile& operator<<(Litterale& l);
+    Pile& operator>>(Litterale* l);
     void voirPile() const;
     static Pile& donnerInstance();
     static void libererInstance();
     //Méthodes pour le Memento
     MementoPile* saveInMemento() const;
     void restoreFromMemento(MementoPile* m);
+
     /*AJOUTER UN ITERATOR SUR LA PILE*/
 
 };
@@ -50,12 +53,15 @@ public:
 };
 
 class GerantPile{
-    unsigned int nombreMaxDeMemento;
-    unsigned int nombreDeMemento;
-    MementoPile** savedMemento;
+    unsigned int nombreMaxDeMementoUNDO;
+    unsigned int nombreDeMementoUNDO;
+    unsigned int nombreMaxDeMementoREDO;
+    unsigned int nombreDeMementoREDO;
+    MementoPile** savedMementoUNDO;
+    MementoPile** savedMementoREDO;
     static GerantPile *instanceGerantPile;
 
-    GerantPile(unsigned int nbMax = 1);
+    GerantPile(unsigned int nbMaxUNDO = 1,unsigned int nbMaxREDO=1);
     ~GerantPile();
     GerantPile(const GerantPile&);
     void operator=(const GerantPile& g);
@@ -64,12 +70,14 @@ public:
     friend class MementoPile;
     static GerantPile& donnerInstance();
     static void libererInstance();
-    GerantPile& push_front(MementoPile* l);
-    MementoPile* pop_front();
+    GerantPile& push_front_undo(MementoPile* l);
+    MementoPile* pop_front_undo();
+    GerantPile& push_front_redo(MementoPile* l);
+    MementoPile* pop_front_redo();
     void sauverPile();
     void UNDO();
     void REDO();
-
+    void clearREDO();
 
 };
 #endif // PILE_H
