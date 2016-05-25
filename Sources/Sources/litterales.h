@@ -101,13 +101,6 @@ public:
 };
 
 
-
-
-
-
-
-
-
 /*------------Classe Litterale Reelle------------*/
 
 class Reelle : public LitteraleNumerique{
