@@ -21,6 +21,7 @@ int main() {
     /*
         Tests pour la pile
     */
+
     Pile& p = Pile::donnerInstance();
     p<<r;
     p<<r2;
