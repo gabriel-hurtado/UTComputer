@@ -22,15 +22,16 @@ int main() {
     */
     try{
     Pile& p = Pile::donnerInstance();
+    std::cout<<"On ajoute un élément à la pile"<<std::endl;
     p<<r;
+    p.voirPile();
+    std::cout<<"On ajoute un élément à la pile"<<std::endl;
     p<<r2;
     p.voirPile();
-    std::cout<<"On sauve la pile 1 fois"<<std::endl;
-    p.sauverPile();
+    std::cout<<"On ajoute un élément à la pile"<<std::endl;
     p<<e;
     p.voirPile();
-    std::cout<<"On resauve la pile 2 fois"<<std::endl;
-    p.sauverPile();
+    std::cout<<"On ajoute un élément à la pile"<<std::endl;
     p<<f;
     p.voirPile();
     std::cout<<"On recharge l'ancienne pile"<<std::endl;
@@ -42,9 +43,14 @@ int main() {
     std::cout<<"On recharge la pile stockée 2"<<std::endl;
     p.REDO();
     p.voirPile();
-    std::cout<<"On recharge la pile stockée 1"<<std::endl;
+    std::cout<<"On recharge la pile stockée 1 on revient donc à l'état courant de la pile"<<std::endl;
     p.REDO();
     p.voirPile();
+    std::cout<<"On ajoute un élément à la pile"<<std::endl;
+    p<<r;
+    p.voirPile();
+    std::cout<<"On essaye de REDO après insertion, mais cela est interdit car cela n'a pas de sens"<<std::endl;
+    p.REDO();
     }
     catch(LitteraleException& e){
         std::cout<<e.getMessage();
