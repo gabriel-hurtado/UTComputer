@@ -1,4 +1,5 @@
 #include "operande.h"
+#include <math.h>
 
 #ifndef H_LITTERALE
 #define H_LITTERALE
@@ -52,6 +53,8 @@ public:
 	LitteraleComplexe() {}
     virtual ~LitteraleComplexe() {}
 
+    virtual LitteraleComplexe* neg() =0;
+
 private:
 
 };
@@ -92,7 +95,7 @@ public:
     virtual ~Entier() {}
     int getValeur() const { return valeur; }
     const std::string toString() const { return std::to_string(getValeur());}
-
+    LitteraleComplexe* neg(){valeur=-valeur; return getNumericCopy();}
     LitteraleNumerique* getNumericCopy() const{return new Entier(*this);}
 
 };
@@ -108,19 +111,27 @@ public:
 /*------------Classe Litterale Reelle------------*/
 
 class Reelle : public LitteraleNumerique{
-    Entier p_entiere;
-    Entier mantisse;
+    double value;
 public:
     /*La partie entiere dit etre le second paramêtre pour avoir une valeur par défaut*/
-    Reelle(Entier m,Entier p=0):p_entiere(p){
+    Reelle(Entier m,Entier p=0){
         /*Un réel ne peut pas être construit avec une mantisse nulle*/
         if(m.getValeur()==0){LitteraleException("Construction: Mantisse nulle !");}
-        else{mantisse=m;}
+        else{value=p.getValeur();
+                double mantisse=(double)m.getValeur();
+               while(mantisse>=1)
+                mantisse=mantisse/10.0;
+                value+=mantisse;}
     }
     virtual ~Reelle(){}
-    Entier getPartieEntiere(){return p_entiere;}
-    Entier getMantisse(){return mantisse;}
+    Entier getPartieEntiere() const{return Entier(value/1);}
+    Entier getMantisse()const {double temp=value-value/1;
+                           while(fmod(temp,1)!=0)
+                               temp=temp*10;
+                           return Entier((int)temp);}
     LitteraleNumerique& Simplification();
+    double  getValeur()const {return value;}
+    LitteraleComplexe* neg(){value=-value;return this;}
     LitteraleNumerique* getNumericCopy() const{return new Reelle(*this);}
     const std::string toString() const;
 
@@ -140,6 +151,8 @@ public:
     virtual ~Rationnel(){ }
     Entier getNumerateur() const { return numerateur; }
     Entier getDenominator() const { return denominateur; }
+
+    LitteraleComplexe* neg(){numerateur.neg();return this;}
     LitteraleNumerique* getNumericCopy() const{return new Rationnel(*this);}
     const std::string toString() const;
     LitteraleNumerique& Simplification();
@@ -159,7 +172,9 @@ public:
     Complexe(LitteraleNumerique& pR,LitteraleNumerique& pI):p_reelle(*pR.getNumericCopy()),p_imaginaire(*pI.getNumericCopy()){}
     const LitteraleNumerique& getPartieReelle() const {return p_reelle;}
     const LitteraleNumerique& getPartieImaginaire() const {return p_imaginaire;}
-    Litterale* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
+
+    LitteraleComplexe* neg(){p_reelle.neg();return getCopy();}
+    LitteraleComplexe* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
     const std::string toString() const;
 
 
