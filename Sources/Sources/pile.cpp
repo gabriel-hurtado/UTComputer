@@ -42,18 +42,22 @@ MementoPile::MementoPile(const std::deque<Litterale* >& emP){
 }
 
 /*---------Méthodes de GerantPile-----------*/
-GerantPile::GerantPile(unsigned int nbMax =1):nombreMaxDeMemento(nbMax),nombreDeMemento(0),savedMemento(new MementoPile[1]){}
+GerantPile* GerantPile::instanceGerantPile=nullptr;
+
+GerantPile::GerantPile(unsigned int nbMax):nombreMaxDeMemento(nbMax),nombreDeMemento(0),savedMemento(new MementoPile*[nbMax]){}
+
 /*
  Le destructeur du GerantPile doit détruire toutes les Litterale* sauvés dans des Memento puis le tableau des Memento
- En effet le Memento ne doit pas supprimer tout seul
+ En effet le Memento ne doit pas supprimer tout seul les litterales car une version du memento sera chargée dans la Pile
 */
 GerantPile::~GerantPile(){
     for(unsigned int i=0;i<nombreDeMemento;i++){
-        for(Litterale* n : savedMemento[i].saved_emP){
+        for(Litterale* n : savedMemento[i]->saved_emP){
             delete n;
         }
+
     }
-    delete savedMemento[i];
+
 }
 
 GerantPile& GerantPile::donnerInstance(){
@@ -68,10 +72,35 @@ void GerantPile::libererInstance(){
     instanceGerantPile = nullptr;
 }
 
-void GerantPile::UNDO(){
-    if()
+GerantPile& GerantPile::push_front(MementoPile* l){
+    if(nombreDeMemento==nombreMaxDeMemento){
+        //On doit reconstruire un savedMemento plus grand
+        MementoPile** newsavedMemento = new MementoPile*[nombreMaxDeMemento*2];
+        for(unsigned int i = 0; i < nombreMaxDeMemento*2;i++)
+            newsavedMemento[i]=savedMemento[i]; //Trasnfert des pointeurs
+        delete savedMemento;
+        savedMemento= newsavedMemento;
+        nombreMaxDeMemento*=2;
+    }
+    savedMemento[nombreDeMemento++]=l;
+    return *this;
 }
 
+MementoPile* GerantPile::pop_front(){
+    if(nombreDeMemento==0)
+        throw LitteraleException("Impossible de UNDO : Pas de sauvegarde de la pile !");
+    return savedMemento[nombreDeMemento--];
+}
+
+void GerantPile::UNDO(){
+    //On chope l'instance de la pile dans un Memento
+    MementoPile* TempMemento = Pile::donnerInstance().saveInMemento();
+    //On dépile la derniere instace du Gerant que l'on envoie dans la pile
+    Pile::donnerInstance().restoreFromMemento(this->pop_front());
+    //On sauvegarde l'état de Pile
+    push_front(TempMemento);
+
+}
 void GerantPile::REDO(){
     //Destruction des Litterale* ici
 }
