@@ -1,9 +1,5 @@
 #include "pile.h"
 
-
-
-
-
 /*---------Méthodes de Pile-----------*/
 Pile* Pile::instancePile = nullptr;
 
@@ -21,11 +17,11 @@ void Pile::libererInstance(){
 
 Pile& Pile::operator<<(Litterale& l){
     GerantPile::donnerInstance().clearREDO();
-    emP.push_front(&l);return *this;
+    emP.push_back(&l);return *this;
 }
 
 Pile& Pile::operator>>(Litterale* l){
-    *l=*emP.front();return *this;
+    *l=*emP.back();return *this;
 }
 
 void Pile::voirPile() const {
@@ -41,10 +37,20 @@ void Pile::restoreFromMemento(MementoPile* m){
     emP= m->saved_emP;
 }
 
+void Pile::UNDO(){
+    GerantPile::donnerInstance().UNDO();
+}
+void Pile::REDO(){
+    GerantPile::donnerInstance().REDO();
+}
+void Pile::sauverPile(){
+    GerantPile::donnerInstance().sauverPile();
+}
+
 /*---------Méthodes de MementoPile-----------*/
 
-MementoPile::MementoPile(const std::deque<Litterale* >& emP){
-    //On push par le back from the front
+MementoPile::MementoPile(const std::vector<Litterale* >& emP){
+    //On push par le back from the back
     for(Litterale* n : emP)
         saved_emP.push_back(n->getCopy());
 
@@ -89,7 +95,7 @@ void GerantPile::libererInstance(){
     instanceGerantPile = nullptr;
 }
 
-GerantPile& GerantPile::push_front_undo(MementoPile* l){
+GerantPile& GerantPile::push_back_undo(MementoPile* l){
     if(nombreDeMementoUNDO==nombreMaxDeMementoUNDO){
         //On doit reconstruire un savedMemento plus grand
         MementoPile** newsavedMemento = new MementoPile*[nombreMaxDeMementoUNDO*2];
@@ -103,13 +109,13 @@ GerantPile& GerantPile::push_front_undo(MementoPile* l){
     return *this;
 }
 
-MementoPile* GerantPile::pop_front_undo(){
+MementoPile* GerantPile::pop_back_undo(){
     if(nombreDeMementoUNDO==0)
         throw LitteraleException("Impossible de UNDO : Pas de sauvegarde de la pile !");
     return savedMementoUNDO[--nombreDeMementoUNDO];
 }
 
-GerantPile& GerantPile::push_front_redo(MementoPile* l){
+GerantPile& GerantPile::push_back_redo(MementoPile* l){
     if(nombreDeMementoREDO==nombreMaxDeMementoREDO){
         //On doit reconstruire un savedMemento plus grand
         MementoPile** newsavedMemento = new MementoPile*[nombreMaxDeMementoREDO*2];
@@ -123,7 +129,7 @@ GerantPile& GerantPile::push_front_redo(MementoPile* l){
     return *this;
 }
 
-MementoPile* GerantPile::pop_front_redo(){
+MementoPile* GerantPile::pop_back_redo(){
     if(nombreDeMementoREDO==0)
         throw LitteraleException("Impossible de REDO : Pas de sauvegarde de la pile !");
     return savedMementoREDO[--nombreDeMementoREDO];
@@ -133,24 +139,27 @@ void GerantPile::UNDO(){
     //On chope l'instance de la pile dans un Memento
     MementoPile* TempMemento = Pile::donnerInstance().saveInMemento();
     //On dépile la derniere instace du Gerant que l'on envoie dans la pile
-    MementoPile* m = this->pop_front_undo();
+    MementoPile* m = this->pop_back_undo();
     Pile::donnerInstance().restoreFromMemento(m);
     //On sauvegarde l'état de Pile
-    push_front_redo(TempMemento);
+    push_back_redo(TempMemento);
 
 }
+
 void GerantPile::REDO(){
     //On chope l'instance de la pile dans un Memento
     MementoPile* TempMemento = Pile::donnerInstance().saveInMemento();
     //On dépile la derniere instace du Gerant que l'on envoie dans la pile
-    MementoPile* m = this->pop_front_redo();
+    MementoPile* m = this->pop_back_redo();
     Pile::donnerInstance().restoreFromMemento(m);
     //On sauvegarde l'état de Pile
-    push_front_undo(TempMemento);
+    push_back_undo(TempMemento);
 }
-
+/*
+    Permet
+*/
 void GerantPile::sauverPile(){
-    push_front_undo(Pile::donnerInstance().saveInMemento());
+    push_back_undo(Pile::donnerInstance().saveInMemento());
 }
 
 void GerantPile::clearREDO(){

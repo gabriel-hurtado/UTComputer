@@ -26,24 +26,24 @@ int main() {
     p<<r2;
     p.voirPile();
     std::cout<<"On sauve la pile 1 fois"<<std::endl;
-    GerantPile::donnerInstance().sauverPile();
+    p.sauverPile();
     p<<e;
     p.voirPile();
     std::cout<<"On resauve la pile 2 fois"<<std::endl;
-    GerantPile::donnerInstance().sauverPile();
+    p.sauverPile();
     p<<f;
     p.voirPile();
     std::cout<<"On recharge l'ancienne pile"<<std::endl;
-    GerantPile::donnerInstance().UNDO();
+    p.UNDO();
     p.voirPile();
     std::cout<<"On recharge l'ancienne pile"<<std::endl;
-    GerantPile::donnerInstance().UNDO();
+    p.UNDO();
     p.voirPile();
     std::cout<<"On recharge la pile stockée 2"<<std::endl;
-    GerantPile::donnerInstance().REDO();
+    p.REDO();
     p.voirPile();
     std::cout<<"On recharge la pile stockée 1"<<std::endl;
-    GerantPile::donnerInstance().REDO();
+    p.REDO();
     p.voirPile();
     }
     catch(LitteraleException& e){

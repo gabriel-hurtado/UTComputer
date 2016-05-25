@@ -153,8 +153,6 @@ public:
 
 };
 
-
-
 /*------------Classe Litterale Complexe------------*/
 
 class Complexe : public LitteraleComplexe{
@@ -209,13 +207,6 @@ public:
     std::string getProgramme() const {return valeur;}
     const std::string toString() const {return getProgramme();}
     Litterale* getCopy() const;
-
-    class LitteraleFactory{
-    public:
-         static std::map<std::string,littrea*> m_map;
-         static void Register(const std::string& key,Figure* obj);
-         Figure* Create(const std::string& key) const;
-    }
 };
 
 #endif

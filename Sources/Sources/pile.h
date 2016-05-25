@@ -1,5 +1,5 @@
 #include "litterales.h"
-#include <deque>
+#include <vector>
 #ifndef PILE_H
 #define PILE_H
 
@@ -15,7 +15,7 @@ class GerantPile;
 
 class Pile
 {
-    std::deque<Litterale*> emP;//emP stands for "embedded Pile"
+    std::vector<Litterale*> emP;//emP stands for "embedded Pile"
     static Pile* instancePile;
 
     /*made those method in private so the user can't use them*/
@@ -34,6 +34,10 @@ public:
     //Méthodes pour le Memento
     MementoPile* saveInMemento() const;
     void restoreFromMemento(MementoPile* m);
+    void UNDO();
+    void REDO();
+    void sauverPile();
+
 
     /*AJOUTER UN ITERATOR SUR LA PILE*/
 
@@ -45,11 +49,11 @@ public:
         crée des objets qui contiennent une sauvegarde de la pile
 */
 class MementoPile{
-    std::deque<Litterale*> saved_emP;
+    std::vector<Litterale*> saved_emP;
 public:
     friend class Pile; //Pour que la Pile puisse acceder au saved_emP d'un MementoPile (on casse ici l'encapsulation mais ces classes ne sont normalement pas utilisées par l'User)
     friend class GerantPile;//Pour que le GerantPile puisse acceder au saved_emP d'un Memento (on casse ici l'encapsulation mais ces classes ne sont normalement pas utilisées par l'User)
-    MementoPile(const std::deque<Litterale* >& emP);
+    MementoPile(const std::vector<Litterale* >& emP);
 };
 
 class GerantPile{
@@ -70,10 +74,10 @@ public:
     friend class MementoPile;
     static GerantPile& donnerInstance();
     static void libererInstance();
-    GerantPile& push_front_undo(MementoPile* l);
-    MementoPile* pop_front_undo();
-    GerantPile& push_front_redo(MementoPile* l);
-    MementoPile* pop_front_redo();
+    GerantPile& push_back_undo(MementoPile* l);
+    MementoPile* pop_back_undo();
+    GerantPile& push_back_redo(MementoPile* l);
+    MementoPile* pop_back_redo();
     void sauverPile();
     void UNDO();
     void REDO();
