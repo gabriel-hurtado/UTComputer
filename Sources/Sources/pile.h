@@ -59,10 +59,11 @@ public:
 class GerantPile{
     unsigned int nombreMaxDeMementoUNDO;
     unsigned int nombreDeMementoUNDO;
+    MementoPile** savedMementoUNDO;
     unsigned int nombreMaxDeMementoREDO;
     unsigned int nombreDeMementoREDO;
-    MementoPile** savedMementoUNDO;
     MementoPile** savedMementoREDO;
+
     static GerantPile *instanceGerantPile;
 
     GerantPile(unsigned int nbMaxUNDO = 1,unsigned int nbMaxREDO=1);
