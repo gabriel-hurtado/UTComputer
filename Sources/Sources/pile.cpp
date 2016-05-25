@@ -89,19 +89,24 @@ GerantPile& GerantPile::push_front(MementoPile* l){
 MementoPile* GerantPile::pop_front(){
     if(nombreDeMemento==0)
         throw LitteraleException("Impossible de UNDO : Pas de sauvegarde de la pile !");
-    return savedMemento[nombreDeMemento--];
+    return savedMemento[--nombreDeMemento];
 }
 
 void GerantPile::UNDO(){
     //On chope l'instance de la pile dans un Memento
     MementoPile* TempMemento = Pile::donnerInstance().saveInMemento();
     //On dépile la derniere instace du Gerant que l'on envoie dans la pile
-    Pile::donnerInstance().restoreFromMemento(this->pop_front());
+    MementoPile* m = this->pop_front();
+    Pile::donnerInstance().restoreFromMemento(m);
     //On sauvegarde l'état de Pile
     push_front(TempMemento);
 
 }
 void GerantPile::REDO(){
     //Destruction des Litterale* ici
+
 }
 
+void GerantPile::sauverPile(){
+    push_front(Pile::donnerInstance().saveInMemento());
+}

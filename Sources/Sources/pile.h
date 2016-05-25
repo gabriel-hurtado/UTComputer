@@ -66,6 +66,7 @@ public:
     static void libererInstance();
     GerantPile& push_front(MementoPile* l);
     MementoPile* pop_front();
+    void sauverPile();
     void UNDO();
     void REDO();
 
