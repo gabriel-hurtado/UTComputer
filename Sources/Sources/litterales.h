@@ -11,10 +11,10 @@
 */
 class LitteraleException : public std::exception
 {
-	std::string info;
+    std::string info;
 public:
-	LitteraleException (std::string in) : info(in) {}
-	const std::string	getMessage() { return info; }
+    LitteraleException (std::string in) : info(in) {}
+    const std::string	getMessage() { return info; }
 };
 
 
@@ -25,7 +25,7 @@ public:
 class Litterale : public Operande
 {
 public:
-	Litterale() {}
+    Litterale() {}
     virtual ~Litterale() {}
     /*Template method pour afficher utilisant toString()*/
     std::ostream& afficher(std::ostream& f=std::cout){f<<toString();return f;}
@@ -41,7 +41,7 @@ private:
 class LitteraleSimple : public Litterale
 {
 public:
-	LitteraleSimple() {}
+    LitteraleSimple() {}
     virtual ~LitteraleSimple() {}
 private:
 
@@ -50,7 +50,7 @@ private:
 class LitteraleComplexe : public LitteraleSimple
 {
 public:
-	LitteraleComplexe() {}
+    LitteraleComplexe() {}
     virtual ~LitteraleComplexe() {}
 
     virtual LitteraleComplexe* neg() =0;
@@ -62,7 +62,7 @@ private:
 class LitteraleNumerique : public LitteraleComplexe
 {
 public:
-	LitteraleNumerique() {}
+    LitteraleNumerique() {}
     virtual ~LitteraleNumerique() {}
     virtual LitteraleNumerique* getNumericCopy() const =0;
     Litterale* getCopy() const {return getNumericCopy();}
@@ -210,6 +210,12 @@ public:
     const std::string toString() const {return getProgramme();}
     Litterale* getCopy() const;
 
+    class LitteraleFactory{
+    public:
+         static std::map<std::string,littrea*> m_map;
+         static void Register(const std::string& key,Figure* obj);
+         Figure* Create(const std::string& key) const;
+    }
 };
 
 #endif
