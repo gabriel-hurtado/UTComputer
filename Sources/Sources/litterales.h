@@ -76,6 +76,9 @@ private:
 */
 template<typename L> L* estdeType(Litterale* Tobj){
     L* Lobj;
+    if(Tobj==nullptr)
+
+        return nullptr;
     if((Lobj=dynamic_cast<L*>(Tobj)))
         return Lobj;
     return nullptr;

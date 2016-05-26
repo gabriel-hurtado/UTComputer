@@ -12,8 +12,7 @@ class Operande
 
 public:
 	Operande() {}
-	virtual ~Operande() {};
-    virtual Litterale* traitement() = 0;
+    virtual ~Operande() {};
 
 };
 
