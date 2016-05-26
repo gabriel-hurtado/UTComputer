@@ -31,8 +31,8 @@ Pile& Pile::operator<<(Litterale& l){
     emP.push_back(&l);return *this;
 }
 
-Pile& Pile::operator>>(Litterale* l){
-    *l=*emP.back();return *this;
+Pile& Pile::operator>>(Litterale*& l){
+    l=emP.back();return *this;
 }
 
 void Pile::voirPile() const {

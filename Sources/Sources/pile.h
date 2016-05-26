@@ -27,7 +27,7 @@ class Pile
 public:
     friend class MementoPile; //Help for the constructor of a MementoPile
     Pile& operator<<(Litterale& l);
-    Pile& operator>>(Litterale* l);
+    Pile& operator>>(Litterale*& l);
     void voirPile() const;
     static Pile& donnerInstance();
     static void libererInstance();

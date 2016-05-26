@@ -49,9 +49,18 @@ int main() {
     std::cout<<"On ajoute un élément à la pile"<<std::endl;
     p<<r;
     p.voirPile();
-    std::cout<<"On essaye de REDO après insertion, mais cela est interdit car cela n'a pas de sens"<<std::endl;
+    /*std::cout<<"On essaye de REDO après insertion, mais cela est interdit car cela n'a pas de sens"<<std::endl;
     p.REDO();
+    */    //pour récuperer un élément de la pile
+    Litterale* k;
+    p>>k;
+    p.UNDO();
+    p>>k;
+    std::cout<<k->toString();
     }
+
+
+
     catch(LitteraleException& e){
         std::cout<<e.getMessage();
     }
