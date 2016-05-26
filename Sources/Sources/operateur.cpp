@@ -31,12 +31,12 @@ Litterale* OperateurAddition::traitementOperateur(){
         {
            Rationnel temp= Rationnel(e2->getValeur());
            OperateurAddition ad = OperateurAddition(r1,&temp);
-           return ad.operation();
+           return ad.traitementOperateur();
 
         }
         if(r2 && e1){ //idem
            OperateurAddition ad = OperateurAddition(r2,e1);
-           return ad.operation();
+           return ad.traitementOperateur();
 
         }
 
@@ -53,20 +53,20 @@ Litterale* OperateurAddition::traitementOperateur(){
         }
         if(re2 && e1){
             OperateurAddition ad= OperateurAddition(re2,e1);
-            return ad.operation();
+            return ad.traitementOperateur();
         }
 
         if(re1 && r2) //si relle et rationelle
         {
             Reelle temp=(r2->roundValue());
             OperateurAddition ad = OperateurAddition(re1,&temp);
-            return ad.operation();
+            return ad.traitementOperateur();
 
         }
         if(re2 && r1) //idem
         {
             OperateurAddition ad = OperateurAddition(re2,r1);
-            return ad.operation();
+            return ad.traitementOperateur();
 
         }
 
@@ -78,14 +78,14 @@ Litterale* OperateurAddition::traitementOperateur(){
             LitteraleNumerique* pr1=c1->getPartieReelle();
             LitteraleNumerique* pr2=c2->getPartieReelle();
             OperateurAddition ad = OperateurAddition(pr1,pr2);
-            LitteraleNumerique* reel=estdeType<LitteraleNumerique>(ad.traitement());
+            LitteraleNumerique* reel=estdeType<LitteraleNumerique>(ad.traitementOperateur());
 
 
             LitteraleNumerique* pi1=c1->getPartieImaginaire();
             LitteraleNumerique* pi2=c2->getPartieImaginaire();
             OperateurAddition ad2 = OperateurAddition(pi1,pi2);
 
-            LitteraleNumerique* im=estdeType<LitteraleNumerique>(ad.traitement());
+            LitteraleNumerique* im=estdeType<LitteraleNumerique>(ad.traitementOperateur());
                    return new Complexe(*reel,*im);
         }
         LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
@@ -96,7 +96,7 @@ Litterale* OperateurAddition::traitementOperateur(){
             LitteraleNumerique* pr1=c1->getPartieReelle();
 
             OperateurAddition ad = OperateurAddition(pr1,litNum2);
-            LitteraleNumerique* reel=estdeType<LitteraleNumerique>(ad.traitement());
+            LitteraleNumerique* reel=estdeType<LitteraleNumerique>(ad.traitementOperateur());
 
 
             LitteraleNumerique* im=c1->getPartieImaginaire();
@@ -106,7 +106,7 @@ Litterale* OperateurAddition::traitementOperateur(){
 
         if(c2 && litNum1){
             OperateurAddition ad = OperateurAddition(c2,litNum1);
-            return ad.traitement();
+            return ad.traitementOperateur();
         }
 
     }
@@ -128,8 +128,8 @@ Litterale* OperateurSoustraction::traitementOperateur(){
     if(litNum1 && litNum2)
     {
         OperateurNeg ng = OperateurNeg(litNum1);
-        OperateurAddition add = OperateurAddition(ng.traitement(),litNum2);
-        return add.operation();
+        OperateurAddition add = OperateurAddition(ng.traitementOperateur(),litNum2);
+        return add.traitementOperateur();
     }
 }
 

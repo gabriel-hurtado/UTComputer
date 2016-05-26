@@ -6,15 +6,12 @@ int main() {
 
 
 	Rationnel r = Rationnel(13, 5);
-	Rationnel r2 = Rationnel(12, 5);
+    Rationnel* r2 ;
 
     Entier e= Entier(5);
     Complexe c=Complexe(r,e);
     Entier f(7);
     Litterale* ptr = &r;
-    OperateurAddition ad = OperateurAddition(&c,&r2);
-    ptr = ad.traitement();
-    ptr->afficher();
     //system("pause");
 
     /*
