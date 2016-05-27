@@ -32,7 +32,7 @@ Pile& Pile::operator<<(Litterale& l){
 }
 
 Pile& Pile::operator>>(Litterale*& l){
-    l=emP.back();return *this;
+    l=emP.back();emP.pop_back();return *this;
 }
 
 void Pile::voirPile() const {

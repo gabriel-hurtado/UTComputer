@@ -5,7 +5,7 @@
 int main() {
 
 
-	Rationnel r = Rationnel(13, 5);
+    Rationnel r = Rationnel(13, 5);
     Rationnel* r2 ;
 
     Entier e= Entier(5);
@@ -21,9 +21,8 @@ int main() {
     Pile& p = Pile::donnerInstance();
     std::cout<<"On ajoute un élément à la pile"<<std::endl;
     p<<r;
-    p.voirPile();
     std::cout<<"On ajoute un élément à la pile"<<std::endl;
-    p<<r2;
+    p<<r;
     p.voirPile();
     std::cout<<"On ajoute un élément à la pile"<<std::endl;
     p<<e;
@@ -50,6 +49,7 @@ int main() {
     p.REDO();
     */    //pour récuperer un élément de la pile
     Litterale* k;
+
     p>>k;
     p.UNDO();
     p>>k;

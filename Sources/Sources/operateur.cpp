@@ -116,20 +116,19 @@ Litterale* OperateurAddition::traitementOperateur(){
 }
 
 Litterale* OperateurNeg::traitementOperateur(){
-    LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
-    if(litNum1)
-    return litNum1->neg();
+    LitteraleComplexe* lit=estdeType<LitteraleComplexe>(l1);
+    if(lit)
+    return lit->neg();
 }
 
 Litterale* OperateurSoustraction::traitementOperateur(){
-    LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
-
-    LitteraleNumerique* litNum2=estdeType<LitteraleNumerique>(l2);
-    if(litNum1 && litNum2)
+    LitteraleComplexe* li1=estdeType<LitteraleComplexe>(l1);
+    LitteraleComplexe* li2=estdeType<LitteraleComplexe>(l2);
+    if(li1 && li2)
     {
-        OperateurNeg ng = OperateurNeg(litNum1);
-        OperateurAddition add = OperateurAddition(ng.traitementOperateur(),litNum2);
-        return add.traitementOperateur();
+        OperateurNeg ng = OperateurNeg(li2);
+        OperateurAddition addTemp = OperateurAddition(li1,ng.traitementOperateur());
+        return addTemp.traitementOperateur();
     }
 }
 

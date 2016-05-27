@@ -98,8 +98,8 @@ public:
     virtual ~Entier() {}
     int getValeur() const { return valeur; }
     const std::string toString() const { return std::to_string(getValeur());}
-    LitteraleComplexe* neg(){valeur=-valeur; return getNumericCopy();}
-    LitteraleNumerique* getNumericCopy() const{return new Entier(*this);}
+    LitteraleComplexe* neg(){Entier* res =getNumericCopy(); res->valeur=-res->valeur; return res;}
+    Entier* getNumericCopy() const{return new Entier(*this);}
 
 };
 
@@ -127,8 +127,8 @@ public:
                            return Entier((int)temp);}
     LitteraleNumerique& Simplification();
     double  getValeur()const {return value;}
-    LitteraleComplexe* neg(){value=-value;return this;}
-    LitteraleNumerique* getNumericCopy() const{return new Reelle(*this);}
+    LitteraleComplexe* neg(){Reelle* res=getNumericCopy(); res->value=-res->value;return res;}
+    Reelle* getNumericCopy() const{return new Reelle(*this);}
     const std::string toString() const;
 
 
@@ -148,8 +148,8 @@ public:
     Entier getNumerateur() const { return numerateur; }
     Entier getDenominator() const { return denominateur; }
 
-    LitteraleComplexe* neg(){numerateur.neg();return this;}
-    LitteraleNumerique* getNumericCopy() const{return new Rationnel(*this);}
+    LitteraleComplexe* neg(){Rationnel* res=getNumericCopy(); res->numerateur.neg();return res;}
+    Rationnel* getNumericCopy() const{return new Rationnel(*this);}
     const std::string toString() const;
     LitteraleNumerique& Simplification();
     Reelle roundValue() const;
@@ -167,8 +167,8 @@ public:
     LitteraleNumerique* getPartieReelle() const {return p_reelle.getNumericCopy();}
     LitteraleNumerique* getPartieImaginaire() const {return p_imaginaire.getNumericCopy();}
 
-    LitteraleComplexe* neg(){p_reelle.neg();return getCopy();}
-    LitteraleComplexe* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
+    LitteraleComplexe* neg(){Complexe* res=getCopy(); res->p_reelle.neg();return res;}
+    Complexe* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
     const std::string toString() const;
 
 
