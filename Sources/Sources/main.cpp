@@ -5,18 +5,19 @@
 int main() {
 
 
-    Rationnel r = Rationnel(13, 5);
-    Rationnel* r2 ;
+    Reelle r = Reelle(1, 0);
+    r.afficher();
+    std::cout<<"\n";
 
     Entier e= Entier(5);
-    Complexe c=Complexe(r,e);
-    Entier f(7);
-    Litterale* ptr = &r;
+    LitteraleNumerique* l= &(r.Simplification());
+    OperateurAddition ad= OperateurAddition(&r,&e);
+    Litterale* l2= ad.traitementOperateur();
     //system("pause");
 
     /*
         Tests pour la pile
-    */
+
     try{
     Pile& p = Pile::donnerInstance();
     std::cout<<"On ajoute un élément à la pile"<<std::endl;
@@ -47,7 +48,7 @@ int main() {
     p.voirPile();
     /*std::cout<<"On essaye de REDO après insertion, mais cela est interdit car cela n'a pas de sens"<<std::endl;
     p.REDO();
-    */    //pour récuperer un élément de la pile
+        //pour récuperer un élément de la pile
     Litterale* k;
 
     p>>k;
@@ -61,5 +62,6 @@ int main() {
     catch(LitteraleException& e){
         std::cout<<e.getMessage();
     }
+    */
     return 0;
 }

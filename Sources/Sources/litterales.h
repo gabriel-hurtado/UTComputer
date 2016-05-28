@@ -104,13 +104,18 @@ public:
 };
 
 
+
 /*------------Classe Litterale Reelle------------*/
 
 class Reelle : public LitteraleNumerique{
     double value;
 public:
+
+
     /*La partie entiere dit etre le second paramêtre pour avoir une valeur par défaut*/
-    Reelle(Entier m,Entier p=0){
+    Reelle(double d):value(d){}
+
+    Reelle(const Entier& m,const Entier& p){
         /*Un réel ne peut pas être construit avec une mantisse nulle*/
         if(m.getValeur()==0){LitteraleException("Construction: Mantisse nulle !");}
         else{value=p.getValeur();
@@ -119,12 +124,18 @@ public:
                 mantisse=mantisse/10.0;
                 value+=mantisse;}
     }
+
+    Reelle(int x,int y=0):Reelle( Entier(x), Entier(y)){}
     virtual ~Reelle(){}
-    Entier getPartieEntiere() const{return Entier(value/1);}
-    Entier getMantisse()const {double temp=value-value/1;
-                           while(fmod(temp,1)!=0)
-                               temp=temp*10;
-                           return Entier((int)temp);}
+    Entier getPartieEntiere() const{return Entier(floor(value));}
+    Entier getMantisse()const {
+        double res=value-floor(value);
+                               if(res==0)
+                                   return 0;
+                           while(res-floor(res)!=0){
+                               res=res*10;
+                           }
+                           return Entier((int)res);}
     LitteraleNumerique& Simplification();
     double  getValeur()const {return value;}
     LitteraleComplexe* neg(){Reelle* res=getNumericCopy(); res->value=-res->value;return res;}

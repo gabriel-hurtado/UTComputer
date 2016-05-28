@@ -90,5 +90,8 @@ class OperateurMultiplication : public OperateurBinaire{
 public:
    Litterale* traitementOperateur();
 
+   OperateurMultiplication():OperateurBinaire(){}
+   OperateurMultiplication(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
 };
 #endif // OPERATEUR_H

@@ -12,13 +12,14 @@ LitteraleNumerique& Reelle::Simplification(){
     LitteraleNumerique* ptr;
     if(getMantisse().getValeur()==0)
          ptr = new Entier(getPartieEntiere());
-    else{ptr=this;}
+    else{
+             ptr=this;
+    }
     return *ptr;
 }
 
 const std::string Reelle::toString() const {
     std::stringstream s;
-    if((this->getPartieEntiere()).getValeur()!=0)
         s<<getValeur();
     return s.str();
 }
