@@ -1,18 +1,21 @@
 #include "litterales.h"
 #include "operateur.h"
 #include "pile.h"
+#include "litteralefactory.h"
 
 int main() {
 
+    LitteraleFactory& lf = LitteraleFactory::donnerInstance();
+    LitteraleFactory::enregistrer("Réelle",new Reelle(0,0));
+    LitteraleFactory::enregistrer("Entier",new Entier(0));
 
-    Reelle r = Reelle(1, 0);
-    r.afficher();
-    std::cout<<"\n";
+    Litterale* r = lf.creer("Réelle");
+    Litterale* e = lf.creer("Entier");
 
-    Entier e= Entier(5);
-    LitteraleNumerique* l= &(r.Simplification());
-    OperateurAddition ad= OperateurAddition(&r,&e);
+    OperateurAddition ad= OperateurAddition(r,e);
     Litterale* l2= ad.traitementOperateur();
+
+    l2->afficher();
     //system("pause");
 
     /*

@@ -1,9 +1,9 @@
-#include "operande.h"
-#include <math.h>
+
 
 #ifndef H_LITTERALE
 #define H_LITTERALE
-
+#include "operande.h"
+#include <math.h>
 
 /*
  Classe pour gérer les exceptions sur les littérales
