@@ -327,7 +327,7 @@ Litterale* OperateurDivision::traitementOperateur(){
                OperateurMultiplication mulNum3 = OperateurMultiplication(c2Re,c1Im);
                OperateurMultiplication mulNum4 = OperateurMultiplication(c2Im,c1Re);
 
-               LitteraleNumerique* newNumIm=  estdeType<LitteraleNumerique>(OperateurAddition(mulNum3.traitementOperateur(),mulNum4.traitementOperateur()).traitementOperateur());
+               LitteraleNumerique* newNumIm=  estdeType<LitteraleNumerique>(OperateurSoustraction(mulNum3.traitementOperateur(),mulNum4.traitementOperateur()).traitementOperateur());
 
                LitteraleNumerique* re=  estdeType<LitteraleNumerique>(OperateurDivision(newNumRe,newDenom).traitementOperateur());
                LitteraleNumerique* im= estdeType<LitteraleNumerique>(OperateurDivision(newNumIm,newDenom).traitementOperateur());

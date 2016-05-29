@@ -11,7 +11,7 @@ int main() {
     Entier e= Entier(5);
     Complexe c1 = Complexe(r,e);
     Complexe c2= Complexe(e,r);
-    OperateurMultiplication ad= OperateurMultiplication(&c1,&c2);
+    OperateurDivision ad= OperateurDivision(&c1,&c2);
     Litterale* l2= ad.traitementOperateur();
     l2->afficher();
     //system("pause");
