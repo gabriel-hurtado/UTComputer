@@ -276,20 +276,24 @@ Litterale* OperateurDivision::traitementOperateur(){
 
         }
         if(r2 && e1){ //idem
-            OperateurDivision(r2,e1).traitementOperateur();
+
+            Rationnel* temp = new Rationnel(e1->getValeur());
+            OperateurDivision(temp,r2).traitementOperateur();
         }
 
         Reelle* re1=estdeType<Reelle>(l1);
         Reelle* re2=estdeType<Reelle>(l2);
         if(re1 && re2){ //si deux relles
-            return new Reelle(re1->getValeur()/re2->getValeur());
+            return new Reelle((double)(re1->getValeur()/re2->getValeur()));
         }
         if(re1 && e2){ //si relle et entier
-           Reelle* temp= new Reelle(e2->getValeur());
+           Reelle* temp= new Reelle((double)e2->getValeur());
            return OperateurDivision(re1,temp).traitementOperateur();
         }
         if(re2 && e1){
-           return OperateurDivision(re2,e1).traitementOperateur();
+
+            Reelle* temp= new Reelle((double)e1->getValeur());
+           return OperateurDivision(temp,re2).traitementOperateur();
         }
 
         if(re1 && r2) //si relle et rationelle
@@ -299,7 +303,7 @@ Litterale* OperateurDivision::traitementOperateur(){
        }
         if(re2 && r1) //idem
         {
-             return OperateurDivision(re2,r1).traitementOperateur();
+            return (OperateurDivision(new Reelle(r1->roundValue()),re2).traitementOperateur());
         }
 
 
