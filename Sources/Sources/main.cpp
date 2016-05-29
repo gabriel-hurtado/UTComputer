@@ -9,12 +9,14 @@ int main() {
     LitteraleFactory::enregistrer("Réelle",new Reelle(0,0));
     LitteraleFactory::enregistrer("Entier",new Entier(0));
 
-    Litterale* r = lf.creer("Réelle");
-    Litterale* e = lf.creer("Entier");
+    Reelle r = Reelle(1, 0);
+    std::cout<<"\n";
 
-    OperateurAddition ad= OperateurAddition(r,e);
+    Entier e= Entier(5);
+    Complexe c1 = Complexe(r,e);
+    Complexe c2= Complexe(e,r);
+    OperateurDivision ad= OperateurDivision(&c1,&c2);
     Litterale* l2= ad.traitementOperateur();
-
     l2->afficher();
     //system("pause");
 
