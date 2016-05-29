@@ -4,11 +4,13 @@ HEADERS += \
     Sources/Sources/utils.h \
     Sources/Sources/litteralefactory.h \
     Sources/Sources/operateur.h \
-    Sources/Sources/pile.h
+    Sources/Sources/pile.h \
+    Sources/Sources/controleur.h
 
 SOURCES += \
     Sources/Sources/main.cpp \
     Sources/Sources/litterales.cpp \
     Sources/Sources/litteralefactory.cpp \
     Sources/Sources/operateur.cpp \
-    Sources/Sources/pile.cpp
+    Sources/Sources/pile.cpp \
+    Sources/Sources/controleur.cpp

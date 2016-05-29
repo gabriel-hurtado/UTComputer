@@ -4,6 +4,7 @@
 #include <sstream>
 #include <exception>
 #include <iostream>
+#include <map>
 
 class Litterale;
 
@@ -11,7 +12,7 @@ class Operande
 {
 
 public:
-	Operande() {}
+    Operande() {}
     virtual ~Operande() {};
 
 };
