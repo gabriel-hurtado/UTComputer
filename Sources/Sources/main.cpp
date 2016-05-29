@@ -6,13 +6,14 @@ int main() {
 
 
     Reelle r = Reelle(1, 0);
-    r.afficher();
     std::cout<<"\n";
 
     Entier e= Entier(5);
-    LitteraleNumerique* l= &(r.Simplification());
-    OperateurAddition ad= OperateurAddition(&r,&e);
+    Complexe c1 = Complexe(r,e);
+    Complexe c2= Complexe(e,r);
+    OperateurMultiplication ad= OperateurMultiplication(&c1,&c2);
     Litterale* l2= ad.traitementOperateur();
+    l2->afficher();
     //system("pause");
 
     /*

@@ -209,16 +209,29 @@ Litterale* OperateurMultiplication::traitementOperateur(){
         Complexe* c2=estdeType<Complexe>(l2);
 
         if(c1 && c2){ //si deux complexe
+            OperateurMultiplication mul1 = OperateurMultiplication(c1->getPartieReelle(),c2->getPartieReelle());
+            OperateurMultiplication mul2 = OperateurMultiplication(c1->getPartieImaginaire(),c2->getPartieImaginaire());
+            OperateurSoustraction sub = OperateurSoustraction(mul1.traitementOperateur(),mul2.traitementOperateur());
+            LitteraleNumerique* real = estdeType<LitteraleNumerique>(sub.traitementOperateur());
+
+            OperateurMultiplication mul3 = OperateurMultiplication(c1->getPartieImaginaire(),c2->getPartieReelle());
+            OperateurMultiplication mul4 = OperateurMultiplication(c1->getPartieReelle(),c2->getPartieImaginaire());
+            OperateurAddition  add = OperateurAddition(mul3.traitementOperateur(),mul4.traitementOperateur());
+            LitteraleNumerique* img = estdeType<LitteraleNumerique>(add.traitementOperateur());
+            return (new Complexe(*real,*img));
         }
         LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
 
         LitteraleNumerique* litNum2=estdeType<LitteraleNumerique>(l2);
         if(c1 && litNum2){ //si un complexe et une litNumérique
-
+            LitteraleNumerique* zero=new Entier(0);
+            Complexe* temp= new Complexe(*litNum2,*zero);
+            return (OperateurMultiplication(c1,temp).traitementOperateur());
 
         }
 
         if(c2 && litNum1){
+            return (OperateurMultiplication(c2,litNum1).traitementOperateur());
          }
 
     }
