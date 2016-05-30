@@ -2,6 +2,7 @@
 #include "operateur.h"
 #include "pile.h"
 #include "litteralefactory.h"
+#include "controleur.h"
 
 int main() {
 
@@ -68,5 +69,12 @@ int main() {
         std::cout<<e.getMessage();
     }
     */
+    std::cout<<std::endl;
+
+    Controleur::enregistrer("$",1);
+    Controleur::enregistrer(".",2);
+    Controleur::enregistrer("[",0);
+
+    Controleur::donnerInstance().firstWord("4 5 +");
     return 0;
 }

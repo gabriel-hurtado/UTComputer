@@ -10,17 +10,19 @@ class Controleur
     virtual ~Controleur();
     Controleur(const Controleur&);
     void operator =(const Controleur&);
-    std::map<std::string,std::string> symbol_map;
+    static std::map<unsigned int,std::string> litterale_priority_map; //Map des symboles de litterales ex <"$",Complexe>
+    std::map<std::string,std::string> operator_map;
+
 
 
 public:
     /*Méthodes pour le singleton*/
     static Controleur& donnerInstance();
-    static Controleur& libererInstance();
+    static void libererInstance();
+    static void enregistrer(std::string symbole,unsigned int priority);
 
     void commande(const std::string s);
-
-    static std::string firstWord(std::string s);
+    std::string firstWord(std::string s);
 
 
 };

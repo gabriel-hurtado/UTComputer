@@ -1,26 +1,53 @@
 #include "controleur.h"
 
+Controleur* Controleur::instanceControleur=nullptr;
+
+std::map<unsigned int,std::string> Controleur::litterale_priority_map = std::map<unsigned int,std::string>();
+
+Controleur& Controleur::donnerInstance(){
+    if(instanceControleur==nullptr)
+        instanceControleur= new Controleur;
+    return *instanceControleur;
+}
+
+void Controleur::libererInstance(){
+    if(instanceControleur!=nullptr)
+        delete instanceControleur;
+}
+
+void Controleur::enregistrer(std::string symbole,unsigned int priorite){
+    if(litterale_priority_map.find(priorite)==litterale_priority_map.end()) //Si pas déja la clé
+        litterale_priority_map[priorite]=symbole;
+    else
+        throw LitteraleException("Une litterale avec cette priorité la existe déjà");
+}
+
 Controleur::Controleur(){}
 Controleur::~Controleur(){};
 
-void Controleur::commande(const std::string s){
-
-    std::string::const_iterator it = s.begin();
-    /*Quel est le prochain mot à traiter sachant que la séparation se fait avec des espaces*/
 
 
 
+void Controleur::commande(std::string s){
 
-    std::string nextInst;
-  /*
-    while(it!=s.end()){
-        //Si c'est un espace, alors on l'enlève
-        if(*it=" ")
-            continue;
-        if(*it)
+    std::string word;
+
+    while((word=firstWord(s))!=""){
+        s= s.erase(0,(s.find(word)+word.length())); //Enlève le mot trouvé dans firstWord de s
+        std::cout << word;
+        /*
+            L'objectif maintenant est de détecter le type de variable
+        */
+        std::map<unsigned int,std::string>::iterator it_litterale_priority_map = litterale_priority_map.begin();
+
+        while(word.find(it_litterale_priority_map->second)==std::string::npos && (it_litterale_priority_map)!=litterale_priority_map.end()){
+            it_litterale_priority_map++;
+        }
+
+        if((it_litterale_priority_map)!=litterale_priority_map.end())
+            std::cout<< "Detected: "<< it_litterale_priority_map->second;
+
     }
-*/
-
 }
 
 std::string Controleur::firstWord(std::string s){
