@@ -5,6 +5,7 @@
 #include <sstream>
 #include <exception>
 #include <iostream>
+#include <QObject>
 #include <map>
 
 

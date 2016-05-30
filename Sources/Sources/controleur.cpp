@@ -30,7 +30,9 @@ Controleur::~Controleur(){};
 
 void Controleur::commande(QString s){
 
-    QString word;
+    Entier* e = new Entier(s.toInt());
+    Pile::donnerInstance()<<*e;
+    //QString word;
 /*
     while((word=firstWord(s))!=""){
         s= s.erase(0,(s.find(word)+word.length())); //Enlève le mot trouvé dans firstWord de s

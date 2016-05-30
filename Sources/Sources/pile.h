@@ -22,14 +22,15 @@ public:
 };
 
 
-class Pile
-{
+class Pile : public QObject{
+    Q_OBJECT
+
     std::vector<Litterale*> emP;//emP stands for "embedded Pile"
     static Pile* instancePile;
     unsigned int nbLitteraletoAffiche;
 
     /*made those method in private so the user can't use them*/
-    Pile():nbLitteraletoAffiche(4){}
+    Pile():nbLitteraletoAffiche(10){}
     Pile(const Pile& p);
     ~Pile(){}
     void operator=(const Pile&);
@@ -66,9 +67,8 @@ public:
         iterator begin() { return emP.begin(); }
         iterator end() { return emP.end(); }
 
-
-
-    /*AJOUTER UN ITERATOR SUR LA PILE*/
+signals:
+        void modificationEtat();
 
 };
 

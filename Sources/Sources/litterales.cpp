@@ -83,7 +83,6 @@ const QString Complexe::toString() const{
 /*------------Définition des méthodes de la classe Atome------------*/
 
 Atome::Atome(QString n){
-    QString::iterator it=n.begin();
     if(isValidAtomeName(n))
         nom=n;
     else

@@ -4,6 +4,7 @@
 #include <QtWidgets>
 #include <QMainWindow>
 #include "pile.h"
+#include "controleur.h"
 
 namespace Ui {
 class MainWindow;
@@ -13,12 +14,14 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
     Pile& pile;
+    Controleur& controleur;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 public slots:
     void refreshVuePile();
+    void getNextCommande();
 
 private:
     Ui::MainWindow *ui;

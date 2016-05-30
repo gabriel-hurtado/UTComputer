@@ -28,11 +28,18 @@ void Pile::libererInstance(){
 Pile& Pile::operator<<(Litterale& l){
     GerantPile::donnerInstance().clearREDO();
     sauverPile();
-    emP.push_back(&l);return *this;
+    emP.push_back(&l);
+    modificationEtat();
+    return *this;
 }
 
 Pile& Pile::operator>>(Litterale*& l){
-   if(!emP.empty()){ l=emP.back();emP.pop_back();return *this;}
+   if(!emP.empty()){
+       l=emP.back();
+       emP.pop_back();
+       modificationEtat();
+       return *this;
+   }
     else throw PileException("Pile vide, impossible de dépiler");
 }
 

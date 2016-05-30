@@ -10,7 +10,7 @@
 int main(int argc,char* argv[]) {
 
 
-
+    /*
     std::cout<<"\n";
 
     Entier e(3);
@@ -26,7 +26,7 @@ int main(int argc,char* argv[]) {
     }
 
     //system("pause");
-
+    */
     /*
         Tests pour la pile
 
@@ -76,7 +76,7 @@ int main(int argc,char* argv[]) {
     }
     */
 
-
+    /*
     Pile& p = Pile::donnerInstance();
     p<<e;
     p<<c;
@@ -87,7 +87,7 @@ int main(int argc,char* argv[]) {
     Controleur::enregistrer("[",0);
 
     Controleur::donnerInstance().firstWord("4 5 +");
-
+    */
     //Construction de l'interface
 
     QApplication app(argc, argv);

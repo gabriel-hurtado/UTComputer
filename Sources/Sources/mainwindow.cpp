@@ -4,6 +4,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     pile(Pile::donnerInstance()),
+    controleur(Controleur::donnerInstance()),
     ui(new Ui::MainWindow)
 
 {
@@ -18,16 +19,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->vuePile->horizontalHeader()->setStretchLastSection(true);
     ui->vuePile->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    //Définition des objets
-
-
     //Pour initialiser la pile
-
     ui->vuePile->setRowCount(pile.getNbToAffiche());//initialise le nombre de ligne de la vue
     ui->vuePile->setColumnCount(1);// Idem avec les colonnes
 
     QStringList liste;
-    for(unsigned int i= pile.getNbToAffiche(); i>0; i--){
+    for(unsigned int i=1; pile.getNbToAffiche()>=i; i++){
         QString str = QString::number(i);
         str+=" :";
         liste<<str;
@@ -35,9 +32,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->vuePile->setVerticalHeaderLabels(liste);
 
     //Allocation des éléments du QtableWIdget
-    for(unsigned int i=pile.getNbToAffiche()-1;i>0;i--)
+    for(unsigned int i=0;pile.getNbToAffiche()>i;i++)
         ui->vuePile->setItem(i,0,new QTableWidgetItem(""));
-    refreshVuePile();
+
+    connect(ui->commande,SIGNAL(returnPressed()),this,SLOT(getNextCommande()));
+    connect(&pile,SIGNAL(modificationEtat()),this,SLOT(refreshVuePile()));
+
 }
 
 MainWindow::~MainWindow()
@@ -47,10 +47,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::refreshVuePile(){
     //Rafraichir l'état de la pile
-    for(unsigned int i=pile.getNbToAffiche()-1;i>0;i--)
+    for(unsigned int i=0;pile.getNbToAffiche()<i;i++)
         ui->vuePile->item(i,0)->setText("");
     unsigned int nb = 0;
 
-    for(Pile::iterator it=pile.begin();it!=pile.end();++it,++nb)
-        ui->vuePile->item(pile.getNbToAffiche()-nb-1,0)->setText((*it).toString());
+    for(Pile::iterator it=pile.begin();it!=pile.end() && nb<pile.getNbToAffiche();++it,++nb)
+        ui->vuePile->item(nb,0)->setText((*it).toString());
+    pile.voirPile();
+    std::cout<<std::endl;
+}
+
+void MainWindow::getNextCommande(){
+    //pile->setMessage("");
+    QString g = ui->commande->text();
+    controleur.commande(g);
+    ui->commande->clear();
 }
