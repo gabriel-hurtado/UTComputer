@@ -37,9 +37,7 @@ public:
     virtual void chargerContexte() = 0;
     virtual void pushResultat(Litterale* res) {p<<(*res);}
     void operation(){chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res);}
-    virtual bool checkContext() =0;
-    Litterale* traitementOperateur() {if(checkContext()) return traitement(); else throw OperateurException("Pas le bon nombre de litérales");}
-    virtual Litterale* traitement()=0;
+    virtual Litterale* traitementOperateur() =0;
     virtual Operateur* getCopy()=0;
 };
 
@@ -53,7 +51,6 @@ public:
                            p>>l1;}
     OperateurBinaire(){}
     OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
-    bool checkContext(){return (!(l1==nullptr || l2 == nullptr));}
 };
 
 class OperateurUnaire  : public Operateur{
@@ -64,12 +61,11 @@ public:
 
    OperateurUnaire(){}
    OperateurUnaire(Litterale* lit1):l1(lit1){}
-   bool checkContext(){return (!(l1==nullptr));}
 };
 
 class OperateurNeg : public OperateurUnaire{
 public:
-   Litterale* traitement();
+   Litterale* traitementOperateur();
 
    OperateurNeg():OperateurUnaire(){}
    OperateurNeg(Litterale* lit1):OperateurUnaire(lit1){}
@@ -79,7 +75,7 @@ public:
 
 class OperateurAddition : public OperateurBinaire{
 public:
-   Litterale* traitement();
+   Litterale* traitementOperateur();
 
    OperateurAddition():OperateurBinaire(){}
    OperateurAddition(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -89,7 +85,7 @@ public:
 
 class OperateurSoustraction : public OperateurBinaire{
 public:
-   Litterale* traitement();
+   Litterale* traitementOperateur();
 
    OperateurSoustraction():OperateurBinaire(){}
    OperateurSoustraction(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -99,7 +95,7 @@ public:
 
 class OperateurDivision : public OperateurBinaire{
 public:
-   Litterale* traitement();
+   Litterale* traitementOperateur();
 
    OperateurDivision():OperateurBinaire(){}
    OperateurDivision(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -109,7 +105,7 @@ public:
 
 class OperateurMultiplication : public OperateurBinaire{
 public:
-   Litterale* traitement();
+   Litterale* traitementOperateur();
 
    OperateurMultiplication():OperateurBinaire(){}
    OperateurMultiplication(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}

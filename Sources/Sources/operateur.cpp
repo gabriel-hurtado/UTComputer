@@ -1,6 +1,6 @@
 #include "operateur.h"
 
-Litterale* OperateurAddition::traitement(){
+Litterale* OperateurAddition::traitementOperateur(){
 
 
     LitteraleComplexe* litC1=estdeType<LitteraleComplexe>(l1);
@@ -31,12 +31,12 @@ Litterale* OperateurAddition::traitement(){
         {
            Rationnel temp= Rationnel(e2->getValeur());
            OperateurAddition ad = OperateurAddition(r1,&temp);
-           return ad.traitement();
+           return ad.traitementOperateur();
 
         }
         if(r2 && e1){ //idem
            OperateurAddition ad = OperateurAddition(r2,e1);
-           return ad.traitement();
+           return ad.traitementOperateur();
 
         }
 
@@ -54,20 +54,20 @@ Litterale* OperateurAddition::traitement(){
         }
         if(re2 && e1){
             OperateurAddition ad= OperateurAddition(re2,e1);
-            return ad.traitement();
+            return ad.traitementOperateur();
         }
 
         if(re1 && r2) //si relle et rationelle
         {
             Reelle temp=(r2->roundValue());
             OperateurAddition ad = OperateurAddition(re1,&temp);
-            return ad.traitement();
+            return ad.traitementOperateur();
 
         }
         if(re2 && r1) //idem
         {
             OperateurAddition ad = OperateurAddition(re2,r1);
-            return ad.traitement();
+            return ad.traitementOperateur();
 
         }
 
@@ -79,14 +79,14 @@ Litterale* OperateurAddition::traitement(){
             LitteraleNumerique* pr1=c1->getPartieReelle();
             LitteraleNumerique* pr2=c2->getPartieReelle();
             OperateurAddition ad = OperateurAddition(pr1,pr2);
-            LitteraleNumerique* reel=estdeType<LitteraleNumerique>(ad.traitement());
+            LitteraleNumerique* reel=estdeType<LitteraleNumerique>(ad.traitementOperateur());
 
 
             LitteraleNumerique* pi1=c1->getPartieImaginaire();
             LitteraleNumerique* pi2=c2->getPartieImaginaire();
             OperateurAddition ad2 = OperateurAddition(pi1,pi2);
 
-            LitteraleNumerique* im=estdeType<LitteraleNumerique>(ad2.traitement());
+            LitteraleNumerique* im=estdeType<LitteraleNumerique>(ad2.traitementOperateur());
                    return new Complexe(*reel,*im);
         }
         LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
@@ -97,7 +97,7 @@ Litterale* OperateurAddition::traitement(){
             LitteraleNumerique* pr1=c1->getPartieReelle();
 
             OperateurAddition ad = OperateurAddition(pr1,litNum2);
-            LitteraleNumerique* reel=estdeType<LitteraleNumerique>(ad.traitement());
+            LitteraleNumerique* reel=estdeType<LitteraleNumerique>(ad.traitementOperateur());
 
 
             LitteraleNumerique* im=c1->getPartieImaginaire();
@@ -107,33 +107,33 @@ Litterale* OperateurAddition::traitement(){
 
         if(c2 && litNum1){
             OperateurAddition ad = OperateurAddition(c2,litNum1);
-            return ad.traitement();
+            return ad.traitementOperateur();
         }
 
     }
-    throw LitteraleException("Error in Addition");
+    throw OperateurException("Error in Addition");
 
 
 }
 
-Litterale* OperateurNeg::traitement(){
+Litterale* OperateurNeg::traitementOperateur(){
     LitteraleComplexe* lit=estdeType<LitteraleComplexe>(l1);
     if(lit)
     return lit->neg();
 }
 
-Litterale* OperateurSoustraction::traitement(){
+Litterale* OperateurSoustraction::traitementOperateur(){
     LitteraleComplexe* li1=estdeType<LitteraleComplexe>(l1);
     LitteraleComplexe* li2=estdeType<LitteraleComplexe>(l2);
     if(li1 && li2)
     {
         OperateurNeg ng = OperateurNeg(li2);
-        OperateurAddition addTemp = OperateurAddition(li1,ng.traitement());
-        return addTemp.traitement();
+        OperateurAddition addTemp = OperateurAddition(li1,ng.traitementOperateur());
+        return addTemp.traitementOperateur();
     }
 }
 
-Litterale* OperateurMultiplication::traitement(){
+Litterale* OperateurMultiplication::traitementOperateur(){
 
 
     LitteraleComplexe* litC1=estdeType<LitteraleComplexe>(l1);
@@ -166,12 +166,12 @@ Litterale* OperateurMultiplication::traitement(){
         {
             Rationnel temp= Rationnel(e2->getValeur());
             OperateurMultiplication mul = OperateurMultiplication(r1,&temp);
-            return mul.traitement();
+            return mul.traitementOperateur();
 
         }
         if(r2 && e1){ //idem
             OperateurMultiplication mul = OperateurMultiplication(r2,e1);
-            return mul.traitement();
+            return mul.traitementOperateur();
         }
 
         Reelle* re1=estdeType<Reelle>(l1);
@@ -187,20 +187,20 @@ Litterale* OperateurMultiplication::traitement(){
         if(re2 && e1){
 
             OperateurMultiplication mul = OperateurMultiplication(re2,e1);
-            return mul.traitement();
+            return mul.traitementOperateur();
         }
 
         if(re1 && r2) //si relle et rationelle
         {
             Reelle temp=(r2->roundValue());
             OperateurMultiplication mul = OperateurMultiplication(re1,&temp);
-            return mul.traitement();
+            return mul.traitementOperateur();
 
         }
         if(re2 && r1) //idem
         {
             OperateurMultiplication mul = OperateurMultiplication(re2,r1);
-            return mul.traitement();
+            return mul.traitementOperateur();
 
         }
 
@@ -211,13 +211,13 @@ Litterale* OperateurMultiplication::traitement(){
         if(c1 && c2){ //si deux complexe
             OperateurMultiplication mul1 = OperateurMultiplication(c1->getPartieReelle(),c2->getPartieReelle());
             OperateurMultiplication mul2 = OperateurMultiplication(c1->getPartieImaginaire(),c2->getPartieImaginaire());
-            OperateurSoustraction sub = OperateurSoustraction(mul1.traitement(),mul2.traitement());
-            LitteraleNumerique* real = estdeType<LitteraleNumerique>(sub.traitement());
+            OperateurSoustraction sub = OperateurSoustraction(mul1.traitementOperateur(),mul2.traitementOperateur());
+            LitteraleNumerique* real = estdeType<LitteraleNumerique>(sub.traitementOperateur());
 
             OperateurMultiplication mul3 = OperateurMultiplication(c1->getPartieImaginaire(),c2->getPartieReelle());
             OperateurMultiplication mul4 = OperateurMultiplication(c1->getPartieReelle(),c2->getPartieImaginaire());
-            OperateurAddition  add = OperateurAddition(mul3.traitement(),mul4.traitement());
-            LitteraleNumerique* img = estdeType<LitteraleNumerique>(add.traitement());
+            OperateurAddition  add = OperateurAddition(mul3.traitementOperateur(),mul4.traitementOperateur());
+            LitteraleNumerique* img = estdeType<LitteraleNumerique>(add.traitementOperateur());
             return (new Complexe(*real,*img));
         }
         LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
@@ -226,22 +226,22 @@ Litterale* OperateurMultiplication::traitement(){
         if(c1 && litNum2){ //si un complexe et une litNumérique
             LitteraleNumerique* zero=new Entier(0);
             Complexe* temp= new Complexe(*litNum2,*zero);
-            return (OperateurMultiplication(c1,temp).traitement());
+            return (OperateurMultiplication(c1,temp).traitementOperateur());
 
         }
 
         if(c2 && litNum1){
-            return (OperateurMultiplication(c2,litNum1).traitement());
+            return (OperateurMultiplication(c2,litNum1).traitementOperateur());
          }
 
     }
-    throw LitteraleException("Error in Addition");
+    throw OperateurException("Error in Multiplication");
 
 
 }
 
 
-Litterale* OperateurDivision::traitement(){
+Litterale* OperateurDivision::traitementOperateur(){
 
     LitteraleComplexe* litC1=estdeType<LitteraleComplexe>(l1);
 
@@ -271,14 +271,14 @@ Litterale* OperateurDivision::traitement(){
         if(r1 && e2) //si il y a un rationel et un entier
         {
             Rationnel* temp = new Rationnel(e2->getValeur());
-            OperateurDivision(r1,temp).traitement();
+            OperateurDivision(r1,temp).traitementOperateur();
 
 
         }
         if(r2 && e1){ //idem
 
             Rationnel* temp = new Rationnel(e1->getValeur());
-            OperateurDivision(temp,r2).traitement();
+            OperateurDivision(temp,r2).traitementOperateur();
         }
 
         Reelle* re1=estdeType<Reelle>(l1);
@@ -288,22 +288,22 @@ Litterale* OperateurDivision::traitement(){
         }
         if(re1 && e2){ //si relle et entier
            Reelle* temp= new Reelle((double)e2->getValeur());
-           return OperateurDivision(re1,temp).traitement();
+           return OperateurDivision(re1,temp).traitementOperateur();
         }
         if(re2 && e1){
 
             Reelle* temp= new Reelle((double)e1->getValeur());
-           return OperateurDivision(temp,re2).traitement();
+           return OperateurDivision(temp,re2).traitementOperateur();
         }
 
         if(re1 && r2) //si relle et rationelle
         {
-            return (OperateurDivision(re1,new Reelle(r2->roundValue())).traitement());
+            return (OperateurDivision(re1,new Reelle(r2->roundValue())).traitementOperateur());
 
        }
         if(re2 && r1) //idem
         {
-            return (OperateurDivision(new Reelle(r1->roundValue()),re2).traitement());
+            return (OperateurDivision(new Reelle(r1->roundValue()),re2).traitementOperateur());
         }
 
 
@@ -320,21 +320,21 @@ Litterale* OperateurDivision::traitement(){
 
                OperateurMultiplication mulDenom1= OperateurMultiplication(c2Im,c2Im);
                OperateurMultiplication mulDenom2= OperateurMultiplication(c2Re,c2Re);
-               LitteraleNumerique* newDenom = estdeType<LitteraleNumerique>(OperateurAddition(mulDenom1.traitement(),mulDenom2.traitement()).traitement());
+               LitteraleNumerique* newDenom = estdeType<LitteraleNumerique>(OperateurAddition(mulDenom1.traitementOperateur(),mulDenom2.traitementOperateur()).traitementOperateur());
 
 
                OperateurMultiplication mulNum1 = OperateurMultiplication(c2Re,c1Re);
                OperateurMultiplication mulNum2 = OperateurMultiplication(c2Im,c1Im);
 
-               LitteraleNumerique* newNumRe= estdeType<LitteraleNumerique>( OperateurAddition(mulNum1.traitement(),mulNum2.traitement()).traitement());
+               LitteraleNumerique* newNumRe= estdeType<LitteraleNumerique>( OperateurAddition(mulNum1.traitementOperateur(),mulNum2.traitementOperateur()).traitementOperateur());
 
                OperateurMultiplication mulNum3 = OperateurMultiplication(c2Re,c1Im);
                OperateurMultiplication mulNum4 = OperateurMultiplication(c2Im,c1Re);
 
-               LitteraleNumerique* newNumIm=  estdeType<LitteraleNumerique>(OperateurSoustraction(mulNum3.traitement(),mulNum4.traitement()).traitement());
+               LitteraleNumerique* newNumIm=  estdeType<LitteraleNumerique>(OperateurSoustraction(mulNum3.traitementOperateur(),mulNum4.traitementOperateur()).traitementOperateur());
 
-               LitteraleNumerique* re=  estdeType<LitteraleNumerique>(OperateurDivision(newNumRe,newDenom).traitement());
-               LitteraleNumerique* im= estdeType<LitteraleNumerique>(OperateurDivision(newNumIm,newDenom).traitement());
+               LitteraleNumerique* re=  estdeType<LitteraleNumerique>(OperateurDivision(newNumRe,newDenom).traitementOperateur());
+               LitteraleNumerique* im= estdeType<LitteraleNumerique>(OperateurDivision(newNumIm,newDenom).traitementOperateur());
 
                return new Complexe(*re,*im);
         }
@@ -346,15 +346,15 @@ Litterale* OperateurDivision::traitement(){
 
             LitteraleNumerique* zero=new Entier(0);
             Complexe* temp= new Complexe(*litNum2,*zero);
-            return OperateurDivision(c1,temp).traitement();
+            return OperateurDivision(c1,temp).traitementOperateur();
        }
 
         if(c2 && litNum1){
-            return OperateurDivision(c2,litNum1).traitement();
+            return OperateurDivision(c2,litNum1).traitementOperateur();
             }
 
     }
-    throw LitteraleException("Error in Addition");
+    throw OperateurException("Error in Division");
 
 
 
