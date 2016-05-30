@@ -6,7 +6,8 @@ HEADERS += \
     Sources/Sources/operateur.h \
     Sources/Sources/pile.h \
     Sources/Sources/controleur.h \
-    Sources/Sources/operateurfactory.h
+    Sources/Sources/operateurfactory.h \
+    Sources/Sources/mainwindow.h
     Sources/Sources/mainwindow.h
 
 SOURCES += \
@@ -16,7 +17,8 @@ SOURCES += \
     Sources/Sources/operateur.cpp \
     Sources/Sources/pile.cpp \
     Sources/Sources/controleur.cpp \
-    Sources/Sources/operateurfactory.cpp
+    Sources/Sources/operateurfactory.cpp \
+    Sources/Sources/mainwindow.cpp
     Sources/Sources/mainwindow.cpp
 
 FORMS += \

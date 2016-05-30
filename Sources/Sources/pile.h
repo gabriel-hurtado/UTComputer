@@ -29,7 +29,7 @@ class Pile
     unsigned int nbLitteraletoAffiche;
 
     /*made those method in private so the user can't use them*/
-    Pile(){}
+    Pile():nbLitteraletoAffiche(4){}
     Pile(const Pile& p);
     ~Pile(){}
     void operator=(const Pile&);
@@ -47,6 +47,8 @@ public:
     void UNDO();
     void REDO();
     void sauverPile();
+
+    unsigned int getNbToAffiche(){return nbLitteraletoAffiche;}
 
 
 

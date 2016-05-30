@@ -4,19 +4,19 @@
 #include "litteralefactory.h"
 #include "controleur.h"
 #include "mainwindow.h"
-#include <QApplication>
-#include <QtWidgets>
+
+
 
 int main(int argc,char* argv[]) {
 
-    LitteraleFactory& lf = LitteraleFactory::donnerInstance();
-    LitteraleFactory::enregistrer("Réelle",new Reelle(0,0));
-    LitteraleFactory::enregistrer("Entier",new Entier(0));
+
 
     std::cout<<"\n";
 
-    Entier e=  Entier(0);
-    Entier e2=  Entier(5);
+    Entier e(3);
+    Entier e2(4);
+    Reelle r(7.3);
+    Complexe c(e,r);
     OperateurDivision ad= OperateurDivision(&e,&e2);
     try{
     Litterale* l2= ad.traitementOperateur();
@@ -31,7 +31,7 @@ int main(int argc,char* argv[]) {
         Tests pour la pile
 
     try{
-    Pile& p = Pile::donnerInstance();
+
     std::cout<<"On ajoute un élément à la pile"<<std::endl;
     p<<r;
     std::cout<<"On ajoute un élément à la pile"<<std::endl;
@@ -75,6 +75,11 @@ int main(int argc,char* argv[]) {
         std::cout<<e.getMessage();
     }
     */
+
+
+    Pile& p = Pile::donnerInstance();
+    p<<e;
+    p<<c;
     std::cout<<std::endl;
 
     Controleur::enregistrer("$",1);
