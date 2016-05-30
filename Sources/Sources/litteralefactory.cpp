@@ -2,7 +2,7 @@
 
 LitteraleFactory* LitteraleFactory::instanceLitteraleFactory = nullptr;
 
-std::map<std::string, Litterale*> LitteraleFactory::lf_map = std::map<std::string, Litterale*>();
+std::map<QString, Litterale*> LitteraleFactory::lf_map = std::map<QString, Litterale*>();
 
 
 LitteraleFactory& LitteraleFactory::donnerInstance(){
@@ -15,17 +15,17 @@ LitteraleFactory& LitteraleFactory::donnerInstance(){
 LitteraleFactory::LitteraleFactory(){}
 
 LitteraleFactory::~LitteraleFactory(){
-    for(std::map<std::string, Litterale*>::iterator it = lf_map.begin();it!=lf_map.end();++it)
+    for(std::map<QString, Litterale*>::iterator it = lf_map.begin();it!=lf_map.end();++it)
         delete it->second; //on détruit les Litterales* qui servaient de patron
 }
 
-void LitteraleFactory::enregistrer(const std::string& cle, Litterale* l){
+void LitteraleFactory::enregistrer(const QString& cle, Litterale* l){
     if(lf_map.find(cle)==lf_map.end()) //Si pas déja la clé
         lf_map[cle]=l;
 }
 
-Litterale* LitteraleFactory::creer(const std::string& cle){
-    std::map<std::string, Litterale*>::const_iterator it = lf_map.find(cle);
+Litterale* LitteraleFactory::creer(const QString &cle){
+    std::map<QString, Litterale*>::const_iterator it = lf_map.find(cle);
     Litterale* tmp = nullptr;
     if(it!=lf_map.end())
         tmp = it->second->getCopy();

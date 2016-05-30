@@ -1,10 +1,12 @@
 #ifndef H_OPERANDE
 #define H_OPERANDE
+#include <QString>
 #include <string>
 #include <sstream>
 #include <exception>
 #include <iostream>
 #include <map>
+
 
 class Litterale;
 

@@ -11,10 +11,10 @@
 */
 class LitteraleException : public std::exception
 {
-    std::string info;
+    QString info;
 public:
-    LitteraleException (std::string in) : info(in) {}
-    const std::string	getMessage() { return info; }
+    LitteraleException (QString in) : info(in) {}
+    const QString	getMessage() { return info; }
 };
 
 
@@ -28,8 +28,8 @@ public:
     Litterale() {}
     virtual ~Litterale() {}
     /*Template method pour afficher utilisant toString()*/
-    std::ostream& afficher(std::ostream& f=std::cout){f<<toString();return f;}
-    virtual const std::string toString() const = 0;
+    std::ostream& afficher(std::ostream& f=std::cout){f<<toString().toStdString();return f;}
+    virtual const QString toString() const = 0;
     virtual Litterale* getCopy() const = 0;
     Litterale* traitement(){return nullptr;}
 
@@ -97,7 +97,7 @@ public:
     Entier(int v=0) :valeur(v) {}
     virtual ~Entier() {}
     int getValeur() const { return valeur; }
-    const std::string toString() const { return std::to_string(getValeur());}
+    const QString toString() const {QString s; return s.setNum(getValeur());}
     LitteraleComplexe* neg(){Entier* res =getNumericCopy(); res->valeur=-res->valeur; return res;}
     Entier* getNumericCopy() const{return new Entier(*this);}
 
@@ -140,7 +140,7 @@ public:
     double  getValeur()const {return value;}
     LitteraleComplexe* neg(){Reelle* res=getNumericCopy(); res->value=-res->value;return res;}
     Reelle* getNumericCopy() const{return new Reelle(*this);}
-    const std::string toString() const;
+    const QString toString() const;
 
 
 };
@@ -161,7 +161,7 @@ public:
 
     LitteraleComplexe* neg(){Rationnel* res=getNumericCopy(); res->numerateur.neg();return res;}
     Rationnel* getNumericCopy() const{return new Rationnel(*this);}
-    const std::string toString() const;
+    const QString toString() const;
     LitteraleNumerique& Simplification();
     Reelle roundValue() const;
 
@@ -180,7 +180,7 @@ public:
 
     LitteraleComplexe* neg(){Complexe* res=getCopy(); res->p_reelle.neg();return res;}
     Complexe* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
-    const std::string toString() const;
+    const QString toString() const;
 
 
 };
@@ -189,23 +189,23 @@ public:
 
 /*------------Classe Litterale Atome------------*/
 class Atome : public LitteraleSimple{
-    std::string nom;
+    QString nom;
 public:
-    Atome(std::string n);
-    std::string getNom() const {return nom;}
-    const std::string toString() const {return getNom();}
+    Atome(QString n);
+    QString getNom() const {return nom;}
+    const QString toString() const {return getNom();}
     Litterale* getCopy() const;
-    static bool isValidAtomeName(std::string s);
+    static bool isValidAtomeName(QString s);
 };
 
 /*------------Classe Litterale Expression------------*/
 
 class Expression : public Litterale{
-    std::string value;
+    QString value;
 public:
-    Expression(std::string v):value(v){}
-    std::string getExpression() const {return value;}
-    const std::string toString() const {return getExpression();}
+    Expression(QString v):value(v){}
+    QString getExpression() const {return value;}
+    const QString toString() const {return getExpression();}
     LitteraleComplexe* evaluer() const;
     Litterale* getCopy() const;
 };
@@ -215,11 +215,11 @@ public:
 
 
 class Programme : public Litterale{
-    std::string valeur;
+    QString valeur;
 public:
-    Programme(std::string p):valeur(p){}
-    std::string getProgramme() const {return valeur;}
-    const std::string toString() const {return getProgramme();}
+    Programme(QString p):valeur(p){}
+    QString getProgramme() const {return valeur;}
+    const QString toString() const {return getProgramme();}
     Litterale* getCopy() const;
 };
 

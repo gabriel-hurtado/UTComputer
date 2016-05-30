@@ -15,10 +15,10 @@ class GerantPile;
 
 class PileException : public std::exception
 {
-    std::string info;
+    QString info;
 public:
-    PileException (std::string in) : info(in) {}
-    const std::string	getMessage() { return info; }
+    PileException (QString in) : info(in) {}
+    const QString	getMessage() { return info; }
 };
 
 

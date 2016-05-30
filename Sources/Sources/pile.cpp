@@ -38,7 +38,7 @@ Pile& Pile::operator>>(Litterale*& l){
 
 void Pile::voirPile() const {
     for(Litterale* n : emP)
-        std::cout<<n->toString()<<std::endl;
+        std::cout<<n->toString().toStdString()<<std::endl;
 }
 
 MementoPile* Pile::saveInMemento() const{

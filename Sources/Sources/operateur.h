@@ -12,10 +12,10 @@
 */
 class OperateurException : public std::exception
 {
-    std::string info;
+    QString info;
 public:
-    OperateurException (std::string in) : info(in) {}
-    const std::string	getMessage() { return info; }
+    OperateurException (QString in) : info(in) {}
+    const QString	getMessage() { return info; }
 };
 
 
@@ -27,13 +27,13 @@ public:
 
 class Operateur : public Operande
 {
-    static std::string symbole;
+    static QString symbole;
  protected:
     Pile& p = Pile::donnerInstance();
 public:
 
     Operateur(){}
-    static std::string getSymbole(){return symbole;}
+    static QString getSymbole(){return symbole;}
     virtual void chargerContexte() = 0;
     virtual void pushResultat(Litterale* res) {p<<(*res);}
     void operation(){chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res);}

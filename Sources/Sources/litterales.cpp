@@ -1,6 +1,8 @@
 #include "litterales.h"
 #include "utils.h"
 #include "operateur.h"
+#include <QTextStream>
+
 
 /*Définition des méthodes de la classe Litterale*/
 
@@ -18,10 +20,10 @@ LitteraleNumerique& Reelle::Simplification(){
     return *ptr;
 }
 
-const std::string Reelle::toString() const {
-    std::stringstream s;
-        s<<getValeur();
-    return s.str();
+const QString Reelle::toString() const {
+    QString s;
+        s.setNum(getValeur());
+    return s;
 }
 
 
@@ -42,9 +44,9 @@ Rationnel::Rationnel(int n, int d){
         }
     }
 
-const std::string Rationnel::toString() const { std::stringstream st;
-                                st << getNumerateur().getValeur() << "/" << getDenominator().getValeur();
-                                return st.str();
+const QString Rationnel::toString() const { std::stringstream s;
+                                s << getNumerateur().getValeur() << "/" << getDenominator().getValeur();
+                                return QString::fromStdString(s.str());
                                 }
 
 LitteraleNumerique& Rationnel::Simplification(){
@@ -68,20 +70,20 @@ Reelle Rationnel::roundValue() const{
 
 
 /*------------Définition des méthodes de la classe Complexe------------*/
-const std::string Complexe::toString() const{
-    std::stringstream s;
-    s<<p_reelle.toString();
-    s<<'$';
-    s<<p_imaginaire.toString();
-    return s.str();
+const QString Complexe::toString() const{
+    QString s;
+    s+=p_reelle.toString();
+    s+='$';
+    s+=p_imaginaire.toString();
+    return s;
 }
 
 
 
 /*------------Définition des méthodes de la classe Atome------------*/
 
-Atome::Atome(std::string n){
-    std::string::iterator it=n.begin();
+Atome::Atome(QString n){
+    QString::iterator it=n.begin();
     if(isValidAtomeName(n))
         nom=n;
     else
@@ -89,8 +91,8 @@ Atome::Atome(std::string n){
 }
 
 
-bool Atome::isValidAtomeName(std::string s){
-    std::string::iterator it=s.begin();
+bool Atome::isValidAtomeName(QString s){
+    QString::iterator it=s.begin();
     //On vérifie que le premier caractère est une majuscule;
     if(s.begin()!=s.end() && *it<'Z' && *it>'A'){
         //On doit alors vérifier que tout les caractères ne sont que des lettres majuscules ou des chiffres
