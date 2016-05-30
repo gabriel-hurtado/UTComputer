@@ -5,6 +5,20 @@
 #ifndef OPERATEUR_H
 #define OPERATEUR_H
 
+
+/*
+ Classe pour gérer les exceptions sur les opérateurs
+ Ces messages sont utile pour notre GUI (?)
+*/
+class OperateurException : public std::exception
+{
+    std::string info;
+public:
+    OperateurException (std::string in) : info(in) {}
+    const std::string	getMessage() { return info; }
+};
+
+
 /*
  * Operation interact with stack, operator must be created withoud parameters
  * traitementOperator works alone, do not push results to the stack
@@ -14,18 +28,17 @@
 class Operateur : public Operande
 {
     static std::string symbole;
-    static int arite;
  protected:
     Pile& p = Pile::donnerInstance();
 public:
 
     Operateur(){}
-    static int getArite(){return arite;}
     static std::string getSymbole(){return symbole;}
     virtual void chargerContexte() = 0;
-    void operation(){Litterale* res=traitementOperateur(); pushResultat(res);}
     virtual void pushResultat(Litterale* res) {p<<(*res);}
-    virtual Litterale* traitementOperateur()=0;
+    void operation(){chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res);}
+    virtual Litterale* traitementOperateur() =0;
+    virtual Operateur* getCopy()=0;
 };
 
 
@@ -36,10 +49,8 @@ class OperateurBinaire : public Operateur{
 public:
     void chargerContexte(){p>>l2;
                            p>>l1;}
-    OperateurBinaire(){chargerContexte();}
+    OperateurBinaire(){}
     OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
-
-
 };
 
 class OperateurUnaire  : public Operateur{
@@ -48,9 +59,8 @@ protected:
 public:
    void chargerContexte(){p>>l1;}
 
-   OperateurUnaire(){chargerContexte();}
+   OperateurUnaire(){}
    OperateurUnaire(Litterale* lit1):l1(lit1){}
-
 };
 
 class OperateurNeg : public OperateurUnaire{
@@ -59,6 +69,8 @@ public:
 
    OperateurNeg():OperateurUnaire(){}
    OperateurNeg(Litterale* lit1):OperateurUnaire(lit1){}
+
+   OperateurNeg* getCopy() {return new OperateurNeg(*this);}
 };
 
 class OperateurAddition : public OperateurBinaire{
@@ -67,6 +79,8 @@ public:
 
    OperateurAddition():OperateurBinaire(){}
    OperateurAddition(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurAddition* getCopy() {return new OperateurAddition(*this);}
 };
 
 class OperateurSoustraction : public OperateurBinaire{
@@ -75,6 +89,8 @@ public:
 
    OperateurSoustraction():OperateurBinaire(){}
    OperateurSoustraction(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurSoustraction* getCopy() {return new OperateurSoustraction(*this);}
 };
 
 class OperateurDivision : public OperateurBinaire{
@@ -83,6 +99,7 @@ public:
 
    OperateurDivision():OperateurBinaire(){}
    OperateurDivision(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+   OperateurDivision* getCopy() {return new OperateurDivision(*this);}
 };
 
 
@@ -92,6 +109,8 @@ public:
 
    OperateurMultiplication():OperateurBinaire(){}
    OperateurMultiplication(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurMultiplication* getCopy() {return new OperateurMultiplication(*this);}
 
 };
 #endif // OPERATEUR_H

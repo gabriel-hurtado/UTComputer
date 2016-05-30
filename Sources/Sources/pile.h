@@ -13,6 +13,15 @@ class MementoPile;
 */
 class GerantPile;
 
+class PileException : public std::exception
+{
+    std::string info;
+public:
+    PileException (std::string in) : info(in) {}
+    const std::string	getMessage() { return info; }
+};
+
+
 class Pile
 {
     std::vector<Litterale*> emP;//emP stands for "embedded Pile"

@@ -13,15 +13,18 @@ int main(int argc,char* argv[]) {
     LitteraleFactory::enregistrer("Réelle",new Reelle(0,0));
     LitteraleFactory::enregistrer("Entier",new Entier(0));
 
-    Reelle r = Reelle(1, 0);
     std::cout<<"\n";
 
-    Entier e= Entier(5);
-    Complexe c1 = Complexe(r,e);
-    Complexe c2= Complexe(e,r);
-    OperateurDivision ad= OperateurDivision(&c1,&c2);
+    Entier e=  Entier(0);
+    Entier e2=  Entier(5);
+    OperateurDivision ad= OperateurDivision(&e,&e2);
+    try{
     Litterale* l2= ad.traitementOperateur();
-    l2->afficher();
+    l2->afficher();}
+    catch(LitteraleException err){
+        std::cout<<err.getMessage();
+    }
+
     //system("pause");
 
     /*

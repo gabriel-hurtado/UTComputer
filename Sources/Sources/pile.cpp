@@ -32,7 +32,8 @@ Pile& Pile::operator<<(Litterale& l){
 }
 
 Pile& Pile::operator>>(Litterale*& l){
-    l=emP.back();emP.pop_back();return *this;
+   if(!emP.empty()){ l=emP.back();emP.pop_back();return *this;}
+    else throw PileException("Pile vide, impossible de dépiler");
 }
 
 void Pile::voirPile() const {

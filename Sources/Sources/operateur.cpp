@@ -111,7 +111,7 @@ Litterale* OperateurAddition::traitementOperateur(){
         }
 
     }
-    throw LitteraleException("Error in Addition");
+    throw OperateurException("Error in Addition");
 
 
 }
@@ -235,7 +235,7 @@ Litterale* OperateurMultiplication::traitementOperateur(){
          }
 
     }
-    throw LitteraleException("Error in Addition");
+    throw OperateurException("Error in Multiplication");
 
 
 }
@@ -354,7 +354,7 @@ Litterale* OperateurDivision::traitementOperateur(){
             }
 
     }
-    throw LitteraleException("Error in Addition");
+    throw OperateurException("Error in Division");
 
 
 
