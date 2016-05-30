@@ -14,9 +14,8 @@ int main() {
     std::cout<<"\n";
 
     Entier e= Entier(5);
-    Complexe c1 = Complexe(r,e);
     Complexe c2= Complexe(e,r);
-    OperateurDivision ad= OperateurDivision(&c1,&c2);
+    OperateurDivision ad= OperateurDivision(nullptr,&c2);
     Litterale* l2= ad.traitementOperateur();
     l2->afficher();
     //system("pause");
