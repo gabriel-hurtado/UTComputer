@@ -5,7 +5,8 @@ HEADERS += \
     Sources/Sources/litteralefactory.h \
     Sources/Sources/operateur.h \
     Sources/Sources/pile.h \
-    Sources/Sources/controleur.h
+    Sources/Sources/controleur.h \
+    Sources/Sources/mainwindow.h
 
 SOURCES += \
     Sources/Sources/main.cpp \
@@ -13,4 +14,9 @@ SOURCES += \
     Sources/Sources/litteralefactory.cpp \
     Sources/Sources/operateur.cpp \
     Sources/Sources/pile.cpp \
-    Sources/Sources/controleur.cpp
+    Sources/Sources/controleur.cpp \
+    Sources/Sources/mainwindow.cpp
+
+FORMS += \
+    Sources/Sources/mainwindow.ui
+QT += widgets

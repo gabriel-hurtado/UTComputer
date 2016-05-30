@@ -17,6 +17,7 @@ class Pile
 {
     std::vector<Litterale*> emP;//emP stands for "embedded Pile"
     static Pile* instancePile;
+    unsigned int nbLitteraletoAffiche;
 
     /*made those method in private so the user can't use them*/
     Pile(){}
@@ -37,6 +38,23 @@ public:
     void UNDO();
     void REDO();
     void sauverPile();
+
+
+
+    /*
+        Iterator sur la Pile
+    */
+    class iterator {
+            std::vector<Litterale*>::iterator ite;
+        public:
+            iterator(std::vector<Litterale*>::iterator i = instancePile->emP.begin()):ite(i){}
+            Litterale& operator*() const { return *(*ite); }
+            bool operator!=(iterator it) const { return ite!=it.ite; }
+            iterator& operator++(){ ++ite; return *this; }
+        };
+        iterator begin() { return emP.begin(); }
+        iterator end() { return emP.end(); }
+
 
 
     /*AJOUTER UN ITERATOR SUR LA PILE*/

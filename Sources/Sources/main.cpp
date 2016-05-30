@@ -3,8 +3,11 @@
 #include "pile.h"
 #include "litteralefactory.h"
 #include "controleur.h"
+#include "mainwindow.h"
+#include <QApplication>
+#include <QtWidgets>
 
-int main() {
+int main(int argc,char* argv[]) {
 
     LitteraleFactory& lf = LitteraleFactory::donnerInstance();
     LitteraleFactory::enregistrer("Réelle",new Reelle(0,0));
@@ -76,5 +79,15 @@ int main() {
     Controleur::enregistrer("[",0);
 
     Controleur::donnerInstance().firstWord("4 5 +");
+
+    //Construction de l'interface
+
+    QApplication app(argc, argv);
+
+    MainWindow fenetre;
+    fenetre.show();
+
+    return app.exec();
+
     return 0;
 }
