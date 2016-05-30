@@ -8,6 +8,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("UTComputer");
+    //Pour rendre la page des messages plus swag
+    ui->message->setStyleSheet("background: black; color: red");
+    ui->message->setReadOnly(true);
+
+    //Pour rendre plus swag la vue de la pile
+    ui->vuePile->horizontalHeader()->setVisible(false);
+    ui->vuePile->horizontalHeader()->setStretchLastSection(true);
+    ui->vuePile->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
     //Définition des objets
 
 
