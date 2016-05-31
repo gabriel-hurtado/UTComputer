@@ -1,26 +1,10 @@
-#include "operande.h"
+
+#ifndef OPERATEURSNUMERIQUES_H
+#define OPERATEURSNUMERIQUES_H
+#include "operateur.h"
 #include "litterales.h"
+
 #include"pile.h"
-
-#ifndef OPERATEUR_H
-#define OPERATEUR_H
-
-
-/*
- Classe pour gérer les exceptions sur les opérateurs
- Ces messages sont utile pour notre GUI (?)
-*/
-class OperateurException : public std::exception
-{
-    QString info;
-public:
-    OperateurException (QString in) : info(in) {}
-    virtual const char* what() const throw()
-      {
-        return info.toStdString().c_str();
-      }
-
-};
 
 
 /*
@@ -29,24 +13,21 @@ public:
  *
  */
 
-class Operateur : public Operande
+namespace numerique{
+
+class OperateurNumerique : public Operateur
 {
-    static QString symbole;
- protected:
-    Pile& p = Pile::donnerInstance();
 public:
 
-    Operateur(){}
-    static QString getSymbole(){return symbole;}
-    virtual void chargerContexte() = 0;
+    OperateurNumerique(){}
     virtual void pushResultat(Litterale* res) {p<<(*res);}
     void operation(){chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res);}
     virtual Litterale* traitementOperateur() =0;
-    virtual Operateur* getCopy()=0;
+    virtual OperateurNumerique* getCopy()=0;
 };
 
 
-class OperateurBinaire : public Operateur{
+class OperateurBinaire : public OperateurNumerique{
  protected:
     Litterale* l1;
     Litterale* l2;
@@ -57,7 +38,7 @@ public:
     OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
 };
 
-class OperateurUnaire  : public Operateur{
+class OperateurUnaire  : public OperateurNumerique{
 protected:
    Litterale* l1;
 public:
@@ -190,106 +171,6 @@ public:
    Operateur$* getCopy() {return new Operateur$(*this);}
 
 };
+}
 
-class OperateurEgal : public OperateurBinaire{
-public:
-   Litterale* traitementOperateur();
-
-   OperateurEgal():OperateurBinaire(){}
-   OperateurEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
-   OperateurEgal* getCopy() {return new OperateurEgal(*this);}
-
-};
-
-class OperateurDiff : public OperateurBinaire{
-public:
-   Litterale* traitementOperateur();
-
-   OperateurDiff():OperateurBinaire(){}
-   OperateurDiff(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
-   OperateurDiff* getCopy() {return new OperateurDiff(*this);}
-
-};
-
-class OperateurInfEgal : public OperateurBinaire{
-public:
-   Litterale* traitementOperateur();
-
-   OperateurInfEgal():OperateurBinaire(){}
-   OperateurInfEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
-   OperateurInfEgal* getCopy() {return new OperateurInfEgal(*this);}
-
-};
-
-
-class OperateurSupEgal : public OperateurBinaire{
-public:
-   Litterale* traitementOperateur();
-
-   OperateurSupEgal():OperateurBinaire(){}
-   OperateurSupEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
-   OperateurSupEgal* getCopy() {return new OperateurSupEgal(*this);}
-
-};
-
-class OperateurSup : public OperateurBinaire{
-public:
-   Litterale* traitementOperateur();
-
-   OperateurSup():OperateurBinaire(){}
-   OperateurSup(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
-   OperateurSup* getCopy() {return new OperateurSup(*this);}
-
-};
-
-
-class OperateurInf: public OperateurBinaire{
-public:
-   Litterale* traitementOperateur();
-
-   OperateurInf():OperateurBinaire(){}
-   OperateurInf(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
-   OperateurInf* getCopy() {return new OperateurInf(*this);}
-
-};
-
-
-class OperateurAND: public OperateurBinaire{
-public:
-   Litterale* traitementOperateur();
-
-   OperateurAND():OperateurBinaire(){}
-   OperateurAND(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
-   OperateurAND* getCopy() {return new OperateurAND(*this);}
-
-};
-
-class OperateurOR: public OperateurBinaire{
-public:
-   Litterale* traitementOperateur();
-
-   OperateurOR():OperateurBinaire(){}
-   OperateurOR(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
-   OperateurOR* getCopy() {return new OperateurOR(*this);}
-
-};
-
-class OperateurNOT: public OperateurBinaire{
-public:
-   Litterale* traitementOperateur();
-
-   OperateurNOT():OperateurBinaire(){}
-   OperateurNOT(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
-   OperateurNOT* getCopy() {return new OperateurNOT(*this);}
-
-};
-#endif // OPERATEUR_H
+#endif // OPERATEURSNUMERIQUES_H

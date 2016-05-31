@@ -1,6 +1,6 @@
 #include "litterales.h"
 #include "utils.h"
-#include "operateur.h"
+#include "operateursnumeriques.h"
 #include <QTextStream>
 
 

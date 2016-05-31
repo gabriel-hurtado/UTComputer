@@ -1,5 +1,5 @@
 #include "litterales.h"
-#include "operateur.h"
+#include "operateursnumeriques.h"
 #include "pile.h"
 #include "litteralefactory.h"
 #include "controleur.h"
