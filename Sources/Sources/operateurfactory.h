@@ -3,6 +3,7 @@
 
 
 #include "operateur.h"
+#include "operateursnumeriques.h"
 #include <map>
 
 
