@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->commande,SIGNAL(returnPressed()),this,SLOT(getNextCommande()));
     connect(&pile,SIGNAL(modificationEtat()),this,SLOT(refreshVuePile()));
+    connect(this,SIGNAL(SendException(QString)),ui->message,SLOT(setText(QString)));
 
 }
 
@@ -60,6 +61,11 @@ void MainWindow::refreshVuePile(){
 void MainWindow::getNextCommande(){
     //pile->setMessage("");
     QString g = ui->commande->text();
-    controleur.commande(g);
+    try{
+        controleur.commande(g);
+    }
+    catch(LitteraleException& e){
+        SendException(e.getInfo());
+    }
     ui->commande->clear();
 }

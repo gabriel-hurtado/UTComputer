@@ -22,6 +22,8 @@ public:
 public slots:
     void refreshVuePile();
     void getNextCommande();
+signals:
+    void SendException(QString s);
 
 private:
     Ui::MainWindow *ui;

@@ -2,6 +2,7 @@
 #define CONTROLEUR_H
 #include "operande.h"
 #include "pile.h"
+#include "litteralefactory.h"
 
 class Controleur
 {

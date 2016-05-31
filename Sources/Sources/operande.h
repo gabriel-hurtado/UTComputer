@@ -7,7 +7,7 @@
 #include <iostream>
 #include <QObject>
 #include <map>
-
+#include <QMap>
 
 class Litterale;
 

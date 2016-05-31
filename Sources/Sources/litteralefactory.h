@@ -1,7 +1,7 @@
 
 #ifndef LITTERALEFACTORY_H
 #define LITTERALEFACTORY_H
-
+#include "pile.h"
 #include "litterales.h"
 #include <map>
 
@@ -14,7 +14,8 @@ class LitteraleFactory
         Plus facile à manipuler si c'est static
         (évite de passer par l'instance pour la méthode enregistrer et creer)
     */
-    static std::map<QString, Litterale*> lf_map;
+    static QMap<unsigned int, QString> priority_map;
+    static QMap<QString, Litterale*>   litterale_map;
     LitteraleFactory();
     ~LitteraleFactory();
     void operator=(LitteraleFactory& l);
@@ -26,10 +27,10 @@ public:
     static void libererInstance();
 
     //Pour enregistrer de nouveaux objets
-    static void enregistrer(const QString& cle,Litterale* obj);
+    static void enregistrer(unsigned int,QString,Litterale*);
 
     //Pour créer des objets à partir de la factory
-    Litterale* creer(const QString& cle);
+    Litterale* creer(QString);
 
 };
 
