@@ -67,14 +67,14 @@ public:
    OperateurUnaire(Litterale* lit1):l1(lit1){}
 };
 
-class OperateurNeg : public OperateurUnaire{
+class OperateurNEG : public OperateurUnaire{
 public:
    Litterale* traitementOperateur();
 
-   OperateurNeg():OperateurUnaire(){}
-   OperateurNeg(Litterale* lit1):OperateurUnaire(lit1){}
+   OperateurNEG():OperateurUnaire(){}
+   OperateurNEG(Litterale* lit1):OperateurUnaire(lit1){}
 
-   OperateurNeg* getCopy() {return new OperateurNeg(*this);}
+   OperateurNEG* getCopy() {return new OperateurNEG(*this);}
 };
 
 class OperateurAddition : public OperateurBinaire{
@@ -137,6 +137,159 @@ public:
    OperateurMOD(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
    OperateurMOD* getCopy() {return new OperateurMOD(*this);}
+
+};
+
+class OperateurNUM : public OperateurUnaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurNUM():OperateurUnaire(){}
+   OperateurNUM(Litterale* lit1):OperateurUnaire(lit1){}
+
+   OperateurNUM* getCopy() {return new OperateurNUM(*this);}
+};
+
+class OperateurDEN : public OperateurUnaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurDEN():OperateurUnaire(){}
+   OperateurDEN(Litterale* lit1):OperateurUnaire(lit1){}
+
+   OperateurDEN* getCopy() {return new OperateurDEN(*this);}
+};
+
+class OperateurIM : public OperateurUnaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurIM():OperateurUnaire(){}
+   OperateurIM(Litterale* lit1):OperateurUnaire(lit1){}
+
+   OperateurIM* getCopy() {return new OperateurIM(*this);}
+};
+
+class OperateurRE : public OperateurUnaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurRE():OperateurUnaire(){}
+   OperateurRE(Litterale* lit1):OperateurUnaire(lit1){}
+
+   OperateurRE* getCopy() {return new OperateurRE(*this);}
+};
+
+class Operateur$ : public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   Operateur$():OperateurBinaire(){}
+   Operateur$(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   Operateur$* getCopy() {return new Operateur$(*this);}
+
+};
+
+class OperateurEgal : public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurEgal():OperateurBinaire(){}
+   OperateurEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurEgal* getCopy() {return new OperateurEgal(*this);}
+
+};
+
+class OperateurDiff : public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurDiff():OperateurBinaire(){}
+   OperateurDiff(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurDiff* getCopy() {return new OperateurDiff(*this);}
+
+};
+
+class OperateurInfEgal : public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurInfEgal():OperateurBinaire(){}
+   OperateurInfEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurInfEgal* getCopy() {return new OperateurInfEgal(*this);}
+
+};
+
+
+class OperateurSupEgal : public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurSupEgal():OperateurBinaire(){}
+   OperateurSupEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurSupEgal* getCopy() {return new OperateurSupEgal(*this);}
+
+};
+
+class OperateurSup : public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurSup():OperateurBinaire(){}
+   OperateurSup(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurSup* getCopy() {return new OperateurSup(*this);}
+
+};
+
+
+class OperateurInf: public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurInf():OperateurBinaire(){}
+   OperateurInf(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurInf* getCopy() {return new OperateurInf(*this);}
+
+};
+
+
+class OperateurAND: public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurAND():OperateurBinaire(){}
+   OperateurAND(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurAND* getCopy() {return new OperateurAND(*this);}
+
+};
+
+class OperateurOR: public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurOR():OperateurBinaire(){}
+   OperateurOR(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurOR* getCopy() {return new OperateurOR(*this);}
+
+};
+
+class OperateurNOT: public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurNOT():OperateurBinaire(){}
+   OperateurNOT(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurNOT* getCopy() {return new OperateurNOT(*this);}
 
 };
 #endif // OPERATEUR_H

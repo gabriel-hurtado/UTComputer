@@ -116,10 +116,11 @@ Litterale* OperateurAddition::traitementOperateur(){
 
 }
 
-Litterale* OperateurNeg::traitementOperateur(){
+Litterale* OperateurNEG::traitementOperateur(){
     LitteraleComplexe* lit=estdeType<LitteraleComplexe>(l1);
     if(lit)
     return lit->neg();
+    else throw OperateurException("Error in NEG");
 }
 
 Litterale* OperateurSoustraction::traitementOperateur(){
@@ -127,7 +128,7 @@ Litterale* OperateurSoustraction::traitementOperateur(){
     LitteraleComplexe* li2=estdeType<LitteraleComplexe>(l2);
     if(li1 && li2)
     {
-        OperateurNeg ng = OperateurNeg(li2);
+        OperateurNEG ng = OperateurNEG(li2);
         OperateurAddition addTemp = OperateurAddition(li1,ng.traitementOperateur());
         return addTemp.traitementOperateur();
     }
@@ -380,4 +381,147 @@ Litterale* OperateurMOD::traitementOperateur(){
         return (new Entier(e1->getValeur()%e2->getValeur()));
     }
     throw OperateurException("Error in MOD");
+}
+
+Litterale* OperateurNUM::traitementOperateur(){
+    Entier* e=estdeType<Entier>(l1);
+    if(e)
+    return e->getNumericCopy();
+    Rationnel* re=estdeType<Rationnel>(l1);
+    if(re)
+    return new Entier(re->getNumerateur());
+
+    else throw OperateurException("Error in NUM");
+}
+
+Litterale* OperateurDEN::traitementOperateur(){
+    Entier* e=estdeType<Entier>(l1);
+    if(e)
+    return (new Entier(1));
+    Rationnel* re=estdeType<Rationnel>(l1);
+    if(re)
+    return new Entier(re->getDenominator());
+
+    else throw OperateurException("Error in DEN");
+}
+
+Litterale* OperateurIM::traitementOperateur(){
+    LitteraleComplexe* lit=estdeType<LitteraleComplexe>(l1);
+    if(lit){
+       Complexe* cmp=estdeType<Complexe>(l1);
+       if(cmp)
+           return  cmp->getPartieImaginaire()->getNumericCopy();
+
+       else
+           return new Entier(0);
+    }
+
+    else throw OperateurException("Error in IM");
+}
+
+Litterale* OperateurRE::traitementOperateur(){
+    LitteraleComplexe* lit=estdeType<LitteraleComplexe>(l1);
+    if(lit){
+       Complexe* cmp=estdeType<Complexe>(l1);
+       if(cmp)
+           return cmp->getPartieReelle()->getNumericCopy();
+
+       else{
+            LitteraleNumerique* num=estdeType<LitteraleNumerique>(l1);
+            return num->getNumericCopy();
+       }
+    }
+
+    else throw OperateurException("Error in RE");
+}
+
+Litterale* Operateur$::traitementOperateur(){
+    LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
+    LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
+    if(li1 && li2)
+    {
+        return new Complexe(*li1,*li2);
+    }
+    throw OperateurException("Error in $");
+}
+
+Litterale* OperateurEgal::traitementOperateur(){
+    LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
+    LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
+    if(li1 && li2)
+    {
+    }
+    throw OperateurException("Error in $");
+}
+
+Litterale* OperateurDiff::traitementOperateur(){
+    LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
+    LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
+    if(li1 && li2)
+    {
+    }
+    throw OperateurException("Error in $");
+}
+
+Litterale* OperateurInfEgal::traitementOperateur(){
+    LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
+    LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
+    if(li1 && li2)
+    {
+    }
+    throw OperateurException("Error in $");
+}
+
+Litterale* OperateurSupEgal::traitementOperateur(){
+    LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
+    LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
+    if(li1 && li2)
+    {
+    }
+    throw OperateurException("Error in $");
+}
+
+Litterale* OperateurSup::traitementOperateur(){
+    LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
+    LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
+    if(li1 && li2)
+    {
+    }
+    throw OperateurException("Error in $");
+}
+
+Litterale* OperateurInf::traitementOperateur(){
+    LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
+    LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
+    if(li1 && li2)
+    {
+    }
+    throw OperateurException("Error in $");
+}
+
+Litterale* OperateurAND::traitementOperateur(){
+    LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
+    LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
+    if(li1 && li2)
+    {
+    }
+    throw OperateurException("Error in $");
+}
+
+Litterale* OperateurOR::traitementOperateur(){
+    LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
+    LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
+    if(li1 && li2)
+    {
+    }
+    throw OperateurException("Error in $");
+}
+
+Litterale* OperateurNOT::traitementOperateur(){
+    LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
+    LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
+    if(li1 && li2)
+    {
+    }
+    throw OperateurException("Error in $");
 }
