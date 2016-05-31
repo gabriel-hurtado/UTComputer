@@ -361,3 +361,23 @@ Litterale* OperateurDivision::traitementOperateur(){
 
 
 }
+
+Litterale* OperateurDIV::traitementOperateur(){
+    Entier* e1=estdeType<Entier>(l1);
+    Entier* e2=estdeType<Entier>(l2);
+    if(e1 && e2)
+    {
+        return (new Entier(e1->getValeur()/e2->getValeur()));
+    }
+    throw OperateurException("Error in DIV");
+}
+
+Litterale* OperateurMOD::traitementOperateur(){
+    Entier* e1=estdeType<Entier>(l1);
+    Entier* e2=estdeType<Entier>(l2);
+    if(e1 && e2)
+    {
+        return (new Entier(e1->getValeur()%e2->getValeur()));
+    }
+    throw OperateurException("Error in MOD");
+}

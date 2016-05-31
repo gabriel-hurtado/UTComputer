@@ -15,7 +15,11 @@ class OperateurException : public std::exception
     QString info;
 public:
     OperateurException (QString in) : info(in) {}
-    const QString	getMessage() { return info; }
+    virtual const char* what() const throw()
+      {
+        return info.toStdString().c_str();
+      }
+
 };
 
 
@@ -111,6 +115,28 @@ public:
    OperateurMultiplication(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
    OperateurMultiplication* getCopy() {return new OperateurMultiplication(*this);}
+
+};
+
+class OperateurDIV : public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurDIV():OperateurBinaire(){}
+   OperateurDIV(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurDIV* getCopy() {return new OperateurDIV(*this);}
+
+};
+
+class OperateurMOD : public OperateurBinaire{
+public:
+   Litterale* traitementOperateur();
+
+   OperateurMOD():OperateurBinaire(){}
+   OperateurMOD(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+
+   OperateurMOD* getCopy() {return new OperateurMOD(*this);}
 
 };
 #endif // OPERATEUR_H

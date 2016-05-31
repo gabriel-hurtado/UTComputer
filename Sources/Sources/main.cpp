@@ -22,7 +22,7 @@ int main(int argc,char* argv[]) {
     Litterale* l2= ad.traitementOperateur();
     l2->afficher();}
     catch(LitteraleException err){
-        std::cout<<err.getMessage().toStdString();
+
     }
 
     //system("pause");
