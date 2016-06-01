@@ -196,6 +196,7 @@ public:
     Complexe* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
     const QString toString() const;
     Litterale* getFromString(QString s);
+    LitteraleComplexe& Simplification();
 
 };
 

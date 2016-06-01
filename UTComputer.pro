@@ -9,7 +9,8 @@ HEADERS += \
     Sources/Sources/mainwindow.h \
     Sources/Sources/operateurslogiques.h \
     Sources/Sources/operateur.h \
-    Sources/Sources/operateursnumeriques.h
+    Sources/Sources/operateursnumeriques.h \
+    Sources/Sources/variable.h
     Sources/Sources/mainwindow.h
 
 SOURCES += \
