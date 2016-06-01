@@ -3,7 +3,6 @@
 #define OPERATEURSNUMERIQUES_H
 #include "operateur.h"
 #include "litterales.h"
-
 #include"pile.h"
 
 

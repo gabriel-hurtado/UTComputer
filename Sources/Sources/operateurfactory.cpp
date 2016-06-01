@@ -2,7 +2,7 @@
 
 OperateurFactory* OperateurFactory::instanceOperateurFactory = nullptr;
 
-std::map<QString, Operateur*> OperateurFactory::of_map = std::map<QString, Operateur*>();
+QMap<QString, Operateur*> OperateurFactory::of_map = QMap<QString, Operateur*>();
 
 
 OperateurFactory& OperateurFactory::donnerInstance(){
@@ -15,8 +15,8 @@ OperateurFactory& OperateurFactory::donnerInstance(){
 OperateurFactory::OperateurFactory(){}
 
 OperateurFactory::~OperateurFactory(){
-    for(std::map<QString, Operateur*>::iterator it = of_map.begin();it!=of_map.end();++it)
-        delete it->second; //on détruit les Operateurs* qui servaient de patron
+    for(QMap<QString, Operateur*>::iterator it = of_map.begin();it!=of_map.end();++it)
+        delete it.value(); //on détruit les Operateurs* qui servaient de patron
 }
 
 void OperateurFactory::enregistrer(const QString& cle, Operateur* l){
@@ -25,11 +25,9 @@ void OperateurFactory::enregistrer(const QString& cle, Operateur* l){
 }
 
 Operateur* OperateurFactory::creer(const QString& cle){
-    std::map<QString, Operateur*>::const_iterator it = of_map.find(cle);
+    QMap<QString, Operateur*>::const_iterator it = of_map.find(cle);
     Operateur* tmp = nullptr;
     if(it!=of_map.end())
-        tmp = it->second->getCopy();
-    else
-        throw OperateurException("'L'opérateur "+cle+" n'existe pas !");
+        tmp = it.value()->getCopy();
     return tmp;
 }

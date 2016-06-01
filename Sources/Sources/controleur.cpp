@@ -2,7 +2,6 @@
 
 Controleur* Controleur::instanceControleur=nullptr;
 
-std::map<unsigned int,QString> Controleur::litterale_priority_map = std::map<unsigned int,QString>();
 
 Controleur& Controleur::donnerInstance(){
     if(instanceControleur==nullptr)
@@ -15,41 +14,24 @@ void Controleur::libererInstance(){
         delete instanceControleur;
 }
 
-void Controleur::enregistrer(QString symbole,unsigned int priorite){
-    if(litterale_priority_map.find(priorite)==litterale_priority_map.end()) //Si pas déja la clé
-        litterale_priority_map[priorite]=symbole;
-    else
-        throw LitteraleException("Une litterale avec cette priorité la existe déjà");
-}
 
 Controleur::Controleur(){}
-Controleur::~Controleur(){};
+Controleur::~Controleur(){}
 
 
 
 
 void Controleur::commande(QString s){
-
-    Pile::donnerInstance()<<*LitteraleFactory::donnerInstance().creer(s);
-    //QString word;
-/*
+    QString word;
+    LitteraleException* EXCEPTION_LIT;
     while((word=firstWord(s))!=""){
-        s= s.erase(0,(s.find(word)+word.length())); //Enlève le mot trouvé dans firstWord de s
-        std::cout << word;
-
-        //L'objectif maintenant est de détecter le type de variable grâce à une map des priorités (dans un mot)
-
-        std::map<unsigned int,QString>::iterator it_litterale_priority_map = litterale_priority_map.begin();
-
-        while(word.find(it_litterale_priority_map->second)==QString::npos && (it_litterale_priority_map)!=litterale_priority_map.end()){
-            it_litterale_priority_map++;
-        }
-
-        if((it_litterale_priority_map)!=litterale_priority_map.end())
-            std::cout<< "Detected: "<< it_litterale_priority_map->second;
-
-
-    }*/
+        s=s.remove(0,(s.indexOf(word)+word.length()));
+        Litterale* l = LitteraleFactory::donnerInstance().creer(word);
+        if(l){Pile::donnerInstance()<<*l;}
+        Operateur* op = OperateurFactory::donnerInstance().creer(word);
+        if(op){op->operation();}
+        if(!op && !l){throw LitteraleException("Le mot "+word+" n'as pas été reconnu");}
+   }
 }
 
 QString Controleur::firstWord(QString s){

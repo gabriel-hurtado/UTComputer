@@ -31,6 +31,8 @@ void LitteraleFactory::enregistrer(unsigned int prio,QString tok, Litterale* l){
 
 }
 
+
+
 Litterale* LitteraleFactory::creer(QString litt_str){
     QMap<unsigned int,QString>::iterator it_prio = priority_map.begin();
     while(it_prio!=priority_map.end() && !litt_str.contains(it_prio.value())){//On cherche le token dans la chaine de caractère par ordre de priorité
@@ -45,19 +47,8 @@ Litterale* LitteraleFactory::creer(QString litt_str){
         bool ok;
         int tmp = litt_str.toInt(&ok); //On tente de convertir en entier
         if(ok) return new Entier(tmp);
-        else throw LitteraleException("Litterale non reconnue");
-    }
 
+    }
+    return nullptr;
 }
 
-
-    /*
-    //Vieux code
-    std::map<QString, Litterale*>::const_iterator it = lf_map.find(cle);
-    Litterale* tmp = nullptr;
-    if(it!=lf_map.end())
-        tmp = it->second->getCopy();
-    else
-        throw LitteraleException("La littérale "+cle+" n'existe pas !");
-    return tmp;
-    */

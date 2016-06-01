@@ -15,6 +15,7 @@ class OperateurException : public std::exception
     QString info;
 public:
     OperateurException (QString in) : info(in) {}
+    QString getInfo(){return info;}
     virtual const char* what() const throw()
       {
         return info.toStdString().c_str();

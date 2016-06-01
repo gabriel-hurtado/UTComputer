@@ -1,10 +1,9 @@
-#include "litterales.h"
-#include "operateursnumeriques.h"
-#include "pile.h"
+
 #include "litteralefactory.h"
+#include "operateurfactory.h"
 #include "controleur.h"
 #include "mainwindow.h"
-
+#include "operateurslogiques.h"
 
 
 int main(int argc,char* argv[]) {
@@ -91,11 +90,14 @@ int main(int argc,char* argv[]) {
     //Construction de l'interface
 
     //try{
-    LitteraleFactory::enregistrer(1,"$",new Complexe(*dynamic_cast<LitteraleNumerique*>(new Entier(1)),
-                                                     *dynamic_cast<LitteraleNumerique*>(new Entier(1)))
-                                                     );
+    Entier* e = new Entier(3);
+    Entier* e2 = new Entier(4);
+    Pile::donnerInstance()<<*e;
+    Pile::donnerInstance()<<*e2;
     LitteraleFactory::enregistrer(2,".",new Reelle(1,1));
-    LitteraleFactory::enregistrer(3,"/",new Rationnel(1,2));
+
+    OperateurFactory::enregistrer("$",new numerique::Operateur$);
+
     //}
     //catch(LitteraleException& e){
     //    std::cout<<e.getInfo().toStdString();

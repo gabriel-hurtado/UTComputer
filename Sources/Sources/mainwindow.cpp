@@ -48,7 +48,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::refreshVuePile(){
     //Rafraichir l'état de la pile
-    for(unsigned int i=0;pile.getNbToAffiche()<i;i++)
+
+    for(unsigned int i=0; i<pile.getNbToAffiche();i++)
         ui->vuePile->item(i,0)->setText("");
     unsigned int nb = 0;
 
@@ -65,7 +66,10 @@ void MainWindow::getNextCommande(){
         controleur.commande(g);
     }
     catch(LitteraleException& e){
-        SendException(e.getInfo());
+        SendException("Litterale :"+e.getInfo());
+    }
+    catch(OperateurException& e){
+        SendException("Operateur :"+e.getInfo());
     }
     ui->commande->clear();
 }

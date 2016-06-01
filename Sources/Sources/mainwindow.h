@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include "pile.h"
 #include "controleur.h"
+#include "operateur.h"
 
 namespace Ui {
 class MainWindow;

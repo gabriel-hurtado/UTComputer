@@ -1,6 +1,5 @@
-#ifndef OPERATEURFACTORY_H
-#define OPERATEURFACTORY_H
-
+#ifndef H_OPERATEURFACTORY
+#define H_OPERATEURFACTORY
 
 #include "operateur.h"
 #include "operateursnumeriques.h"
@@ -18,7 +17,7 @@ class OperateurFactory
         Plus facile à manipuler si c'est static
         (évite de passer par l'instance pour la méthode enregistrer et creer)
     */
-    static std::map<QString, Operateur*> of_map;
+    static QMap<QString, Operateur*> of_map;
     OperateurFactory();
     ~OperateurFactory();
     void operator=(OperateurFactory& l);
