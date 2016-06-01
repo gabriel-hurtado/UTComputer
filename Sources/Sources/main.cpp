@@ -4,10 +4,10 @@
 #include "controleur.h"
 #include "mainwindow.h"
 #include "operateurslogiques.h"
+#include "variable.h"
 
 
 int main(int argc,char* argv[]) {
-
 
     /*
     std::cout<<"\n";
@@ -105,6 +105,13 @@ int main(int argc,char* argv[]) {
     OperateurFactory::enregistrer("RE",new numerique::OperateurRE);
 
 
+
+
+    VariablesManager& man=VariablesManager::donnerInstance();
+    man.enregistrer("x",new Variable(e));
+    man.enregistrer("x",new Variable(e2));
+    Entier* lit= estdeType<Entier>(&(man.getVariable("x").getValeur()));
+    lit->afficher();
     //}
     //catch(LitteraleException& e){
     //    std::cout<<e.getInfo().toStdString();

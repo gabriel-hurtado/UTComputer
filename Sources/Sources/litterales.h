@@ -79,21 +79,7 @@ private:
 
 };
 
-/*
-    Fonction Template pour connaitre les types des objets :
-    L'objet de type T est-il de type L ?
-*/
 
-template<typename L> L* estdeType(Litterale* Tobj){
-    L* Lobj;
-    if(Tobj==nullptr)
-
-        return nullptr;
-    if((Lobj=dynamic_cast<L*>(Tobj)))
-        return Lobj;
-    return nullptr;
-
-}
 
 
 

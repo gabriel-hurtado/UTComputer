@@ -22,7 +22,8 @@ SOURCES += \
     Sources/Sources/operateurfactory.cpp \
     Sources/Sources/mainwindow.cpp \
     Sources/Sources/operateurslogiques.cpp \
-    Sources/Sources/operateursnumeriques.cpp
+    Sources/Sources/operateursnumeriques.cpp \
+    Sources/Sources/variable.cpp
     Sources/Sources/mainwindow.cpp
 
 FORMS += \
