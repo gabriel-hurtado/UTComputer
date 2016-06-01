@@ -7,7 +7,7 @@
 namespace logique{
 
 
-bool OperateurEgal::traitementOperateur(){
+Litterale* OperateurEgal::traitementOperateur(){
     LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
     LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
     if(li1 && li2)
@@ -17,7 +17,7 @@ bool OperateurEgal::traitementOperateur(){
     throw OperateurException("Error in $");
 }
 
-bool OperateurDiff::traitementOperateur(){
+Litterale* OperateurDiff::traitementOperateur(){
     LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
     LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
     if(li1 && li2)
@@ -26,7 +26,7 @@ bool OperateurDiff::traitementOperateur(){
     throw OperateurException("Error in $");
 }
 
-bool OperateurInfEgal::traitementOperateur(){
+Litterale* OperateurInfEgal::traitementOperateur(){
     LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
     LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
     if(li1 && li2)
@@ -35,7 +35,7 @@ bool OperateurInfEgal::traitementOperateur(){
     throw OperateurException("Error in $");
 }
 
-bool OperateurSupEgal::traitementOperateur(){
+Litterale* OperateurSupEgal::traitementOperateur(){
     LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
     LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
     if(li1 && li2)
@@ -44,7 +44,7 @@ bool OperateurSupEgal::traitementOperateur(){
     throw OperateurException("Error in $");
 }
 
-bool OperateurSup::traitementOperateur(){
+Litterale* OperateurSup::traitementOperateur(){
     LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
     LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
     if(li1 && li2)
@@ -53,7 +53,7 @@ bool OperateurSup::traitementOperateur(){
     throw OperateurException("Error in $");
 }
 
-bool OperateurInf::traitementOperateur(){
+Litterale* OperateurInf::traitementOperateur(){
     LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
     LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
     if(li1 && li2)
@@ -62,7 +62,7 @@ bool OperateurInf::traitementOperateur(){
     throw OperateurException("Error in $");
 }
 
-bool OperateurAND::traitementOperateur(){
+Litterale* OperateurAND::traitementOperateur(){
     LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
     LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
     if(li1 && li2)
@@ -71,7 +71,7 @@ bool OperateurAND::traitementOperateur(){
     throw OperateurException("Error in $");
 }
 
-bool OperateurOR::traitementOperateur(){
+Litterale* OperateurOR::traitementOperateur(){
     LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
     LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
     if(li1 && li2)
@@ -80,7 +80,7 @@ bool OperateurOR::traitementOperateur(){
     throw OperateurException("Error in $");
 }
 
-bool OperateurNOT::traitementOperateur(){
+Litterale* OperateurNOT::traitementOperateur(){
     LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);
     LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
     if(li1 && li2)
