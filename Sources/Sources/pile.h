@@ -1,8 +1,7 @@
-#include "litterales.h"
-#include <vector>
 #ifndef PILE_H
 #define PILE_H
-
+#include "litterales.h"
+#include <vector>
 class MementoPile;
 /*
     Manuel pour utiliser un objet "deque" :

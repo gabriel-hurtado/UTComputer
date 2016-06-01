@@ -3,7 +3,8 @@
 #ifndef H_LITTERALE
 #define H_LITTERALE
 #include "operande.h"
-#include <math.h>
+#include "litteralefactory.h"
+
 
 /*
  Classe pour gérer les exceptions sur les littérales
@@ -36,6 +37,7 @@ public:
     std::ostream& afficher(std::ostream& f=std::cout){f<<toString().toStdString();return f;}
     virtual const QString toString() const = 0;
     virtual Litterale* getCopy() const = 0;
+    virtual Litterale* getFromString(QString s) = 0;
     Litterale* traitement(){return nullptr;}
 
 private:
@@ -60,6 +62,7 @@ public:
 
     virtual LitteraleComplexe* neg() =0;
 
+
 private:
 
 };
@@ -79,6 +82,7 @@ private:
     Fonction Template pour connaitre les types des objets :
     L'objet de type T est-il de type L ?
 */
+
 template<typename L> L* estdeType(Litterale* Tobj){
     L* Lobj;
     if(Tobj==nullptr)
@@ -105,6 +109,7 @@ public:
     const QString toString() const {QString s; return s.setNum(getValeur());}
     LitteraleComplexe* neg(){Entier* res =getNumericCopy(); res->valeur=-res->valeur; return res;}
     Entier* getNumericCopy() const{return new Entier(*this);}
+    Litterale* getFromString(QString s){throw LitteraleException("Création d'entier depuis la factory"); return nullptr;}//Cas spécial
 
 };
 
@@ -146,6 +151,7 @@ public:
     LitteraleComplexe* neg(){Reelle* res=getNumericCopy(); res->value=-res->value;return res;}
     Reelle* getNumericCopy() const{return new Reelle(*this);}
     const QString toString() const;
+    Litterale* getFromString(QString s);
 
 
 };
@@ -169,6 +175,7 @@ public:
     const QString toString() const;
     LitteraleNumerique& Simplification();
     Reelle roundValue() const;
+    Litterale* getFromString(QString s);
 
 };
 
@@ -186,7 +193,7 @@ public:
     LitteraleComplexe* neg(){Complexe* res=getCopy(); res->p_reelle.neg();return res;}
     Complexe* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
     const QString toString() const;
-
+    Litterale* getFromString(QString s);
 
 };
 
@@ -201,6 +208,7 @@ public:
     const QString toString() const {return getNom();}
     Litterale* getCopy() const;
     static bool isValidAtomeName(QString s);
+    Litterale* getFromString(QString s){return new Atome(s);}
 };
 
 /*------------Classe Litterale Expression------------*/
@@ -213,6 +221,7 @@ public:
     const QString toString() const {return getExpression();}
     LitteraleComplexe* evaluer() const;
     Litterale* getCopy() const;
+    Litterale* getFromString(QString s){return new Expression(s);}
 };
 
 
@@ -226,6 +235,7 @@ public:
     QString getProgramme() const {return valeur;}
     const QString toString() const {return getProgramme();}
     Litterale* getCopy() const;
+    Litterale* getFromString(QString s){return new Programme(s);}
 };
 
 #endif

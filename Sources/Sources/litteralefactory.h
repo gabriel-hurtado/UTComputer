@@ -1,9 +1,9 @@
 
 #ifndef LITTERALEFACTORY_H
 #define LITTERALEFACTORY_H
-#include "pile.h"
 #include "litterales.h"
 #include <map>
+#include "pile.h"
 
 class LitteraleFactory
 {
@@ -33,5 +33,7 @@ public:
     Litterale* creer(QString);
 
 };
+
+
 
 #endif // LITTERALEFACTORY_H

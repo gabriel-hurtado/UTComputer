@@ -20,12 +20,16 @@ LitteraleNumerique& Reelle::Simplification(){
     return *ptr;
 }
 
+
 const QString Reelle::toString() const {
     QString s;
         s.setNum(getValeur());
     return s;
 }
-
+Litterale* Reelle::getFromString(QString s){
+    QStringList Ql = s.split('.');
+    return new Reelle(Ql.at(0).toInt(),Ql.at(1).toInt());
+}
 
 
 
@@ -64,6 +68,10 @@ Reelle Rationnel::roundValue() const{
      return Reelle(0,(int)(rounded));
 }
 
+Litterale* Rationnel::getFromString(QString s){
+    QStringList Ql = s.split('/');
+    return new Rationnel(Ql.at(0).toInt(),Ql.at(1).toInt());
+}
 
 
 /*------------Définition des méthodes de la classe Entier------------*/
@@ -77,7 +85,16 @@ const QString Complexe::toString() const{
     s+=p_imaginaire.toString();
     return s;
 }
-
+Litterale* Complexe::getFromString(QString s){
+    QStringList Ql = s.split('$');
+    LitteraleFactory& LF = LitteraleFactory::donnerInstance();
+    LitteraleNumerique* l1 = estdeType<LitteraleNumerique>(LF.creer(Ql.at(0)));
+    LitteraleNumerique* l2 = estdeType<LitteraleNumerique>(LF.creer(Ql.at(1)));
+    if(l1 && l2)
+        return new Complexe(*l1,*l2);
+    else
+        throw LitteraleException(s+" n'est pas un Complexe valide");
+}
 
 
 /*------------Définition des méthodes de la classe Atome------------*/

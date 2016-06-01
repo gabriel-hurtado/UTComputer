@@ -19,7 +19,7 @@ LitteraleFactory::~LitteraleFactory(){}
 void LitteraleFactory::enregistrer(unsigned int prio,QString tok, Litterale* l){
     QMap<unsigned int,QString>::iterator it_prio = priority_map.find(prio);
     if(it_prio==priority_map.end()){            //Si la priorité n'est pas déja prise
-        if(litterale_map.find(it_prio.value())==litterale_map.end()){//Si le token n'est pas déja pris
+        if(litterale_map.find(tok)==litterale_map.end()){//Si le token n'est pas déja pris
             priority_map[prio]=tok;             //On enregistre le token dans la priority_map
             litterale_map[tok]=l;               //On enregistre le pointeur sur litterale dans la base
         }
@@ -37,19 +37,15 @@ Litterale* LitteraleFactory::creer(QString litt_str){
         it_prio++;
     }
     if(it_prio!=priority_map.end()){
-
+        return litterale_map.find(it_prio.value()).value()->getFromString(litt_str);
     }
     //Cela peut encore etre un Entier
 
     else{
         bool ok;
         int tmp = litt_str.toInt(&ok); //On tente de convertir en entier
-        if(ok){ //
-            Entier* tmp_entier = new Entier(tmp);
-            Pile::donnerInstance()<<*tmp_entier;
-        }
-        else
-            throw LitteraleException("Liiterale non reconnue");
+        if(ok) return new Entier(tmp);
+        else throw LitteraleException("Litterale non reconnue");
     }
 
 }

@@ -8,6 +8,7 @@
 #include <QObject>
 #include <map>
 #include <QMap>
+#include <math.h>
 
 class Litterale;
 

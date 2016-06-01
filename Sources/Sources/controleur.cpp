@@ -30,7 +30,7 @@ Controleur::~Controleur(){};
 
 void Controleur::commande(QString s){
 
-    LitteraleFactory::donnerInstance().creer(s);
+    Pile::donnerInstance()<<*LitteraleFactory::donnerInstance().creer(s);
     //QString word;
 /*
     while((word=firstWord(s))!=""){
