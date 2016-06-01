@@ -381,7 +381,7 @@ Litterale* OperateurMOD::traitementOperateur(){
     Entier* e2=estdeType<Entier>(l2);
     if(e1 && e2)
     {
-        return (new Entier(e1->getValeur()%e2->getValeur()));
+        return (new Entier((int)e1->getValeur()%(int)e2->getValeur()));
     }
     throw OperateurException("Error in MOD");
 }
