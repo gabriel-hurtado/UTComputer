@@ -20,9 +20,7 @@ class OperateurLogique : public Operateur
 public:
 
     OperateurLogique(){}
-    bool operation(){chargerContexte(); return traitementOperateur();}
-    virtual bool traitementOperateur() =0;
-    virtual OperateurLogique* getCopy()=0;
+
 };
 
 
@@ -50,7 +48,7 @@ public:
 
 class OperateurEgal : public OperateurBinaire{
 public:
-   bool traitementOperateur();
+   Litterale* traitementOperateur();
 
    OperateurEgal():OperateurBinaire(){}
    OperateurEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -61,7 +59,7 @@ public:
 
 class OperateurDiff : public OperateurBinaire{
 public:
-   bool traitementOperateur();
+   Litterale* traitementOperateur();
 
    OperateurDiff():OperateurBinaire(){}
    OperateurDiff(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -72,7 +70,7 @@ public:
 
 class OperateurInfEgal : public OperateurBinaire{
 public:
-   bool traitementOperateur();
+   Litterale* traitementOperateur();
 
    OperateurInfEgal():OperateurBinaire(){}
    OperateurInfEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -84,7 +82,7 @@ public:
 
 class OperateurSupEgal : public OperateurBinaire{
 public:
-   bool traitementOperateur();
+   Litterale* traitementOperateur();
 
    OperateurSupEgal():OperateurBinaire(){}
    OperateurSupEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -95,7 +93,7 @@ public:
 
 class OperateurSup : public OperateurBinaire{
 public:
-   bool traitementOperateur();
+   Litterale* traitementOperateur();
 
    OperateurSup():OperateurBinaire(){}
    OperateurSup(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -107,7 +105,7 @@ public:
 
 class OperateurInf: public OperateurBinaire{
 public:
-   bool traitementOperateur();
+   Litterale* traitementOperateur();
 
    OperateurInf():OperateurBinaire(){}
    OperateurInf(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -119,7 +117,7 @@ public:
 
 class OperateurAND: public OperateurBinaire{
 public:
-   bool traitementOperateur();
+   Litterale* traitementOperateur();
 
    OperateurAND():OperateurBinaire(){}
    OperateurAND(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -130,7 +128,7 @@ public:
 
 class OperateurOR: public OperateurBinaire{
 public:
-   bool traitementOperateur();
+   Litterale* traitementOperateur();
 
    OperateurOR():OperateurBinaire(){}
    OperateurOR(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -141,7 +139,7 @@ public:
 
 class OperateurNOT: public OperateurBinaire{
 public:
-   bool traitementOperateur();
+   Litterale* traitementOperateur();
 
    OperateurNOT():OperateurBinaire(){}
    OperateurNOT(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}

@@ -34,6 +34,9 @@ public:
     static QString getSymbole(){return symbole;}
     virtual void chargerContexte() = 0;
     virtual Operateur* getCopy()=0;
+    virtual void pushResultat(Litterale* res) {p<<(*res);}
+    void operation(){chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res);}
+    virtual Litterale* traitementOperateur() =0;
 };
 
 #endif // OPERATEUR_H

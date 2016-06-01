@@ -20,10 +20,8 @@ class OperateurNumerique : public Operateur
 public:
 
     OperateurNumerique(){}
-    virtual void pushResultat(Litterale* res) {p<<(*res);}
-    void operation(){chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res);}
-    virtual Litterale* traitementOperateur() =0;
-    virtual OperateurNumerique* getCopy()=0;
+
+
 };
 
 

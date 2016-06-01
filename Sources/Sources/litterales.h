@@ -74,6 +74,7 @@ public:
     virtual ~LitteraleNumerique() {}
     virtual LitteraleNumerique* getNumericCopy() const =0;
     Litterale* getCopy() const {return getNumericCopy();}
+    virtual double getValeur() const=0;
 private:
 
 };
@@ -105,7 +106,7 @@ class Entier : public LitteraleNumerique {
 public:
     Entier(int v=0) :valeur(v) {}
     virtual ~Entier() {}
-    int getValeur() const { return valeur; }
+    double getValeur() const { return (double)valeur; }
     const QString toString() const {QString s; return s.setNum(getValeur());}
     LitteraleComplexe* neg(){Entier* res =getNumericCopy(); res->valeur=-res->valeur; return res;}
     Entier* getNumericCopy() const{return new Entier(*this);}
@@ -175,6 +176,7 @@ public:
     const QString toString() const;
     LitteraleNumerique& Simplification();
     Reelle roundValue() const;
+    double getValeur() const{return roundValue().getValeur();}
     Litterale* getFromString(QString s);
 
 };
