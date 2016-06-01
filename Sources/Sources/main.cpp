@@ -97,6 +97,13 @@ int main(int argc,char* argv[]) {
     LitteraleFactory::enregistrer(2,".",new Reelle(1,1));
 
     OperateurFactory::enregistrer("$",new numerique::Operateur$);
+    OperateurFactory::enregistrer("DIV",new numerique::OperateurDIV);
+    OperateurFactory::enregistrer("*",new numerique::OperateurMultiplication);
+    OperateurFactory::enregistrer("+",new numerique::OperateurAddition);
+    OperateurFactory::enregistrer("-",new numerique::OperateurSoustraction);
+    OperateurFactory::enregistrer("IM",new numerique::OperateurIM);
+    OperateurFactory::enregistrer("RE",new numerique::OperateurRE);
+
 
     //}
     //catch(LitteraleException& e){
