@@ -21,7 +21,7 @@ public:
 
     OperateurNumerique(){}
 
-    virtual OperateurNumerique* getCopy()=0;
+
 };
 
 

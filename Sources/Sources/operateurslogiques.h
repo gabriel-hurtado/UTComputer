@@ -20,7 +20,7 @@ class OperateurLogique : public Operateur
 public:
 
     OperateurLogique(){}
-    virtual OperateurLogique* getCopy()=0;
+
 };
 
 
