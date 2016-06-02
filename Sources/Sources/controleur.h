@@ -16,7 +16,7 @@ public:
     /*Méthodes pour le singleton*/
     static Controleur& donnerInstance();
     static void libererInstance();
-    void commande(const QString s);
+    bool commande(QString& s);
     QString firstWord(QString s);
 
 

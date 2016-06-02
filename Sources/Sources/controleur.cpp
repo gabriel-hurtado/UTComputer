@@ -21,16 +21,21 @@ Controleur::~Controleur(){}
 
 
 
-void Controleur::commande(QString s){
-    QString word;
-    LitteraleException* EXCEPTION_LIT;
-    while((word=firstWord(s))!=""){
+bool Controleur::commande(QString& s){
+    QString word = firstWord(s);
+    if(word==""){return true;} //On a bien terminé tous les mots
+    else{
         s=s.remove(0,(s.indexOf(word)+word.length()));
         Litterale* l = LitteraleFactory::donnerInstance().creerRPNLitterale(word);
         if(l){Pile::donnerInstance()<<*l;}
         Operateur* op = OperateurFactory::donnerInstance().creer(word);
         if(op){op->operation();}
-        if(!op && !l){throw LitteraleException("Le mot "+word+" n'as pas été reconnu");}
+        if(!op && !l){s=word;return false;}
+        if(commande(s))//Si la commande suivante est valide on valide la notre
+            return true;
+        else            //Si la commande suivante n'est pas valide alors il faut nettoyer la notre aussi
+            Pile::donnerInstance().UNDO();
+        return false;
    }
 }
 

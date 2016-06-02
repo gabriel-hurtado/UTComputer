@@ -59,11 +59,14 @@ void MainWindow::refreshVuePile(){
     std::cout<<std::endl;
 }
 
-void MainWindow::getNextCommande(){
+void MainWindow::getNextCommande(QString _fromButton){
     //pile->setMessage("");
-    QString g = ui->commande->text();
+    QString _fromCommand = ui->commande->text();
     try{
-        controleur.commande(g);
+        QString& sent(_fromCommand);
+        sent+=_fromButton;
+        if(!controleur.commande(sent))
+            throw LitteraleException("Le mot "+ sent+" n'as pas été reconnu");
         ui->commande->clear();
     }
     catch(LitteraleException& e){
@@ -76,4 +79,173 @@ void MainWindow::getNextCommande(){
         SendException("Pile :"+e.getInfo());
     }
 
+}
+
+/*Linkage des boutons*/
+
+void MainWindow::on_button_1_clicked()
+{
+    ui->commande->setText(ui->commande->text()+"1");
+}
+
+void MainWindow::on_button_2_clicked()
+{
+    ui->commande->setText(ui->commande->text()+"2");
+}
+
+void MainWindow::on_button_3_clicked()
+{
+    ui->commande->setText(ui->commande->text()+"3");
+}
+
+void MainWindow::on_button_4_clicked()
+{
+    ui->commande->setText(ui->commande->text()+"4");
+}
+
+void MainWindow::on_button_5_clicked()
+{
+    ui->commande->setText(ui->commande->text()+"5");
+}
+
+void MainWindow::on_button_6_clicked()
+{
+    ui->commande->setText(ui->commande->text()+"6");
+}
+
+void MainWindow::on_button_7_clicked()
+{
+    ui->commande->setText(ui->commande->text()+"7");
+}
+
+void MainWindow::on_button_8_clicked()
+{
+    ui->commande->setText(ui->commande->text()+"8");
+}
+
+void MainWindow::on_button_9_clicked()
+{
+    ui->commande->setText(ui->commande->text()+"9");
+}
+
+void MainWindow::on_button_0_clicked()
+{
+    ui->commande->setText(ui->commande->text()+"0");
+}
+
+void MainWindow::on_button_plus_clicked()
+{
+    getNextCommande(" +");
+}
+
+void MainWindow::on_button_moins_clicked()
+{
+    getNextCommande(" -");
+}
+
+void MainWindow::on_button_fois_clicked()
+{
+    getNextCommande(" *");
+}
+
+
+void MainWindow::on_button_diviser_clicked()
+{
+    getNextCommande(" -");
+}
+
+void MainWindow::on_button_space_clicked()
+{
+    ui->commande->setText(ui->commande->text()+" ");
+}
+
+void MainWindow::on_button_num_clicked()
+{
+    getNextCommande(" NUM");
+}
+
+void MainWindow::on_button_den_clicked()
+{
+    getNextCommande(" DEN");
+}
+
+void MainWindow::on_button_re_clicked()
+{
+    getNextCommande(" RE");
+}
+
+void MainWindow::on_button_im_clicked()
+{
+    getNextCommande(" IM");
+}
+
+void MainWindow::on_button_dollar_clicked()
+{
+    getNextCommande(" $");
+}
+
+void MainWindow::on_button_undo_clicked()
+{
+    getNextCommande(" UNDO");
+}
+
+void MainWindow::on_button_redo_clicked()
+{
+    getNextCommande(" REDO");
+}
+
+
+void MainWindow::on_button_clear_clicked()
+{
+    getNextCommande(" CLEAR");
+}
+
+void MainWindow::on_button_dup_clicked()
+{
+    getNextCommande(" DUP");
+}
+
+void MainWindow::on_button_drop_clicked()
+{
+    getNextCommande(" DROP");
+}
+
+void MainWindow::on_button_swap_clicked()
+{
+    getNextCommande(" SWAP");
+}
+
+void MainWindow::on_button_lastop_clicked()
+{
+    getNextCommande(" LASTOP");
+}
+
+void MainWindow::on_button_sin_clicked()
+{
+    getNextCommande(" SIN");
+}
+
+void MainWindow::on_button_cos_clicked()
+{
+    getNextCommande(" COS");
+}
+
+void MainWindow::on_button_tan_clicked()
+{
+    getNextCommande(" TAN");
+}
+
+void MainWindow::on_button_div_clicked()
+{
+    getNextCommande(" DIV");
+}
+
+void MainWindow::on_button_lastargs_clicked()
+{
+    getNextCommande(" LASTARGS");
+}
+
+void MainWindow::on_button_neg_clicked()
+{
+    getNextCommande(" NEG");
 }
