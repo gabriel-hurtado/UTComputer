@@ -105,14 +105,14 @@
               </property>
              </widget>
             </item>
-            <item row="8" column="3">
+            <item row="9" column="3">
              <widget class="QPushButton" name="button_inf">
               <property name="text">
                <string>&lt;</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
+            <item row="5" column="2">
              <widget class="QPushButton" name="button_egal">
               <property name="text">
                <string>=</string>
@@ -126,21 +126,21 @@
               </property>
              </widget>
             </item>
-            <item row="7" column="3">
+            <item row="8" column="3">
              <widget class="QPushButton" name="button_supegal">
               <property name="text">
                <string>&gt;=</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="2">
+            <item row="7" column="2">
              <widget class="QPushButton" name="button_sin">
               <property name="text">
                <string>SIN</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="2">
+            <item row="10" column="2">
              <widget class="QPushButton" name="button_div">
               <property name="text">
                <string>DIV</string>
@@ -161,7 +161,7 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="3">
+            <item row="5" column="3">
              <widget class="QPushButton" name="button_diff">
               <property name="text">
                <string>!=</string>
@@ -175,21 +175,21 @@
               </property>
              </widget>
             </item>
-            <item row="6" column="3">
+            <item row="7" column="3">
              <widget class="QPushButton" name="button_infegal">
               <property name="text">
                <string>=&lt;</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="3">
+            <item row="10" column="3">
              <widget class="QPushButton" name="button_sup">
               <property name="text">
                <string>&gt;</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="2">
+            <item row="9" column="2">
              <widget class="QPushButton" name="button_tan">
               <property name="text">
                <string>TAN</string>
@@ -244,14 +244,14 @@
               </property>
              </widget>
             </item>
-            <item row="14" column="0" colspan="4">
+            <item row="15" column="0" colspan="4">
              <widget class="QPushButton" name="button_enter">
               <property name="text">
                <string>Enter</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="2">
+            <item row="8" column="2">
              <widget class="QPushButton" name="button_cos">
               <property name="text">
                <string>COS</string>
@@ -265,101 +265,111 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
+            <item row="5" column="0">
              <widget class="QPushButton" name="button_num">
               <property name="text">
                <string>NUM</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="0">
+            <item row="7" column="0">
              <widget class="QPushButton" name="button_den">
               <property name="text">
                <string>DEN</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="0">
+            <item row="8" column="0">
              <widget class="QPushButton" name="button_re">
               <property name="text">
                <string>RE</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="0">
+            <item row="9" column="0">
              <widget class="QPushButton" name="button_im">
               <property name="text">
                <string>IM</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="0">
+            <item row="10" column="0">
              <widget class="QPushButton" name="button_dollar">
               <property name="text">
                <string>$</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
+            <item row="5" column="1">
              <widget class="QPushButton" name="button_clear">
               <property name="text">
                <string>CLEAR</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="1">
+            <item row="7" column="1">
              <widget class="QPushButton" name="button_dup">
               <property name="text">
                <string>DUP</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="1">
+            <item row="8" column="1">
              <widget class="QPushButton" name="button_drop">
               <property name="text">
                <string>DROP</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="1">
+            <item row="9" column="1">
              <widget class="QPushButton" name="button_swap">
               <property name="text">
                <string>SWAP</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="1">
+            <item row="10" column="1">
              <widget class="QPushButton" name="button_lastop">
               <property name="text">
                <string>LASTOP</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="0">
+            <item row="11" column="0">
              <widget class="QPushButton" name="button_undo">
               <property name="text">
                <string>UNDO</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="3">
+            <item row="11" column="3">
              <widget class="QPushButton" name="button_neg">
               <property name="text">
                <string>NEG</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="2">
+            <item row="11" column="2">
              <widget class="QPushButton" name="button_lastargs">
               <property name="text">
                <string>LASTARGS</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="1">
+            <item row="11" column="1">
              <widget class="QPushButton" name="button_redo">
               <property name="text">
                <string>REDO</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0" colspan="4">
+             <widget class="QPushButton" name="button_space">
+              <property name="text">
+               <string>Space</string>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -372,11 +382,6 @@
      </item>
     </layout>
    </widget>
-   <zorder>horizontalSpacer</zorder>
-   <zorder>pushButton_13</zorder>
-   <zorder>verticalLayoutWidget_3</zorder>
-   <zorder>commande</zorder>
-   <zorder>beautiful_useless_spacer</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

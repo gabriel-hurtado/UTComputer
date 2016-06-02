@@ -59,12 +59,15 @@ void Pile::restoreFromMemento(MementoPile* m){
 
 void Pile::UNDO(){
     GerantPile::donnerInstance().UNDO();
+    modificationEtat();
 }
 void Pile::REDO(){
     GerantPile::donnerInstance().REDO();
+
 }
 void Pile::sauverPile(){
     GerantPile::donnerInstance().sauverPile();
+    modificationEtat();
 }
 
 /*---------Méthodes de MementoPile-----------*/
