@@ -18,7 +18,18 @@ namespace logique{
 class OperateurLogique : public Operateur
 {
 public:
-
+    virtual void pushResultat(Litterale* res) {p<<(*res);}
+    void operation(){
+                     try{chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res); }
+                        catch(OperateurException op){
+                       resetContexte();
+                       throw OperateurException(op);
+                            }
+                         catch(PileException op){
+                        resetContexte();
+                        throw PileException(op);
+                            }
+                        }
     OperateurLogique(){}
 
 };

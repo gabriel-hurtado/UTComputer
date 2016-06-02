@@ -37,18 +37,7 @@ public:
     virtual void resetContexte() = 0;
     virtual Operateur* getCopy()=0;
     virtual void pushResultat(Litterale* res) {p<<(*res);}
-    void operation(){
-                     try{chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res); }
-                        catch(OperateurException op){
-                       resetContexte();
-                       //throw OperateurException(op);
-                            }
-                         catch(PileException op){
-                        resetContexte();
-                        //throw PileException(op);
-                            }
-                        }
-
+    virtual void operation()=0;
     virtual Litterale* traitementOperateur() =0;
 };
 
