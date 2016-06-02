@@ -125,6 +125,7 @@ public:
 };
 
 /*
+ * TODO
 • LASTOP : applique le dernier opérateur utilisé.
 • LASTARGS : empile les littérales utilisées pour la dernière opération.*/
 

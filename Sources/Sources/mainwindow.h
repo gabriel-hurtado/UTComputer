@@ -6,6 +6,7 @@
 #include "pile.h"
 #include "controleur.h"
 #include "operateur.h"
+#include "variable.h"
 
 namespace Ui {
 class MainWindow;

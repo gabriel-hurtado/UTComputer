@@ -154,7 +154,7 @@ Litterale* OperateurMultiplication::traitementOperateur(){
         {
             int newDen=r1->getDenominator().getValeur()*r2->getDenominator().getValeur();
             int newNum = r1->getNumerateur().getValeur()*r2->getNumerateur().getValeur();
-            return ( new Rationnel(newDen, newNum));
+            return (&( new Rationnel(newNum,newDen))->Simplification());
 
              }
 
@@ -168,8 +168,8 @@ Litterale* OperateurMultiplication::traitementOperateur(){
 
         if(r1 && e2) //si il y a un rationel et un entier
         {
-            Rationnel temp= Rationnel(e2->getValeur());
-            OperateurMultiplication mul = OperateurMultiplication(r1,&temp);
+            Rationnel* temp=new Rationnel(e2->getValeur(),1);
+            OperateurMultiplication mul = OperateurMultiplication(r1,temp);
             return mul.traitementOperateur();
 
         }
@@ -259,9 +259,10 @@ Litterale* OperateurDivision::traitementOperateur(){
 
         if(r1 && r2 ) //si les deux sont rationelles
         {
-            Entier newNum = Entier(r1->getNumerateur().getValeur()*r2->getDenominator().getValeur());
-            Entier newDenum = Entier(r2->getNumerateur().getValeur()*r1->getDenominator().getValeur());
-           return(&(new Rationnel(newNum,newDenum))->Simplification());
+            Entier* newNum = new Entier(r1->getNumerateur().getValeur()*r2->getDenominator().getValeur());
+            Entier* newDenum = new Entier(r2->getNumerateur().getValeur()*r1->getDenominator().getValeur());
+            Rationnel* res= new Rationnel(newNum->getValeur(),newDenum->getValeur());
+           return &(res->Simplification());
 
              }
 
@@ -269,26 +270,25 @@ Litterale* OperateurDivision::traitementOperateur(){
         Entier* e2=estdeType<Entier>(l2);
         if(e1 && e2) //si deux entiers
         {
-            return (new Rationnel(e1->getValeur(),e2->getValeur()));
+            return (&(new Rationnel(e1->getValeur(),e2->getValeur()))->Simplification());
           }
 
         if(r1 && e2) //si il y a un rationel et un entier
         {
             Rationnel* temp = new Rationnel(e2->getValeur());
-            OperateurDivision(r1,temp).traitementOperateur();
+             return OperateurDivision(r1,temp).traitementOperateur();
 
 
         }
         if(r2 && e1){ //idem
-
-            Rationnel* temp = new Rationnel(e1->getValeur());
-            OperateurDivision(temp,r2).traitementOperateur();
+            Rationnel* temp = new Rationnel(e2->getValeur());
+             return OperateurDivision(temp,r2).traitementOperateur();
         }
 
         Reelle* re1=estdeType<Reelle>(l1);
         Reelle* re2=estdeType<Reelle>(l2);
         if(re1 && re2){ //si deux relles
-            return new Reelle((double)(re1->getValeur()/re2->getValeur()));
+            return (&(new Reelle((double)(re1->getValeur()/re2->getValeur())))->Simplification());
         }
         if(re1 && e2){ //si relle et entier
            Reelle* temp= new Reelle((double)e2->getValeur());

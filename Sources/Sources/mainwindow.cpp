@@ -76,4 +76,8 @@ void MainWindow::getNextCommande(){
         SendException("Pile :"+e.getInfo());
     }
 
+    catch(VariableException & e){
+        SendException("Variable :"+e.getInfo());
+    }
+
 }

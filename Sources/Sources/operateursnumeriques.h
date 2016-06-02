@@ -28,6 +28,11 @@ public:
                         resetContexte();
                         throw PileException(op);
                             }
+
+                        catch(LitteraleException op){
+                       resetContexte();
+                       throw LitteraleException(op);
+                           }
                         }
     OperateurNumerique(){}
 
