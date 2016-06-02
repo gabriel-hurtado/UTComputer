@@ -96,7 +96,7 @@ public:
     const QString toString() const {QString s; return s.setNum(getValeur());}
     LitteraleComplexe* neg(){Entier* res =getNumericCopy(); res->valeur=-res->valeur; return res;}
     Entier* getNumericCopy() const{return new Entier(*this);}
-    Litterale* getFromString(QString s){throw LitteraleException("Création d'entier depuis la factory"); return nullptr;}//Cas spécial
+    Litterale* getFromString(QString ){throw LitteraleException("Création d'entier depuis la factory"); return nullptr;}//Cas spécial
 
 };
 

@@ -1,6 +1,7 @@
 #include "litterales.h"
 #include "utils.h"
 #include "operateursnumeriques.h"
+#include "operateurfactory.h"
 #include <QTextStream>
 
 
@@ -125,6 +126,10 @@ Atome::Atome(QString n){
 
 bool Atome::isValidAtomeName(QString s){
     QString::iterator it = s.begin();
+    //Avant de vérifier quoi que ce soit on vérifie le la string ne désigne pas un opérateur
+    if(OperateurFactory::getMap().find(s)!=OperateurFactory::getMap().end())
+        return false;
+
     //On vérifie que le premier caractère est une majuscule;
     if(s.begin()!=s.end() && *it<'Z' && *it>'A'){
         //On doit alors vérifier que tout les caractères ne sont que des lettres majuscules ou des chiffres

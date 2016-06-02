@@ -34,6 +34,9 @@ public:
     //Pour créer des objets à partir de la factory
     Operateur* creer(const QString& cle);
 
+    //Pour acceder à la qmap dans atome
+    static const QMap<QString,Operateur*> getMap(){return of_map;}
+
 };
 
 
