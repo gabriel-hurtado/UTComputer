@@ -79,21 +79,7 @@ private:
 
 };
 
-/*
-    Fonction Template pour connaitre les types des objets :
-    L'objet de type T est-il de type L ?
-*/
 
-template<typename L> L* estdeType(Litterale* Tobj){
-    L* Lobj;
-    if(Tobj==nullptr)
-
-        return nullptr;
-    if((Lobj=dynamic_cast<L*>(Tobj)))
-        return Lobj;
-    return nullptr;
-
-}
 
 
 
@@ -196,6 +182,7 @@ public:
     Complexe* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
     const QString toString() const;
     Litterale* getFromString(QString s);
+    LitteraleComplexe& Simplification();
 
 };
 

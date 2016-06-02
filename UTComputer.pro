@@ -9,7 +9,8 @@ HEADERS += \
     Sources/Sources/mainwindow.h \
     Sources/Sources/operateurslogiques.h \
     Sources/Sources/operateur.h \
-    Sources/Sources/operateursnumeriques.h
+    Sources/Sources/operateursnumeriques.h \
+    Sources/Sources/variable.h
     Sources/Sources/mainwindow.h
 
 SOURCES += \
@@ -21,7 +22,8 @@ SOURCES += \
     Sources/Sources/operateurfactory.cpp \
     Sources/Sources/mainwindow.cpp \
     Sources/Sources/operateurslogiques.cpp \
-    Sources/Sources/operateursnumeriques.cpp
+    Sources/Sources/operateursnumeriques.cpp \
+    Sources/Sources/variable.cpp
     Sources/Sources/mainwindow.cpp
 
 FORMS += \

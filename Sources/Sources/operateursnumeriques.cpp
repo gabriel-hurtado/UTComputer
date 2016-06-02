@@ -90,7 +90,7 @@ Litterale* OperateurAddition::traitementOperateur(){
             OperateurAddition ad2 = OperateurAddition(pi1,pi2);
 
             LitteraleNumerique* im=estdeType<LitteraleNumerique>(ad2.traitementOperateur());
-                   return new Complexe(*reel,*im);
+                   return (&(new Complexe(*reel,*im))->Simplification());
         }
         LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
 
@@ -104,7 +104,7 @@ Litterale* OperateurAddition::traitementOperateur(){
 
 
             LitteraleNumerique* im=c1->getPartieImaginaire();
-             return new Complexe(*reel,*im);
+             return (&(new Complexe(*reel,*im))->Simplification());
 
         }
 
@@ -222,7 +222,7 @@ Litterale* OperateurMultiplication::traitementOperateur(){
             OperateurMultiplication mul4 = OperateurMultiplication(c1->getPartieReelle(),c2->getPartieImaginaire());
             OperateurAddition  add = OperateurAddition(mul3.traitementOperateur(),mul4.traitementOperateur());
             LitteraleNumerique* img = estdeType<LitteraleNumerique>(add.traitementOperateur());
-            return (new Complexe(*real,*img));
+            return (&(new Complexe(*real,*img))->Simplification());
         }
         LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
 
@@ -340,7 +340,7 @@ Litterale* OperateurDivision::traitementOperateur(){
                LitteraleNumerique* re=  estdeType<LitteraleNumerique>(OperateurDivision(newNumRe,newDenom).traitementOperateur());
                LitteraleNumerique* im= estdeType<LitteraleNumerique>(OperateurDivision(newNumIm,newDenom).traitementOperateur());
 
-               return new Complexe(*re,*im);
+               return (&(new Complexe(*re,*im))->Simplification());
         }
         LitteraleNumerique* litNum1=estdeType<LitteraleNumerique>(l1);
 
@@ -443,7 +443,7 @@ Litterale* Operateur$::traitementOperateur(){
     LitteraleNumerique* li2=estdeType<LitteraleNumerique>(l2);
     if(li1 && li2)
     {
-        return new Complexe(*li1,*li2);
+        return (&(new Complexe(*li1,*li2))->Simplification());
     }
     throw OperateurException("Error in $");
 }

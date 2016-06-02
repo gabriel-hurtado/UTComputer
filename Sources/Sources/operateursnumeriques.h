@@ -31,6 +31,10 @@ class OperateurBinaire : public OperateurNumerique{
 public:
     void chargerContexte(){p>>l2;
                            p>>l1;}
+
+    void resetContexte(){if(l1) p<<*l1;
+                         if(l2)  p<<*l2;}
+
     OperateurBinaire(){}
     OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
 };
@@ -41,6 +45,7 @@ protected:
 public:
    void chargerContexte(){p>>l1;}
 
+   void resetContexte(){if(l1) p<<*l1;}
    OperateurUnaire(){}
    OperateurUnaire(Litterale* lit1):l1(lit1){}
 };

@@ -21,6 +21,16 @@ LitteraleNumerique& Reelle::Simplification(){
 }
 
 
+LitteraleComplexe& Complexe::Simplification(){
+    LitteraleComplexe* ptr;
+    if(getPartieImaginaire()->getValeur()==0)
+         ptr = estdeType<LitteraleComplexe>(getPartieReelle()->getCopy());
+    else{
+             ptr=this;
+    }
+    return *ptr;
+}
+
 const QString Reelle::toString() const {
     QString s;
         s.setNum(getValeur());
