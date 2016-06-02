@@ -20,7 +20,9 @@ class OperateurLogique : public Operateur
 public:
     virtual void pushResultat(Litterale* res) {p<<(*res);}
     void operation(){
-                     try{chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res); }
+                     try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
+                        chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res);
+                            }
                         catch(OperateurException op){
                        resetContexte();
                        throw OperateurException(op);
@@ -32,6 +34,8 @@ public:
                         }
     OperateurLogique(){}
 
+    virtual Litterale* traitementOperateur() =0;
+
 };
 
 
@@ -41,7 +45,9 @@ class OperateurBinaire : public OperateurLogique{
     Litterale* l2;
 public:
     void chargerContexte(){p>>l2;
-                           p>>l1;}
+                           p>>l1;
+                          OperationManager::donnerInstance().add(l1);
+                          OperationManager::donnerInstance().add(l2);}
 
     void resetContexte(){if(l1) p<<*l1;
                          if(l2)  p<<*l2;}
@@ -53,7 +59,8 @@ class OperateurUnaire  : public OperateurLogique{
 protected:
    Litterale* l1;
 public:
-   void chargerContexte(){p>>l1;}
+   void chargerContexte(){p>>l1;
+                         OperationManager::donnerInstance().add(l1);}
     void resetContexte(){if(l1) p<<*l1;}
    OperateurUnaire(){}
    OperateurUnaire(Litterale* lit1):l1(lit1){}

@@ -25,7 +25,8 @@ SOURCES += \
     Sources/Sources/operateurslogiques.cpp \
     Sources/Sources/operateursnumeriques.cpp \
     Sources/Sources/variable.cpp \
-    Sources/Sources/enregistrements.cpp
+    Sources/Sources/enregistrements.cpp \
+    Sources/Sources/operateur.cpp
     Sources/Sources/mainwindow.cpp
 
 FORMS += \
