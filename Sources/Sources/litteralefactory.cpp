@@ -2,7 +2,8 @@
 
 LitteraleFactory* LitteraleFactory::instanceLitteraleFactory = nullptr;
 
-QMap<unsigned int , QString> LitteraleFactory::priority_map = (QMap<unsigned int , QString>());
+QMap<unsigned int , QString> LitteraleFactory::priority_map_basic = (QMap<unsigned int , QString>());
+QMap<unsigned int , QString> LitteraleFactory::priority_map_infix = (QMap<unsigned int , QString>());
 QMap<QString, Litterale*> LitteraleFactory::litterale_map = (QMap<QString, Litterale*>());
 
 LitteraleFactory& LitteraleFactory::donnerInstance(){
@@ -17,10 +18,11 @@ LitteraleFactory::LitteraleFactory(){}
 LitteraleFactory::~LitteraleFactory(){}
 
 void LitteraleFactory::enregistrer(unsigned int prio,QString tok, Litterale* l){
-    QMap<unsigned int,QString>::iterator it_prio = priority_map.find(prio);
-    if(it_prio==priority_map.end()){            //Si la priorité n'est pas déja prise
+    QMap<unsigned int,QString>::iterator it_prio = priority_map_infix.find(prio);
+    if(it_prio==priority_map_infix.end()){            //Si la priorité n'est pas déja prise
         if(litterale_map.find(tok)==litterale_map.end()){//Si le token n'est pas déja pris
-            priority_map[prio]=tok;             //On enregistre le token dans la priority_map
+            priority_map_basic[prio]=tok;       //On enregistre le token dans la priority_map
+            priority_map_basic[prio]=tok;
             litterale_map[tok]=l;               //On enregistre le pointeur sur litterale dans la base
         }
         else
@@ -31,23 +33,66 @@ void LitteraleFactory::enregistrer(unsigned int prio,QString tok, Litterale* l){
 
 }
 
+void LitteraleFactory::enregistrerInfix(unsigned int prio,QString tok, Litterale* l){
+    QMap<unsigned int,QString>::iterator it_prio = priority_map_infix.find(prio);
+    if(it_prio==priority_map_infix.end()){            //Si la priorité n'est pas déja prise
+        if(litterale_map.find(tok)==litterale_map.end()){//Si le token n'est pas déja pris
+            priority_map_infix[prio]=tok;             //On enregistre le token dans la priority_map
+            litterale_map[tok]=l;               //On enregistre le pointeur sur litterale dans la base
+        }
+        else
+            throw LitteraleException("Token déja pris");
+    }
+    else
+        throw LitteraleException("Priorité déja prise");
 
+}
+/*
+    Check if there if he can detect a known infix symbol and do what he can with it
+    Useful for the parser.
 
-Litterale* LitteraleFactory::creer(QString litt_str){
-    QMap<unsigned int,QString>::iterator it_prio = priority_map.begin();
-    while(it_prio!=priority_map.end() && !litt_str.contains(it_prio.value())){//On cherche le token dans la chaine de caractère par ordre de priorité
+*/
+Litterale* LitteraleFactory::creerInfixLitterale(QString litt_str){
+    QMap<unsigned int,QString>::iterator it_prio = priority_map_infix.begin();
+    while(it_prio!=priority_map_infix.end() && !litt_str.contains(it_prio.value())){//On cherche le token dans la chaine de caractère par ordre de priorité
         it_prio++;
     }
-    if(it_prio!=priority_map.end()){
+    if(it_prio!=priority_map_infix.end()){
         return litterale_map.find(it_prio.value()).value()->getFromString(litt_str);
     }
-    //Cela peut encore etre un Entier
+    //Cela peut encore etre un Entier ou un Atome
 
     else{
         bool ok;
         int tmp = litt_str.toInt(&ok); //On tente de convertir en entier
         if(ok) return new Entier(tmp);
 
+        if(Atome::isValidAtomeName(litt_str)){
+            return new Atome(litt_str);
+        }
+    }
+    return nullptr;
+}
+
+
+Litterale* LitteraleFactory::creerRPNLitterale(QString litt_str){
+    QMap<unsigned int,QString>::iterator it_prio = priority_map_basic.begin();
+    while(it_prio!=priority_map_basic.end() && !litt_str.contains(it_prio.value())){//On cherche le token dans la chaine de caractère par ordre de priorité
+        it_prio++;
+    }
+    if(it_prio!=priority_map_basic.end()){
+        return litterale_map.find(it_prio.value()).value()->getFromString(litt_str);
+    }
+    //Cela peut encore etre un Entier ou un Atome
+
+    else{
+        bool ok;
+        int tmp = litt_str.toInt(&ok); //On tente de convertir en entier
+        if(ok) return new Entier(tmp);
+
+        if(Atome::isValidAtomeName(litt_str)){
+            return new Atome(litt_str);
+        }
     }
     return nullptr;
 }

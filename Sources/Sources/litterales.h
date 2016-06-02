@@ -126,7 +126,7 @@ public:
     /*La partie entiere dit etre le second paramêtre pour avoir une valeur par défaut*/
     Reelle(double d):value(d){}
 
-    Reelle(const Entier& m,const Entier& p){
+    Reelle(const Entier& p,const Entier& m){
         /*Un réel ne peut pas être construit avec une mantisse nulle*/
         if(m.getValeur()==0){LitteraleException("Construction: Mantisse nulle !");}
         else{value=p.getValeur();

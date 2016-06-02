@@ -28,7 +28,13 @@ const QString Reelle::toString() const {
 }
 Litterale* Reelle::getFromString(QString s){
     QStringList Ql = s.split('.');
-    return new Reelle(Ql.at(0).toInt(),Ql.at(1).toInt());
+    LitteraleFactory& LF = LitteraleFactory::donnerInstance();
+    Entier* l1 = estdeType<Entier>(LF.creerRPNLitterale(Ql.at(0)));
+    Entier* l2 = estdeType<Entier>(LF.creerRPNLitterale(Ql.at(1)));
+    if(l1 && l2)
+        return new Reelle(*l1,*l2);
+    else
+        throw LitteraleException(s+" n'est pas une Réelle valide");
 }
 
 
@@ -88,8 +94,8 @@ const QString Complexe::toString() const{
 Litterale* Complexe::getFromString(QString s){
     QStringList Ql = s.split('$');
     LitteraleFactory& LF = LitteraleFactory::donnerInstance();
-    LitteraleNumerique* l1 = estdeType<LitteraleNumerique>(LF.creer(Ql.at(0)));
-    LitteraleNumerique* l2 = estdeType<LitteraleNumerique>(LF.creer(Ql.at(1)));
+    LitteraleNumerique* l1 = estdeType<LitteraleNumerique>(LF.creerInfixLitterale(Ql.at(0)));
+    LitteraleNumerique* l2 = estdeType<LitteraleNumerique>(LF.creerInfixLitterale(Ql.at(1)));
     if(l1 && l2)
         return new Complexe(*l1,*l2);
     else
@@ -108,13 +114,15 @@ Atome::Atome(QString n){
 
 
 bool Atome::isValidAtomeName(QString s){
-    QString::iterator it=s.begin();
+    QString::iterator it = s.begin();
     //On vérifie que le premier caractère est une majuscule;
     if(s.begin()!=s.end() && *it<'Z' && *it>'A'){
         //On doit alors vérifier que tout les caractères ne sont que des lettres majuscules ou des chiffres
         while(it!=s.end()){
-            if(('A'<=*it && *it<='Z') || ('0'<=*it && *it<='9'))
+            if(('A'<=*it && *it<='Z') || ('0'<=*it && *it<='9')){
+                it++;
                 continue;
+            }
             else
                 return false;
         }

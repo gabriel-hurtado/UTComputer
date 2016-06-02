@@ -26,7 +26,7 @@ void Controleur::commande(QString s){
     LitteraleException* EXCEPTION_LIT;
     while((word=firstWord(s))!=""){
         s=s.remove(0,(s.indexOf(word)+word.length()));
-        Litterale* l = LitteraleFactory::donnerInstance().creer(word);
+        Litterale* l = LitteraleFactory::donnerInstance().creerRPNLitterale(word);
         if(l){Pile::donnerInstance()<<*l;}
         Operateur* op = OperateurFactory::donnerInstance().creer(word);
         if(op){op->operation();}

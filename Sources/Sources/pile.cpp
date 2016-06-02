@@ -29,6 +29,7 @@ Pile& Pile::operator<<(Litterale& l){
     GerantPile::donnerInstance().clearREDO();
     sauverPile();
     emP.push_back(&l);
+    std::cout<<"PUSHED "+l.toString().toStdString()+"\n";
     modificationEtat();
     return *this;
 }

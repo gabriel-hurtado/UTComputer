@@ -64,6 +64,7 @@ void MainWindow::getNextCommande(){
     QString g = ui->commande->text();
     try{
         controleur.commande(g);
+        ui->commande->clear();
     }
     catch(LitteraleException& e){
         SendException("Litterale :"+e.getInfo());
@@ -71,5 +72,8 @@ void MainWindow::getNextCommande(){
     catch(OperateurException& e){
         SendException("Operateur :"+e.getInfo());
     }
-    ui->commande->clear();
+    catch(PileException & e){
+        SendException("Pile :"+e.getInfo());
+    }
+
 }
