@@ -4,30 +4,11 @@
 #include <map>
 
 
-class VariableException : public std::exception
-{
-    QString info;
-public:
-    VariableException (QString in) : info(in) {}
-    QString getInfo(){return info;}
-    virtual const char* what() const throw()
-    {
-      return info.toStdString().c_str();
-    }
-
-};
 
 
-class Variable{
-    Operande* lit;
-    public:
-        Variable(Operande* l):lit(l){}
-        Operande& getValeur() const{return *lit;}
-
-};
-
+//gère aussi les programmes
 class VariablesManager{
-    static QMap<QString, Variable*> var_map;
+    static QMap<QString, Litterale*> var_map;
     static VariablesManager* instance;
     VariablesManager(){}
     ~VariablesManager();
@@ -40,9 +21,9 @@ public:
     static void libererInstance();
 
     //Pour enregistrer des nouvelles variables
-    static void enregistrer(const QString& nom,Variable* obj);
+    static void enregistrer(const QString& nom,Litterale* obj);
     static void supprimer(const QString& nom);
-    static Variable& getVariable(const QString& nom);
+    static Litterale* getVariable(const QString& nom);
 };
 
 #endif // VARIABLE_H

@@ -225,6 +225,7 @@ public:
     const QString toString() const {return getProgramme();}
     Litterale* getCopy() const;
     Litterale* getFromString(QString s){return new Programme(s);}
+    void traitement(){} //parse le programme et fait les différentes opérations, par ex + avec un élément de la pile
 };
 
 #endif
