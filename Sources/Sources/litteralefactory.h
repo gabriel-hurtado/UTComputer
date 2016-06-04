@@ -29,6 +29,9 @@ class LitteraleFactory
         car le polymorphysme n'est pas utilisable puisque la donnée provient d'un string
     */
     static QMap<QString, Litterale*>   litterale_map;
+    /*
+
+    */
 
     //----------Méthodes privés pour le singleton-------------//
 
@@ -60,7 +63,7 @@ public:
             -> Dans des programmes ou expressions ou tout autre objet appelant la méthode creerInfixLitterale ou la méthode creerRPNLitterale
 
     */
-    static void enregistrer(unsigned int,QString,Litterale*);
+    static void enregistrer(unsigned int,QString,Litterale* ,QString ="");
 
     /*
         Cette méthode est une version similaire de la méthode enregistrer
@@ -69,7 +72,7 @@ public:
 
         Ils servent par exemple à traiter des litterales écrites dans des programmes ou des expressions.
     */
-    static void enregistrerInfix(unsigned int,QString,Litterale*);
+    static void enregistrerInfix(unsigned int,QString,Litterale*, QString="");
 
     /*
         Cette méthode cree des Litterales en fonction des symboles enregistrés dans la priority_basic_map,
