@@ -14,7 +14,7 @@ public:
 
     void operation(){
                      try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
-                        chargerContexte(); traitementOperateur(); }
+                        actualiserContexte(); traitementOperateur(); }
                         catch(OperateurException op){
                        resetContexte();
                        throw OperateurException(op);

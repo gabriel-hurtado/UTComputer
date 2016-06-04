@@ -1,7 +1,7 @@
 #include "operateursexpressions.h"
 #include "litterales.h"
 #include "variable.h"
-
+#include "operateurfactory.h"
 
 namespace expression {
 
@@ -14,9 +14,9 @@ un message en informe l’utilisateur. Si la littérale expression comprend au m
 Si tous les atomes de la littérales expression sont des identificateurs de variables, l’expression est évaluée
 numériquement..*/
 void OperateurEVAL::traitementOperateur(){
-Expression* l1= estdeType<Expression>(l1);
- if(l1){
-     l1->evaluer();
+Expression* li1= estdeType<Expression>(l1);
+ if(li1){
+     li1->evaluer();
 
  }
     throw OperateurException("La littérale ne peut pas être évaluée");
@@ -41,7 +41,12 @@ void OperateurSTO::traitementOperateur(){
         Atome* at = nullptr; //ici besoin de récupérer l'atome si il est seul dans l'expression
 
         //vérifier que le nom de at n'est pas un opérateur prédéfini
+        if(OperateurFactory::donnerInstance().creer(at->getNom())==nullptr)
+        {
         VariablesManager::donnerInstance().enregistrer(at->getNom(),ex);
+        }
+        else
+            throw OperateurException("Opération prédéfinie");
     }
     throw OperateurException("Impossible de stocker dans cette littérale");
 
@@ -61,7 +66,7 @@ void OperateurUserMade::traitementOperateur(){
             prog->traitement();
         }
         else{
-            p<<*var;
+            Pile::donnerInstance()<<*var;
         }
 
     }

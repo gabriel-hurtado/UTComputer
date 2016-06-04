@@ -18,7 +18,7 @@ namespace logique{
 class OperateurLogique : public Operateur
 {
 public:
-    virtual void pushResultat(Litterale* res) {p<<(*res);}
+    virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
     void operation(){
                      try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
                         chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res);
@@ -44,13 +44,13 @@ class OperateurBinaire : public OperateurLogique{
     Litterale* l1;
     Litterale* l2;
 public:
-    void chargerContexte(){p>>l2;
-                           p>>l1;
+    void chargerContexte(){Pile::donnerInstance()>>l2;
+                           Pile::donnerInstance()>>l1;
                           OperationManager::donnerInstance().add(l1);
                           OperationManager::donnerInstance().add(l2);}
 
-    void resetContexte(){if(l1) p<<*l1;
-                         if(l2)  p<<*l2;}
+    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
+                         if(l2)  Pile::donnerInstance()<<*l2;}
     OperateurBinaire(){}
     OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
 };
@@ -59,9 +59,9 @@ class OperateurUnaire  : public OperateurLogique{
 protected:
    Litterale* l1;
 public:
-   void chargerContexte(){p>>l1;
+   void chargerContexte(){Pile::donnerInstance()>>l1;
                          OperationManager::donnerInstance().add(l1);}
-    void resetContexte(){if(l1) p<<*l1;}
+    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
    OperateurUnaire(){}
    OperateurUnaire(Litterale* lit1):l1(lit1){}
 };

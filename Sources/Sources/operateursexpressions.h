@@ -38,13 +38,13 @@ class OperateurBinaire : public OperateurExpression{
     Litterale* l1;
     Litterale* l2;
 public:
-    void chargerContexte(){p>>l2;
-                           p>>l1;
+    void chargerContexte(){Pile::donnerInstance()>>l2;
+                           Pile::donnerInstance()>>l1;
                           OperationManager::donnerInstance().add(l1);
                           OperationManager::donnerInstance().add(l2);}
 
-    void resetContexte(){if(l1) p<<*l1;
-                         if(l2)  p<<*l2;}
+    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
+                         if(l2)  Pile::donnerInstance()<<*l2;}
 
     OperateurBinaire(Litterale* li1, Litterale* li2):l1(li1),l2(li2){}
 };
@@ -53,10 +53,10 @@ class OperateurUnaire  : public OperateurExpression{
 protected:
    Litterale* l1;
 public:
-   void chargerContexte(){p>>l1;
+   void chargerContexte(){Pile::donnerInstance()>>l1;
                          OperationManager::donnerInstance().add(l1);}
 
-   void resetContexte(){if(l1) p<<*l1;}
+   void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
    OperateurUnaire(Litterale* lit1):l1(lit1){}
 };
 
@@ -109,6 +109,7 @@ public:
 
 
 //a déclancher dès qu'on empile un atome
+//soucis pour le REDO ?
 class OperateurUserMade : public OperateurUnaire{
 public:
    void traitementOperateur();

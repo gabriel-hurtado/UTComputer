@@ -25,8 +25,6 @@ public:
 class Operateur : public Operande
 {
     static QString symbole;
- protected:
-    Pile& p = Pile::donnerInstance();
 public:
 
     Operateur(){}
@@ -34,7 +32,7 @@ public:
     virtual void chargerContexte() = 0;
     virtual void resetContexte() = 0;
     virtual Operateur* getCopy()=0;
-    virtual void pushResultat(Litterale* res) {p<<(*res);}
+    virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
     virtual void operation()=0;
 };
 

@@ -63,7 +63,7 @@ void Pile::UNDO(){
 }
 void Pile::REDO(){
     GerantPile::donnerInstance().REDO();
-
+     modificationEtat();
 }
 void Pile::sauverPile(){
     GerantPile::donnerInstance().sauverPile();
