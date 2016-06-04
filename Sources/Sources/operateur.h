@@ -3,8 +3,7 @@
 #include"operande.h"
 
 #include"pile.h"
-
-
+#include<vector>
 
 /*
  Classe pour gérer les exceptions sur les opérateurs
@@ -23,12 +22,9 @@ public:
 
 };
 
-
 class Operateur : public Operande
 {
     static QString symbole;
- protected:
-    Pile& p = Pile::donnerInstance();
 public:
 
     Operateur(){}
@@ -36,9 +32,30 @@ public:
     virtual void chargerContexte() = 0;
     virtual void resetContexte() = 0;
     virtual Operateur* getCopy()=0;
-    virtual void pushResultat(Litterale* res) {p<<(*res);}
+    virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
     virtual void operation()=0;
-    virtual Litterale* traitementOperateur() =0;
 };
+
+class OperationManager
+{
+    static OperationManager* man;
+    static Operateur* lastOp;
+    static std::vector<Litterale*> lastLits;
+    OperationManager(){}
+    ~OperationManager();
+    void operator=(OperationManager& l);
+    OperationManager(OperationManager& l);
+public:
+    static OperationManager& donnerInstance();
+    static void libererInstance();
+    static void sauvegarder(Operateur* o);
+    static Operateur* getLastOp();
+    static std::vector<Litterale*>::const_iterator getLastLitsBegin();
+    static std::vector<Litterale*>::const_iterator getLastLitsEnd();
+
+    static void add( Litterale* l);
+};
+
+
 
 #endif // OPERATEUR_H

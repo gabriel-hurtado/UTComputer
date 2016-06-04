@@ -5,7 +5,7 @@
 #include "mainwindow.h"
 #include "operateurslogiques.h"
 #include "variable.h"
-
+#include "operateurspile.h"
 
 int main(int argc,char* argv[]) {
 
@@ -25,6 +25,11 @@ int main(int argc,char* argv[]) {
     OperateurFactory::enregistrer("RE",new numerique::OperateurRE);
     OperateurFactory::enregistrer("$",new numerique::Operateur$);
 
+    OperateurFactory::enregistrer("!=",new logique::OperateurDiff);
+    OperateurFactory::enregistrer("LASTARGS",new op_pile::OperateurLASTARGS);
+    OperateurFactory::enregistrer("DROP",new op_pile::OperateurDROP);
+    OperateurFactory::enregistrer("UNDO",new op_pile::OperateurUNDO);
+    OperateurFactory::enregistrer("REDO",new op_pile::OperateurREDO);
     QApplication app(argc, argv);
 
     MainWindow fenetre;

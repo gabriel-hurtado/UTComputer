@@ -11,7 +11,9 @@ HEADERS += \
     Sources/Sources/operateur.h \
     Sources/Sources/operateursnumeriques.h \
     Sources/Sources/variable.h \
-    Sources/Sources/operateurspile.h
+    Sources/Sources/operateurspile.h \
+    Sources/Sources/operateurscond.h \
+    Sources/Sources/operateursexpressions.h
     Sources/Sources/mainwindow.h
 
 SOURCES += \
@@ -25,7 +27,9 @@ SOURCES += \
     Sources/Sources/operateurslogiques.cpp \
     Sources/Sources/operateursnumeriques.cpp \
     Sources/Sources/variable.cpp \
-    Sources/Sources/enregistrements.cpp
+    Sources/Sources/enregistrements.cpp \
+    Sources/Sources/operateur.cpp \
+    Sources/Sources/operateursexpressions.cpp
     Sources/Sources/mainwindow.cpp
 
 FORMS += \

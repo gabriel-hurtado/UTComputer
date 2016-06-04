@@ -79,9 +79,7 @@ void MainWindow::getNextCommande(QString _fromButton){
         SendException("Pile :"+e.getInfo());
     }
 
-    catch(VariableException & e){
-        SendException("Variable :"+e.getInfo());
-    }
+
 
 }
 
