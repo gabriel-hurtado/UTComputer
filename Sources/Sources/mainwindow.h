@@ -7,6 +7,7 @@
 #include "controleur.h"
 #include "operateur.h"
 #include "variable.h"
+#include "parameterwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,10 +18,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     Pile& pile;
     Controleur& controleur;
+    static MainWindow* InstanceMainWindow;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    static const MainWindow* getInstanceMainWindow();
 public slots:
 
     /*
@@ -33,9 +36,21 @@ public slots:
         En supplément de la commande, on peut rajouter q (utile pour les boutons)
     */
     void getNextCommande(QString q="");
+    /*
+        Pour ouvrir la fenetre de parametre
+    */
+    void openParameterWindow();
+    /*
+        Pour fermer la fenetre de parametre
+    */
+    void closeParameterWindow();
+    /*
+        Pour regenerer la vue de la Pile
+        Quand le nombre d'éléménts visibles est modifié
+    */
+    void regenerateVuePile();
 
 signals:
-
     /*
         pour envoyer des messages d'exception à la QLineEdit message du GUI.
     */
@@ -110,6 +125,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    ParameterWindow* parameterIwindow; //I stand for instansciated
 
 
 };

@@ -56,6 +56,7 @@ public:
     void sauverPile();
 
     unsigned int getNbToAffiche(){return nbLitteraletoAffiche;}
+    void setNbToAffiche(unsigned int i){nbLitteraletoAffiche=i;sendRegenerateVuePile();}
 
 
 
@@ -75,6 +76,7 @@ public:
 
 signals:
         void modificationEtat();
+        void sendRegenerateVuePile();
 
 };
 

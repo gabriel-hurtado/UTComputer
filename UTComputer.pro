@@ -15,7 +15,8 @@ HEADERS += \
     Sources/Sources/operateurscond.h \
     Sources/Sources/operateursexpressions.h \
     Sources/Sources/litteraleexception.h \
-    Sources/Sources/wordidentifier.h
+    Sources/Sources/wordidentifier.h \
+    Sources/Sources/parameterwindow.h
     Sources/Sources/mainwindow.h
 
 SOURCES += \
@@ -32,9 +33,11 @@ SOURCES += \
     Sources/Sources/enregistrements.cpp \
     Sources/Sources/operateur.cpp \
     Sources/Sources/operateursexpressions.cpp \
-    Sources/Sources/wordidentifier.cpp
+    Sources/Sources/wordidentifier.cpp \
+    Sources/Sources/parameterwindow.cpp
     Sources/Sources/mainwindow.cpp
 
 FORMS += \
-    Sources/Sources/mainwindow.ui
+    Sources/Sources/mainwindow.ui \
+    Sources/Sources/parameterwindow.ui
 QT += widgets

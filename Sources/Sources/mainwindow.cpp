@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+MainWindow* MainWindow::InstanceMainWindow = nullptr;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     pile(Pile::donnerInstance()),
@@ -8,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 
 {
+    //On initialise la fenetre dans une ref static pour la connaitre dans les fenetres filles;
+    InstanceMainWindow=this;
+
     ui->setupUi(this);
     setWindowTitle("UTComputer");
     //Pour rendre la page des messages plus swag
@@ -38,6 +43,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->commande,SIGNAL(returnPressed()),this,SLOT(getNextCommande()));
     connect(&pile,SIGNAL(modificationEtat()),this,SLOT(refreshVuePile()));
     connect(this,SIGNAL(SendException(QString)),ui->message,SLOT(setText(QString)));
+    //Pour afficher la fenetre de parametre
+    connect(ui->actionEdition_des_param_tres,SIGNAL(triggered(bool)),this,SLOT(openParameterWindow()));
+    //Pour regenerer la vue de la pile
+    connect(&pile,SIGNAL(sendRegenerateVuePile()),this,SLOT(regenerateVuePile()));
 
 }
 
@@ -45,7 +54,15 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+/*
+    Méthodes
+*/
+   const MainWindow* MainWindow::getInstanceMainWindow(){return InstanceMainWindow;}
 
+
+/*
+    SLOTS
+*/
 void MainWindow::refreshVuePile(){
     //Rafraichir l'état de la pile
 
@@ -78,10 +95,27 @@ void MainWindow::getNextCommande(QString _fromButton){
     catch(PileException & e){
         SendException("Pile :"+e.getInfo());
     }
-
-
-
 }
+
+void MainWindow::openParameterWindow(){
+    parameterIwindow = new ParameterWindow();
+    QString s;
+    parameterIwindow->show();
+}
+
+void MainWindow::closeParameterWindow(){
+    parameterIwindow->close();
+    delete parameterIwindow;
+}
+
+void MainWindow::regenerateVuePile(){
+    ui->vuePile->removeColumn(0);
+    for(int i=pile.getNbToAffiche()-1;i>=0;i--)
+        ui->vuePile->setItem(i,0,new QTableWidgetItem(""));
+    unsigned int k = ui->vuePile->rowCount();
+    refreshVuePile();
+}
+
 
 /*Linkage des boutons*/
 
