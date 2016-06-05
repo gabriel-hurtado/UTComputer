@@ -15,7 +15,7 @@
 
 namespace numerique{
 
-class OperateurNumerique : public Operateur
+class OperateurNumerique : public virtual Operateur
 {
 public:
     virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
@@ -45,79 +45,61 @@ public:
 };
 
 
-class OperateurBinaire : public OperateurNumerique{
- protected:
-    Litterale* l1;
-    Litterale* l2;
-public:
-    void chargerContexte(){Pile::donnerInstance()>>l2;
-                           Pile::donnerInstance()>>l1;
-                          OperationManager::donnerInstance().add(l1);
-                          OperationManager::donnerInstance().add(l2);}
 
-    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
-                         if(l2)  Pile::donnerInstance()<<*l2;}
+class OperateurNEG : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
 
-    OperateurBinaire(){}
-    OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
-};
-
-class OperateurUnaire  : public OperateurNumerique{
-protected:
-   Litterale* l1;
-public:
-   void chargerContexte(){Pile::donnerInstance()>>l1;
-                         OperationManager::donnerInstance().add(l1);}
-
-   void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
-   OperateurUnaire(){}
-   OperateurUnaire(Litterale* lit1):l1(lit1){}
-};
-
-class OperateurNEG : public OperateurUnaire{
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="NEG";}
    OperateurNEG():OperateurUnaire(){}
    OperateurNEG(Litterale* lit1):OperateurUnaire(lit1){}
 
    OperateurNEG* getCopy() {return new OperateurNEG(*this);}
 };
 
-class OperateurAddition : public OperateurBinaire{
+class OperateurAddition : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){ symbole="+";}
    OperateurAddition():OperateurBinaire(){}
    OperateurAddition(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
    OperateurAddition* getCopy() {return new OperateurAddition(*this);}
 };
 
-class OperateurSoustraction : public OperateurBinaire{
+class OperateurSoustraction : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){   symbole="-";}
    OperateurSoustraction():OperateurBinaire(){}
    OperateurSoustraction(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
    OperateurSoustraction* getCopy() {return new OperateurSoustraction(*this);}
 };
 
-class OperateurDivision : public OperateurBinaire{
+class OperateurDivision : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="/";}
    OperateurDivision():OperateurBinaire(){}
    OperateurDivision(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
    OperateurDivision* getCopy() {return new OperateurDivision(*this);}
 };
 
 
-class OperateurMultiplication : public OperateurBinaire{
+class OperateurMultiplication : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){ symbole="*";}
    OperateurMultiplication():OperateurBinaire(){}
    OperateurMultiplication(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -125,10 +107,12 @@ public:
 
 };
 
-class OperateurDIV : public OperateurBinaire{
+class OperateurDIV : public OperateurBinaire, public OperateurNumerique,public OperateurPrefixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="DIV";}
    OperateurDIV():OperateurBinaire(){}
    OperateurDIV(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -136,10 +120,12 @@ public:
 
 };
 
-class OperateurMOD : public OperateurBinaire{
+class OperateurMOD : public OperateurBinaire, public OperateurNumerique,public OperateurPrefixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="MOD";}
    OperateurMOD():OperateurBinaire(){}
    OperateurMOD(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -147,50 +133,60 @@ public:
 
 };
 
-class OperateurNUM : public OperateurUnaire{
+class OperateurNUM : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="NUM";}
    OperateurNUM():OperateurUnaire(){}
    OperateurNUM(Litterale* lit1):OperateurUnaire(lit1){}
 
    OperateurNUM* getCopy() {return new OperateurNUM(*this);}
 };
 
-class OperateurDEN : public OperateurUnaire{
+class OperateurDEN : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="DEN";}
    OperateurDEN():OperateurUnaire(){}
    OperateurDEN(Litterale* lit1):OperateurUnaire(lit1){}
 
    OperateurDEN* getCopy() {return new OperateurDEN(*this);}
 };
 
-class OperateurIM : public OperateurUnaire{
+class OperateurIM : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="IM";}
    OperateurIM():OperateurUnaire(){}
    OperateurIM(Litterale* lit1):OperateurUnaire(lit1){}
 
    OperateurIM* getCopy() {return new OperateurIM(*this);}
 };
 
-class OperateurRE : public OperateurUnaire{
+class OperateurRE : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="RE";}
    OperateurRE():OperateurUnaire(){}
    OperateurRE(Litterale* lit1):OperateurUnaire(lit1){}
 
    OperateurRE* getCopy() {return new OperateurRE(*this);}
 };
 
-class Operateur$ : public OperateurBinaire{
+class Operateur$ : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="$";}
    Operateur$():OperateurBinaire(){}
    Operateur$(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 

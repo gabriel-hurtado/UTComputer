@@ -15,7 +15,7 @@
 
 namespace logique{
 
-class OperateurLogique : public Operateur
+class OperateurLogique : public virtual Operateur
 {
 public:
     virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
@@ -39,37 +39,14 @@ public:
 };
 
 
-class OperateurBinaire : public OperateurLogique{
- protected:
-    Litterale* l1;
-    Litterale* l2;
-public:
-    void chargerContexte(){Pile::donnerInstance()>>l2;
-                           Pile::donnerInstance()>>l1;
-                          OperationManager::donnerInstance().add(l1);
-                          OperationManager::donnerInstance().add(l2);}
-
-    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
-                         if(l2)  Pile::donnerInstance()<<*l2;}
-    OperateurBinaire(){}
-    OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
-};
-
-class OperateurUnaire  : public OperateurLogique{
-protected:
-   Litterale* l1;
-public:
-   void chargerContexte(){Pile::donnerInstance()>>l1;
-                         OperationManager::donnerInstance().add(l1);}
-    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
-   OperateurUnaire(){}
-   OperateurUnaire(Litterale* lit1):l1(lit1){}
-};
 
 
-class OperateurEgal : public OperateurBinaire{
+class OperateurEgal : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
+
+   void initSymbole(){ symbole="=";}
 
    OperateurEgal():OperateurBinaire(){}
    OperateurEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -78,10 +55,13 @@ public:
 
 };
 
-class OperateurDiff : public OperateurBinaire{
+class OperateurDiff : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
 
+
+   void initSymbole(){ symbole="!=";}
    OperateurDiff():OperateurBinaire(){}
    OperateurDiff(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -89,10 +69,12 @@ public:
 
 };
 
-class OperateurInfEgal : public OperateurBinaire{
+class OperateurInfEgal : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="<=";}
    OperateurInfEgal():OperateurBinaire(){}
    OperateurInfEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -101,10 +83,12 @@ public:
 };
 
 
-class OperateurSupEgal : public OperateurBinaire{
+class OperateurSupEgal : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){ symbole=">=";}
    OperateurSupEgal():OperateurBinaire(){}
    OperateurSupEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -112,10 +96,12 @@ public:
 
 };
 
-class OperateurSup : public OperateurBinaire{
+class OperateurSup : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole=">";}
    OperateurSup():OperateurBinaire(){}
    OperateurSup(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -124,10 +110,12 @@ public:
 };
 
 
-class OperateurInf: public OperateurBinaire{
+class OperateurInf: public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){symbole="<";}
    OperateurInf():OperateurBinaire(){}
    OperateurInf(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -136,10 +124,12 @@ public:
 };
 
 
-class OperateurAND: public OperateurBinaire{
+class OperateurAND: public OperateurBinaire, public OperateurLogique,public OperateurPrefixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){   symbole="AND";}
    OperateurAND():OperateurBinaire(){}
    OperateurAND(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -147,10 +137,12 @@ public:
 
 };
 
-class OperateurOR: public OperateurBinaire{
+class OperateurOR: public OperateurBinaire, public OperateurLogique,public OperateurPrefixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){ symbole="OR";}
    OperateurOR():OperateurBinaire(){}
    OperateurOR(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -158,10 +150,12 @@ public:
 
 };
 
-class OperateurNOT: public OperateurBinaire{
+class OperateurNOT: public OperateurBinaire, public OperateurLogique,public OperateurPrefixe{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){ symbole="NOT";}
    OperateurNOT():OperateurBinaire(){}
    OperateurNOT(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 

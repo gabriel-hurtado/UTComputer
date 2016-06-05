@@ -5,66 +5,28 @@
 #include<vector>
 namespace op_pile{
 
-class OperateurPile : public Operateur
+class OperateurPile : public virtual Operateur
 {
 public:
 
     OperateurPile(){}
 
-    void operation(){
-                     try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
-                        chargerContexte(); traitementOperateur(); }
-                        catch(OperateurException op){
-                       resetContexte();
-                       throw OperateurException(op);
-                            }
-                         catch(PileException op){
-                        resetContexte();
-                        throw PileException(op);
-                            }
-                        }
-
-    virtual void traitementOperateur() =0;
-};
-
-
-class OperateurBinaire : public OperateurPile{
- protected:
-    Litterale* l1;
-    Litterale* l2;
-public:
-    void chargerContexte(){Pile::donnerInstance()>>l2;
-                           Pile::donnerInstance()>>l1;
-                          OperationManager::donnerInstance().add(l1);
-                          OperationManager::donnerInstance().add(l2);}
-
-    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
-                         if(l2)  Pile::donnerInstance()<<*l2;}
-
-    OperateurBinaire(){}
-};
-
-class OperateurUnaire  : public OperateurPile{
-protected:
-   Litterale* l1;
-public:
-   void chargerContexte(){Pile::donnerInstance()>>l1;
-                         OperationManager::donnerInstance().add(l1);}
-
-   void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
-   OperateurUnaire(){}
 };
 
 
 
 // empile une nouvelle littérale identique à celle du sommet de la pile.
-class OperateurDUP : public OperateurUnaire{
+class OperateurDUP : public OperateurUnaire, public OperateurPile{
+
 public:
-   void traitementOperateur(){Litterale* l2= l1->getCopy();
+   Litterale* traitementOperateur(){Litterale* l2= l1->getCopy();
                               Pile::donnerInstance()<<*l1;
                               Pile::donnerInstance()<<*l2;
+                              return nullptr;
                              }
 
+
+   void initSymbole(){symbole="DUP";}
    OperateurDUP():OperateurUnaire(){}
 
    OperateurDUP* getCopy() {return new OperateurDUP(*this);}
@@ -72,10 +34,13 @@ public:
 };
 
 //dépile la littérale au sommet de la pile.
-class OperateurDROP : public OperateurUnaire{
-public:
-   void traitementOperateur(){delete l1;}
+class OperateurDROP : public OperateurUnaire, public OperateurPile{
 
+public:
+   Litterale* traitementOperateur(){delete l1;
+                                     return nullptr;}
+
+   void initSymbole(){symbole="DROP";}
    OperateurDROP():OperateurUnaire(){}
 
    OperateurDROP* getCopy() {return new OperateurDROP(*this);}
@@ -83,10 +48,13 @@ public:
 };
 
 //intervertit les deux derniers éléments empilés dans la pile.
-class OperateurSWAP : public OperateurBinaire{
-public:
-   void traitementOperateur(){Pile::donnerInstance()<<*l2; Pile::donnerInstance()<<*l1;}
+class OperateurSWAP : public OperateurBinaire, public OperateurPile{
 
+public:
+   Litterale* traitementOperateur(){Pile::donnerInstance()<<*l2; Pile::donnerInstance()<<*l1;
+                                    return nullptr;}
+
+   void initSymbole(){symbole="SWAP";}
    OperateurSWAP():OperateurBinaire(){}
 
    OperateurSWAP* getCopy() {return new OperateurSWAP(*this);}
@@ -94,9 +62,13 @@ public:
 
 //rétablit l’état du calculateur avant la dernière opération.
 class OperateurUNDO : public OperateurPile{
+
 public:
 
-    void traitementOperateur(){Pile::donnerInstance().UNDO();}
+    Litterale* traitementOperateur(){Pile::donnerInstance().UNDO();
+                                     return nullptr;}
+
+    void initSymbole(){symbole="UNDO";}
     void chargerContexte(){}
 
     void resetContexte(){}
@@ -108,9 +80,13 @@ public:
 
 //rétablit l’état du calculateur avant l’application de la dernière opération UNDO.
 class OperateurREDO : public OperateurPile{
+
 public:
 
-    void traitementOperateur(){Pile::donnerInstance().REDO();}
+    Litterale* traitementOperateur(){Pile::donnerInstance().REDO();
+                                     return nullptr;}
+
+    void initSymbole(){symbole="REDO";}
     void chargerContexte(){}
 
     void resetContexte(){}
@@ -122,9 +98,13 @@ public:
 
 //vide tous les éléments de la pile
 class OperateurCLEAR : public OperateurPile{
+
 public:
 
-    void traitementOperateur(){Pile::donnerInstance().viderPile();}
+    Litterale* traitementOperateur(){Pile::donnerInstance().viderPile();
+                                     return nullptr;}
+
+    void initSymbole(){symbole="CLEAR";}
     void chargerContexte(){}
 
     void resetContexte(){}
@@ -135,9 +115,14 @@ public:
 };
 
 class OperateurLASTOP: public Operateur{
+
 public:
 
-    void traitementOperateur(){OperationManager::donnerInstance().getLastOp()->operation();}
+    Litterale* traitementOperateur(){Operateur* lastop =OperationManager::donnerInstance().getLastOp();
+                               lastop->operation();
+                                     return nullptr;}
+
+    void initSymbole(){symbole="LASTOP";}
     void chargerContexte(){}
 
     void resetContexte(){}
@@ -147,7 +132,7 @@ public:
 
 
      void operation(){
-                      try{chargerContexte(); traitementOperateur(); OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
+                      try{chargerContexte(); traitementOperateur();
                             }
                          catch(OperateurException op){
                         resetContexte();
@@ -162,9 +147,10 @@ public:
 };
 
 class OperateurLASTARGS: public Operateur{
+
 public:
 
-    void traitementOperateur(){
+    Litterale* traitementOperateur(){
         std::vector<Litterale*>::const_iterator it1= OperationManager::donnerInstance().getLastLitsBegin();
 
         std::vector<Litterale*>::const_iterator it2= OperationManager::donnerInstance().getLastLitsEnd();
@@ -172,8 +158,10 @@ public:
             Pile::donnerInstance()<<*(*it1);
             it1++;
         }while(it1!=it2);
-
+         return nullptr;
     }
+
+    void initSymbole(){ symbole="LASTARGS";}
     void chargerContexte(){}
 
     void resetContexte(){}

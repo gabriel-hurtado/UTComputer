@@ -22,19 +22,7 @@ public:
 
 };
 
-class Operateur : public Operande
-{
-    static QString symbole;
-public:
-
-    Operateur(){}
-    static QString getSymbole(){return symbole;}
-    virtual void chargerContexte() = 0;
-    virtual void resetContexte() = 0;
-    virtual Operateur* getCopy()=0;
-    virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
-    virtual void operation()=0;
-};
+class Operateur;
 
 class OperationManager
 {
@@ -56,6 +44,107 @@ public:
     static void add( Litterale* l);
 };
 
+class Operateur : public Operande
+{
+protected:
+    std::string symbole;
+public:
+
+    virtual void initSymbole(){}
+    Operateur(){initSymbole();}
+    virtual void chargerContexte() = 0;
+    virtual void resetContexte() = 0;
+    virtual Operateur* getCopy()=0;
+    virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
+    void operation(){
+                     try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
+                            chargerContexte();Litterale* resExp = traitementExpression();
+                            Litterale* res;
+                            if(!resExp) res =traitementOperateur();
+                            else   res=resExp;
+                           if(res) pushResultat(res);
+                            }
+                        catch(OperateurException op){
+                       resetContexte();
+                       throw OperateurException(op);
+                            }
+                         catch(PileException op){
+                        resetContexte();
+                        throw PileException(op);
+                            }
+
+                        catch(LitteraleException& op){
+                       resetContexte();
+                       throw LitteraleException(op);
+                           }
+                        }
+
+    virtual Litterale* traitementOperateur() =0;
+    Litterale* traitementExpression(){return nullptr;}
+
+    const std::string getSymbole() const {return symbole;}
+
+
+};
+
+
+
+
+class OperateurBinaire : public virtual Operateur{
+ protected:
+    Litterale* l1=nullptr;
+    Litterale* l2=nullptr;
+public:
+    void chargerContexte(){Pile::donnerInstance()>>l2;
+                           Pile::donnerInstance()>>l1;
+                          OperationManager::donnerInstance().add(l1);
+                          OperationManager::donnerInstance().add(l2);}
+
+    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
+                         if(l2)  Pile::donnerInstance()<<*l2;}
+
+    OperateurBinaire(){}
+    OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
+    Litterale* getl1(){return l1;}
+    Litterale* getl2(){return l1;}
+};
+
+class OperateurUnaire  : public virtual Operateur{
+protected:
+   Litterale* l1=nullptr;
+public:
+   void chargerContexte(){Pile::donnerInstance()>>l1;
+                         OperationManager::donnerInstance().add(l1);}
+
+   void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
+   OperateurUnaire(){}
+   OperateurUnaire(Litterale* lit1):l1(lit1){}
+   Litterale* getl1(){return l1;}
+};
+
+/*• On peut également appliquer l’ensemble des opérateurs numériques et logiques s’écrivant sous forme de lettres
+sur une littérale expression. Le résultat de l’opérateur OP unaire appliqué à la littérale expression ’EXP’ est
+la littérale expression ’OP(EXP)’. Par exemple, la ligne de commande ’3+X’SIN a pour résultat SIN(3+X).
+Le résultat de l’opérateur OP binaire appliqué aux littérales expressions ’EXP’ et ’EXP2’ est la littérale
+expression ’OP(EXP1,EXP2)’.
+• Le résultat de l’opérateur binaire utilisant un symbole (+, -, /, *, $) appliqué entre la littérale expression
+’EXP1’ et la littérale expression ’EXP2’ renvoie un littérale expression composée des deux littérales initiales,
+chacune entre parenthèses, les deux littérales étant séparées par le symbole. Par exemple, on obtient ’(EXP1
+)+(EXP2)’ si l’opérateur est +. Les parenthèses autour des expressions EXP1 et/ou EXP2 sont omises dans
+le résultat si tous les opérateurs non parenthésés dans l’expression ont la même priorité que l’opérateur. Les
+opérateurs *, / ont une priorité supérieure à + et -. Les opérateurs *, / ont la même priorité entre eux. Les
+opérateurs + et - ont la même priorité entre eux. Les opérateurs numériques ont priorité sur les opérateurs
+logiques. Deux opérateurs qui ont la même priorité sont toujours évalués de la gauche vers la droite. Par
+exemple, la ligne de commande ’3+X’’9*Y’* a pour résultat ’(3+X)*9*Y’.*/
+
+class OperateurPrefixe : public virtual Operateur{
+   Litterale* traitementExpression();
+
+};
+
+class OperateurInfixe : public virtual Operateur{
+    Litterale* traitementExpression();
+};
 
 
 #endif // OPERATEUR_H
