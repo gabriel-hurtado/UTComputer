@@ -27,6 +27,8 @@ int main(int argc,char* argv[]) {
 
     OperateurFactory::enregistrer("!=",new logique::OperateurDiff);
     OperateurFactory::enregistrer("LASTARGS",new op_pile::OperateurLASTARGS);
+
+    OperateurFactory::enregistrer("LASTOP",new op_pile::OperateurLASTOP);
     OperateurFactory::enregistrer("DROP",new op_pile::OperateurDROP);
     OperateurFactory::enregistrer("UNDO",new op_pile::OperateurUNDO);
     OperateurFactory::enregistrer("REDO",new op_pile::OperateurREDO);

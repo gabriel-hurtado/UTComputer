@@ -137,7 +137,8 @@ public:
 class OperateurLASTOP: public Operateur{
 public:
 
-    void traitementOperateur(){OperationManager::donnerInstance().getLastOp()->operation();}
+    void traitementOperateur(){Operateur* lastop =OperationManager::donnerInstance().getLastOp();
+                               lastop->operation();}
     void chargerContexte(){}
 
     void resetContexte(){}
@@ -147,7 +148,7 @@ public:
 
 
      void operation(){
-                      try{chargerContexte(); traitementOperateur(); OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
+                      try{chargerContexte(); traitementOperateur();
                             }
                          catch(OperateurException op){
                         resetContexte();

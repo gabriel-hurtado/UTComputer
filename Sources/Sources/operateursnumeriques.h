@@ -46,8 +46,8 @@ public:
 
 class OperateurBinaire : public OperateurNumerique{
  protected:
-    Litterale* l1;
-    Litterale* l2;
+    Litterale* l1=nullptr;
+    Litterale* l2=nullptr;
 public:
     void chargerContexte(){Pile::donnerInstance()>>l2;
                            Pile::donnerInstance()>>l1;

@@ -281,7 +281,7 @@ Litterale* OperateurDivision::traitementOperateur(){
 
         }
         if(r2 && e1){ //idem
-            Rationnel* temp = new Rationnel(e2->getValeur());
+            Rationnel* temp = new Rationnel(e1->getValeur());
              return OperateurDivision(temp,r2).traitementOperateur();
         }
 
