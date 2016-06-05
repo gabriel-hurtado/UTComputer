@@ -33,19 +33,29 @@ bool Controleur::commande(QString& s){
 
     if(word==""){return true;} //On a bien terminé tous les mots
     else{
-
-        //Il reste du bouleau chef !
-        s=s.remove(0,(s.indexOf(word)+word.length())); // On enlève notre mot juste prélevé de la string
-        Litterale* l = LitteraleFactory::donnerInstance().creerRPNLitterale(word);
-        if(l){Pile::donnerInstance()<<*l;}
-        Operateur* op = OperateurFactory::donnerInstance().creer(word);
-        if(op){op->operation();}
-        if(!op && !l){s=word;return false;}
-        if(commande(s))//Si la commande suivante est valide on valide la notre
+        try{
+            //Il reste du bouleau chef !
+            s=s.remove(0,(s.indexOf(word)+word.length())); // On enlève notre mot juste prélevé de la string
+            Litterale* l = LitteraleFactory::donnerInstance().creerRPNLitterale(word);
+            if(l){Pile::donnerInstance()<<*l;}
+            Operateur* op = OperateurFactory::donnerInstance().creer(word);
+            if(op){op->operation();}
+            if(!op && !l){s=word;return false;}
+            if(commande(s))//Si la commande suivante est valide on valide la notre
             return true;
-        else            //Si la commande suivante n'est pas valide alors il faut nettoyer la notre aussi
+            else            //Si la commande suivante n'est pas valide alors il faut nettoyer la notre aussi
             Pile::donnerInstance().UNDO();
-        return false;
+            return false;
+        }
+        //Dans le cas ou la commande précédente
+        catch(LitteraleException& e){
+            Pile::donnerInstance().UNDO();
+            throw e;
+        }
+        catch(OperateurException& e){
+            Pile::donnerInstance().UNDO();
+            throw e;
+        }
    }
 }
 /*
