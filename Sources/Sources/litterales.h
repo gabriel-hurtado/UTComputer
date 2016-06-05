@@ -19,7 +19,7 @@ public:
     virtual const QString toString() const = 0;
     virtual Litterale* getCopy() const = 0;
     virtual Litterale* getFromString(QString s) = 0;
-    Litterale* traitement(){return nullptr;}
+    virtual Litterale* traitement();
 
 private:
 
@@ -206,7 +206,7 @@ public:
     const QString toString() const {return getProgramme();}
     Litterale* getCopy() const;
     Litterale* getFromString(QString s){return new Programme(s);}
-    void traitement(){} //parse le programme et fait les différentes opérations, par ex + avec un élément de la pile
+    Litterale* traitement() override; //parse le programme et fait les différentes opérations, par ex + avec un élément de la pile
 };
 
 #endif

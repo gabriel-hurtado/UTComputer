@@ -32,6 +32,13 @@ bool Controleur::commande(QString& s){
     QString word = firstWord(s);
 
     if(word==""){return true;} //On a bien terminé tous les mots
+    /*if(word=="EVAL"){
+        Litterale* e;
+        Pile::donnerInstance()>>e;
+        e->traitement();
+        return true;
+    }
+    */
     else{
         try{
             //Il reste du bouleau chef !
@@ -58,15 +65,7 @@ bool Controleur::commande(QString& s){
         }
    }
 }
-/*
-void Controleur::enregistrerSymbole(QString ltok, QString rtok){
-    QMap<QString,QString>::iterator it_map = symbolMap.find(ltok);
-    if(it_map==symbolMap.end()){
-        symbolMap[ltok]=rtok;
-        interpretationMap[ltok]= new WordIdentifier;
-    }
-}
-*/
+
 
 void Controleur::enregistrerSymbole(QString ltok, QString rtok, WordIdentifier* W){
     QMap<QString,QString>::iterator it_map = symbolMap.find(ltok);
