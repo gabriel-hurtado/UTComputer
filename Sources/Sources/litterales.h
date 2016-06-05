@@ -2,28 +2,9 @@
 
 #ifndef H_LITTERALE
 #define H_LITTERALE
-#include "operande.h"
-#include "litteralefactory.h"
-
-
-/*
- Classe pour gérer les exceptions sur les littérales
- Ces messages sont utile pour notre GUI (?)
-*/
-class LitteraleException : public std::exception
-{
-    QString info;
-public:
-    LitteraleException (QString in) : info(in) {}
-    QString getInfo(){return info;}
-    virtual const char* what() const throw()
-    {
-      return info.toStdString().c_str();
-    }
-
-};
-
-
+#include "operande.h" //Pour savoir ce que sont des opérandes pour l'héritage
+#include "litteralefactory.h" //
+#include "litteraleexception.h"
 
 
 /*------------Classes "Litterales" abstraites------------*/
@@ -38,7 +19,7 @@ public:
     virtual const QString toString() const = 0;
     virtual Litterale* getCopy() const = 0;
     virtual Litterale* getFromString(QString s) = 0;
-    Litterale* traitement(){return nullptr;}
+    virtual Litterale* traitement();
 
 private:
 
@@ -225,7 +206,7 @@ public:
     const QString toString() const {return getProgramme();}
     Litterale* getCopy() const;
     Litterale* getFromString(QString s){return new Programme(s);}
-    void traitement(){} //parse le programme et fait les différentes opérations, par ex + avec un élément de la pile
+    Litterale* traitement() override; //parse le programme et fait les différentes opérations, par ex + avec un élément de la pile
 };
 
 #endif

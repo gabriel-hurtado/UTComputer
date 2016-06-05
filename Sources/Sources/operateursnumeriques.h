@@ -1,10 +1,11 @@
 
 #ifndef OPERATEURSNUMERIQUES_H
 #define OPERATEURSNUMERIQUES_H
-#include "operateur.h"
-#include "litterales.h"
-#include"pile.h"
 
+#include "operateur.h"
+#include"pile.h"
+#include "litterales.h"
+#include "litteraleexception.h"
 
 /*
  * Operation interact with stack, operator must be created withoud parameters
@@ -32,7 +33,7 @@ public:
                         throw PileException(op);
                             }
 
-                        catch(LitteraleException op){
+                        catch(LitteraleException& op){
                        resetContexte();
                        throw LitteraleException(op);
                            }

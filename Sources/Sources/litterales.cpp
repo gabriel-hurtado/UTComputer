@@ -2,10 +2,12 @@
 #include "utils.h"
 #include "operateursnumeriques.h"
 #include "operateurfactory.h"
+#include "controleur.h"
 #include <QTextStream>
 
 
 /*Définition des méthodes de la classe Litterale*/
+Litterale* Litterale::traitement(){return nullptr;}
 
 
 /*------------Définition des méthodes de la classe Réelle------------*/
@@ -161,6 +163,13 @@ LitteraleComplexe* Expression::evaluer() const{ return nullptr;} /*utile pour st
 Litterale* Expression::getCopy() const{return new Expression(value);}
 
 
-/*------------Définition des méthodes de la classe Expression------------*/
+/*------------Définition des méthodes de la classe Programme------------*/
 
 Litterale* Programme::getCopy() const{return new Programme(valeur);}
+Litterale* Programme::traitement(){
+    QString tmp = valeur;
+    tmp=tmp.remove(0,1);
+    tmp=tmp.remove(tmp.length()-1,tmp.length());
+    Controleur::donnerInstance().commande(tmp);
+    return nullptr;
+}

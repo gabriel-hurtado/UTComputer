@@ -22,9 +22,23 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 public slots:
+
+    /*
+        Rafraichie la vue de la pile dans le GUI quand celle-ci est modifiée
+    */
     void refreshVuePile();
+
+    /*
+        Informe du traitement de la commande contenue dans le QLineEdit commande.
+        En supplément de la commande, on peut rajouter q (utile pour les boutons)
+    */
     void getNextCommande(QString q="");
+
 signals:
+
+    /*
+        pour envoyer des messages d'exception à la QLineEdit message du GUI.
+    */
     void SendException(QString s);
 
 private slots:

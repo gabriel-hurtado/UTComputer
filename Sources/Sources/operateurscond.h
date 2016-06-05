@@ -1,7 +1,5 @@
 #ifndef OPERATEURSCOND_H
 #define OPERATEURSCOND_H
-#ifndef OPERATEURSPILE_H
-#define OPERATEURSPILE_H
 
 #include"operateur.h"
 namespace conditionnel{
