@@ -4,6 +4,8 @@
 #include "litterales.h"
 #include <map>
 #include "pile.h"
+#include "litteraleexception.h"
+#include "wordidentifier.h"
 
 class LitteraleFactory
 {
@@ -63,7 +65,7 @@ public:
             -> Dans des programmes ou expressions ou tout autre objet appelant la méthode creerInfixLitterale ou la méthode creerRPNLitterale
 
     */
-    static void enregistrer(unsigned int,QString,Litterale* ,QString ="");
+    static void enregistrer(unsigned int,QString,Litterale* ,QString ="", WordIdentifier* W = new WordIdentifier);
 
     /*
         Cette méthode est une version similaire de la méthode enregistrer
@@ -72,7 +74,7 @@ public:
 
         Ils servent par exemple à traiter des litterales écrites dans des programmes ou des expressions.
     */
-    static void enregistrerInfix(unsigned int,QString,Litterale*, QString="");
+    static void enregistrerInfix(unsigned int,QString,Litterale*, QString="" , WordIdentifier* W = new WordIdentifier);
 
     /*
         Cette méthode cree des Litterales en fonction des symboles enregistrés dans la priority_basic_map,
@@ -90,6 +92,7 @@ public:
     */
     Litterale* creerInfixLitterale(QString);
 
+    static const QMap<unsigned int,QString>& getPriorityMap(){return priority_map_basic;}
 };
 
 

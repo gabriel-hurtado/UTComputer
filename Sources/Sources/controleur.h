@@ -4,51 +4,8 @@
 #include "litteralefactory.h"
 #include "operateur.h"
 #include "operateurfactory.h"
+#include "wordidentifier.h"
 
-/*
-    Classe contenant la statégie d'identification à adopter
-*/
-struct SelectedPosition{
-    QString::iterator it_debut;
-    QString::iterator it_fin;
-};
-/*
-    Version générique de l'identifieur, va jusqu'au prochain espace.
-*/
-class WordIdentifier{
-public:
-    WordIdentifier(){}
-    virtual ~WordIdentifier(){}
-    virtual void WordPosition(QString s, const SelectedPosition& Select);
-};
-
-/*
-    Pour des encapsulateurs comme des expressions
-*/
-class EncapsulatorIdentifier: public WordIdentifier{
-    QString rightDelimiter;
-    QString leftDelimiter;
-public:
-    EncapsulatorIdentifier(QString rD="",QString lD=""):rightDelimiter(rD),leftDelimiter(lD){}
-    void WordPosition(QString s, const SelectedPosition& Select);
-    void setRightDelimiter(QString s){rightDelimiter = s;}
-    void setLeftDelimiter(QString s){leftDelimiter = s;}
-
-};
-/*
-    Pour des encapsulateurs réccursifs, comme des programmes
-*/
-class RecursiveEncapsulatorIdentifier: public WordIdentifier{
-    QString rightDelimiter;
-    QString leftDelimiter;
-public:
-    RecursiveEncapsulatorIdentifier(QString rD="",QString lD=""):rightDelimiter(rD),leftDelimiter(lD){}
-    void WordPosition(QString s, const SelectedPosition& Select);
-    void setRightDelimiter(QString s){rightDelimiter = s;}
-    void setLeftDelimiter(QString s){leftDelimiter = s;}
-
-
-};
 
 class Controleur
 {
@@ -95,7 +52,7 @@ public:
     /*
         Méthode pour enregistrer un symbole pour le WordFinder
     */
-    static void enregistrerSymbole(QString,QString rtok ="");
+    //static void enregistrerSymbole(QString,QString rtok ="");
     static void enregistrerSymbole(QString,QString rtok ="", WordIdentifier* W = new WordIdentifier);
 
 

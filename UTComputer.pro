@@ -13,7 +13,9 @@ HEADERS += \
     Sources/Sources/variable.h \
     Sources/Sources/operateurspile.h \
     Sources/Sources/operateurscond.h \
-    Sources/Sources/operateursexpressions.h
+    Sources/Sources/operateursexpressions.h \
+    Sources/Sources/litteraleexception.h \
+    Sources/Sources/wordidentifier.h
     Sources/Sources/mainwindow.h
 
 SOURCES += \
@@ -29,7 +31,8 @@ SOURCES += \
     Sources/Sources/variable.cpp \
     Sources/Sources/enregistrements.cpp \
     Sources/Sources/operateur.cpp \
-    Sources/Sources/operateursexpressions.cpp
+    Sources/Sources/operateursexpressions.cpp \
+    Sources/Sources/wordidentifier.cpp
     Sources/Sources/mainwindow.cpp
 
 FORMS += \

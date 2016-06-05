@@ -1,16 +1,5 @@
 #include "controleur.h"
 
-void WordIdentifier::WordPosition(QString s, const SelectedPosition& Select){
-
-}
-void EncapsulatorIdentifier::WordPosition(QString s, const SelectedPosition& Select){
-
-}
-void RecursiveEncapsulatorIdentifier::WordPosition(QString s, const SelectedPosition& Select){
-
-}
-
-
 
 
 Controleur* Controleur::instanceControleur=nullptr;
@@ -59,6 +48,7 @@ bool Controleur::commande(QString& s){
         return false;
    }
 }
+/*
 void Controleur::enregistrerSymbole(QString ltok, QString rtok){
     QMap<QString,QString>::iterator it_map = symbolMap.find(ltok);
     if(it_map==symbolMap.end()){
@@ -66,7 +56,7 @@ void Controleur::enregistrerSymbole(QString ltok, QString rtok){
         interpretationMap[ltok]= new WordIdentifier;
     }
 }
-
+*/
 
 void Controleur::enregistrerSymbole(QString ltok, QString rtok, WordIdentifier* W){
     QMap<QString,QString>::iterator it_map = symbolMap.find(ltok);
@@ -79,63 +69,46 @@ void Controleur::enregistrerSymbole(QString ltok, QString rtok, WordIdentifier* 
 
 QString Controleur::firstWord(QString s){
 
-    QString::iterator it_debut = s.begin();
-    //tant qu'il y a des espaces on les vire
-    while(*(it_debut)==' '){
-        it_debut++;
+
+    //On nettoie les espaces à gauche
+    while(*(s.begin())==' '){
+        s=s.remove(0,1);
         continue;
     }
+
     //On arrive ici quand il n'y a plus d'espace à gauche
 
+
     //Dans le cas ou c'est la fin on renvoie la vide
-    if(it_debut==s.end())
+    if(s.begin()==s.end())
         return "";
 
     //Dans les autres cas il faut savoir ou on s'arrete
+    //On initialise pour cela notre curseur
+    SelectedPosition _cursor(s.begin(),s.begin());
+    _cursor.it_fin++;
 
-    //On prépare pour celà un début et une fin à notre chaine à extraire.
-    QString::iterator it_fin = it_debut;
-    it_fin++;//La fin sera au minimum le prochain caractère (qui existe forcément)
+    //On initialise aussi un booleén quand on a trouvé
+    bool found = false;
 
-    bool found=false;
-    //Si c'est un programme il faut trouver la fin de celui ci
-    if(*it_debut=='['){
-        unsigned int nb_crochet=0;
-        while(!(nb_crochet==0 && *it_fin==']')){
-            if(it_fin==s.end())
-                throw LitteraleException("Impossible de trouver la fin du Programme");
-            if(*it_fin=='[')
-                nb_crochet++;
-            if(*it_fin==']')
-                nb_crochet--;
-            it_fin++;
+    //Il faut commencer dans l'ordre de priorité des opérateurs
+    const QMap<unsigned int, QString>& prioMap = LitteraleFactory::getPriorityMap();
+    QMap<unsigned int, QString>::const_iterator it_map = prioMap.begin();
+    while(it_map!=prioMap.end() && !found){
+        WordIdentifier* _currentWordIdentifier = interpretationMap.find(it_map.value()).value();
+        if(_currentWordIdentifier->WordGuesser(s)){
+            _currentWordIdentifier->WordPosition(s,_cursor);
+            found=true;
         }
-        it_fin++; //On avance de 1 car le suivant marquera la fin
-        found=true;
-    }
-    //Si cest une Expression il faut trouver la fin de celle ci
-    if(!found && *it_debut=='"'){
-        while(*it_fin!='"'){
-            if(it_fin==s.end())
-                throw LitteraleException("Impossible de trouver la fin de l'Expression");
-            it_fin++;
-       }
-       it_fin++; //On avance de 1 car le suivant marquera la fin
-       found=true;
+        it_map++;
     }
 
-    //Dans les autres cas il faut chercher le prochain espace ou la fin de la string
-    if(!found){
-       while(*it_fin != ' ' && it_fin != s.end()){
-           it_fin++;
-       }
-   }
-   //Maintenant notre premier mot est borné entre it_debut et it_fin
-   QString ret("");
+    //Maintenant notre premier mot est borné entre it_debut et it_fin
+    QString ret("");
 
-   for(;it_debut!=it_fin;it_debut++)
-       ret+=*it_debut;
-   return ret;
+    for(;_cursor.it_debut!=_cursor.it_fin;_cursor.it_debut++)
+       ret+=*_cursor.it_debut;
+    return ret;
 
 }
 
