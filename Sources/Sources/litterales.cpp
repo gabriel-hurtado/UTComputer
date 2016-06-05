@@ -156,7 +156,7 @@ Litterale* Atome::getCopy() const{return new Atome(nom);}
 
 /*------------Définition des méthodes de la classe Expression------------*/
 
-LitteraleComplexe* Expression::evaluer() const{ return nullptr;} /*utile pour sto, on prend la QString, on la parse de manière infixe, et on esaaye de trouver la valeur numérique.
+LitteraleComplexe* Expression::evaluer() const{ return nullptr;} /*utile pour EVAL, on prend la QString, on la parse de manière infixe, et on esaaye de trouver la valeur numérique.
                                                                   ne pas hésiter a lancer des exceptions si un atome référence un programme ou si un atome ne correspond pas au
                                                                     nom d'une variable*/
 

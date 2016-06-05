@@ -22,19 +22,7 @@ public:
 
 };
 
-class Operateur : public Operande
-{
-    static QString symbole;
-public:
-
-    Operateur(){}
-    static QString getSymbole(){return symbole;}
-    virtual void chargerContexte() = 0;
-    virtual void resetContexte() = 0;
-    virtual Operateur* getCopy()=0;
-    virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
-    virtual void operation()=0;
-};
+class Operateur;
 
 class OperationManager
 {
@@ -56,6 +44,84 @@ public:
     static void add( Litterale* l);
 };
 
+class Operateur : public Operande
+{
+public:
+
+    Operateur(){}
+    virtual void chargerContexte() = 0;
+    virtual void resetContexte() = 0;
+    virtual Operateur* getCopy()=0;
+    virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
+    void operation(){
+                     try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
+                            chargerContexte();Litterale* resExp = traitementExpression();
+                            Litterale* res;
+                            if(!resExp) res =traitementOperateur();
+                            else   res=resExp;
+                           if(res) pushResultat(res);
+                            }
+                        catch(OperateurException op){
+                       resetContexte();
+                       throw OperateurException(op);
+                            }
+                         catch(PileException op){
+                        resetContexte();
+                        throw PileException(op);
+                            }
+
+                        catch(LitteraleException& op){
+                       resetContexte();
+                       throw LitteraleException(op);
+                           }
+                        }
+
+    virtual Litterale* traitementOperateur() =0;
+    Litterale* traitementExpression(){return nullptr;}
+
+
+};
+
+
+
+
+class OperateurBinaire : public virtual Operateur{
+ protected:
+    Litterale* l1=nullptr;
+    Litterale* l2=nullptr;
+public:
+    void chargerContexte(){Pile::donnerInstance()>>l2;
+                           Pile::donnerInstance()>>l1;
+                          OperationManager::donnerInstance().add(l1);
+                          OperationManager::donnerInstance().add(l2);}
+
+    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
+                         if(l2)  Pile::donnerInstance()<<*l2;}
+
+    OperateurBinaire(){}
+    OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
+};
+
+class OperateurUnaire  : public virtual Operateur{
+protected:
+   Litterale* l1=nullptr;
+public:
+   void chargerContexte(){Pile::donnerInstance()>>l1;
+                         OperationManager::donnerInstance().add(l1);}
+
+   void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
+   OperateurUnaire(){}
+   OperateurUnaire(Litterale* lit1):l1(lit1){}
+};
+
+class OperateurPrefixe : public virtual Operateur{
+   Litterale* traitementExpression(){return nullptr;}
+
+};
+
+class OperateurInfixe : public virtual Operateur{
+    Litterale* traitementExpression(){return nullptr;}
+};
 
 
 #endif // OPERATEUR_H

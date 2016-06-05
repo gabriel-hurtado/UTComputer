@@ -15,7 +15,7 @@
 
 namespace numerique{
 
-class OperateurNumerique : public Operateur
+class OperateurNumerique : public virtual Operateur
 {
 public:
     virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
@@ -45,36 +45,8 @@ public:
 };
 
 
-class OperateurBinaire : public OperateurNumerique{
- protected:
-    Litterale* l1=nullptr;
-    Litterale* l2=nullptr;
-public:
-    void chargerContexte(){Pile::donnerInstance()>>l2;
-                           Pile::donnerInstance()>>l1;
-                          OperationManager::donnerInstance().add(l1);
-                          OperationManager::donnerInstance().add(l2);}
 
-    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
-                         if(l2)  Pile::donnerInstance()<<*l2;}
-
-    OperateurBinaire(){}
-    OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
-};
-
-class OperateurUnaire  : public OperateurNumerique{
-protected:
-   Litterale* l1;
-public:
-   void chargerContexte(){Pile::donnerInstance()>>l1;
-                         OperationManager::donnerInstance().add(l1);}
-
-   void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
-   OperateurUnaire(){}
-   OperateurUnaire(Litterale* lit1):l1(lit1){}
-};
-
-class OperateurNEG : public OperateurUnaire{
+class OperateurNEG : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
 public:
    Litterale* traitementOperateur();
 
@@ -84,7 +56,7 @@ public:
    OperateurNEG* getCopy() {return new OperateurNEG(*this);}
 };
 
-class OperateurAddition : public OperateurBinaire{
+class OperateurAddition : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 
@@ -94,7 +66,7 @@ public:
    OperateurAddition* getCopy() {return new OperateurAddition(*this);}
 };
 
-class OperateurSoustraction : public OperateurBinaire{
+class OperateurSoustraction : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 
@@ -104,7 +76,7 @@ public:
    OperateurSoustraction* getCopy() {return new OperateurSoustraction(*this);}
 };
 
-class OperateurDivision : public OperateurBinaire{
+class OperateurDivision : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 
@@ -114,7 +86,7 @@ public:
 };
 
 
-class OperateurMultiplication : public OperateurBinaire{
+class OperateurMultiplication : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 
@@ -125,7 +97,7 @@ public:
 
 };
 
-class OperateurDIV : public OperateurBinaire{
+class OperateurDIV : public OperateurBinaire, public OperateurNumerique,public OperateurPrefixe{
 public:
    Litterale* traitementOperateur();
 
@@ -136,7 +108,7 @@ public:
 
 };
 
-class OperateurMOD : public OperateurBinaire{
+class OperateurMOD : public OperateurBinaire, public OperateurNumerique,public OperateurPrefixe{
 public:
    Litterale* traitementOperateur();
 
@@ -147,7 +119,7 @@ public:
 
 };
 
-class OperateurNUM : public OperateurUnaire{
+class OperateurNUM : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
 public:
    Litterale* traitementOperateur();
 
@@ -157,7 +129,7 @@ public:
    OperateurNUM* getCopy() {return new OperateurNUM(*this);}
 };
 
-class OperateurDEN : public OperateurUnaire{
+class OperateurDEN : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
 public:
    Litterale* traitementOperateur();
 
@@ -167,7 +139,7 @@ public:
    OperateurDEN* getCopy() {return new OperateurDEN(*this);}
 };
 
-class OperateurIM : public OperateurUnaire{
+class OperateurIM : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
 public:
    Litterale* traitementOperateur();
 
@@ -177,7 +149,7 @@ public:
    OperateurIM* getCopy() {return new OperateurIM(*this);}
 };
 
-class OperateurRE : public OperateurUnaire{
+class OperateurRE : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
 public:
    Litterale* traitementOperateur();
 
@@ -187,7 +159,7 @@ public:
    OperateurRE* getCopy() {return new OperateurRE(*this);}
 };
 
-class Operateur$ : public OperateurBinaire{
+class Operateur$ : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 

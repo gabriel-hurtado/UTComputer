@@ -5,64 +5,23 @@
 #include<vector>
 namespace op_pile{
 
-class OperateurPile : public Operateur
+class OperateurPile : public virtual Operateur
 {
 public:
 
     OperateurPile(){}
 
-    void operation(){
-                     try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
-                        chargerContexte(); traitementOperateur(); }
-                        catch(OperateurException op){
-                       resetContexte();
-                       throw OperateurException(op);
-                            }
-                         catch(PileException op){
-                        resetContexte();
-                        throw PileException(op);
-                            }
-                        }
-
-    virtual void traitementOperateur() =0;
-};
-
-
-class OperateurBinaire : public OperateurPile{
- protected:
-    Litterale* l1;
-    Litterale* l2;
-public:
-    void chargerContexte(){Pile::donnerInstance()>>l2;
-                           Pile::donnerInstance()>>l1;
-                          OperationManager::donnerInstance().add(l1);
-                          OperationManager::donnerInstance().add(l2);}
-
-    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
-                         if(l2)  Pile::donnerInstance()<<*l2;}
-
-    OperateurBinaire(){}
-};
-
-class OperateurUnaire  : public OperateurPile{
-protected:
-   Litterale* l1;
-public:
-   void chargerContexte(){Pile::donnerInstance()>>l1;
-                         OperationManager::donnerInstance().add(l1);}
-
-   void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
-   OperateurUnaire(){}
 };
 
 
 
 // empile une nouvelle littérale identique à celle du sommet de la pile.
-class OperateurDUP : public OperateurUnaire{
+class OperateurDUP : public OperateurUnaire, public OperateurPile{
 public:
-   void traitementOperateur(){Litterale* l2= l1->getCopy();
+   Litterale* traitementOperateur(){Litterale* l2= l1->getCopy();
                               Pile::donnerInstance()<<*l1;
                               Pile::donnerInstance()<<*l2;
+                              return nullptr;
                              }
 
    OperateurDUP():OperateurUnaire(){}
@@ -72,9 +31,10 @@ public:
 };
 
 //dépile la littérale au sommet de la pile.
-class OperateurDROP : public OperateurUnaire{
+class OperateurDROP : public OperateurUnaire, public OperateurPile{
 public:
-   void traitementOperateur(){delete l1;}
+   Litterale* traitementOperateur(){delete l1;
+                                     return nullptr;}
 
    OperateurDROP():OperateurUnaire(){}
 
@@ -83,9 +43,10 @@ public:
 };
 
 //intervertit les deux derniers éléments empilés dans la pile.
-class OperateurSWAP : public OperateurBinaire{
+class OperateurSWAP : public OperateurBinaire, public OperateurPile{
 public:
-   void traitementOperateur(){Pile::donnerInstance()<<*l2; Pile::donnerInstance()<<*l1;}
+   Litterale* traitementOperateur(){Pile::donnerInstance()<<*l2; Pile::donnerInstance()<<*l1;
+                                    return nullptr;}
 
    OperateurSWAP():OperateurBinaire(){}
 
@@ -96,7 +57,8 @@ public:
 class OperateurUNDO : public OperateurPile{
 public:
 
-    void traitementOperateur(){Pile::donnerInstance().UNDO();}
+    Litterale* traitementOperateur(){Pile::donnerInstance().UNDO();
+                                     return nullptr;}
     void chargerContexte(){}
 
     void resetContexte(){}
@@ -110,7 +72,8 @@ public:
 class OperateurREDO : public OperateurPile{
 public:
 
-    void traitementOperateur(){Pile::donnerInstance().REDO();}
+    Litterale* traitementOperateur(){Pile::donnerInstance().REDO();
+                                     return nullptr;}
     void chargerContexte(){}
 
     void resetContexte(){}
@@ -124,7 +87,8 @@ public:
 class OperateurCLEAR : public OperateurPile{
 public:
 
-    void traitementOperateur(){Pile::donnerInstance().viderPile();}
+    Litterale* traitementOperateur(){Pile::donnerInstance().viderPile();
+                                     return nullptr;}
     void chargerContexte(){}
 
     void resetContexte(){}
@@ -137,8 +101,9 @@ public:
 class OperateurLASTOP: public Operateur{
 public:
 
-    void traitementOperateur(){Operateur* lastop =OperationManager::donnerInstance().getLastOp();
-                               lastop->operation();}
+    Litterale* traitementOperateur(){Operateur* lastop =OperationManager::donnerInstance().getLastOp();
+                               lastop->operation();
+                                     return nullptr;}
     void chargerContexte(){}
 
     void resetContexte(){}
@@ -165,7 +130,7 @@ public:
 class OperateurLASTARGS: public Operateur{
 public:
 
-    void traitementOperateur(){
+    Litterale* traitementOperateur(){
         std::vector<Litterale*>::const_iterator it1= OperationManager::donnerInstance().getLastLitsBegin();
 
         std::vector<Litterale*>::const_iterator it2= OperationManager::donnerInstance().getLastLitsEnd();
@@ -173,7 +138,7 @@ public:
             Pile::donnerInstance()<<*(*it1);
             it1++;
         }while(it1!=it2);
-
+         return nullptr;
     }
     void chargerContexte(){}
 

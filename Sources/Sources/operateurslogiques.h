@@ -15,7 +15,7 @@
 
 namespace logique{
 
-class OperateurLogique : public Operateur
+class OperateurLogique : public virtual Operateur
 {
 public:
     virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
@@ -39,35 +39,9 @@ public:
 };
 
 
-class OperateurBinaire : public OperateurLogique{
- protected:
-    Litterale* l1;
-    Litterale* l2;
-public:
-    void chargerContexte(){Pile::donnerInstance()>>l2;
-                           Pile::donnerInstance()>>l1;
-                          OperationManager::donnerInstance().add(l1);
-                          OperationManager::donnerInstance().add(l2);}
-
-    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
-                         if(l2)  Pile::donnerInstance()<<*l2;}
-    OperateurBinaire(){}
-    OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
-};
-
-class OperateurUnaire  : public OperateurLogique{
-protected:
-   Litterale* l1;
-public:
-   void chargerContexte(){Pile::donnerInstance()>>l1;
-                         OperationManager::donnerInstance().add(l1);}
-    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
-   OperateurUnaire(){}
-   OperateurUnaire(Litterale* lit1):l1(lit1){}
-};
 
 
-class OperateurEgal : public OperateurBinaire{
+class OperateurEgal : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 
@@ -78,7 +52,7 @@ public:
 
 };
 
-class OperateurDiff : public OperateurBinaire{
+class OperateurDiff : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 
@@ -89,7 +63,7 @@ public:
 
 };
 
-class OperateurInfEgal : public OperateurBinaire{
+class OperateurInfEgal : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 
@@ -101,7 +75,7 @@ public:
 };
 
 
-class OperateurSupEgal : public OperateurBinaire{
+class OperateurSupEgal : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 
@@ -112,7 +86,7 @@ public:
 
 };
 
-class OperateurSup : public OperateurBinaire{
+class OperateurSup : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 
@@ -124,7 +98,7 @@ public:
 };
 
 
-class OperateurInf: public OperateurBinaire{
+class OperateurInf: public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
 public:
    Litterale* traitementOperateur();
 
@@ -136,7 +110,7 @@ public:
 };
 
 
-class OperateurAND: public OperateurBinaire{
+class OperateurAND: public OperateurBinaire, public OperateurLogique,public OperateurPrefixe{
 public:
    Litterale* traitementOperateur();
 
@@ -147,7 +121,7 @@ public:
 
 };
 
-class OperateurOR: public OperateurBinaire{
+class OperateurOR: public OperateurBinaire, public OperateurLogique,public OperateurPrefixe{
 public:
    Litterale* traitementOperateur();
 
@@ -158,7 +132,7 @@ public:
 
 };
 
-class OperateurNOT: public OperateurBinaire{
+class OperateurNOT: public OperateurBinaire, public OperateurLogique,public OperateurPrefixe{
 public:
    Litterale* traitementOperateur();
 

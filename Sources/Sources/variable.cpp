@@ -27,5 +27,5 @@ VariablesManager::~VariablesManager(){
 Litterale* VariablesManager::getVariable(const QString& nom){
     if(var_map.contains(nom))
     return (var_map.find(nom)).value()->getCopy();
-    throw LitteraleException("Variable or program does not exist");
+    throw LitteraleException("Variable ou programme non existant");
 }

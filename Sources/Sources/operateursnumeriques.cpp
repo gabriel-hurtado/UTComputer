@@ -135,6 +135,7 @@ Litterale* OperateurSoustraction::traitementOperateur(){
         OperateurAddition addTemp = OperateurAddition(li1,ng.traitementOperateur());
         return addTemp.traitementOperateur();
     }
+    throw OperateurException("Error in soustraction");
 }
 
 Litterale* OperateurMultiplication::traitementOperateur(){
