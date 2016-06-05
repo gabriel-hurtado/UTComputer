@@ -1,5 +1,6 @@
 #include "operateur.h"
 
+//fonctions de opération manager
 
 OperationManager* OperationManager::man= nullptr;
 Operateur* OperationManager::lastOp=nullptr;
@@ -11,7 +12,7 @@ OperationManager::~OperationManager(){
 }
 
 OperationManager& OperationManager::donnerInstance(){
-    if(man=nullptr)
+    if(man==nullptr)
         man= new OperationManager();
     return *man;
 }
@@ -27,7 +28,6 @@ void OperationManager::sauvegarder( Operateur* o){
 
 void OperationManager::add(Litterale* l){
     lastLits.push_back(l);
-    int x=2;
 }
 
 Operateur* OperationManager::getLastOp(){
@@ -50,4 +50,38 @@ std::vector<Litterale*>::const_iterator OperationManager::getLastLitsEnd(){
         return it;
     }
     throw OperateurException("Pas de littérales sauvegardées");
+}
+
+//fonctions de gestion des littérales expressions
+
+Litterale* OperateurInfixe::traitementExpression(){
+    return nullptr;
+}
+
+Litterale* OperateurPrefixe::traitementExpression(){
+  OperateurBinaire* bin = estdeType<OperateurBinaire>(this);
+  if(bin){
+      Expression* ex1 = estdeType<Expression>(bin->getl1());
+      Expression* ex2 = estdeType<Expression>(bin->getl2());
+      if(ex1 && ex2)
+      {
+
+          QString symbol= QString::fromStdString(bin->getSymbole());
+         //crete the new expression
+      }
+       else
+          return nullptr;
+  }
+  OperateurUnaire* un = estdeType<OperateurUnaire>(this);
+  if(un)
+  {
+      Expression* ex1 = estdeType<Expression>(bin->getl1());
+      if(ex1)
+      {
+          return nullptr; //do something
+      }
+       else
+          return nullptr;
+  }
+  return nullptr;
 }

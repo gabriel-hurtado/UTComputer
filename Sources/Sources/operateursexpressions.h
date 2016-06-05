@@ -28,9 +28,11 @@ transformé en littérale expression puis les règles précédentes sont appliqu
 
 
 class OperateurEVAL : public OperateurUnaire, public OperateurExpression{
+
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){ symbole="EVAL";}
    OperateurEVAL(){}
 
    OperateurEVAL(Litterale* l1):OperateurUnaire(l1){}
@@ -42,8 +44,11 @@ public:
 
 
 class OperateurSTO : public OperateurBinaire, public OperateurExpression{
+
 public:
    Litterale* traitementOperateur();
+
+   void initSymbole(){symbole="STO";}
 
    OperateurSTO(){}
 
@@ -61,6 +66,7 @@ class OperateurUserMade : public OperateurUnaire, public OperateurExpression{
 public:
    Litterale* traitementOperateur();
 
+   void initSymbole(){}
    OperateurUserMade(){}
    OperateurUserMade(Litterale* l1):OperateurUnaire(l1){}
 

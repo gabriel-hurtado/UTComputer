@@ -46,9 +46,12 @@ public:
 
 class Operateur : public Operande
 {
+protected:
+    std::string symbole;
 public:
 
-    Operateur(){}
+    virtual void initSymbole(){}
+    Operateur(){initSymbole();}
     virtual void chargerContexte() = 0;
     virtual void resetContexte() = 0;
     virtual Operateur* getCopy()=0;
@@ -79,6 +82,8 @@ public:
     virtual Litterale* traitementOperateur() =0;
     Litterale* traitementExpression(){return nullptr;}
 
+    const std::string getSymbole() const {return symbole;}
+
 
 };
 
@@ -100,6 +105,8 @@ public:
 
     OperateurBinaire(){}
     OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
+    Litterale* getl1(){return l1;}
+    Litterale* getl2(){return l1;}
 };
 
 class OperateurUnaire  : public virtual Operateur{
@@ -112,15 +119,31 @@ public:
    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
    OperateurUnaire(){}
    OperateurUnaire(Litterale* lit1):l1(lit1){}
+   Litterale* getl1(){return l1;}
 };
 
+/*• On peut également appliquer l’ensemble des opérateurs numériques et logiques s’écrivant sous forme de lettres
+sur une littérale expression. Le résultat de l’opérateur OP unaire appliqué à la littérale expression ’EXP’ est
+la littérale expression ’OP(EXP)’. Par exemple, la ligne de commande ’3+X’SIN a pour résultat SIN(3+X).
+Le résultat de l’opérateur OP binaire appliqué aux littérales expressions ’EXP’ et ’EXP2’ est la littérale
+expression ’OP(EXP1,EXP2)’.
+• Le résultat de l’opérateur binaire utilisant un symbole (+, -, /, *, $) appliqué entre la littérale expression
+’EXP1’ et la littérale expression ’EXP2’ renvoie un littérale expression composée des deux littérales initiales,
+chacune entre parenthèses, les deux littérales étant séparées par le symbole. Par exemple, on obtient ’(EXP1
+)+(EXP2)’ si l’opérateur est +. Les parenthèses autour des expressions EXP1 et/ou EXP2 sont omises dans
+le résultat si tous les opérateurs non parenthésés dans l’expression ont la même priorité que l’opérateur. Les
+opérateurs *, / ont une priorité supérieure à + et -. Les opérateurs *, / ont la même priorité entre eux. Les
+opérateurs + et - ont la même priorité entre eux. Les opérateurs numériques ont priorité sur les opérateurs
+logiques. Deux opérateurs qui ont la même priorité sont toujours évalués de la gauche vers la droite. Par
+exemple, la ligne de commande ’3+X’’9*Y’* a pour résultat ’(3+X)*9*Y’.*/
+
 class OperateurPrefixe : public virtual Operateur{
-   Litterale* traitementExpression(){return nullptr;}
+   Litterale* traitementExpression();
 
 };
 
 class OperateurInfixe : public virtual Operateur{
-    Litterale* traitementExpression(){return nullptr;}
+    Litterale* traitementExpression();
 };
 
 
