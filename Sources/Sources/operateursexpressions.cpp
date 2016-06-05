@@ -19,6 +19,13 @@ Expression* li1= estdeType<Expression>(l1);
      li1->evaluer();
         return nullptr;
  }
+
+/*Un programme peut aussi être déclenché par EVAL*/
+Programme* li2= estdeType<Programme>(l1);
+ if(li2){
+    li2->traitement();
+       return nullptr;
+}
     throw OperateurException("La littérale ne peut pas être évaluée");
 }
 
