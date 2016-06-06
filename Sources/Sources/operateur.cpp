@@ -1,4 +1,5 @@
 #include "operateur.h"
+#include "controleur.h"
 
 
 //fonctions de opération manager
@@ -74,7 +75,14 @@ Litterale* OperateurInfixe::traitementExpression(){
         }
         if(ex1 && ex2)
         {
-           QString newExp = "\"("+ex1->getExpressionNoBorders()+")"+symbol+"("+ex2->getExpressionNoBorders()+")"+"\"";
+           QString firstPart="("+ex1->getExpressionNoBorders()+")";
+           firstPart = Controleur::ParenthesisCleaner(firstPart,bin->getPriority());
+
+           QString secondPart="("+ex2->getExpressionNoBorders()+")";
+           secondPart = Controleur::ParenthesisCleaner(secondPart,bin->getPriority());
+
+           QString newExp = "\""+firstPart+symbol+secondPart+"\"";
+
            return new Expression(newExp);
         }
 
