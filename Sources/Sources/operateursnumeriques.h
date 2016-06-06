@@ -19,26 +19,8 @@ class OperateurNumerique : public virtual Operateur
 {
 public:
     virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
-    void operation(){
-                     try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
-                            chargerContexte(); Litterale* res=traitementOperateur();
-                           pushResultat(res);
-                            }
-                        catch(OperateurException op){
-                       resetContexte();
-                       throw OperateurException(op);
-                            }
-                         catch(PileException op){
-                        resetContexte();
-                        throw PileException(op);
-                            }
 
-                        catch(LitteraleException& op){
-                       resetContexte();
-                       throw LitteraleException(op);
-                           }
-                        }
-    OperateurNumerique(){}
+    OperateurNumerique(){setPriority(2);}
 
     virtual Litterale* traitementOperateur() =0;
 
@@ -64,8 +46,8 @@ public:
    Litterale* traitementOperateur();
 
    void initSymbole(){ symbole="+";}
-   OperateurAddition():OperateurBinaire(){}
-   OperateurAddition(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+   OperateurAddition():OperateurBinaire(){setPriority(3);}
+   OperateurAddition(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){setPriority(3);}
 
    OperateurAddition* getCopy() {return new OperateurAddition(*this);}
 };
@@ -76,8 +58,8 @@ public:
    Litterale* traitementOperateur();
 
    void initSymbole(){   symbole="-";}
-   OperateurSoustraction():OperateurBinaire(){}
-   OperateurSoustraction(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+   OperateurSoustraction():OperateurBinaire(){setPriority(3);}
+   OperateurSoustraction(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){setPriority(3);}
 
    OperateurSoustraction* getCopy() {return new OperateurSoustraction(*this);}
 };
@@ -88,8 +70,8 @@ public:
    Litterale* traitementOperateur();
 
    void initSymbole(){symbole="/";}
-   OperateurDivision():OperateurBinaire(){}
-   OperateurDivision(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+   OperateurDivision():OperateurBinaire(){setPriority(4);}
+   OperateurDivision(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){setPriority(4);}
    OperateurDivision* getCopy() {return new OperateurDivision(*this);}
 };
 
@@ -100,8 +82,8 @@ public:
    Litterale* traitementOperateur();
 
    void initSymbole(){ symbole="*";}
-   OperateurMultiplication():OperateurBinaire(){}
-   OperateurMultiplication(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+   OperateurMultiplication():OperateurBinaire(){setPriority(4);}
+   OperateurMultiplication(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){setPriority(4);}
 
    OperateurMultiplication* getCopy() {return new OperateurMultiplication(*this);}
 

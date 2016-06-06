@@ -32,8 +32,7 @@ class OperateurEVAL : public OperateurUnaire, public OperateurExpression{
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){ symbole="EVAL";}
-   OperateurEVAL(){}
+   OperateurEVAL():OperateurUnaire(){}
 
    OperateurEVAL(Litterale* l1):OperateurUnaire(l1){}
 
@@ -48,9 +47,7 @@ class OperateurSTO : public OperateurBinaire, public OperateurExpression{
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){symbole="STO";}
-
-   OperateurSTO(){}
+   OperateurSTO():OperateurBinaire(){}
 
    OperateurSTO(Litterale* l1, Litterale* l2):OperateurBinaire(l1,l2){}
 
@@ -66,8 +63,7 @@ class OperateurUserMade : public OperateurUnaire, public OperateurExpression{
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){}
-   OperateurUserMade(){}
+   OperateurUserMade():OperateurUnaire(){}
    OperateurUserMade(Litterale* l1):OperateurUnaire(l1){}
 
    OperateurUserMade* getCopy() {return new OperateurUserMade(*this);}

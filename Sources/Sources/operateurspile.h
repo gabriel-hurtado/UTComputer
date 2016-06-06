@@ -9,7 +9,7 @@ class OperateurPile : public virtual Operateur
 {
 public:
 
-    OperateurPile(){}
+    OperateurPile():Operateur(){}
 
 };
 
@@ -26,7 +26,6 @@ public:
                              }
 
 
-   void initSymbole(){symbole="DUP";}
    OperateurDUP():OperateurUnaire(){}
 
    OperateurDUP* getCopy() {return new OperateurDUP(*this);}
@@ -40,7 +39,6 @@ public:
    Litterale* traitementOperateur(){delete l1;
                                      return nullptr;}
 
-   void initSymbole(){symbole="DROP";}
    OperateurDROP():OperateurUnaire(){}
 
    OperateurDROP* getCopy() {return new OperateurDROP(*this);}
@@ -54,7 +52,6 @@ public:
    Litterale* traitementOperateur(){Pile::donnerInstance()<<*l2; Pile::donnerInstance()<<*l1;
                                     return nullptr;}
 
-   void initSymbole(){symbole="SWAP";}
    OperateurSWAP():OperateurBinaire(){}
 
    OperateurSWAP* getCopy() {return new OperateurSWAP(*this);}
@@ -68,12 +65,11 @@ public:
     Litterale* traitementOperateur(){Pile::donnerInstance().UNDO();
                                      return nullptr;}
 
-    void initSymbole(){symbole="UNDO";}
     void chargerContexte(){}
 
     void resetContexte(){}
 
-    OperateurUNDO(){}
+    OperateurUNDO():OperateurPile(){}
 
      OperateurUNDO* getCopy() {return new OperateurUNDO(*this);}
 };
@@ -86,12 +82,11 @@ public:
     Litterale* traitementOperateur(){Pile::donnerInstance().REDO();
                                      return nullptr;}
 
-    void initSymbole(){symbole="REDO";}
     void chargerContexte(){}
 
     void resetContexte(){}
 
-    OperateurREDO(){}
+    OperateurREDO():OperateurPile(){}
      OperateurREDO* getCopy() {return new OperateurREDO(*this);}
 
 };
@@ -104,12 +99,11 @@ public:
     Litterale* traitementOperateur(){Pile::donnerInstance().viderPile();
                                      return nullptr;}
 
-    void initSymbole(){symbole="CLEAR";}
     void chargerContexte(){}
 
     void resetContexte(){}
 
-    OperateurCLEAR(){}
+    OperateurCLEAR():OperateurPile(){}
      OperateurCLEAR* getCopy() {return new OperateurCLEAR(*this);}
 
 };
@@ -122,12 +116,11 @@ public:
                                lastop->operation();
                                      return nullptr;}
 
-    void initSymbole(){symbole="LASTOP";}
     void chargerContexte(){}
 
     void resetContexte(){}
 
-    OperateurLASTOP(){}
+    OperateurLASTOP():Operateur(){}
      OperateurLASTOP* getCopy() {return new OperateurLASTOP(*this);}
 
 
@@ -161,7 +154,6 @@ public:
          return nullptr;
     }
 
-    void initSymbole(){ symbole="LASTARGS";}
     void chargerContexte(){}
 
     void resetContexte(){}
@@ -180,7 +172,7 @@ public:
                         }
 
 
-    OperateurLASTARGS(){}
+    OperateurLASTARGS():Operateur(){}
      OperateurLASTARGS* getCopy() {return new OperateurLASTARGS(*this);}
 };
 

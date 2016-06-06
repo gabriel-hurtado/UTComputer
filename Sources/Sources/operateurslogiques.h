@@ -19,20 +19,8 @@ class OperateurLogique : public virtual Operateur
 {
 public:
     virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
-    void operation(){
-                     try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
-                        chargerContexte(); Litterale* res=traitementOperateur(); pushResultat(res);
-                            }
-                        catch(OperateurException op){
-                       resetContexte();
-                       throw OperateurException(op);
-                            }
-                         catch(PileException op){
-                        resetContexte();
-                        throw PileException(op);
-                            }
-                        }
-    OperateurLogique(){}
+
+    OperateurLogique(){setPriority(1);}
 
     virtual Litterale* traitementOperateur() =0;
 
@@ -46,7 +34,6 @@ class OperateurEgal : public OperateurBinaire, public OperateurLogique,public Op
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){ symbole="=";}
 
    OperateurEgal():OperateurBinaire(){}
    OperateurEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
@@ -61,8 +48,7 @@ public:
    Litterale* traitementOperateur();
 
 
-   void initSymbole(){ symbole="!=";}
-   OperateurDiff():OperateurBinaire(){}
+OperateurDiff():OperateurBinaire(){}
    OperateurDiff(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
    OperateurDiff* getCopy() {return new OperateurDiff(*this);}
@@ -74,7 +60,6 @@ class OperateurInfEgal : public OperateurBinaire, public OperateurLogique,public
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){symbole="<=";}
    OperateurInfEgal():OperateurBinaire(){}
    OperateurInfEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -88,7 +73,6 @@ class OperateurSupEgal : public OperateurBinaire, public OperateurLogique,public
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){ symbole=">=";}
    OperateurSupEgal():OperateurBinaire(){}
    OperateurSupEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -101,7 +85,6 @@ class OperateurSup : public OperateurBinaire, public OperateurLogique,public Ope
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){symbole=">";}
    OperateurSup():OperateurBinaire(){}
    OperateurSup(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -115,7 +98,6 @@ class OperateurInf: public OperateurBinaire, public OperateurLogique,public Oper
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){symbole="<";}
    OperateurInf():OperateurBinaire(){}
    OperateurInf(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -129,7 +111,6 @@ class OperateurAND: public OperateurBinaire, public OperateurLogique,public Oper
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){   symbole="AND";}
    OperateurAND():OperateurBinaire(){}
    OperateurAND(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -142,7 +123,6 @@ class OperateurOR: public OperateurBinaire, public OperateurLogique,public Opera
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){ symbole="OR";}
    OperateurOR():OperateurBinaire(){}
    OperateurOR(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
@@ -155,7 +135,6 @@ class OperateurNOT: public OperateurBinaire, public OperateurLogique,public Oper
 public:
    Litterale* traitementOperateur();
 
-   void initSymbole(){ symbole="NOT";}
    OperateurNOT():OperateurBinaire(){}
    OperateurNOT(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
