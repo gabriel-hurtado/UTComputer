@@ -1,5 +1,6 @@
 #ifndef H_UTILS
 #define H_UTILS
+#include <QString>
 int pgcd(int a, int b) {
     if(a<0)a=-a;
     if(b<0)b=-b;
@@ -15,6 +16,7 @@ int pgcd(int a, int b) {
     else
         return a;
 }
+
 
 
 #endif

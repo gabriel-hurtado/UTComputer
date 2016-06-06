@@ -58,6 +58,8 @@ public:
 
     static QString SpaceCleaner(QString);
 
+    static QString ParenthesisCleaner(QString s, unsigned int priority);
+
 };
 
 #endif // CONTROLEUR_H

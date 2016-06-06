@@ -192,6 +192,13 @@ public:
     LitteraleComplexe* evaluer() const;
     Litterale* getCopy() const;
     Litterale* getFromString(QString s){return new Expression(s);}
+    const QString getExpressionNoBorders() const{
+
+                                                    QString tmp = QString(value);
+                                                    tmp=tmp.remove(0,1);
+                                                    tmp=tmp.remove(tmp.length()-1,tmp.length());
+                                                    return tmp;
+                                                }
 };
 
 

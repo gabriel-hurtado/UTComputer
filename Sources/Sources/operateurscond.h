@@ -37,7 +37,7 @@ class OperateurIFT : public OperateurBinaire, public OperateurConditionnel, publ
 public:
    void traitementOperateur(); //a faire après avoir géré les expressions
 
-   void initSymbole(){symbole="IFT";}
+   void initSymbole() override{symbole="IFT";}
 
    OperateurIFT():OperateurBinaire(){}
 

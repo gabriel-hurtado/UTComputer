@@ -47,14 +47,15 @@ public:
 class Operateur : public Operande
 {
 protected:
-    std::string symbole;
+    QString symbole;
+    unsigned int priority=0;
 public:
 
-    virtual void initSymbole(){}
-    Operateur(){initSymbole();}
+    Operateur(){}
     virtual void chargerContexte() = 0;
     virtual void resetContexte() = 0;
     virtual Operateur* getCopy()=0;
+    void setSymbole(QString const symb){symbole=symb;}
     virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
     virtual void operation(){
                      try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
@@ -80,9 +81,13 @@ public:
                         }
 
     virtual Litterale* traitementOperateur() =0;
-    Litterale* traitementExpression(){return nullptr;}
+    virtual Litterale* traitementExpression(){return nullptr;}
 
-    const std::string getSymbole() const {return symbole;}
+    const QString getSymbole() const {return symbole;}
+
+    void setPriority(unsigned int p){priority=p;}
+
+    unsigned int getPriority()  const {return priority;}
 
 
 };
@@ -103,10 +108,10 @@ public:
     void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
                          if(l2)  Pile::donnerInstance()<<*l2;}
 
-    OperateurBinaire(){}
-    OperateurBinaire(Litterale* lit1, Litterale* lit2):l1(lit1),l2(lit2){}
+    OperateurBinaire():Operateur(){}
+    OperateurBinaire(Litterale* lit1, Litterale* lit2):Operateur(),l1(lit1),l2(lit2){}
     Litterale* getl1(){return l1;}
-    Litterale* getl2(){return l1;}
+    Litterale* getl2(){return l2;}
 };
 
 class OperateurUnaire  : public virtual Operateur{
@@ -117,8 +122,8 @@ public:
                          OperationManager::donnerInstance().add(l1);}
 
    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
-   OperateurUnaire(){}
-   OperateurUnaire(Litterale* lit1):l1(lit1){}
+   OperateurUnaire():Operateur(){}
+   OperateurUnaire(Litterale* lit1):Operateur(),l1(lit1){}
    Litterale* getl1(){return l1;}
 };
 
