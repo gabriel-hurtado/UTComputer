@@ -17,6 +17,7 @@ class Controleur
     static QMap<QString,QString> symbolMap;
     static QMap<QString,WordIdentifier*> interpretationMap;
 
+
     //----------Méthodes privés pour le singleton-------------//
 
     Controleur();

@@ -34,9 +34,6 @@ bool Controleur::commande(QString& s){
     if(word==""){return true;} //On a bien terminé tous les mots [CONDITION D'ARRET]
 
     else{
-            //Il reste du bouleau chef !
-
-
             /*
                 On tente de fabriquer une littérale a partir du mot, si on recoie nullptr alors ce n'en n'est pas une
             */
@@ -45,9 +42,16 @@ bool Controleur::commande(QString& s){
 
             /*
                 Idem, mais avec un opérateur. Si on reçoit null c'est que ce n'est pas un opérateur
+                Il faut bien faire attention à vérrouiler la pile pour éviter les sauvegardes
             */
+
             Operateur* op = OperateurFactory::donnerInstance().creer(word);
-            if(op){op->operation();}
+            Pile::donnerInstance().setAtomicLock(true);
+            if(op){
+
+                if(word!="UNDO" && word!= "REDO")Pile::donnerInstance().sauverPile();
+                op->operation();}
+            Pile::donnerInstance().setAtomicLock(false);
 
             /*
                 Dans le cas ou ce n'était ni l'un ni l'autre, alors l'execution du mot a échoué

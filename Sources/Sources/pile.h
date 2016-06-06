@@ -31,9 +31,11 @@ class Pile : public QObject{
     Q_OBJECT
 
     std::vector<Litterale*> emP;//emP stands for "embedded Pile"
-    static Pile* instancePile;
-    unsigned int nbLitteraletoAffiche;
 
+    static Pile* instancePile;
+    static bool atomic_lock; //When true, no save of the pile, when false it save
+
+    unsigned int nbLitteraletoAffiche;
     /*made those method in private so the user can't use them*/
     Pile():nbLitteraletoAffiche(10){}
     Pile(const Pile& p);
@@ -58,8 +60,11 @@ public:
     unsigned int getNbToAffiche(){return nbLitteraletoAffiche;}
     void setNbToAffiche(unsigned int i){nbLitteraletoAffiche=i;sendRegenerateVuePile();}
 
-
-
+    /*
+        Méthodes pour le verrou de sauvegarde
+    */
+    static void setAtomicLock(bool v){atomic_lock = v;}
+    MementoPile** savedMementoUNDO;
     /*
         Iterator sur la Pile
     */

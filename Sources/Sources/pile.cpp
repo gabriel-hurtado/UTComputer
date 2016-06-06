@@ -2,6 +2,12 @@
 
 /*---------Méthodes de Pile-----------*/
 Pile* Pile::instancePile = nullptr;
+
+/*
+    Verrou qui empeche la sauvegarde de la pile quand vrai
+*/
+bool Pile::atomic_lock = false;
+
 /*
    Donne l'instance courante de la pile
 */
@@ -27,7 +33,10 @@ void Pile::libererInstance(){
 */
 Pile& Pile::operator<<(Litterale& l){
     GerantPile::donnerInstance().clearREDO();
-    sauverPile();
+    //Si on a verrouillé la pile, pas de sauvegarde
+    if(!atomic_lock)
+        sauverPile();
+
     emP.push_back(&l);
     std::cout<<"PUSHED "+l.toString().toStdString()+"\n";
     modificationEtat();
@@ -36,7 +45,10 @@ Pile& Pile::operator<<(Litterale& l){
 
 Pile& Pile::operator>>(Litterale*& l){
    if(!emP.empty()){
-       sauverPile();
+       //Si on a verrouillé la pile, pas de sauvegarde
+       if(!atomic_lock)
+           sauverPile();
+
        l=emP.back();
        emP.pop_back();
        modificationEtat();
