@@ -3,6 +3,9 @@
 #include <QApplication>
 #include <QtWidgets>
 #include <QMainWindow>
+#include <QLabel>
+#include <QSound>
+#include <QMediaPlayer>
 #include "pile.h"
 #include "controleur.h"
 #include "operateur.h"
@@ -19,6 +22,7 @@ class MainWindow : public QMainWindow
     Pile& pile;
     Controleur& controleur;
     static MainWindow* InstanceMainWindow;
+    QMediaPlayer* soundBell;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -49,7 +53,14 @@ public slots:
         Quand le nombre d'éléménts visibles est modifié
     */
     void regenerateVuePile();
-
+    /*
+        Pour afficher/chacher le clavier
+    */
+    void hideKeyboard(int);
+    /*
+        Pour couper le son de la musique
+    */
+    void muteError(int);
 signals:
     /*
         pour envoyer des messages d'exception à la QLineEdit message du GUI.

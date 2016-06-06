@@ -1,3 +1,5 @@
+QT += core gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 HEADERS += \
     Sources/Sources/litterales.h \
     Sources/Sources/operande.h \

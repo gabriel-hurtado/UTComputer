@@ -16,10 +16,12 @@ public:
     friend class MainWindow;
     explicit ParameterWindow(QWidget *parent = 0);
     ~ParameterWindow();
+signals :
+    void sendHideKeyboard(int);
+    void sendMuteError(int);
 
 private slots:
     void on_button_validate_clicked();
-
 private:
     Ui::ParameterWindow *ui;
 };

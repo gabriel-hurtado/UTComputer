@@ -1,13 +1,21 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow* MainWindow::InstanceMainWindow = nullptr;
 
+MainWindow* MainWindow::InstanceMainWindow = nullptr;
+/*
+    Constructeur de la MAINWINDOW
+        Initialisation de la vuePile
+        Initialisation du Player de Son
+        Création des connections entres signaux et slots
+
+*/
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     pile(Pile::donnerInstance()),
     controleur(Controleur::donnerInstance()),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    soundBell(new QMediaPlayer)
 
 {
     //On initialise la fenetre dans une ref static pour la connaitre dans les fenetres filles;
@@ -28,18 +36,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->vuePile->setRowCount(pile.getNbToAffiche());//initialise le nombre de ligne de la vue
     ui->vuePile->setColumnCount(1);// Idem avec les colonnes
 
-    QStringList liste;
-    for(unsigned int i=1; pile.getNbToAffiche()>=i; i++){
-        QString str = QString::number(i);
-        str+=" :";
-        liste<<str;
-    }
-    ui->vuePile->setVerticalHeaderLabels(liste);
-
     //Allocation des éléments du QtableWIdget
     for(unsigned int i=0;pile.getNbToAffiche()>i;i++)
         ui->vuePile->setItem(i,0,new QTableWidgetItem(""));
 
+    /*
+        On initialise le son
+    */
+    soundBell->setMedia(QUrl::fromLocalFile(QFileInfo("bell.wav").absoluteFilePath()));
+    soundBell->setVolume(50);
+
+    /*
+        Création des connexions
+    */
     connect(ui->commande,SIGNAL(returnPressed()),this,SLOT(getNextCommande()));
     connect(&pile,SIGNAL(modificationEtat()),this,SLOT(refreshVuePile()));
     connect(this,SIGNAL(SendException(QString)),ui->message,SLOT(setText(QString)));
@@ -58,6 +67,11 @@ MainWindow::~MainWindow()
     Méthodes
 */
    const MainWindow* MainWindow::getInstanceMainWindow(){return InstanceMainWindow;}
+
+
+
+
+
 
 
 /*
@@ -87,12 +101,15 @@ void MainWindow::getNextCommande(QString _fromButton){
         ui->commande->clear();
     }
     catch(LitteraleException& e){
+        soundBell->play();
         SendException("Litterale :"+e.getInfo());
     }
     catch(OperateurException& e){
+        soundBell->play();
         SendException("Operateur :"+e.getInfo());
     }
     catch(PileException & e){
+        soundBell->play();
         SendException("Pile :"+e.getInfo());
     }
 }
@@ -109,12 +126,31 @@ void MainWindow::closeParameterWindow(){
 }
 
 void MainWindow::regenerateVuePile(){
-    ui->vuePile->removeColumn(0);
-    for(int i=pile.getNbToAffiche()-1;i>=0;i--)
+    for(int i=0;ui->vuePile->rowCount()>i;i++)
+        delete ui->vuePile->item(i,0);
+
+
+    ui->vuePile->setRowCount(pile.getNbToAffiche());
+    for(unsigned int i=0;pile.getNbToAffiche()>i;i++)
         ui->vuePile->setItem(i,0,new QTableWidgetItem(""));
-    unsigned int k = ui->vuePile->rowCount();
+
     refreshVuePile();
 }
+
+void MainWindow::hideKeyboard(int i){
+    if(i)
+        ui->clavierCliquable->hide();
+    else
+        ui->clavierCliquable->show();
+}
+
+void MainWindow::muteError(int i){
+    if(i)
+        soundBell->setMuted(true);
+    else
+        soundBell->setMuted(false);
+}
+
 
 
 /*Linkage des boutons*/
