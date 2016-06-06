@@ -131,7 +131,7 @@ public:
      OperateurLASTOP* getCopy() {return new OperateurLASTOP(*this);}
 
 
-     void operation(){
+     void  operation() override{
                       try{chargerContexte(); traitementOperateur();
                             }
                          catch(OperateurException op){
@@ -166,7 +166,7 @@ public:
 
     void resetContexte(){}
 
-    void operation(){
+    void operation() override{
                      try{chargerContexte(); traitementOperateur(); OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
                         }
                         catch(OperateurException op){

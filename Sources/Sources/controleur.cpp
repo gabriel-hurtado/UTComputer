@@ -56,11 +56,11 @@ bool Controleur::commande(QString& s){
         }
         //Dans le cas ou la commande précédente
         catch(LitteraleException& e){
-            Pile::donnerInstance().UNDO();
+           // Pile::donnerInstance().UNDO();
             throw e;
         }
         catch(OperateurException& e){
-            Pile::donnerInstance().UNDO();
+           // Pile::donnerInstance().UNDO();
             throw e;
         }
    }

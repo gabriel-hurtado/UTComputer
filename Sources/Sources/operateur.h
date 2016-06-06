@@ -56,7 +56,7 @@ public:
     virtual void resetContexte() = 0;
     virtual Operateur* getCopy()=0;
     virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
-    void operation(){
+    virtual void operation(){
                      try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
                             chargerContexte();Litterale* resExp = traitementExpression();
                             Litterale* res;
