@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "pile.h"
 
 
 MainWindow* MainWindow::InstanceMainWindow = nullptr;
@@ -57,6 +58,30 @@ MainWindow::MainWindow(QWidget *parent) :
     //Pour regenerer la vue de la pile
     connect(&pile,SIGNAL(sendRegenerateVuePile()),this,SLOT(regenerateVuePile()));
 
+
+   //Chargement des options
+        QSettings settings("CosteHurtado", "UTComputer");
+
+        int nb_items = settings.value("nb_item_affiche", 10).toInt();
+        Pile::donnerInstance().setNbToAffiche(nb_items);
+        settings.beginGroup( "Programme" );
+        QStringList groupProgs = settings.childGroups();
+        settings.endGroup();
+        /** TODO: debug **/
+        for(int child = 0; child != groupProgs.size(); ++child) {
+                QString progName = groupProgs.at(child);
+                QString progInst = settings.value("Programme/"+progName).toString();
+                VariablesManager::enregistrer(progName,new Programme(progInst));
+            }
+        settings.beginGroup( "Variable" );
+        QStringList groupVars = settings.childGroups();
+        settings.endGroup();
+        for(int child = 0; child != groupVars.size(); ++child) {
+                QString varName = groupVars.at(child);
+                QString varValue = settings.value("Variables/"+varName).toString();
+                //VariablesManager::enregistrer(progName,new Litterale(progInst));
+            }
+
 }
 
 MainWindow::~MainWindow()
@@ -68,8 +93,27 @@ MainWindow::~MainWindow()
 */
    const MainWindow* MainWindow::getInstanceMainWindow(){return InstanceMainWindow;}
 
+   //Settings saver
 
-
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    QSettings settings("CosteHurtado", "UTComputer");
+    //save here the other settings
+    settings.setValue("nb_item_affiche", Pile::donnerInstance().getNbToAffiche());
+    QMap<QString, Litterale*>::iterator begin;
+    QMap<QString, Litterale*>::iterator end=VariablesManager::getVariablesEnd();
+    for(begin=VariablesManager::getVariablesBegin();begin!=end;begin++){
+        const QString name=begin.key();
+        Programme* p =estdeType<Programme>(begin.value());
+        if(p){
+            settings.setValue("Programme/"+name, p->getProgramme());
+        }
+        else{
+            settings.setValue("Variable/"+name, begin.value()->toString());
+        }
+    }
+       event->accept();
+}
 
 
 
