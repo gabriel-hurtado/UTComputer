@@ -145,9 +145,9 @@ void MainWindow::regenerateVuePile(){
 
 void MainWindow::hideKeyboard(int i){
     if(i)
-        ui->clavierCliquable->hide();
+        ui->clavierCliquable->setEnabled(false);
     else
-        ui->clavierCliquable->show();
+        ui->clavierCliquable->setEnabled(true);
 }
 
 void MainWindow::muteError(int i){
