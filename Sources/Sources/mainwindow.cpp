@@ -86,8 +86,12 @@ void MainWindow::refreshVuePile(){
 
     for(Pile::iterator it=pile.begin();it!=pile.end() && nb<pile.getNbToAffiche();++it,++nb)
         ui->vuePile->item(nb,0)->setText((*it).toString());
+
+    //FOR DEBUG
     pile.voirPile();
+
     std::cout<<std::endl;
+    GerantPile::donnerInstance().seeUNDOList();
 }
 
 void MainWindow::getNextCommande(QString _fromButton){
@@ -96,8 +100,10 @@ void MainWindow::getNextCommande(QString _fromButton){
     try{
         QString& sent(_fromCommand);
         sent+=_fromButton;
-        if(!controleur.commande(sent))
-            throw LitteraleException("Le mot "+ sent+" n'as pas été reconnu");
+        if(!controleur.commande(sent)){
+            ui->commande->setText(Controleur::SpaceCleaner(sent));
+            throw LitteraleException("Le mot "+ Controleur::donnerInstance().firstWord(sent)+" n'as pas été reconnu");
+        }
         ui->commande->clear();
     }
     catch(LitteraleException& e){

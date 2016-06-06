@@ -36,6 +36,7 @@ Pile& Pile::operator<<(Litterale& l){
 
 Pile& Pile::operator>>(Litterale*& l){
    if(!emP.empty()){
+       sauverPile();
        l=emP.back();
        emP.pop_back();
        modificationEtat();
@@ -229,3 +230,13 @@ void GerantPile::clearREDO(){
     nombreDeMementoREDO=0;
 
 }
+
+void GerantPile::seeUNDOList(){
+    for(unsigned int i=0;i<nombreDeMementoUNDO;i++){
+        std::cout<<"Memento UNDO n°"<<i<<std::endl;
+        for(Litterale* n: savedMementoUNDO[i]->saved_emP)
+            std::cout<<n->toString().toStdString()<<std::endl;
+    }
+}
+
+void GerantPile::seeREDOList(){}

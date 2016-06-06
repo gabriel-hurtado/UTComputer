@@ -55,6 +55,7 @@ public:
     //static void enregistrerSymbole(QString,QString rtok ="");
     static void enregistrerSymbole(QString,QString rtok ="", WordIdentifier* W = new WordIdentifier);
 
+    static QString SpaceCleaner(QString);
 
 };
 

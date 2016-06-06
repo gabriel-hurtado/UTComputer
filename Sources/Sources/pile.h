@@ -120,6 +120,8 @@ public:
     void UNDO();
     void REDO();
     void clearREDO();
+    void seeUNDOList();
+    void seeREDOList();
 
 };
 #endif // PILE_H

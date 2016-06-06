@@ -31,39 +31,42 @@ bool Controleur::commande(QString& s){
     // On extraie le mot que l'on veut
     QString word = firstWord(s);
 
-    if(word==""){return true;} //On a bien terminé tous les mots
-    /*if(word=="EVAL"){
-        Litterale* e;
-        Pile::donnerInstance()>>e;
-        e->traitement();
-        return true;
-    }
-    */
+    if(word==""){return true;} //On a bien terminé tous les mots [CONDITION D'ARRET]
+
     else{
-        try{
             //Il reste du bouleau chef !
-            s=s.remove(0,(s.indexOf(word)+word.length())); // On enlève notre mot juste prélevé de la string
+
+
+            /*
+                On tente de fabriquer une littérale a partir du mot, si on recoie nullptr alors ce n'en n'est pas une
+            */
             Litterale* l = LitteraleFactory::donnerInstance().creerRPNLitterale(word);
             if(l){Pile::donnerInstance()<<*l;}
+
+            /*
+                Idem, mais avec un opérateur. Si on reçoit null c'est que ce n'est pas un opérateur
+            */
             Operateur* op = OperateurFactory::donnerInstance().creer(word);
             if(op){op->operation();}
-            if(!op && !l){s=word;return false;}
-            if(commande(s))//Si la commande suivante est valide on valide la notre
-            return true;
-            else            //Si la commande suivante n'est pas valide alors il faut nettoyer la notre aussi
-            Pile::donnerInstance().UNDO();
+
+            /*
+                Dans le cas ou ce n'était ni l'un ni l'autre, alors l'execution du mot a échoué
+            */
+            if(!op && !l){return false;}
+
+            /*
+                On peut en fin se permettre d'enlever le mot de la string vu que celui-ci à bien été executé.
+            */
+            s=s.remove(0,(s.indexOf(word)+word.length()));
+
+            /*
+                [APPEL RÉCURSSIF]
+                Sinon, si la commande suivante est valide, on valide la notre, la commande vide étant par défaut valide mais inutile
+            */
+            if(commande(s))
+                return true;
             return false;
         }
-        //Dans le cas ou la commande précédente
-        catch(LitteraleException& e){
-           // Pile::donnerInstance().UNDO();
-            throw e;
-        }
-        catch(OperateurException& e){
-           // Pile::donnerInstance().UNDO();
-            throw e;
-        }
-   }
 }
 
 
@@ -75,15 +78,20 @@ void Controleur::enregistrerSymbole(QString ltok, QString rtok, WordIdentifier* 
     }
 }
 
+QString Controleur::SpaceCleaner(QString s){
+    while(*(s.begin())==' '){
+        s=s.remove(0,1);
+        continue;
+    }
+    return s;
+}
+
 
 QString Controleur::firstWord(QString s){
 
 
     //On nettoie les espaces à gauche
-    while(*(s.begin())==' '){
-        s=s.remove(0,1);
-        continue;
-    }
+    s=SpaceCleaner(s);
 
     //On arrive ici quand il n'y a plus d'espace à gauche
 
