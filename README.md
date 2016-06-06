@@ -7,7 +7,7 @@ __TODO :__
   2. Interpreter des expressions JG 
   3. Afficher , modifier variables et programmes J 
   4. Enregistrer contexte G 
-  5. Debugguer UNDO J 
+  5. ~~Debugguer UNDO J~~ (normalement) 
   6. Rapport + Vodéi 
   
   
