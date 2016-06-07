@@ -152,6 +152,15 @@ bool Atome::isValidAtomeName(QString s){
 
 Litterale* Atome::getCopy() const{return new Atome(nom);}
 
+QString const Atome::toString() const {
+    try{
+        return nom;//VariablesManager::donnerInstance().getVariable(nom);
+    }
+    catch(LitteraleException& e){
+        return nom;
+    }
+}
+
 
 
 /*------------Définition des méthodes de la classe Expression------------*/

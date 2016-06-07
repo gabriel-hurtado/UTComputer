@@ -19,7 +19,8 @@ HEADERS += \
     Sources/Sources/litteraleexception.h \
     Sources/Sources/wordidentifier.h \
     Sources/Sources/parameterwindow.h \
-    Sources/Sources/gestionvariablewindow.h
+    Sources/Sources/gestionvariablewindow.h \
+    Sources/Sources/includers.h
     Sources/Sources/mainwindow.h
 
 SOURCES += \

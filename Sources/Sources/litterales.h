@@ -7,6 +7,7 @@
 #include "litteraleexception.h"
 
 
+
 /*------------Classes "Litterales" abstraites------------*/
 
 class Litterale : public Operande
@@ -175,7 +176,7 @@ class Atome : public LitteraleSimple{
 public:
     Atome(QString n);
     QString getNom() const {return nom;}
-    const QString toString() const {return getNom();}
+    const QString toString() const;
     Litterale* getCopy() const;
     static bool isValidAtomeName(QString s);
     Litterale* getFromString(QString s){return new Atome(s);}

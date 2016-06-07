@@ -6,12 +6,12 @@
 #include <QLabel>
 #include <QSound>
 #include <QMediaPlayer>
-#include "pile.h"
 #include "controleur.h"
 #include "operateur.h"
 #include "variable.h"
 #include "parameterwindow.h"
 #include "gestionvariablewindow.h"
+#include "pile.h"
 
 class gestionvariableWindow;
 

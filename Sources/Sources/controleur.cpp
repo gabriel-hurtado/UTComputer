@@ -48,8 +48,9 @@ bool Controleur::commande(QString& s){
             Operateur* op = OperateurFactory::donnerInstance().creer(word);
             Pile::donnerInstance().setAtomicLock(true);
             if(op){
-
+                //Seul morçeau de code statique [A CHANGER SI POSSIBLE]
                 if(word!="UNDO" && word!= "REDO")Pile::donnerInstance().sauverPile();
+
                 op->operation();}
             Pile::donnerInstance().setAtomicLock(false);
 
