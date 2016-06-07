@@ -15,12 +15,16 @@ class VariablesManager{
     ~VariablesManager();
     void operator=(VariablesManager& l);
     VariablesManager(VariablesManager& l);
+    static unsigned int nb_prog;
+    static unsigned int nb_var;
 
 public:
     friend class gestionvariableWindow;
     /*Méthodes du singleton*/
     static VariablesManager& donnerInstance();
     static void libererInstance();
+    static unsigned int getNbProg(){return nb_prog;}
+    static unsigned int getNbVar(){return nb_var;}
 
     //Pour enregistrer des nouvelles variables
     static void enregistrer(const QString& nom,Litterale* obj);
