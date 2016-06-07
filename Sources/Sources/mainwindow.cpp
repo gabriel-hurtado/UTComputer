@@ -66,6 +66,33 @@ MainWindow::MainWindow(QWidget *parent) :
 
         int nb_items = settings.value("nb_item_affiche", 10).toInt();
         Pile::donnerInstance().setNbToAffiche(nb_items);
+
+        //restaurer pile
+        int sizePile = settings.value("nb_item_pile",0).toInt();
+
+        settings.beginGroup( "Pile" );
+        QStringList groupPile = settings.childKeys();
+        int nb=0;
+
+        foreach (const QString &pileNb, groupPile)
+           {
+            if(nb!=sizePile){
+                QString pValue = settings.value(pileNb).toString();
+                Litterale* val= LitteraleFactory::donnerInstance().creerInfixLitterale(pValue);
+                if(val)
+                Pile::donnerInstance()<<*val;
+                else
+                    //expression ou programme a push ?
+
+                nb++;
+            }
+            else
+                break;
+        }
+
+        settings.endGroup();
+
+        //restaurer programmes et variables
         settings.beginGroup( "Programme" );
         QStringList groupProgs = settings.childKeys();
 
@@ -120,6 +147,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
             settings.setValue("Variable/"+name, begin.value()->toString());
         }
     }
+    Pile::iterator beginP;
+    int nb=0;
+    for(beginP=Pile::donnerInstance().begin();beginP!=Pile::donnerInstance().end();){
+        settings.setValue("Pile/"+QString::number(nb), (*beginP).toString());
+        ++beginP;
+        ++nb;
+    }
+    settings.setValue("nb_item_pile",QString::number(nb));
        event->accept();
 }
 
