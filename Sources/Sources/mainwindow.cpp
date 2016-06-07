@@ -108,7 +108,9 @@ MainWindow::MainWindow(QWidget *parent) :
         foreach (const QString &progName, groupProgs)
            {
               QString progInst = settings.value(progName).toString();
-               VariablesManager::enregistrer(progName,new Programme(progInst));
+              Programme* p=new Programme(progInst);
+              if(p)
+               VariablesManager::enregistrer(progName,p);
 
            }
 
@@ -120,6 +122,7 @@ MainWindow::MainWindow(QWidget *parent) :
            {
               QString varValue = settings.value(varName).toString();
               Litterale* val= LitteraleFactory::donnerInstance().creerInfixLitterale(varValue);
+              if(val)
                VariablesManager::enregistrer(varName,val);
 
            }
