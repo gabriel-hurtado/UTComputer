@@ -9,6 +9,7 @@
 #include "pile.h"
 #include "operateur.h"
 #include "controleur.h"
+#include "litteralefactory.h"
 
 MainWindow* MainWindow::InstanceMainWindow = nullptr;
 /*
