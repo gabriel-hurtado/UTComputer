@@ -90,9 +90,11 @@ MainWindow::MainWindow(QWidget *parent) :
                 Litterale* val= LitteraleFactory::donnerInstance().creerInfixLitterale(pValue);
                 if(val)
                 Pile::donnerInstance()<<*val;
-                else
-                    //expression ou programme a push ?
-
+                else{
+                     val= LitteraleFactory::donnerInstance().creerRPNLitterale(pValue);
+                    if(val)
+                        Pile::donnerInstance()<<*val;
+                }
                 nb++;
             }
             else
@@ -108,7 +110,9 @@ MainWindow::MainWindow(QWidget *parent) :
         foreach (const QString &progName, groupProgs)
            {
               QString progInst = settings.value(progName).toString();
-               VariablesManager::enregistrer(progName,new Programme(progInst));
+              Programme* p=new Programme(progInst);
+              if(p)
+               VariablesManager::enregistrer(progName,p);
 
            }
 
@@ -120,7 +124,13 @@ MainWindow::MainWindow(QWidget *parent) :
            {
               QString varValue = settings.value(varName).toString();
               Litterale* val= LitteraleFactory::donnerInstance().creerInfixLitterale(varValue);
+              if(val)
                VariablesManager::enregistrer(varName,val);
+              else{
+                   val= LitteraleFactory::donnerInstance().creerRPNLitterale(varValue);
+                  if(val)
+                      VariablesManager::enregistrer(varName,val);
+              }
 
            }
         settings.endGroup();
