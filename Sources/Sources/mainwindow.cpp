@@ -153,6 +153,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     //sauvegarde du contexte
     QSettings settings("CosteHurtado", "UTComputer");
+    settings.clear();
 
     settings.setValue("nb_item_affiche", Pile::donnerInstance().getNbToAffiche());
     QMap<QString, Litterale*>::iterator begin;

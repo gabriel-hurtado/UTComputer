@@ -80,10 +80,16 @@ bool Controleur::commande(QString& s){
 
 int skipParentheses(int start,QString s){
     int temp=start;
+
     if(s.mid(temp,1)=="("){
+        int nb=0;
         do{
+            if(s.mid(temp,1)!=")")
+                nb--;
+            if(s.mid(temp,1)!="(")
+                nb++;
             temp++;
-        }while(s.mid(temp,1)!=")" && temp<500);
+        }while(nb!=0 && temp<500);
         if(temp>=500)
             throw LitteraleException("Erreur de parenthèses");
         temp+=1;
@@ -130,9 +136,9 @@ QString Controleur::ParenthesisCleaner(QString s, unsigned int priority){
                 start+=i;
 
             }
-            start+=i;//début d'une parenthèse
-            if(s.mid(start,1)!="(") //sinon le début d'opérateur a fait échouer
-                 start-=1;
+            else
+            start+=i-1;
+
 
 
             /*On est a l'eventuel opérateur
