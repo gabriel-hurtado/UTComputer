@@ -90,9 +90,11 @@ MainWindow::MainWindow(QWidget *parent) :
                 Litterale* val= LitteraleFactory::donnerInstance().creerInfixLitterale(pValue);
                 if(val)
                 Pile::donnerInstance()<<*val;
-                else
-                    //expression ou programme a push ?
-
+                else{
+                     val= LitteraleFactory::donnerInstance().creerRPNLitterale(pValue);
+                    if(val)
+                        Pile::donnerInstance()<<*val;
+                }
                 nb++;
             }
             else
@@ -124,6 +126,11 @@ MainWindow::MainWindow(QWidget *parent) :
               Litterale* val= LitteraleFactory::donnerInstance().creerInfixLitterale(varValue);
               if(val)
                VariablesManager::enregistrer(varName,val);
+              else{
+                   val= LitteraleFactory::donnerInstance().creerRPNLitterale(varValue);
+                  if(val)
+                      VariablesManager::enregistrer(varName,val);
+              }
 
            }
         settings.endGroup();
