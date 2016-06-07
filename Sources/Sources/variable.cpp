@@ -52,3 +52,9 @@ QMap<QString, Litterale*>::iterator VariablesManager::getVariablesBegin(){
 QMap<QString, Litterale*>::iterator VariablesManager::getVariablesEnd(){
      return var_map.end();
 }
+
+void VariablesManager::clearVariables(){
+    var_map.clear();
+    nb_var=0;
+    nb_prog=0;
+}

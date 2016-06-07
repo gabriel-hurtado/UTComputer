@@ -33,6 +33,7 @@ public:
     static Litterale* getVariable(const QString& nom);
     static QMap<QString, Litterale*>::iterator getVariablesBegin();
     static QMap<QString, Litterale*>::iterator getVariablesEnd();
+    static void clearVariables();
 
 };
 

@@ -20,6 +20,9 @@ signals :
 
 private slots:
     void on_button_validate_clicked();
+
+    void on_button_variable_remove_clicked();
+
 private:
     Ui::ParameterWindow *ui;
 };

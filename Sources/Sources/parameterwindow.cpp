@@ -2,6 +2,7 @@
 #include "ui_parameterwindow.h"
 #include "mainwindow.h"
 #include "pile.h"
+#include "variable.h"
 
 ParameterWindow::ParameterWindow(QWidget *parent) :
     QWidget(parent),
@@ -55,4 +56,9 @@ void ParameterWindow::on_button_validate_clicked()
        sendMuteError(0);
    else
        sendMuteError(1);
+}
+
+void ParameterWindow::on_button_variable_remove_clicked()
+{
+    VariablesManager::clearVariables();
 }
