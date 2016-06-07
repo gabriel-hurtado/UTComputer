@@ -29,3 +29,11 @@ Litterale* VariablesManager::getVariable(const QString& nom){
     return (var_map.find(nom)).value()->getCopy();
     throw LitteraleException("Variable ou programme non existant");
 }
+
+QMap<QString, Litterale*>::iterator VariablesManager::getVariablesBegin(){
+    return var_map.begin();
+}
+
+QMap<QString, Litterale*>::iterator VariablesManager::getVariablesEnd(){
+     return var_map.end();
+}

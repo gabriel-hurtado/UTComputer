@@ -27,6 +27,9 @@ class MainWindow : public QMainWindow
     static MainWindow* InstanceMainWindow;
     QMediaPlayer* soundBell;
 
+protected:
+    void closeEvent(QCloseEvent *event);
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();

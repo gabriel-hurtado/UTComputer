@@ -26,8 +26,9 @@ public:
     static void enregistrer(const QString& nom,Litterale* obj);
     static void supprimer(const QString& nom);
     static Litterale* getVariable(const QString& nom);
+    static QMap<QString, Litterale*>::iterator getVariablesBegin();
+    static QMap<QString, Litterale*>::iterator getVariablesEnd();
 
-    //
 };
 
 #endif // VARIABLE_H
