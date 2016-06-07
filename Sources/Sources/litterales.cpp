@@ -3,6 +3,7 @@
 #include "litteraleexception.h"
 #include "operateurfactory.h"
 #include "controleur.h"
+#include <QVector>
 
 /*Définition des méthodes de la classe Litterale*/
 Litterale* Litterale::traitement(){return nullptr;}
@@ -179,9 +180,131 @@ QString const Atome::toString() const {
 
 /*------------Définition des méthodes de la classe Expression------------*/
 
-LitteraleComplexe* Expression::evaluer() const{ return nullptr;} /*utile pour EVAL, on prend la QString, on la parse de manière infixe, et on esaaye de trouver la valeur numérique.
-                                                                  ne pas hésiter a lancer des exceptions si un atome référence un programme ou si un atome ne correspond pas au
-                                                                    nom d'une variable*/
+/*utile pour EVAL, on prend la QString, on la parse de manière infixe, et on esaaye de trouver la valeur numérique.
+ne pas hésiter a lancer des exceptions si un atome référence un programme ou si un atome ne correspond pas au
+nom d'une variable
+!!n'utilise pas la pile*/
+
+//donne l'indice de début de la parenthèse la plus profonde
+int indexOfDeepestParentheses(QString s){
+    int temp=0;
+     int ouvert=0;
+     QVector<bool> ok(30,true);
+
+        int maxProf=0;
+        do{
+
+            if(s.mid(temp,1)=="("){
+               maxProf=temp;
+               ok[ouvert]=false;
+               ouvert++;
+            }
+            else if(s.mid(temp,1)==")"){
+                ouvert--;
+                ok[ouvert]=true;
+
+           }
+            temp++;
+        }while(temp<s.length());
+
+        foreach (bool val, ok) {
+            if(!val){
+                throw LitteraleException("Parenthésage incorrect");
+            }
+        }
+
+    return maxProf;
+}
+
+/* PEUT SERVIR ?
+
+QString Controleur::ParenthesisCleaner(QString s, unsigned int priority){
+    //  s="(5+8+9-7)" ici avoir d'une manière ou d'une autre la première littérale dans word
+
+
+    int start =1;
+
+     int i;
+    bool can_clear=true;
+     QString sub;
+
+     //cas litterale premiere
+
+    do{
+         start= skipParentheses(start,s);
+         Litterale* l ;
+
+         Operateur* op;
+         i=0;
+
+
+         if( s.length()-2<=start) break;
+            do{
+            i++;
+            sub= s.mid( start, i);
+            l = LitteraleFactory::donnerInstance().creerRPNLitterale(sub);
+            if( s.length()-2<=start) break;
+            }while(l);
+
+            op = OperateurFactory::donnerInstance().creer(sub);
+            if(op) //si c'était en fait un opérateur
+            {
+                if(priority!=op->getPriority()){
+                    can_clear=false;
+                    break;
+                }
+
+                start+=i;
+
+            }
+            else
+            start+=i-1;
+
+
+
+
+
+
+            start= skipParentheses(start,s);
+
+
+            i=0;
+
+            if( s.length()-2<=start) break;
+            do{
+            i++;
+            sub= s.mid( start, i);
+            op = OperateurFactory::donnerInstance().creer(sub);
+             if( s.length()-2<=start) break;
+            }while(!op && i<20);
+
+            if (i>=20) throw LitteraleException("Expression invalide !");
+
+            if(priority!=op->getPriority()){
+                can_clear=false;
+                break;
+            }
+
+            start=start+i;
+
+     }while(can_clear || s.length()-2<=start);
+
+     QString tmp = QString(s);
+    if(can_clear)
+    {
+        tmp=tmp.remove(0,1);
+        tmp=tmp.remove(tmp.length()-1,tmp.length());
+    }
+    return tmp;
+}
+*/
+
+
+//Pour le moment dépille la littérale si son parenthésage est correct
+LitteraleComplexe* Expression::evaluer() const{
+    int begin_at= indexOfDeepestParentheses(value);
+    return nullptr;
+}
 
 Litterale* Expression::getCopy() const{return new Expression(value);}
 
