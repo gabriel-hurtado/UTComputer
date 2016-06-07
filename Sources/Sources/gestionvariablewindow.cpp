@@ -16,7 +16,7 @@ gestionvariableWindow::gestionvariableWindow(QWidget *parent) :
     connect(ui->button_refresh,SIGNAL(clicked(bool)),this,SLOT(regenerateVueVariable()));
     connect(ui->button_quit,SIGNAL(clicked(bool)),MainWindow::getInstanceMainWindow(),SLOT(closeVariableWindow()));
     connect(ui->vueVariable,SIGNAL(cellChanged(int,int)),this,SLOT(modifierVariable(int,int)));
-
+    regenerateVueVariable();
 }
 
 gestionvariableWindow::~gestionvariableWindow()
@@ -33,9 +33,11 @@ void gestionvariableWindow::refreshVueVariable(){
     }
     unsigned int nb = 0;
 
-    for(QMap<QString,Litterale*>::iterator it=varMan->var_map.begin() ; it!=varMan->var_map.end() && nb<varMan->var_map.count();++it,++nb){
+    for(QMap<QString,Litterale*>::iterator it=varMan->getVariablesBegin() ; it!=varMan->getVariablesEnd();++it,++nb){
+       if(!estdeType<Programme>(it.value())){
         ui->vueVariable->item(nb,0)->setText(it.key());
         ui->vueVariable->item(nb,1)->setText(it.value()->toString());
+    }
     }
 }
 
@@ -46,8 +48,8 @@ void gestionvariableWindow::regenerateVueVariable(){
         delete ui->vueVariable->item(i,0);
 
 
-    ui->vueVariable->setRowCount(varMan->var_map.count());
-    for(unsigned int i=0;varMan->var_map.count()>i;i++){
+    ui->vueVariable->setRowCount(varMan->getNbVar());
+    for(unsigned int i=0;varMan->getNbVar()>i;i++){
         ui->vueVariable->setItem(i,0,new QTableWidgetItem(""));
         ui->vueVariable->setItem(i,1,new QTableWidgetItem(""));
     }

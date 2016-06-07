@@ -1,6 +1,8 @@
 #include "variable.h"
 
 
+unsigned int VariablesManager::nb_prog=0;
+unsigned int VariablesManager::nb_var=0;
 QMap<QString, Litterale*> VariablesManager::var_map= QMap<QString,Litterale*>();
 VariablesManager* VariablesManager::instance=nullptr;
 VariablesManager& VariablesManager::donnerInstance(){
@@ -13,10 +15,22 @@ void VariablesManager::libererInstance(){
 }
 
 void VariablesManager::enregistrer(const QString& nom,Litterale* obj){
+    if(estdeType<Programme>(obj))
+        nb_prog++;
+    else
+        nb_var++;
     var_map.insert(nom,obj);
 }
 void VariablesManager::supprimer(const QString& nom){
-    var_map.remove(nom);
+    Litterale* obj=var_map.find(nom).value();
+    if(obj){
+        if(estdeType<Programme>(obj))
+            nb_prog--;
+        else
+            nb_var--;
+
+        var_map.remove(nom);
+    }
 }
 
 VariablesManager::~VariablesManager(){
