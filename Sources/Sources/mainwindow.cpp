@@ -87,12 +87,12 @@ MainWindow::MainWindow(QWidget *parent) :
            {
             if(nb!=sizePile){
                 QString pValue = settings.value(pileNb).toString();
-                Litterale* val= LitteraleFactory::donnerInstance().creerInfixLitterale(pValue);
+                Litterale* val= LitteraleFactory::donnerInstance().creerRPNLitterale(pValue);
+
                 if(val)
                 Pile::donnerInstance()<<*val;
                 else{
-                     val= LitteraleFactory::donnerInstance().creerRPNLitterale(pValue);
-                    if(val)
+                     val= LitteraleFactory::donnerInstance().creerInfixLitterale(pValue);                    if(val)
                         Pile::donnerInstance()<<*val;
                 }
                 nb++;
@@ -123,11 +123,11 @@ MainWindow::MainWindow(QWidget *parent) :
         foreach (const QString &varName, groupVars)
            {
               QString varValue = settings.value(varName).toString();
-              Litterale* val= LitteraleFactory::donnerInstance().creerInfixLitterale(varValue);
-              if(val)
+              Litterale* val=  LitteraleFactory::donnerInstance().creerRPNLitterale(varValue);              if(val)
                VariablesManager::enregistrer(varName,val);
               else{
-                   val= LitteraleFactory::donnerInstance().creerRPNLitterale(varValue);
+                  val = LitteraleFactory::donnerInstance().creerInfixLitterale(varValue);
+
                   if(val)
                       VariablesManager::enregistrer(varName,val);
               }
@@ -151,8 +151,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    //sauvegarde du contexte
     QSettings settings("CosteHurtado", "UTComputer");
-    //save here the other settings
+
     settings.setValue("nb_item_affiche", Pile::donnerInstance().getNbToAffiche());
     QMap<QString, Litterale*>::iterator begin;
     QMap<QString, Litterale*>::iterator end=VariablesManager::getVariablesEnd();
