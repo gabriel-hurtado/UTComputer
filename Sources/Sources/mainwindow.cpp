@@ -54,6 +54,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this,SIGNAL(SendException(QString)),ui->message,SLOT(setText(QString)));
     //Pour afficher la fenetre de parametre
     connect(ui->actionEdition_des_param_tres,SIGNAL(triggered(bool)),this,SLOT(openParameterWindow()));
+    //Pour afficher la fenetre de gestion des variables
+    connect(ui->actionGestion_des_variables,SIGNAL(triggered(bool)),this,SLOT(openVariableWindow()));
     //Pour regenerer la vue de la pile
     connect(&pile,SIGNAL(sendRegenerateVuePile()),this,SLOT(regenerateVuePile()));
 
@@ -120,9 +122,18 @@ void MainWindow::getNextCommande(QString _fromButton){
     }
 }
 
+void MainWindow::openVariableWindow(){
+    variableIwindow = new gestionvariableWindow;
+    variableIwindow->show();
+}
+
+void MainWindow::closeVariableWindow(){
+    variableIwindow->close();
+    delete variableIwindow;
+}
+
 void MainWindow::openParameterWindow(){
     parameterIwindow = new ParameterWindow();
-    QString s;
     parameterIwindow->show();
 }
 

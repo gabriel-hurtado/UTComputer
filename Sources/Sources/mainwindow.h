@@ -11,6 +11,9 @@
 #include "operateur.h"
 #include "variable.h"
 #include "parameterwindow.h"
+#include "gestionvariablewindow.h"
+
+class gestionvariableWindow;
 
 namespace Ui {
 class MainWindow;
@@ -30,11 +33,8 @@ public:
     static const MainWindow* getInstanceMainWindow();
 public slots:
 
-    /*
-        Rafraichie la vue de la pile dans le GUI quand celle-ci est modifiée
-    */
-    void refreshVuePile();
 
+    //########################## GESTION DE LA COMMANDE ##########################//
     /*
         Informe du traitement de la commande contenue dans le QLineEdit commande.
         En supplément de la commande, on peut rajouter q (utile pour les boutons)
@@ -43,16 +43,36 @@ public slots:
     /*
         Pour ouvrir la fenetre de parametre
     */
+
+    //########################## GESTION DE LA FENETRE DE VARIABLES ##########################//
+    void openVariableWindow();
+    /*
+        Pour fermer la fenetre de parametre
+    */
+    void closeVariableWindow();
+
+    //########################## GESTION DE LA FENETRE DE PARAMETRES ##########################//
+    /*
+        Pour ouvrir la fenetre de parametre
+    */
     void openParameterWindow();
     /*
         Pour fermer la fenetre de parametre
     */
     void closeParameterWindow();
+
+    //########################## GESTION DE LA VUE DE LA PILE ##########################//
+    /*
+        Rafraichie la vue de la pile dans le GUI quand celle-ci est modifiée
+    */
+    void refreshVuePile();
     /*
         Pour regenerer la vue de la Pile
         Quand le nombre d'éléménts visibles est modifié
     */
     void regenerateVuePile();
+
+    //########################## GESTION DE SLOTS PROVENANT DE LA VUE DES PARAMETRES ##########################//
     /*
         Pour afficher/chacher le clavier
     */
@@ -61,6 +81,8 @@ public slots:
         Pour couper le son de la musique
     */
     void muteError(int);
+
+
 signals:
     /*
         pour envoyer des messages d'exception à la QLineEdit message du GUI.
@@ -137,6 +159,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     ParameterWindow* parameterIwindow; //I stand for instansciated
+    gestionvariableWindow* variableIwindow;
 
 
 };
