@@ -2,11 +2,8 @@
 #ifndef LITTERALEFACTORY_H
 #define LITTERALEFACTORY_H
 #include "litterales.h"
-#include <map>
-#include "pile.h"
-#include "litteraleexception.h"
-#include "wordidentifier.h"
-
+#include "wordidentifier.h"//Obligé pour le parametre par défaut
+#include <QMap>
 class LitteraleFactory
 {
     /*

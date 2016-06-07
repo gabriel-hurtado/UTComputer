@@ -1,6 +1,11 @@
 #include "operateursnumeriques.h"
+#include"pile.h"
+#include "litterales.h"
+#include "litteraleexception.h"
 
 namespace numerique {
+
+void OperateurNumerique::pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
 
 
 Litterale* OperateurAddition::traitementOperateur(){

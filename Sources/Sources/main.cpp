@@ -1,12 +1,15 @@
 
+
 #include "litteralefactory.h"
 #include "operateurfactory.h"
-#include "controleur.h"
+
 #include "mainwindow.h"
+
+#include "operateursnumeriques.h"
 #include "operateurslogiques.h"
 #include "operateursexpressions.h"
-#include "variable.h"
 #include "operateurspile.h"
+
 
 int main(int argc,char* argv[]) {
 

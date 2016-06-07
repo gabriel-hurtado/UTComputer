@@ -1,6 +1,5 @@
 #ifndef PARAMETERWINDOW_H
 #define PARAMETERWINDOW_H
-
 #include <QWidget>
 #include <QString>
 
@@ -13,7 +12,6 @@ class ParameterWindow : public QWidget
     Q_OBJECT
 
 public:
-    friend class MainWindow;
     explicit ParameterWindow(QWidget *parent = 0);
     ~ParameterWindow();
 signals :

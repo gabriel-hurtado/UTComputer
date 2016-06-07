@@ -1,5 +1,6 @@
 #include "variable.h"
-
+#include "litterales.h"
+#include "litteraleexception.h"
 
 unsigned int VariablesManager::nb_prog=0;
 unsigned int VariablesManager::nb_var=0;

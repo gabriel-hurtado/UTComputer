@@ -1,7 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "pile.h"
 
+#include "gestionvariablewindow.h"
+#include "parameterwindow.h"
+#include "litterales.h"
+#include "litteraleexception.h"
+#include "variable.h"
+#include "pile.h"
+#include "operateur.h"
+#include "controleur.h"
 
 MainWindow* MainWindow::InstanceMainWindow = nullptr;
 /*
@@ -15,8 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     pile(Pile::donnerInstance()),
     controleur(Controleur::donnerInstance()),
-    ui(new Ui::MainWindow),
-    soundBell(new QMediaPlayer)
+    soundBell(new QMediaPlayer),
+    ui(new Ui::MainWindow)
+
 
 {
     //On initialise la fenetre dans une ref static pour la connaitre dans les fenetres filles;

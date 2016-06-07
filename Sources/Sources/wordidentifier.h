@@ -1,6 +1,6 @@
 #ifndef WORIDENTIFIER_H
 #define WORIDENTIFIER_H
-#include "litteraleexception.h"
+#include "operande.h"
 
 /*
     Classe contenant la statégie d'identification à adopter

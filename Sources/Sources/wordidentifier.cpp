@@ -1,3 +1,4 @@
+#include "litteraleexception.h"
 #include "wordidentifier.h"
 
 void WordIdentifier::WordPosition(QString& s, SelectedPosition& select){

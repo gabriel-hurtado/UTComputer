@@ -1,11 +1,11 @@
-
-
 #include "operateurslogiques.h"
+#include"pile.h"
 #include "litterales.h"
 
 
 namespace logique{
 
+void OperateurLogique::pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
 
 Litterale* OperateurEgal::traitementOperateur(){
     LitteraleNumerique* li1=estdeType<LitteraleNumerique>(l1);

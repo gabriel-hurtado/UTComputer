@@ -19,8 +19,7 @@ HEADERS += \
     Sources/Sources/litteraleexception.h \
     Sources/Sources/wordidentifier.h \
     Sources/Sources/parameterwindow.h \
-    Sources/Sources/gestionvariablewindow.h \
-    Sources/Sources/includers.h
+    Sources/Sources/gestionvariablewindow.h
     Sources/Sources/mainwindow.h
 
 SOURCES += \
@@ -39,7 +38,8 @@ SOURCES += \
     Sources/Sources/operateursexpressions.cpp \
     Sources/Sources/wordidentifier.cpp \
     Sources/Sources/parameterwindow.cpp \
-    Sources/Sources/gestionvariablewindow.cpp
+    Sources/Sources/gestionvariablewindow.cpp \
+    Sources/Sources/utils.cpp
     Sources/Sources/mainwindow.cpp
 
 FORMS += \

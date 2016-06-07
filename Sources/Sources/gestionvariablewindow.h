@@ -3,8 +3,9 @@
 
 #include <QWidget>
 #include <QStandardItemModel>
-#include "variable.h"
-#include "mainwindow.h"
+
+//Forward declarations
+class VariablesManager;
 
 class VariablesManager;
 

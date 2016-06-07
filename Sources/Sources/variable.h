@@ -1,11 +1,12 @@
 #ifndef VARIABLE_H
 #define VARIABLE_H
-#include "litterales.h"
-#include "gestionvariablewindow.h"
-#include <map>
+#include <QMap>
+#include "operande.h"
 
 
-
+//Forward declarations
+class gestionvariableWindow;
+class Litterale;
 
 //gère aussi les programmes
 class VariablesManager{

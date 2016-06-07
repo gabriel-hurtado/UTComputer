@@ -1,10 +1,12 @@
 #ifndef H_OPERATEURFACTORY
 #define H_OPERATEURFACTORY
+#include <QMap>
+#include "operande.h"
+/*
 
-#include "operateur.h"
 #include "operateursnumeriques.h"
-#include <map>
-
+*/
+class Operateur;
 
 // !! A n'utiliser qu'avec la pile
 

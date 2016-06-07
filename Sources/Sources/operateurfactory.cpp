@@ -1,4 +1,5 @@
 #include "operateurfactory.h"
+#include "operateur.h"
 
 OperateurFactory* OperateurFactory::instanceOperateurFactory = nullptr;
 

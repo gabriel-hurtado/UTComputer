@@ -3,9 +3,8 @@
 #define OPERATEURSNUMERIQUES_H
 
 #include "operateur.h"
-#include"pile.h"
-#include "litterales.h"
-#include "litteraleexception.h"
+
+class Litterale;
 
 /*
  * Operation interact with stack, operator must be created withoud parameters
@@ -18,7 +17,7 @@ namespace numerique{
 class OperateurNumerique : public virtual Operateur
 {
 public:
-    virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
+    virtual void pushResultat(Litterale* res);
 
     OperateurNumerique(){setPriority(2);}
 

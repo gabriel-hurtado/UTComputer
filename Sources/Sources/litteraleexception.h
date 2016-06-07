@@ -1,6 +1,7 @@
 #ifndef LITTERALEEXCEPTION_H
 #define LITTERALEEXCEPTION_H
 #include "operande.h"
+#include <exception>
 /*
  Classe pour gérer les exceptions sur les littérales
  Ces messages sont utile pour notre GUI (?)

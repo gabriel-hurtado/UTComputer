@@ -3,8 +3,10 @@
 #ifndef H_LITTERALE
 #define H_LITTERALE
 #include "operande.h" //Pour savoir ce que sont des opérandes pour l'héritage
-#include "litteralefactory.h" //
-#include "litteraleexception.h"
+
+//Forward declarations
+class LitteraleFactory;
+
 
 
 
@@ -78,7 +80,7 @@ public:
     const QString toString() const {QString s; return s.setNum(getValeur());}
     LitteraleComplexe* neg(){Entier* res =getNumericCopy(); res->valeur=-res->valeur; return res;}
     Entier* getNumericCopy() const{return new Entier(*this);}
-    Litterale* getFromString(QString ){throw LitteraleException("Création d'entier depuis la factory"); return nullptr;}//Cas spécial
+    Litterale* getFromString(QString );//Cas spécial impossible normalement
 
 };
 
@@ -94,15 +96,7 @@ public:
     /*La partie entiere dit etre le second paramêtre pour avoir une valeur par défaut*/
     Reelle(double d):value(d){}
 
-    Reelle(const Entier& p,const Entier& m){
-        /*Un réel ne peut pas être construit avec une mantisse nulle*/
-        if(m.getValeur()==0){LitteraleException("Construction: Mantisse nulle !");}
-        else{value=p.getValeur();
-                double mantisse=(double)m.getValeur();
-               while(mantisse>=1)
-                mantisse=mantisse/10.0;
-                value+=mantisse;}
-    }
+    Reelle(const Entier& p,const Entier& m);
 
     Reelle(int x,int y=0):Reelle( Entier(x), Entier(y)){}
     virtual ~Reelle(){}

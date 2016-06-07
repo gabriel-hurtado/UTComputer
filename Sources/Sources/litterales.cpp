@@ -1,16 +1,25 @@
 #include "litterales.h"
-#include "utils.h"
-#include "operateursnumeriques.h"
+#include "litteralefactory.h"
+#include "litteraleexception.h"
 #include "operateurfactory.h"
 #include "controleur.h"
-#include <QTextStream>
-
 
 /*Définition des méthodes de la classe Litterale*/
 Litterale* Litterale::traitement(){return nullptr;}
 
 
 /*------------Définition des méthodes de la classe Réelle------------*/
+
+Reelle::Reelle(const Entier& p,const Entier& m){
+    /*Un réel ne peut pas être construit avec une mantisse nulle*/
+    if(m.getValeur()==0){LitteraleException("Construction: Mantisse nulle !");}
+    else{value=p.getValeur();
+            double mantisse=(double)m.getValeur();
+           while(mantisse>=1)
+            mantisse=mantisse/10.0;
+            value+=mantisse;}
+}
+
 
     /*Simplification retourne une référence sur litterale numerique allouée dynaiquement*/
 LitteraleNumerique& Reelle::Simplification(){
@@ -94,6 +103,11 @@ Litterale* Rationnel::getFromString(QString s){
 
 
 /*------------Définition des méthodes de la classe Entier------------*/
+Litterale* Entier::getFromString(QString ){
+    throw LitteraleException("Création d'entier depuis la factory");
+    return nullptr;
+}
+
 
 
 /*------------Définition des méthodes de la classe Complexe------------*/

@@ -1,6 +1,7 @@
 #include "parameterwindow.h"
 #include "ui_parameterwindow.h"
 #include "mainwindow.h"
+#include "pile.h"
 
 ParameterWindow::ParameterWindow(QWidget *parent) :
     QWidget(parent),
@@ -34,7 +35,7 @@ void ParameterWindow::on_button_validate_clicked()
     QString tmp = ui->nb_item_affiche->text();
     bool ok;
     int i = tmp.toInt(&ok);
-    if(ok && Pile::donnerInstance().getNbToAffiche()!=i && i>=0){
+    if(ok && Pile::donnerInstance().getNbToAffiche()!=static_cast<unsigned int>(i) && i>=0){
             Pile::donnerInstance().setNbToAffiche(i);
     }
 

@@ -1,6 +1,8 @@
 #include "litteralefactory.h"
 #include "controleur.h"
 #include "variable.h"
+#include "litteraleexception.h"
+
 
 LitteraleFactory* LitteraleFactory::instanceLitteraleFactory = nullptr;
 

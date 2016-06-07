@@ -2,7 +2,8 @@
 #define OPERATEURSPILE_H
 
 #include"operateur.h"
-#include<vector>
+#include "pile.h"
+
 namespace op_pile{
 
 class OperateurPile : public virtual Operateur

@@ -1,10 +1,8 @@
 #ifndef CONTROLEUR_H
 #define CONTROLEUR_H
-#include "pile.h"
-#include "litteralefactory.h"
-#include "operateur.h"
-#include "operateurfactory.h"
-#include "wordidentifier.h"
+#include <QMap>
+#include "operande.h"
+class WordIdentifier;
 
 
 class Controleur
@@ -54,7 +52,7 @@ public:
         Méthode pour enregistrer un symbole pour le WordFinder
     */
     //static void enregistrerSymbole(QString,QString rtok ="");
-    static void enregistrerSymbole(QString,QString rtok ="", WordIdentifier* W = new WordIdentifier);
+    static void enregistrerSymbole(QString,QString rtok ="", WordIdentifier* W = nullptr);
 
     static QString SpaceCleaner(QString);
 

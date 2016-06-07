@@ -1,10 +1,7 @@
 #ifndef OPERATEUR_H
 #define OPERATEUR_H
 #include"operande.h"
-
-#include"pile.h"
-#include<vector>
-
+#include <exception>
 /*
  Classe pour gérer les exceptions sur les opérateurs
  Ces messages sont utile pour notre GUI (?)
@@ -56,29 +53,8 @@ public:
     virtual void resetContexte() = 0;
     virtual Operateur* getCopy()=0;
     void setSymbole(QString const symb){symbole=symb;}
-    virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
-    virtual void operation(){
-                     try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
-                            chargerContexte();Litterale* resExp = traitementExpression();
-                            Litterale* res;
-                            if(!resExp) res =traitementOperateur();
-                            else   res=resExp;
-                           if(res) pushResultat(res);
-                            }
-                        catch(OperateurException op){
-                       resetContexte();
-                       throw OperateurException(op);
-                            }
-                         catch(PileException op){
-                        resetContexte();
-                        throw PileException(op);
-                            }
-
-                        catch(LitteraleException& op){
-                       resetContexte();
-                       throw LitteraleException(op);
-                           }
-                        }
+    virtual void pushResultat(Litterale* res);
+    virtual void operation();
 
     virtual Litterale* traitementOperateur() =0;
     virtual Litterale* traitementExpression(){return nullptr;}
@@ -88,8 +64,6 @@ public:
     void setPriority(unsigned int p){priority=p;}
 
     unsigned int getPriority()  const {return priority;}
-
-
 };
 
 
@@ -100,13 +74,9 @@ class OperateurBinaire : public virtual Operateur{
     Litterale* l1=nullptr;
     Litterale* l2=nullptr;
 public:
-    void chargerContexte(){Pile::donnerInstance()>>l2;
-                           Pile::donnerInstance()>>l1;
-                          OperationManager::donnerInstance().add(l1);
-                          OperationManager::donnerInstance().add(l2);}
+    void chargerContexte();
 
-    void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
-                         if(l2)  Pile::donnerInstance()<<*l2;}
+    void resetContexte();
 
     OperateurBinaire():Operateur(){}
     OperateurBinaire(Litterale* lit1, Litterale* lit2):Operateur(),l1(lit1),l2(lit2){}
@@ -118,10 +88,8 @@ class OperateurUnaire  : public virtual Operateur{
 protected:
    Litterale* l1=nullptr;
 public:
-   void chargerContexte(){Pile::donnerInstance()>>l1;
-                         OperationManager::donnerInstance().add(l1);}
-
-   void resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
+   void chargerContexte();
+   void resetContexte();
    OperateurUnaire():Operateur(){}
    OperateurUnaire(Litterale* lit1):Operateur(),l1(lit1){}
    Litterale* getl1(){return l1;}

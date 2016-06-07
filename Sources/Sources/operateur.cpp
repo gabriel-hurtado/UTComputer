@@ -1,6 +1,49 @@
 #include "operateur.h"
 #include "controleur.h"
+#include "litterales.h"
+#include "litteraleexception.h"
+#include"pile.h"
 
+// Définitions de la classe OperateurBinaire
+
+void OperateurBinaire::chargerContexte(){Pile::donnerInstance()>>l2;
+                       Pile::donnerInstance()>>l1;
+                      OperationManager::donnerInstance().add(l1);
+                      OperationManager::donnerInstance().add(l2);
+}
+void OperateurBinaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
+                     if(l2)  Pile::donnerInstance()<<*l2;}
+
+// Définitions de la classe Operateur
+
+void Operateur::pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
+void Operateur::operation(){
+                 try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
+                        chargerContexte();Litterale* resExp = traitementExpression();
+                        Litterale* res;
+                        if(!resExp) res =traitementOperateur();
+                        else   res=resExp;
+                        if(res) pushResultat(res);
+                    }
+                 catch(OperateurException op){
+                   resetContexte();
+                   throw OperateurException(op);
+                 }
+                 catch(PileException op){
+                   resetContexte();
+                   throw PileException(op);
+                 }
+                 catch(LitteraleException& op){
+                   resetContexte();
+                   throw LitteraleException(op);
+                 }
+}
+
+//Définitions de la classe OperateurUnaire
+void OperateurUnaire::chargerContexte(){Pile::donnerInstance()>>l1;
+                      OperationManager::donnerInstance().add(l1);}
+
+void OperateurUnaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
 
 //fonctions de opération manager
 

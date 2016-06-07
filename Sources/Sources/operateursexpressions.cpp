@@ -2,10 +2,9 @@
 #include "litterales.h"
 #include "variable.h"
 #include "operateurfactory.h"
+#include "pile.h"
 
 namespace expression {
-
-
 
 /* EVAL permet d’évaluer numériquement une littérale expression. Si elle comprend
 au moins un atome qui ne correspond pas au nom d’une variable, l’évaluation n’a aucune effet et
@@ -25,7 +24,7 @@ Programme* li2= estdeType<Programme>(l1);
  if(li2){
     li2->traitement();
        return nullptr;
-}
+ }
     throw OperateurException("La littérale ne peut pas être évaluée");
 }
 

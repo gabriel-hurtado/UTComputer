@@ -1,5 +1,8 @@
 #include "gestionvariablewindow.h"
 #include "ui_gestionvariablewindow.h"
+#include "litteralefactory.h"
+#include "variable.h"
+#include "mainwindow.h"
 
 gestionvariableWindow::gestionvariableWindow(QWidget *parent) :
     QWidget(parent),
@@ -27,7 +30,7 @@ gestionvariableWindow::~gestionvariableWindow()
 void gestionvariableWindow::refreshVueVariable(){
     //Rafraichir l'état de la vue des variables
 
-    for(unsigned int i=0; i< ui->vueVariable->rowCount();i++){
+    for(int i=0; i< ui->vueVariable->rowCount();i++){
         ui->vueVariable->item(i,0)->setText("");
         ui->vueVariable->item(i,1)->setText("");
     }

@@ -1,8 +1,11 @@
 #ifndef PILE_H
 #define PILE_H
-#include "litterales.h"
-#include <vector>
+#include "operande.h"
+#include <QObject>
 
+class QObject;
+
+class Litterale;
 
 class MementoPile;
 /*

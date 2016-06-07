@@ -3,6 +3,7 @@
 
 
 #include"operateur.h"
+
 namespace expression{
 
 class OperateurExpression : public virtual Operateur

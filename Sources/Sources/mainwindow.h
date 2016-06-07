@@ -4,16 +4,14 @@
 #include <QtWidgets>
 #include <QMainWindow>
 #include <QLabel>
-#include <QSound>
 #include <QMediaPlayer>
-#include "controleur.h"
-#include "operateur.h"
-#include "variable.h"
-#include "parameterwindow.h"
-#include "gestionvariablewindow.h"
-#include "pile.h"
 
+//Forward declarations
+class Pile;
 class gestionvariableWindow;
+class ParameterWindow;
+class Controleur;
+
 
 namespace Ui {
 class MainWindow;

@@ -2,10 +2,9 @@
 #define OPERATEURSLOGIQUES_H
 
 #include "operateur.h"
-#include "litterales.h"
 
-#include"pile.h"
-
+//Forward declarations
+class Litterale;
 
 /*
  * Operation interact with stack, operator must be created withoud parameters
@@ -18,16 +17,13 @@ namespace logique{
 class OperateurLogique : public virtual Operateur
 {
 public:
-    virtual void pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
+    virtual void pushResultat(Litterale* res);
 
     OperateurLogique(){setPriority(1);}
 
     virtual Litterale* traitementOperateur() =0;
 
 };
-
-
-
 
 class OperateurEgal : public OperateurBinaire, public OperateurLogique,public OperateurInfixe{
 

@@ -1,6 +1,10 @@
 #include "controleur.h"
-
-
+#include "pile.h"
+#include "litteralefactory.h"
+#include "operateurfactory.h"
+#include "operateur.h"
+#include "wordidentifier.h"
+#include "litteraleexception.h"
 
 Controleur* Controleur::instanceControleur=nullptr;
 

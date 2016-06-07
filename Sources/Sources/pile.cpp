@@ -1,4 +1,7 @@
 #include "pile.h"
+#include "litterales.h"
+#include "litteraleexception.h"
+
 
 /*---------Méthodes de Pile-----------*/
 Pile* Pile::instancePile = nullptr;
