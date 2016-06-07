@@ -36,10 +36,11 @@ void gestionvariableWindow::refreshVueVariable(){
     }
     unsigned int nb = 0;
 
-    for(QMap<QString,Litterale*>::iterator it=varMan->getVariablesBegin() ; it!=varMan->getVariablesEnd();++it,++nb){
+    for(QMap<QString,Litterale*>::iterator it=varMan->getVariablesBegin() ; it!=varMan->getVariablesEnd() && nb!=varMan->getNbVar();++it){
        if(!estdeType<Programme>(it.value())){
-        ui->vueVariable->item(nb,0)->setText(it.key());
-        ui->vueVariable->item(nb,1)->setText(it.value()->toString());
+        ++nb;
+        ui->vueVariable->item(nb-1,0)->setText(it.key());
+        ui->vueVariable->item(nb-1,1)->setText(it.value()->toString());
     }
     }
 }

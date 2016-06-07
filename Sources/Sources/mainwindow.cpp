@@ -74,23 +74,56 @@ MainWindow::MainWindow(QWidget *parent) :
 
         int nb_items = settings.value("nb_item_affiche", 10).toInt();
         Pile::donnerInstance().setNbToAffiche(nb_items);
+
+        //restaurer pile
+        int sizePile = settings.value("nb_item_pile",0).toInt();
+
+        settings.beginGroup( "Pile" );
+        QStringList groupPile = settings.childKeys();
+        int nb=0;
+
+        foreach (const QString &pileNb, groupPile)
+           {
+            if(nb!=sizePile){
+                QString pValue = settings.value(pileNb).toString();
+                Litterale* val= LitteraleFactory::donnerInstance().creerInfixLitterale(pValue);
+                if(val)
+                Pile::donnerInstance()<<*val;
+                else
+                    //expression ou programme a push ?
+
+                nb++;
+            }
+            else
+                break;
+        }
+
+        settings.endGroup();
+
+        //restaurer programmes et variables
         settings.beginGroup( "Programme" );
-        QStringList groupProgs = settings.childGroups();
+        QStringList groupProgs = settings.childKeys();
+
+        foreach (const QString &progName, groupProgs)
+           {
+              QString progInst = settings.value(progName).toString();
+               VariablesManager::enregistrer(progName,new Programme(progInst));
+
+           }
+
         settings.endGroup();
-        /** TODO: debug **/
-        for(int child = 0; child != groupProgs.size(); ++child) {
-                QString progName = groupProgs.at(child);
-                QString progInst = settings.value("Programme/"+progName).toString();
-                VariablesManager::enregistrer(progName,new Programme(progInst));
-            }
         settings.beginGroup( "Variable" );
-        QStringList groupVars = settings.childGroups();
+        QStringList groupVars = settings.childKeys();
+
+        foreach (const QString &varName, groupVars)
+           {
+              QString varValue = settings.value(varName).toString();
+              Litterale* val= LitteraleFactory::donnerInstance().creerInfixLitterale(varValue);
+               VariablesManager::enregistrer(varName,val);
+
+           }
         settings.endGroup();
-        for(int child = 0; child != groupVars.size(); ++child) {
-                QString varName = groupVars.at(child);
-                QString varValue = settings.value("Variables/"+varName).toString();
-                //VariablesManager::enregistrer(progName,new Litterale(progInst));
-            }
+
 
 }
 
@@ -122,6 +155,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
             settings.setValue("Variable/"+name, begin.value()->toString());
         }
     }
+    Pile::iterator beginP;
+    int nb=0;
+    for(beginP=Pile::donnerInstance().begin();beginP!=Pile::donnerInstance().end();){
+        settings.setValue("Pile/"+QString::number(nb), (*beginP).toString());
+        ++beginP;
+        ++nb;
+    }
+    settings.setValue("nb_item_pile",QString::number(nb));
        event->accept();
 }
 
