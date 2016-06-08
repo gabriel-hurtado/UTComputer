@@ -249,7 +249,7 @@ LitteraleComplexe* Expression::evaluer() const{
         begin_at= indexOfDeepestParentheses(newVal,hasPar);
 
     }
-    //newVal de la forme 2*8+3 (pas de parenthèses)
+    //newVal de la forme 2*8+3 (pas de parenthèses), plus qu'a l'interpréter
     return new Entier(1);
 }
 
