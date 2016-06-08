@@ -11,6 +11,9 @@
 #include "controleur.h"
 #include "litteralefactory.h"
 
+bool MainWindow::keyboard=true;
+bool MainWindow::sound=true;
+
 MainWindow* MainWindow::InstanceMainWindow = nullptr;
 /*
     Constructeur de la MAINWINDOW
@@ -78,6 +81,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
         //restaurer pile
         int sizePile = settings.value("nb_item_pile",0).toInt();
+
+
+        bool keyboardRestore= settings.value("keyboard", true).toBool();
+         bool soundRestore= settings.value("sound", true).toBool();
+
+         if(!keyboardRestore){
+             hideKeyboard(1);
+
+         }
+
+         if(!soundRestore){
+             muteError(1);
+         }
 
         settings.beginGroup( "Pile" );
         QStringList groupPile = settings.childKeys();
@@ -156,6 +172,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
     settings.clear();
 
     settings.setValue("nb_item_affiche", Pile::donnerInstance().getNbToAffiche());
+
+     settings.setValue("keyboard", keyboard );
+     settings.setValue("sound", sound);
     QMap<QString, Litterale*>::iterator begin;
     QMap<QString, Litterale*>::iterator end=VariablesManager::getVariablesEnd();
     for(begin=VariablesManager::getVariablesBegin();begin!=end;begin++){
@@ -261,17 +280,25 @@ void MainWindow::regenerateVuePile(){
 }
 
 void MainWindow::hideKeyboard(int i){
-    if(i)
+    if(i){
+
         ui->clavierCliquable->setEnabled(false);
+        keyboard=false;
+    }
     else
+    {
         ui->clavierCliquable->setEnabled(true);
+        keyboard=true;
+       }
 }
 
 void MainWindow::muteError(int i){
-    if(i)
+    if(i){
         soundBell->setMuted(true);
-    else
+        sound=false;}
+    else{
         soundBell->setMuted(false);
+        sound=true;}
 }
 
 

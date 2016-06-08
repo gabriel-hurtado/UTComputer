@@ -24,6 +24,8 @@ class MainWindow : public QMainWindow
     Controleur& controleur;
     static MainWindow* InstanceMainWindow;
     QMediaPlayer* soundBell;
+    static bool keyboard;
+    static bool sound;
 
 protected:
     void closeEvent(QCloseEvent *event);
