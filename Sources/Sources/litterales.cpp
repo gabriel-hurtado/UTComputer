@@ -186,34 +186,38 @@ nom d'une variable
 !!n'utilise pas la pile*/
 
 //donne l'indice de début de la parenthèse la plus profonde
-int indexOfDeepestParentheses(QString s){
+int indexOfDeepestParentheses(QString s, bool* hasPar){
     int temp=0;
      int ouvert=0;
-     QVector<bool> ok(30,true);
+     QVector<bool> vectok(30,true);
+     int nb=0;
+     *hasPar= false;
 
         int maxProf=0;
         do{
 
             if(s.mid(temp,1)=="("){
+                *hasPar=true;
                maxProf=temp;
-               ok[ouvert]=false;
+               vectok[ouvert]=false;
                ouvert++;
             }
             else if(s.mid(temp,1)==")"){
                 ouvert--;
-                ok[ouvert]=true;
+                vectok[ouvert]=true;
 
            }
             temp++;
         }while(temp<s.length());
 
-        foreach (bool val, ok) {
+        foreach (bool val, vectok) {
             if(!val){
                 throw LitteraleException("Parenthésage incorrect");
             }
         }
 
-    return maxProf+1;
+    return maxProf;
+
 }
 
 int getLengthOfSubExp(QString s,int begin_at){
@@ -228,21 +232,25 @@ int getLengthOfSubExp(QString s,int begin_at){
 //Pour le moment dépille la littérale si son parenthésage est correct
 LitteraleComplexe* Expression::evaluer() const{
     QString newVal = value;
-    int begin_at= indexOfDeepestParentheses(newVal);
+    newVal=newVal.remove(0,1);
+    newVal=newVal.remove(newVal.length()-1,newVal.length());
+    bool* hasPar= new bool(false);
+    int begin_at= indexOfDeepestParentheses(newVal,hasPar);
     QString sub;
 
-    while(begin_at!=0){ //tant qu'il reste des "choses" parenthésées dans la value
+    while(*hasPar){ //tant qu'il reste des "choses" parenthésées dans la value
         int length= getLengthOfSubExp(newVal,begin_at);
-        sub= newVal.mid(begin_at,length);
+        sub= newVal.mid(begin_at+1,length-1);
         //traiter sub et modifier newVal en conséquence, du coup begin at va diminuer
-        LitteraleComplexe* resTempExp= Expression(sub).evaluer();
+        LitteraleComplexe* resTempExp= Expression("\""+sub+"\"").evaluer();
         //remplacer la partie de newVal correspondant a sub par resTempExp
-
+        newVal=newVal.mid(0,begin_at)+resTempExp->toString()+newVal.mid(begin_at+length+1,sub.length());
         //en attendant
-        begin_at=0;
+        begin_at= indexOfDeepestParentheses(newVal,hasPar);
 
     }
-    return nullptr;
+    //newVal de la forme 2*8+3 (pas de parenthèses)
+    return new Entier(1);
 }
 
 Litterale* Expression::getCopy() const{return new Expression(value);}

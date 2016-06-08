@@ -16,8 +16,8 @@ numériquement..*/
 Litterale* OperateurEVAL::traitementOperateur(){
 Expression* li1= estdeType<Expression>(l1);
  if(li1){
-     li1->evaluer();
-        return nullptr;
+    return li1->evaluer();
+
  }
 
 /*Un programme peut aussi être déclenché par EVAL*/

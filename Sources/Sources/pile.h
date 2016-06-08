@@ -50,7 +50,8 @@ public:
     Pile& operator<<(Litterale& l);
     Pile& operator>>(Litterale*& l);
     void voirPile() const;
-    void viderPile(){emP.clear();}
+    void viderPile(){emP.clear();
+                     modificationEtat();}
     static Pile& donnerInstance();
     static void libererInstance();
     //Méthodes pour le Memento

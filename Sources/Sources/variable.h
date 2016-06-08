@@ -20,7 +20,6 @@ class VariablesManager{
     static unsigned int nb_var;
 
 public:
-    friend class gestionvariableWindow;
     /*Méthodes du singleton*/
     static VariablesManager& donnerInstance();
     static void libererInstance();

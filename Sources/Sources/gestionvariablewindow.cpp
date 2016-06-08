@@ -13,7 +13,7 @@ gestionvariableWindow::gestionvariableWindow(QWidget *parent) :
     setWindowTitle("Gestion des variables");
 
     ui->vueVariable->horizontalHeader()->setStretchLastSection(true); //Permet d'étirer la vue au maximum de la taille
-    ui->vueVariable->setRowCount(varMan->var_map.count());  //initialise le nombre de ligne de la vue
+    ui->vueVariable->setRowCount(varMan->getNbVar());  //initialise le nombre de ligne de la vue
     ui->vueVariable->setColumnCount(2);  // Idem avec les colonnes
 
     connect(ui->button_refresh,SIGNAL(clicked(bool)),this,SLOT(regenerateVueVariable()));
