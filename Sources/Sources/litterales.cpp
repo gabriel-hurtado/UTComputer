@@ -213,96 +213,35 @@ int indexOfDeepestParentheses(QString s){
             }
         }
 
-    return maxProf;
+    return maxProf+1;
 }
 
-/* PEUT SERVIR ?
-
-QString Controleur::ParenthesisCleaner(QString s, unsigned int priority){
-    //  s="(5+8+9-7)" ici avoir d'une manière ou d'une autre la première littérale dans word
-
-
-    int start =1;
-
-     int i;
-    bool can_clear=true;
-     QString sub;
-
-     //cas litterale premiere
-
+int getLengthOfSubExp(QString s,int begin_at){
+    int res=0;
     do{
-         start= skipParentheses(start,s);
-         Litterale* l ;
-
-         Operateur* op;
-         i=0;
-
-
-         if( s.length()-2<=start) break;
-            do{
-            i++;
-            sub= s.mid( start, i);
-            l = LitteraleFactory::donnerInstance().creerRPNLitterale(sub);
-            if( s.length()-2<=start) break;
-            }while(l);
-
-            op = OperateurFactory::donnerInstance().creer(sub);
-            if(op) //si c'était en fait un opérateur
-            {
-                if(priority!=op->getPriority()){
-                    can_clear=false;
-                    break;
-                }
-
-                start+=i;
-
-            }
-            else
-            start+=i-1;
-
-
-
-
-
-
-            start= skipParentheses(start,s);
-
-
-            i=0;
-
-            if( s.length()-2<=start) break;
-            do{
-            i++;
-            sub= s.mid( start, i);
-            op = OperateurFactory::donnerInstance().creer(sub);
-             if( s.length()-2<=start) break;
-            }while(!op && i<20);
-
-            if (i>=20) throw LitteraleException("Expression invalide !");
-
-            if(priority!=op->getPriority()){
-                can_clear=false;
-                break;
-            }
-
-            start=start+i;
-
-     }while(can_clear || s.length()-2<=start);
-
-     QString tmp = QString(s);
-    if(can_clear)
-    {
-        tmp=tmp.remove(0,1);
-        tmp=tmp.remove(tmp.length()-1,tmp.length());
-    }
-    return tmp;
+        res++;
+    }while(s.mid(begin_at+res,1)!=")");
+    return res;
 }
-*/
 
 
 //Pour le moment dépille la littérale si son parenthésage est correct
 LitteraleComplexe* Expression::evaluer() const{
-    int begin_at= indexOfDeepestParentheses(value);
+    QString newVal = value;
+    int begin_at= indexOfDeepestParentheses(newVal);
+    QString sub;
+
+    while(begin_at!=0){ //tant qu'il reste des "choses" parenthésées dans la value
+        int length= getLengthOfSubExp(newVal,begin_at);
+        sub= newVal.mid(begin_at,length);
+        //traiter sub et modifier newVal en conséquence, du coup begin at va diminuer
+        LitteraleComplexe* resTempExp= Expression(sub).evaluer();
+        //remplacer la partie de newVal correspondant a sub par resTempExp
+
+        //en attendant
+        begin_at=0;
+
+    }
     return nullptr;
 }
 
