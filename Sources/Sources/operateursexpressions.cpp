@@ -3,6 +3,7 @@
 #include "variable.h"
 #include "operateurfactory.h"
 #include "pile.h"
+#include "litteraleexception.h"
 
 namespace expression {
 
@@ -15,8 +16,8 @@ numériquement..*/
 Litterale* OperateurEVAL::traitementOperateur(){
 Expression* li1= estdeType<Expression>(l1);
  if(li1){
-     li1->evaluer();
-        return nullptr;
+    return li1->evaluer();
+
  }
 
 /*Un programme peut aussi être déclenché par EVAL*/
@@ -69,17 +70,26 @@ Quand un atome est utilisé sans guillemet :
 Litterale* OperateurUserMade::traitementOperateur(){
     Atome* at = estdeType<Atome>(l1);
     if(at){
+        try {
         Litterale* var=VariablesManager::donnerInstance().getVariable(at->getNom());
-        Programme* prog=estdeType<Programme>(var);
-        if(prog){
-            prog->traitement();
-             return nullptr;
-        }
-        else{
-            Pile::donnerInstance()<<*var;
-             return nullptr;
-        }
+        if(var){
+            Programme* prog=estdeType<Programme>(var);
+            if(prog){
+                prog->traitement();
+                 return nullptr;
+            }
+            else{
+                Pile::donnerInstance()<<*var;
+                 return nullptr;
+            }
 
+        }
+        }
+        catch (LitteraleException e) {
+            Expression* exp = new Expression("\""+at->toString()+"\"");
+            Pile::donnerInstance()<<*exp;
+            return nullptr;
+        }
     }
     throw OperateurException("Impossible d'éxécuter cette fonction sur ça !");
 

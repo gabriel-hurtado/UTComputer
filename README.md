@@ -3,11 +3,11 @@ Scientific calculator
 
 __TODO :__
 
-  1. ~~Construire des expressions G~~
+  1. Doc ?
   2. Interpreter des expressions JG 
   3. ~~Afficher , modifier variables~~(seulement les valeurs) et programmes J 
-  4. ~~Enregistrer contexte G~~ (son et hide keyboard ?, soucis de restauration des programmes et exp sur la pile)
-  5. ~~Debugguer UNDO J~~ (normalement) 
+  4. Enregistrer son et hide keyboard. G
+  5. Debugguer la saisie expressions J
   6. Rapport + Vodéi 
   
   

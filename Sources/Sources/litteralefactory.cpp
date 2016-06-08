@@ -97,12 +97,7 @@ Litterale* LitteraleFactory::creerRPNLitterale(QString litt_str){
         if(ok) return new Entier(tmp);
 
         if(Atome::isValidAtomeName(litt_str)){
-            try{
-                return VariablesManager::donnerInstance().getVariable(litt_str);
-            }
-            catch(LitteraleException& e){
-                return new Atome(litt_str);
-            }
+            return new Atome(litt_str);
         }
     }
     return nullptr;

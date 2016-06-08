@@ -5,6 +5,7 @@
 #include "operateur.h"
 #include "wordidentifier.h"
 #include "litteraleexception.h"
+#include "operateursexpressions.h"
 
 Controleur* Controleur::instanceControleur=nullptr;
 
@@ -42,7 +43,22 @@ bool Controleur::commande(QString& s){
                 On tente de fabriquer une littérale a partir du mot, si on recoie nullptr alors ce n'en n'est pas une
             */
             Litterale* l = LitteraleFactory::donnerInstance().creerRPNLitterale(word);
-            if(l){Pile::donnerInstance()<<*l;}
+            if(l){
+
+
+                    Atome* a= estdeType<Atome>(l);
+                        if(a){
+                            expression::OperateurUserMade op = expression::OperateurUserMade(a);
+
+                             op.traitementOperateur();
+
+
+                        }
+                        else{
+                            Pile::donnerInstance()<<*l;
+                        }
+
+                }
 
             /*
                 Idem, mais avec un opérateur. Si on reçoit null c'est que ce n'est pas un opérateur
