@@ -89,7 +89,13 @@ public:
     */
     Litterale* creerInfixLitterale(QString);
 
+    Litterale* getRPNExampleOf(QString s) const;
+
+    Litterale* getInfixExampleOf(QString s) const;
+
     static const QMap<unsigned int,QString>& getPriorityMap(){return priority_map_basic;}
+
+    static const QMap<QString,Litterale*>& getLitteraleMap(){return litterale_map;}
 };
 
 

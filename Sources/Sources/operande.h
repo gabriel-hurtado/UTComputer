@@ -5,6 +5,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
+#include <QStack>
 #include "utils.h"
 
 class Litterale;

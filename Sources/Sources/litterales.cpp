@@ -2,7 +2,9 @@
 #include "litteralefactory.h"
 #include "litteraleexception.h"
 #include "operateurfactory.h"
+#include "operateur.h"
 #include "controleur.h"
+#include "variable.h"
 #include <QVector>
 
 /*Définition des méthodes de la classe Litterale*/
@@ -104,9 +106,8 @@ Litterale* Rationnel::getFromString(QString s){
 
 
 /*------------Définition des méthodes de la classe Entier------------*/
-Litterale* Entier::getFromString(QString ){
-    throw LitteraleException("Création d'entier depuis la factory");
-    return nullptr;
+Litterale* Entier::getFromString(QString s){
+    return new Entier(s.toInt());
 }
 
 
@@ -229,15 +230,17 @@ int getLengthOfSubExp(QString s,int begin_at){
 }
 
 
-//Pour le moment dépille la littérale si son parenthésage est correct
-LitteraleComplexe* Expression::evaluer() const{
+//Pour le moment dépile la littérale si son parenthésage est correct
+Litterale* Expression::evaluer() const{
     QString newVal = value;
     newVal=newVal.remove(0,1);
     newVal=newVal.remove(newVal.length()-1,newVal.length());
+
+
+    /*
     bool* hasPar= new bool(false);
     int begin_at= indexOfDeepestParentheses(newVal,hasPar);
     QString sub;
-
     while(*hasPar){ //tant qu'il reste des "choses" parenthésées dans la value
         int length= getLengthOfSubExp(newVal,begin_at);
         sub= newVal.mid(begin_at+1,length-1);
@@ -249,12 +252,164 @@ LitteraleComplexe* Expression::evaluer() const{
         begin_at= indexOfDeepestParentheses(newVal,hasPar);
 
     }
+    */
     //newVal de la forme 2*8+3 (pas de parenthèses), plus qu'a l'interpréter
-    return new Entier(1);
-}
+    //Partie interprétation
+    return new Expression(readToken(newVal));
 
+
+/*
+    QString::iterator it = newVal.begin();
+
+    QString _toTreat(""); //Qstring which has the first Litterale/Operator
+    QString _toTest("");
+    QString _Resultat("");
+
+    bool foundThisSymbol = false;
+
+    //Récupération de la
+    LitteraleFactory& LF (LitteraleFactory::donnerInstance());
+    VariablesManager& varMan = VariablesManager::donnerInstance();
+    const QMap<QString,Litterale*>& litterale_map(LitteraleFactory::getLitteraleMap());
+    const QMap<QString, WordIdentifier*>& interpretation_map(Controleur::getInterpretationMap());
+
+    //3$7+4$5
+    while(it!=newVal.end()){
+        foundThisSymbol = false;
+        _toTest+=*it;
+
+        //Cas d'un nombre toujours bon
+        if(*it<'9' && *it>'0'){
+            foundThisSymbol = true;
+        }
+        else if(interpretation_map.find(*it).value()->WordGuesser(_toTest)){//Si le symbole est interprétable
+            Litterale* l = LF.getRPNExampleOf(_toTest); //On essaye de savoir ce que c'est comme litterale
+            if(l){ //Si c'est bien une litterale
+                if(estdeType<Atome>(l)){
+                    try{
+                    Litterale* l_atome = varMan.getVariable(_toTreat);
+
+                    }
+                    catch(LitteraleException& e){
+                        throw("L'atome "+_toTreat+"n'identifie pas de variable");
+                    }
+                }
+                else
+                    _toTreat=*it++; //On peut l'ajouter serenement à _toTreat
+            }
+            //Dans l'autre cas, _toTest n'as plus de sens et on empile _toTreat qui lui en avait
+            else{
+                //Si c'est un atome alors il doit être valide
+
+                _Resultat+=_toTreat;
+                _Resultat+=" ";
+                _toTreat.clear();
+                _toTest.clear();
+                it++;
+                continue;
+            }
+
+        }
+
+    }*/
+}
+//3+5*7 -> 3 5 7 * +
+QString Expression::readToken(QString s) const{
+    QString::iterator it = s.begin();
+    QString postfix;
+    QStack<QString> stack;
+    const QMap<QString, Operateur*> op_map = OperateurFactory::getMap();
+    const QMap<QString,Litterale*>& litterale_map(LitteraleFactory::getLitteraleMap());
+    bool found;
+
+    QString tmp;
+    while(it!=s.end()){
+
+        if(*it==' ')
+            continue;
+
+//4+4*7 4 4 7 * +
+        //On tombe dans le cas ou on a une valeur
+        while(it!=s.end() && ((*it<'9' && *it>'0') || (litterale_map.find(*it))!=litterale_map.end())){
+              tmp+=*it;
+              if(it!=s.end())
+                  it++;
+        }
+        //Pour vider ce qu'on a trouvé
+        if(tmp!=""){
+            postfix+=tmp+" ";
+            tmp.clear();
+        }
+        //On tombe dans le cas d'un opérateur d'un seul caractère
+        if(isOperator(*it)){
+
+            while(!stack.empty() && stack.top() != "(" && CompareOperators(stack.top(),*it)<=0){
+                postfix += stack.top()+" ";
+                stack.pop();
+            }
+        stack.push(*it);
+        if(it!=s.end())
+            it++;
+        }
+
+
+        //On tombe dans le cas d'un morçeau de texte
+        if((*it<='Z' && *it>'A')){
+            while(it!=s.end() && ((*it<='Z' && *it>'A') || (*it<'9' && *it>'0'))){
+                tmp+=* it;
+                if(it!=s.end())
+                    it++;
+            }
+            if(isOperator(tmp)){
+                while(!stack.empty() && stack.top() != "(" && CompareOperators(stack.top(),tmp)<=0){
+                    postfix += stack.top()+" ";
+                    stack.pop();
+                }
+            stack.push(tmp);
+            }
+
+        }
+
+        if(*it=='('){
+            stack.push(*it);
+            if(it!=s.end())
+                it++;
+        }
+        if(*it==')'){
+            while(stack.top()!="("){
+                postfix+= stack.top()+" ";
+                stack.pop();
+            }
+            stack.pop();
+            if(it!=s.end())
+                it++;
+        }
+    }
+
+    while(!stack.empty()){
+        postfix+= stack.top() + " ";
+        stack.pop();
+    }
+    std::cout<< postfix.toStdString();
+    return postfix;
+}
 Litterale* Expression::getCopy() const{return new Expression(value);}
 
+int Expression::CompareOperators(QString s1,QString s2) const{
+    const QMap<QString, Operateur*> op_map = OperateurFactory::getMap();
+    int a = op_map.find(s1).value()->getPriority();
+    int b = op_map.find(s2).value()->getPriority();
+    if(a>b) return -1;
+    if(a==b) return 0;
+    if(a<b) return 1;
+}
+
+bool Expression::isOperator(QString s) const {
+    const QMap<QString, Operateur*> op_map = OperateurFactory::getMap();
+    if( op_map.find(s)!=op_map.end())
+        return true;
+    return false;
+}
 
 /*------------Définition des méthodes de la classe Programme------------*/
 

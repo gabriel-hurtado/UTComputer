@@ -58,6 +58,8 @@ public:
 
     static QString ParenthesisCleaner(QString s, unsigned int priority);
 
+    static const QMap<QString,WordIdentifier*>& getInterpretationMap(){return interpretationMap;}
+
 };
 
 #endif // CONTROLEUR_H

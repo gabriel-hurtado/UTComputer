@@ -58,48 +58,64 @@ void LitteraleFactory::enregistrerInfix(unsigned int prio,QString ltok, Litteral
     Useful for the parser.
 
 */
-Litterale* LitteraleFactory::creerInfixLitterale(QString litt_str){
-    QMap<unsigned int,QString>::iterator it_prio = priority_map_infix.begin();
-    while(it_prio!=priority_map_infix.end() && !litt_str.contains(it_prio.value())){//On cherche le token dans la chaine de caractère par ordre de priorité
-        it_prio++;
-    }
-    if(it_prio!=priority_map_infix.end()){
-        return litterale_map.find(it_prio.value()).value()->getFromString(litt_str);
-    }
-    //Cela peut encore etre un Entier ou un Atome
-
-    else{
-        bool ok;
-        int tmp = litt_str.toInt(&ok); //On tente de convertir en entier
-        if(ok) return new Entier(tmp);
-
-        if(Atome::isValidAtomeName(litt_str)){
-            return new Atome(litt_str);
-        }
-    }
-    return nullptr;
-}
 
 
-Litterale* LitteraleFactory::creerRPNLitterale(QString litt_str){
+Litterale* LitteraleFactory::getRPNExampleOf(QString litt_str) const{
+
     QMap<unsigned int,QString>::iterator it_prio = priority_map_basic.begin();
     while(it_prio!=priority_map_basic.end() && !litt_str.contains(it_prio.value())){//On cherche le token dans la chaine de caractère par ordre de priorité
         it_prio++;
     }
     if(it_prio!=priority_map_basic.end()){
-        return litterale_map.find(it_prio.value()).value()->getFromString(litt_str);
+        Litterale* stored_example = litterale_map.find(it_prio.value()).value();
+        return stored_example;
     }
-    //Cela peut encore etre un Entier ou un Atome
-
     else{
         bool ok;
         int tmp = litt_str.toInt(&ok); //On tente de convertir en entier
-        if(ok) return new Entier(tmp);
+        if(ok) return litterale_map.find("Entier").value();
 
         if(Atome::isValidAtomeName(litt_str)){
-            return new Atome(litt_str);
+            return litterale_map.find("Atome").value();
         }
     }
     return nullptr;
 }
 
+Litterale* LitteraleFactory::getInfixExampleOf(QString litt_str) const{
+
+    QMap<unsigned int,QString>::iterator it_prio = priority_map_infix.begin();
+    while(it_prio!=priority_map_infix.end() && !litt_str.contains(it_prio.value())){//On cherche le token dans la chaine de caractère par ordre de priorité
+        it_prio++;
+    }
+    if(it_prio!=priority_map_infix.end()){
+        Litterale* stored_example = litterale_map.find(it_prio.value()).value();
+        return stored_example;
+    }
+    else{
+        bool ok;
+        int tmp = litt_str.toInt(&ok); //On tente de convertir en entier
+        if(ok) return litterale_map.find("Entier").value();
+
+        if(Atome::isValidAtomeName(litt_str)){
+            return litterale_map.find("Atome").value();
+        }
+    }
+    return nullptr;
+}
+
+Litterale* LitteraleFactory::creerRPNLitterale(QString litt_str){
+       Litterale* l1 = getRPNExampleOf(litt_str);
+       if(l1)
+           return l1->getFromString(litt_str);
+       return nullptr;
+
+}
+
+Litterale* LitteraleFactory::creerInfixLitterale(QString litt_str){
+       Litterale* l1 = getRPNExampleOf(litt_str);
+       if(l1)
+           return l1->getFromString(litt_str);
+       return nullptr;
+
+}

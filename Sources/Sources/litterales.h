@@ -180,11 +180,18 @@ public:
 
 class Expression : public Litterale{
     QString value;
+
 public:
+    QString readToken(QString) const;
+
+    int CompareOperators(QString,QString) const;
+
+    bool isOperator(QString) const;
+
     Expression(QString v):value(v){}
     QString getExpression() const {return value;}
     const QString toString() const {return getExpression();}
-    LitteraleComplexe* evaluer() const;
+    Litterale* evaluer() const;
     Litterale* getCopy() const;
     Litterale* getFromString(QString s){
         if(s[0]=='\"')
