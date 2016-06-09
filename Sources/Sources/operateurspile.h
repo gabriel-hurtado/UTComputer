@@ -36,7 +36,7 @@ public:
 class OperateurDROP : public OperateurUnaire, public OperateurPile{
 
 public:
-   Litterale* traitementOperateur(){delete l1;
+   Litterale* traitementOperateur(){
                                      return nullptr;}
 
    OperateurDROP():OperateurUnaire(){}
