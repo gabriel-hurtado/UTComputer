@@ -149,7 +149,7 @@ bool Atome::isValidAtomeName(QString s){
         return false;
 
     //On vérifie que le premier caractère est une majuscule;
-    if(s.begin()!=s.end() && *it<'Z' && *it>'A'){
+    if(s.begin()!=s.end() && *it<='Z' && *it>='A'){
         //On doit alors vérifier que tout les caractères ne sont que des lettres majuscules ou des chiffres
         while(it!=s.end()){
             if(('A'<=*it && *it<='Z') || ('0'<=*it && *it<='9')){
@@ -181,56 +181,6 @@ QString const Atome::toString() const {
 
 /*------------Définition des méthodes de la classe Expression------------*/
 
-/*utile pour EVAL, on prend la QString, on la parse de manière infixe, et on esaaye de trouver la valeur numérique.
-ne pas hésiter a lancer des exceptions si un atome référence un programme ou si un atome ne correspond pas au
-nom d'une variable
-!!n'utilise pas la pile*/
-
-//donne l'indice de début de la parenthèse la plus profonde
-int indexOfDeepestParentheses(QString s, bool* hasPar){
-    int temp=0;
-     int ouvert=0;
-     QVector<bool> vectok(30,true);
-     int nb=0;
-     *hasPar= false;
-
-        int maxProf=0;
-        do{
-
-            if(s.mid(temp,1)=="("){
-                *hasPar=true;
-               maxProf=temp;
-               vectok[ouvert]=false;
-               ouvert++;
-            }
-            else if(s.mid(temp,1)==")"){
-                ouvert--;
-                vectok[ouvert]=true;
-
-           }
-            temp++;
-        }while(temp<s.length());
-
-        foreach (bool val, vectok) {
-            if(!val){
-                throw LitteraleException("Parenthésage incorrect");
-            }
-        }
-
-    return maxProf;
-
-}
-
-int getLengthOfSubExp(QString s,int begin_at){
-    int res=0;
-    do{
-        res++;
-    }while(s.mid(begin_at+res,1)!=")");
-    return res;
-}
-
-
-//Pour le moment dépile la littérale si son parenthésage est correct
 Litterale* Expression::evaluer() const{
     QString newVal = value;
     newVal=newVal.remove(0,1);
@@ -238,19 +188,23 @@ Litterale* Expression::evaluer() const{
     QString result = readToken(newVal);
     Controleur::donnerInstance().commande(result);
     return nullptr;
-
-
-
 }
 
+Litterale* Expression::getFromString(QString s){
+    if(s[0]=='\'')
+        return new Expression(s);
+    else return nullptr;
+}
 
 QString Expression::readToken(QString s) const{
     QString::iterator it = s.begin();
     QString postfix;
     QStack<QString> stack;
     const QMap<QString, Operateur*> op_map = OperateurFactory::getMap();
-    const QMap<QString,Litterale*>& litterale_map(LitteraleFactory::getLitteraleMap());
+    const QMap<QString,QString>& symbol_map = Controleur::getSymbolMap();
+
     bool found;
+    QString endTarget;
 
     QString tmp;
     while(it!=s.end()){
@@ -261,9 +215,27 @@ QString Expression::readToken(QString s) const{
             continue;
         }
 
-//4+4*7 4 4 7 * +
+        if(tmp == "" && symbol_map.find(*it)!=symbol_map.end()){
+            endTarget=symbol_map.find(*it).value();
+            if(endTarget!=""){
+                while(it!=s.end() && *it != endTarget){
+                    tmp+=*it++;
+                }
+                if(*it!=endTarget)
+                    throw LitteraleException("Mot " +endTarget + " non trouvé");
+                tmp+=endTarget;
+                postfix+=tmp+" ";
+                endTarget.clear();
+                tmp.clear();
+                it++;
+                found=true;
+            }
+        }
+
         //On tombe dans le cas ou on a une valeur
-        while(it!=s.end() && ((*it<='9' && *it>='0') || (litterale_map.find(*it))!=litterale_map.end())){
+        while(it!=s.end() && ((*it<='9' && *it>='0') || (symbol_map.find(*it)!=symbol_map.end()))){
+
+
               tmp+=*it;
               if(it!=s.end())
                   it++;
@@ -331,24 +303,20 @@ QString Expression::readToken(QString s) const{
                 tmp+=*it++;
             }
             if(it==s.end() && !op_map.contains(tmp))
-                throw("Expression non valide dès"+tmp);
+                throw LitteraleException("Expression non valide dès "+tmp);
             while(!stack.empty() && stack.top() != "(" && CompareOperators(stack.top(),tmp)<=0){
                 postfix += stack.top()+" ";
                 stack.pop();
             }
         stack.push(tmp);
         tmp.clear();
-        if(it!=s.end())
-            it++;
         }
-
     }
 
     while(!stack.empty()){
         postfix+= stack.top() + " ";
         stack.pop();
     }
-    std::cout<< postfix.toStdString();
     return postfix;
 }
 Litterale* Expression::getCopy() const{return new Expression(value);}
@@ -358,8 +326,9 @@ int Expression::CompareOperators(QString s1,QString s2) const{
     int a = op_map.find(s1).value()->getPriority();
     int b = op_map.find(s2).value()->getPriority();
     if(a>b) return -1;
-    if(a==b) return 0;
     if(a<b) return 1;
+    return 0;
+
 }
 
 bool Expression::isOperator(QString s) const {

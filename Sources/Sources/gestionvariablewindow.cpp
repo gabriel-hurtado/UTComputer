@@ -1,13 +1,16 @@
 #include "gestionvariablewindow.h"
 #include "ui_gestionvariablewindow.h"
+#include "litteraleexception.h"
 #include "litteralefactory.h"
 #include "variable.h"
+#include "litterales.h"
 #include "mainwindow.h"
 
 gestionvariableWindow::gestionvariableWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::gestionvariableWindow),
-    varMan(&VariablesManager::donnerInstance())
+    varMan(&VariablesManager::donnerInstance()),
+    selectedIdentifierName("")
 {
     ui->setupUi(this);
     setWindowTitle("Gestion des variables");
@@ -19,6 +22,7 @@ gestionvariableWindow::gestionvariableWindow(QWidget *parent) :
     connect(ui->button_refresh,SIGNAL(clicked(bool)),this,SLOT(regenerateVueVariable()));
     connect(ui->button_quit,SIGNAL(clicked(bool)),MainWindow::getInstanceMainWindow(),SLOT(closeVariableWindow()));
     connect(ui->vueVariable,SIGNAL(cellChanged(int,int)),this,SLOT(modifierVariable(int,int)));
+    connect(ui->vueVariable,SIGNAL(cellDoubleClicked(int,int)),this,SLOT(saveIdentifierName(int,int)));
     regenerateVueVariable();
 }
 
@@ -63,13 +67,67 @@ void gestionvariableWindow::regenerateVueVariable(){
 }
 
 void gestionvariableWindow::modifierVariable(int i, int j){
-    if(j==1){
+    if(j==0){
+        Litterale* tmp = varMan->getVariable(selectedIdentifierName);
+        QString newIdentifier = ui->vueVariable->item(i,0)->text();
+        if(Atome::isValidAtomeName(newIdentifier)){
+            varMan->supprimer(selectedIdentifierName);
+            varMan->enregistrer(newIdentifier,tmp);
+        }
+    }
+    else if(j==1){
         QString _nomVariable = ui->vueVariable->item(i,0)->text();
         QString _valueVariable = ui->vueVariable->item(i,1)->text();
-
+        Litterale* l = nullptr;
+        try{
+        l = LitteraleFactory::donnerInstance().creerInfixLitterale(_valueVariable);
+        }
+        catch(LitteraleException& e){
+            ui->message->setText("Nombre non valide");
+            delete l;
+            return;
+        }
+        if(l){
         varMan->supprimer(_nomVariable);
-        varMan->enregistrer(_nomVariable,LitteraleFactory::donnerInstance().creerInfixLitterale(_valueVariable));
-
-        regenerateVueVariable();
+        varMan->enregistrer(_nomVariable,l);
+        }
     }
+    regenerateVueVariable();
+}
+
+void gestionvariableWindow::saveIdentifierName(int i,int j){
+    if(j==0)
+        selectedIdentifierName=ui->vueVariable->item(i,j)->text();
+}
+
+void gestionvariableWindow::on_button_add_clicked()
+{
+    QString id = ui->add_id->text();
+    Litterale* l = nullptr;
+    if(!Atome::isValidAtomeName(id)){
+        ui->message->setText("Nom non valide");
+        return;
+    }
+    try{
+        varMan->getVariable(id);
+        ui->message->setText("Nom déjà pris");
+        return;
+    }
+    catch(LitteraleException& e){
+
+    }
+    try{
+    l = LitteraleFactory::donnerInstance().creerInfixLitterale(ui->add_value->text());
+    }
+    catch(LitteraleException& e){
+        ui->message->setText("Nombre non valide");
+        delete l;
+        return;
+    }
+    if(l){
+        varMan->enregistrer(id,l);
+    }
+    ui->message->setText("Ajout réussi");
+    regenerateVueVariable();
+    return;
 }

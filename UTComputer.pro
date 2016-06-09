@@ -21,7 +21,8 @@ HEADERS += \
     Sources/Sources/litteraleexception.h \
     Sources/Sources/wordidentifier.h \
     Sources/Sources/parameterwindow.h \
-    Sources/Sources/gestionvariablewindow.h
+    Sources/Sources/gestionvariablewindow.h \
+    Sources/Sources/gestionprogrammes.h
     Sources/Sources/mainwindow.h
 
 SOURCES += \
@@ -41,11 +42,13 @@ SOURCES += \
     Sources/Sources/wordidentifier.cpp \
     Sources/Sources/parameterwindow.cpp \
     Sources/Sources/gestionvariablewindow.cpp \
-    Sources/Sources/utils.cpp
+    Sources/Sources/utils.cpp \
+    Sources/Sources/gestionprogrammes.cpp
     Sources/Sources/mainwindow.cpp
 
 FORMS += \
     Sources/Sources/mainwindow.ui \
     Sources/Sources/parameterwindow.ui \
-    Sources/Sources/gestionvariablewindow.ui
+    Sources/Sources/gestionvariablewindow.ui \
+    Sources/Sources/gestionprogrammes.ui
 QT += widgets

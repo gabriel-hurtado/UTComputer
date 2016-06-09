@@ -195,11 +195,7 @@ public:
     const QString toString() const {return getExpression();}
     Litterale* evaluer() const;
     Litterale* getCopy() const;
-    Litterale* getFromString(QString s){
-        if(s[0]=='\"')
-            return new Expression(s);
-        else return nullptr;
-    }
+    Litterale* getFromString(QString s);
     const QString getExpressionNoBorders() const{
 
                                                     QString tmp = QString(value);
@@ -215,6 +211,7 @@ public:
 
 class Programme : public Litterale{
     QString valeur;
+
 public:
     Programme(QString p):valeur(p){}
     QString getProgramme() const {return valeur;}
@@ -226,6 +223,7 @@ public:
         else
             return nullptr;
     }
+
     Litterale* traitement() override; //parse le programme et fait les différentes opérations, par ex + avec un élément de la pile
 };
 

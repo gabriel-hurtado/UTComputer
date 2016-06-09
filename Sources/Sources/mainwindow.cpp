@@ -196,6 +196,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
     settings.setValue("nb_item_pile",QString::number(nb));
        event->accept();
+    //Fermer les autres fenetres
+    if(parameterIwindow){
+        parameterIwindow->close();
+    }
+    if(variableIwindow)
+        variableIwindow->close();
 }
 
 
@@ -245,6 +251,7 @@ void MainWindow::getNextCommande(QString _fromButton){
         soundBell->play();
         SendException("Pile :"+e.getInfo());
     }
+
 }
 
 void MainWindow::openVariableWindow(){

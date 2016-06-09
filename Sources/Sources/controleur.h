@@ -47,7 +47,7 @@ public:
         leur détection à été écrite en dur dans cette méthode.
         L'idéal serait de trouver une autre façon de faire mais celà est difficile par manque de temps
     */
-    QString firstWord(QString s);
+    static QString firstWord(QString s);
     /*
         Méthode pour enregistrer un symbole pour le WordFinder
     */
@@ -59,6 +59,8 @@ public:
     static QString ParenthesisCleaner(QString s, unsigned int priority);
 
     static const QMap<QString,WordIdentifier*>& getInterpretationMap(){return interpretationMap;}
+
+    static const QMap<QString,QString>& getSymbolMap(){return symbolMap;}
 
 };
 

@@ -25,8 +25,8 @@ void LitteraleFactory::enregistrer(unsigned int prio,QString ltok, Litterale* l,
     QMap<unsigned int,QString>::iterator it_prio = priority_map_infix.find(prio);
     if(it_prio==priority_map_infix.end()){            //Si la priorité n'est pas déja prise
         if(litterale_map.find(ltok)==litterale_map.end()){//Si le token n'est pas déja pris
-            priority_map_basic[prio]=ltok;       //On enregistre le token dans la priority_map
-            priority_map_basic[prio]=ltok;
+            priority_map_basic[prio]=ltok;       //On enregistre le token dans la priority_map des litterales interpretables
+            priority_map_infix[prio]=ltok;       //On enregistre le token dans la priority_map des littérales infixe utilisables
             litterale_map[ltok]=l;               //On enregistre le pointeur sur litterale dans la base
             Controleur::enregistrerSymbole(ltok,rtok,W);
         }
@@ -42,7 +42,8 @@ void LitteraleFactory::enregistrerInfix(unsigned int prio,QString ltok, Litteral
     QMap<unsigned int,QString>::iterator it_prio = priority_map_infix.find(prio);
     if(it_prio==priority_map_infix.end()){            //Si la priorité n'est pas déja prise
         if(litterale_map.find(ltok)==litterale_map.end()){//Si le token n'est pas déja pris
-            priority_map_infix[prio]=ltok;             //On enregistre le token dans la priority_map
+            priority_map_infix[prio]=ltok;
+
             litterale_map[ltok]=l;               //On enregistre le pointeur sur litterale dans la base
             Controleur::enregistrerSymbole(ltok,rtok,W);
         }
@@ -72,7 +73,7 @@ Litterale* LitteraleFactory::getRPNExampleOf(QString litt_str) const{
     }
     else{
         bool ok;
-        int tmp = litt_str.toInt(&ok); //On tente de convertir en entier
+        litt_str.toInt(&ok); //On tente de convertir en entier
         if(ok) return litterale_map.find("Entier").value();
 
         if(Atome::isValidAtomeName(litt_str)){
@@ -94,7 +95,7 @@ Litterale* LitteraleFactory::getInfixExampleOf(QString litt_str) const{
     }
     else{
         bool ok;
-        int tmp = litt_str.toInt(&ok); //On tente de convertir en entier
+        litt_str.toInt(&ok); //On tente de convertir en entier
         if(ok) return litterale_map.find("Entier").value();
 
         if(Atome::isValidAtomeName(litt_str)){
@@ -113,7 +114,7 @@ Litterale* LitteraleFactory::creerRPNLitterale(QString litt_str){
 }
 
 Litterale* LitteraleFactory::creerInfixLitterale(QString litt_str){
-       Litterale* l1 = getRPNExampleOf(litt_str);
+       Litterale* l1 = getInfixExampleOf(litt_str);
        if(l1)
            return l1->getFromString(litt_str);
        return nullptr;

@@ -11,6 +11,7 @@ Controleur* Controleur::instanceControleur=nullptr;
 
 //Map qui contient les symboles des opérateurs
 QMap<QString,QString> Controleur::symbolMap = QMap<QString,QString>();
+
 QMap<QString,WordIdentifier*> Controleur::interpretationMap = QMap<QString,WordIdentifier*>();
 
 
@@ -248,7 +249,6 @@ QString Controleur::firstWord(QString s){
 
     //Maintenant notre premier mot est borné entre it_debut et it_fin
     QString ret("");
-
     for(;_cursor.it_debut!=_cursor.it_fin;_cursor.it_debut++)
        ret+=*_cursor.it_debut;
     return ret;
