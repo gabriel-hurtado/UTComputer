@@ -235,87 +235,15 @@ Litterale* Expression::evaluer() const{
     QString newVal = value;
     newVal=newVal.remove(0,1);
     newVal=newVal.remove(newVal.length()-1,newVal.length());
-
-
-    /*
-    bool* hasPar= new bool(false);
-    int begin_at= indexOfDeepestParentheses(newVal,hasPar);
-    QString sub;
-    while(*hasPar){ //tant qu'il reste des "choses" parenthésées dans la value
-        int length= getLengthOfSubExp(newVal,begin_at);
-        sub= newVal.mid(begin_at+1,length-1);
-        //traiter sub et modifier newVal en conséquence, du coup begin at va diminuer
-        LitteraleComplexe* resTempExp= Expression("\""+sub+"\"").evaluer();
-        //remplacer la partie de newVal correspondant a sub par resTempExp
-        newVal=newVal.mid(0,begin_at)+resTempExp->toString()+newVal.mid(begin_at+length+1,sub.length());
-        //en attendant
-        begin_at= indexOfDeepestParentheses(newVal,hasPar);
-
-    }
-    */
-    //newVal de la forme 2*8+3 (pas de parenthèses), plus qu'a l'interpréter
-    //Partie interprétation
     QString result = readToken(newVal);
     Controleur::donnerInstance().commande(result);
     return nullptr;
 
 
-/*
-    QString::iterator it = newVal.begin();
 
-    QString _toTreat(""); //Qstring which has the first Litterale/Operator
-    QString _toTest("");
-    QString _Resultat("");
-
-    bool foundThisSymbol = false;
-
-    //Récupération de la
-    LitteraleFactory& LF (LitteraleFactory::donnerInstance());
-    VariablesManager& varMan = VariablesManager::donnerInstance();
-    const QMap<QString,Litterale*>& litterale_map(LitteraleFactory::getLitteraleMap());
-    const QMap<QString, WordIdentifier*>& interpretation_map(Controleur::getInterpretationMap());
-
-    //3$7+4$5
-    while(it!=newVal.end()){
-        foundThisSymbol = false;
-        _toTest+=*it;
-
-        //Cas d'un nombre toujours bon
-        if(*it<'9' && *it>'0'){
-            foundThisSymbol = true;
-        }
-        else if(interpretation_map.find(*it).value()->WordGuesser(_toTest)){//Si le symbole est interprétable
-            Litterale* l = LF.getRPNExampleOf(_toTest); //On essaye de savoir ce que c'est comme litterale
-            if(l){ //Si c'est bien une litterale
-                if(estdeType<Atome>(l)){
-                    try{
-                    Litterale* l_atome = varMan.getVariable(_toTreat);
-
-                    }
-                    catch(LitteraleException& e){
-                        throw("L'atome "+_toTreat+"n'identifie pas de variable");
-                    }
-                }
-                else
-                    _toTreat=*it++; //On peut l'ajouter serenement à _toTreat
-            }
-            //Dans l'autre cas, _toTest n'as plus de sens et on empile _toTreat qui lui en avait
-            else{
-                //Si c'est un atome alors il doit être valide
-
-                _Resultat+=_toTreat;
-                _Resultat+=" ";
-                _toTreat.clear();
-                _toTest.clear();
-                it++;
-                continue;
-            }
-
-        }
-
-    }*/
 }
-//3+5*7 -> 3 5 7 * +
+
+
 QString Expression::readToken(QString s) const{
     QString::iterator it = s.begin();
     QString postfix;
@@ -326,6 +254,7 @@ QString Expression::readToken(QString s) const{
 
     QString tmp;
     while(it!=s.end()){
+        found=false;
 
         if(*it==' '){
             it++;
@@ -343,18 +272,10 @@ QString Expression::readToken(QString s) const{
         if(tmp!=""){
             postfix+=tmp+" ";
             tmp.clear();
-        }
-        //On tombe dans le cas d'un opérateur d'un seul caractère
-        if(isOperator(*it)){
+            found=true;
 
-            while(!stack.empty() && stack.top() != "(" && CompareOperators(stack.top(),*it)<=0){
-                postfix += stack.top()+" ";
-                stack.pop();
-            }
-        stack.push(*it);
-        if(it!=s.end())
-            it++;
         }
+
 
 
         //On tombe dans le cas d'un morçeau de texte
@@ -365,6 +286,7 @@ QString Expression::readToken(QString s) const{
                     it++;
             }
             if(isOperator(tmp)){
+                found=true;
                 while(!stack.empty() && stack.top() != "(" && CompareOperators(stack.top(),tmp)<=0){
                     postfix += stack.top()+" ";
                     stack.pop();
@@ -373,6 +295,7 @@ QString Expression::readToken(QString s) const{
             tmp.clear();
             }
             else if(isVariable(tmp)){
+                found=true;
                 QString rep = VariablesManager::getVariable(tmp)->toString();
                 int length_it = s.indexOf(tmp);
                 s.replace(tmp,rep);
@@ -381,6 +304,8 @@ QString Expression::readToken(QString s) const{
                 tmp.clear();
 
             }
+            else
+                throw(LitteraleException("Le mot "+tmp+" est inconnu"));
 
         }
 
@@ -388,6 +313,7 @@ QString Expression::readToken(QString s) const{
             stack.push(*it);
             if(it!=s.end())
                 it++;
+            found=true;
         }
         if(*it==')'){
             while(stack.top()!="("){
@@ -396,8 +322,26 @@ QString Expression::readToken(QString s) const{
             }
             stack.pop();
             if(it!=s.end())
-                it++;
+            it++;
+            found=true;
         }
+        //On tombe dans le cas d'un opérateur à caractère
+        if(!found){
+            while(it!=s.end() && !op_map.contains(tmp)){
+                tmp+=*it++;
+            }
+            if(it==s.end() && !op_map.contains(tmp))
+                throw("Expression non valide dès"+tmp);
+            while(!stack.empty() && stack.top() != "(" && CompareOperators(stack.top(),tmp)<=0){
+                postfix += stack.top()+" ";
+                stack.pop();
+            }
+        stack.push(tmp);
+        tmp.clear();
+        if(it!=s.end())
+            it++;
+        }
+
     }
 
     while(!stack.empty()){
