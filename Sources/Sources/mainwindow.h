@@ -19,6 +19,7 @@ class MainWindow;
 
 class MainWindow : public QMainWindow
 {
+    friend class ParameterWindow;
     Q_OBJECT
     Pile& pile;
     Controleur& controleur;

@@ -10,6 +10,12 @@ ParameterWindow::ParameterWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("Gestion des paramètres");
+    if(!MainWindow::keyboard){
+        ui->check_clavier->setChecked(0);
+    }
+    if(!MainWindow::sound){
+        ui->check_bip->setChecked(0);
+    }
     connect(ui->button_close,SIGNAL(clicked(bool)),MainWindow::getInstanceMainWindow(),SLOT(closeParameterWindow()));
     connect(this,SIGNAL(sendHideKeyboard(int)),MainWindow::getInstanceMainWindow(),SLOT(hideKeyboard(int)));
     connect(this,SIGNAL(sendMuteError(int)),MainWindow::getInstanceMainWindow(),SLOT(muteError(int)));
