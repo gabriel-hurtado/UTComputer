@@ -67,7 +67,7 @@ void OperationManager::libererInstance(){
 }
 
 void OperationManager::sauvegarder( Operateur* o){
-    lastOp= o->getCopy();
+    lastOp= o;
     lastLits.clear();
 }
 
@@ -77,7 +77,7 @@ void OperationManager::add(Litterale* l){
 
 Operateur* OperationManager::getLastOp(){
     if(lastOp!=nullptr)
-    return lastOp->getCopy();
+    return lastOp;
     throw OperateurException("Pas d'opérateur sauvegardé");
 }
 

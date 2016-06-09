@@ -31,6 +31,6 @@ Operateur* OperateurFactory::creer(const QString& cle){
     QMap<QString, Operateur*>::const_iterator it = of_map.find(cle);
     Operateur* tmp = nullptr;
     if(it!=of_map.end())
-        tmp = it.value()->getCopy();
+        tmp = it.value();
     return tmp;
 }

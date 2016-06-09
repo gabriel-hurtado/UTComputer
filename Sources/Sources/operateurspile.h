@@ -29,7 +29,6 @@ public:
 
    OperateurDUP():OperateurUnaire(){}
 
-   OperateurDUP* getCopy() {return new OperateurDUP(*this);}
 
 };
 
@@ -42,7 +41,6 @@ public:
 
    OperateurDROP():OperateurUnaire(){}
 
-   OperateurDROP* getCopy() {return new OperateurDROP(*this);}
 
 };
 
@@ -55,7 +53,6 @@ public:
 
    OperateurSWAP():OperateurBinaire(){}
 
-   OperateurSWAP* getCopy() {return new OperateurSWAP(*this);}
 };
 
 //rétablit l’état du calculateur avant la dernière opération.
@@ -72,7 +69,6 @@ public:
 
     OperateurUNDO():OperateurPile(){}
 
-     OperateurUNDO* getCopy() {return new OperateurUNDO(*this);}
 };
 
 //rétablit l’état du calculateur avant l’application de la dernière opération UNDO.
@@ -88,7 +84,6 @@ public:
     void resetContexte(){}
 
     OperateurREDO():OperateurPile(){}
-     OperateurREDO* getCopy() {return new OperateurREDO(*this);}
 
 };
 
@@ -105,7 +100,6 @@ public:
     void resetContexte(){}
 
     OperateurCLEAR():OperateurPile(){}
-     OperateurCLEAR* getCopy() {return new OperateurCLEAR(*this);}
 
 };
 
@@ -122,7 +116,6 @@ public:
     void resetContexte(){}
 
     OperateurLASTOP():Operateur(){}
-     OperateurLASTOP* getCopy() {return new OperateurLASTOP(*this);}
 
 
      void  operation() override{
@@ -174,7 +167,6 @@ public:
 
 
     OperateurLASTARGS():Operateur(){}
-     OperateurLASTARGS* getCopy() {return new OperateurLASTARGS(*this);}
 };
 
 }

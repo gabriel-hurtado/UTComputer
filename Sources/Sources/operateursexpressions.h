@@ -37,7 +37,6 @@ public:
 
    OperateurEVAL(Litterale* l1):OperateurUnaire(l1){}
 
-   OperateurEVAL* getCopy() {return new OperateurEVAL(*this);}
 
 };
 
@@ -52,8 +51,6 @@ public:
 
    OperateurSTO(Litterale* l1, Litterale* l2):OperateurBinaire(l1,l2){}
 
-   OperateurSTO* getCopy() {return new OperateurSTO(*this);}
-
 };
 
 
@@ -67,7 +64,6 @@ public:
    OperateurUserMade():OperateurUnaire(){}
    OperateurUserMade(Litterale* l1):OperateurUnaire(l1){}
 
-   OperateurUserMade* getCopy() {return new OperateurUserMade(*this);}
 
 };
 

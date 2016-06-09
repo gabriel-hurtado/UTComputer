@@ -47,11 +47,9 @@ protected:
     QString symbole;
     unsigned int priority=0;
 public:
-
-    Operateur(){}
+    virtual ~Operateur(){}
     virtual void chargerContexte() = 0;
     virtual void resetContexte() = 0;
-    virtual Operateur* getCopy()=0;
     void setSymbole(QString const symb){symbole=symb;}
     virtual void pushResultat(Litterale* res);
     virtual void operation();
@@ -77,6 +75,7 @@ public:
     void chargerContexte();
 
     void resetContexte();
+    virtual ~OperateurBinaire(){delete l1;delete l2;}
 
     OperateurBinaire():Operateur(){}
     OperateurBinaire(Litterale* lit1, Litterale* lit2):Operateur(),l1(lit1),l2(lit2){}
@@ -88,6 +87,7 @@ class OperateurUnaire  : public virtual Operateur{
 protected:
    Litterale* l1=nullptr;
 public:
+   virtual ~OperateurUnaire(){delete l1;}
    void chargerContexte();
    void resetContexte();
    OperateurUnaire():Operateur(){}
@@ -112,11 +112,15 @@ exemple, la ligne de commande ’3+X’’9*Y’* a pour résultat ’(3+X)*9*Y�
 
 class OperateurPrefixe : public virtual Operateur{
    Litterale* traitementExpression();
+public:
+   virtual ~OperateurPrefixe(){}
 
 };
 
 class OperateurInfixe : public virtual Operateur{
     Litterale* traitementExpression();
+public:
+    virtual ~OperateurInfixe(){}
 };
 
 

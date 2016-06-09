@@ -34,7 +34,6 @@ public:
    OperateurEgal():OperateurBinaire(){}
    OperateurEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurEgal* getCopy() {return new OperateurEgal(*this);}
 
 };
 
@@ -47,7 +46,6 @@ public:
 OperateurDiff():OperateurBinaire(){}
    OperateurDiff(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurDiff* getCopy() {return new OperateurDiff(*this);}
 
 };
 
@@ -59,7 +57,6 @@ public:
    OperateurInfEgal():OperateurBinaire(){}
    OperateurInfEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurInfEgal* getCopy() {return new OperateurInfEgal(*this);}
 
 };
 
@@ -72,7 +69,6 @@ public:
    OperateurSupEgal():OperateurBinaire(){}
    OperateurSupEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurSupEgal* getCopy() {return new OperateurSupEgal(*this);}
 
 };
 
@@ -84,7 +80,6 @@ public:
    OperateurSup():OperateurBinaire(){}
    OperateurSup(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurSup* getCopy() {return new OperateurSup(*this);}
 
 };
 
@@ -97,7 +92,6 @@ public:
    OperateurInf():OperateurBinaire(){}
    OperateurInf(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurInf* getCopy() {return new OperateurInf(*this);}
 
 };
 
@@ -110,7 +104,6 @@ public:
    OperateurAND():OperateurBinaire(){}
    OperateurAND(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurAND* getCopy() {return new OperateurAND(*this);}
 
 };
 
@@ -122,7 +115,6 @@ public:
    OperateurOR():OperateurBinaire(){}
    OperateurOR(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurOR* getCopy() {return new OperateurOR(*this);}
 
 };
 
@@ -134,7 +126,6 @@ public:
    OperateurNOT():OperateurBinaire(){}
    OperateurNOT(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurNOT* getCopy() {return new OperateurNOT(*this);}
 
 };
 }

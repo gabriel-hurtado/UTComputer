@@ -22,6 +22,7 @@ public:
     OperateurNumerique(){setPriority(2);}
 
     virtual Litterale* traitementOperateur() =0;
+    virtual ~OperateurNumerique(){}
 
 };
 
@@ -36,7 +37,6 @@ public:
    OperateurNEG():OperateurUnaire(){}
    OperateurNEG(Litterale* lit1):OperateurUnaire(lit1){}
 
-   OperateurNEG* getCopy() {return new OperateurNEG(*this);}
 };
 
 class OperateurAddition : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
@@ -48,7 +48,6 @@ public:
    OperateurAddition():OperateurBinaire(){setPriority(3);}
    OperateurAddition(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){setPriority(3);}
 
-   OperateurAddition* getCopy() {return new OperateurAddition(*this);}
 };
 
 class OperateurSoustraction : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
@@ -60,7 +59,6 @@ public:
    OperateurSoustraction():OperateurBinaire(){setPriority(3);}
    OperateurSoustraction(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){setPriority(3);}
 
-   OperateurSoustraction* getCopy() {return new OperateurSoustraction(*this);}
 };
 
 class OperateurDivision : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
@@ -71,7 +69,6 @@ public:
    void initSymbole(){symbole="/";}
    OperateurDivision():OperateurBinaire(){setPriority(4);}
    OperateurDivision(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){setPriority(4);}
-   OperateurDivision* getCopy() {return new OperateurDivision(*this);}
 };
 
 
@@ -84,7 +81,6 @@ public:
    OperateurMultiplication():OperateurBinaire(){setPriority(4);}
    OperateurMultiplication(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){setPriority(4);}
 
-   OperateurMultiplication* getCopy() {return new OperateurMultiplication(*this);}
 
 };
 
@@ -97,7 +93,6 @@ public:
    OperateurDIV():OperateurBinaire(){}
    OperateurDIV(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurDIV* getCopy() {return new OperateurDIV(*this);}
 
 };
 
@@ -110,7 +105,6 @@ public:
    OperateurMOD():OperateurBinaire(){}
    OperateurMOD(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   OperateurMOD* getCopy() {return new OperateurMOD(*this);}
 
 };
 
@@ -123,7 +117,6 @@ public:
    OperateurNUM():OperateurUnaire(){}
    OperateurNUM(Litterale* lit1):OperateurUnaire(lit1){}
 
-   OperateurNUM* getCopy() {return new OperateurNUM(*this);}
 };
 
 class OperateurDEN : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
@@ -135,7 +128,6 @@ public:
    OperateurDEN():OperateurUnaire(){}
    OperateurDEN(Litterale* lit1):OperateurUnaire(lit1){}
 
-   OperateurDEN* getCopy() {return new OperateurDEN(*this);}
 };
 
 class OperateurIM : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
@@ -147,7 +139,6 @@ public:
    OperateurIM():OperateurUnaire(){}
    OperateurIM(Litterale* lit1):OperateurUnaire(lit1){}
 
-   OperateurIM* getCopy() {return new OperateurIM(*this);}
 };
 
 class OperateurRE : public OperateurUnaire, public OperateurNumerique,public OperateurPrefixe{
@@ -159,7 +150,6 @@ public:
    OperateurRE():OperateurUnaire(){}
    OperateurRE(Litterale* lit1):OperateurUnaire(lit1){}
 
-   OperateurRE* getCopy() {return new OperateurRE(*this);}
 };
 
 class Operateur$ : public OperateurBinaire, public OperateurNumerique,public OperateurInfixe{
@@ -171,7 +161,6 @@ public:
    Operateur$():OperateurBinaire(){}
    Operateur$(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
 
-   Operateur$* getCopy() {return new Operateur$(*this);}
 
 };
 }

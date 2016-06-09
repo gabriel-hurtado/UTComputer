@@ -42,7 +42,6 @@ public:
    OperateurIFT():OperateurBinaire(){}
 
 
-   OperateurIFT* getCopy() {return new OperateurIFT(*this);}
 
 };
 
