@@ -29,8 +29,8 @@ void VariablesManager::supprimer(const QString& nom){
             nb_prog--;
         else
             nb_var--;
-
         var_map.remove(nom);
+        delete obj;
     }
 }
 
@@ -42,7 +42,7 @@ VariablesManager::~VariablesManager(){
 Litterale* VariablesManager::getVariable(const QString& nom){
     if(var_map.contains(nom))
     return (var_map.find(nom)).value()->getCopy();
-    throw LitteraleException("Variable ou programme non existant");
+    throw LitteraleException(nom + " ne référence pas de variable ou programme");
 }
 
 QMap<QString, Litterale*>::iterator VariablesManager::getVariablesBegin(){

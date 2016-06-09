@@ -7,10 +7,10 @@ void WordIdentifier::WordPosition(QString& s, SelectedPosition& select){
     }
 }
 
-bool WordIdentifier::WordGuesser(QString s){return true;}
+bool WordIdentifier::WordGuesser(QString){return true;}
 
 void EncapsulatorIdentifier::WordPosition(QString& s,SelectedPosition& select){
-    while(*select.it_fin!='"'){
+    while(*select.it_fin!=leftDelimiter){
         if(select.it_fin==s.end())
             throw LitteraleException("Impossible de trouver la fin de l'Expression");
         select.it_fin++;

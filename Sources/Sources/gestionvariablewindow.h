@@ -24,11 +24,15 @@ public:
 private:
     Ui::gestionvariableWindow *ui;
     VariablesManager * varMan;
+    QString selectedIdentifierName;
 
 public slots:
     void refreshVueVariable();
     void regenerateVueVariable();
     void modifierVariable(int,int);
+    void saveIdentifierName(int,int);
+private slots:
+    void on_button_add_clicked();
 };
 
 #endif // GESTIONVARIABLEWINDOW_H

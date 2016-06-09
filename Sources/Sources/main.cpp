@@ -17,10 +17,10 @@ int main(int argc,char* argv[]) {
         Littérales Updated on 02/06/16
     */
     LitteraleFactory::enregistrer(0,"[",new Programme(""),"]",new RecursiveEncapsulatorIdentifier("[","]"));
-    LitteraleFactory::enregistrer(1,"\"",new Expression(""),"\"" ,new EncapsulatorIdentifier("\"","\""));
-    //LitteraleFactory::enregistrerInfix(2,"$",new Complexe(*dynamic_cast<LitteraleNumerique*>(new Entier(1)),*dynamic_cast<LitteraleNumerique*>(new Entier(1))));
+    LitteraleFactory::enregistrer(1,"'",new Expression(""),"'" ,new EncapsulatorIdentifier("'","'"));
+    LitteraleFactory::enregistrerInfix(2,"$",new Complexe(*dynamic_cast<LitteraleNumerique*>(new Entier(1)),*dynamic_cast<LitteraleNumerique*>(new Entier(1))));
     LitteraleFactory::enregistrer(4,".",new Reelle(1,1));
-    //LitteraleFactory::enregistrerInfix(3,"/",new Rationnel(2,1));
+    LitteraleFactory::enregistrerInfix(3,"/",new Rationnel(2,1));
     LitteraleFactory::enregistrer(INT_MAX-1,"Atome",new Atome("ERROR"));
     LitteraleFactory::enregistrer(INT_MAX,"Entier",new Entier(0));
 
