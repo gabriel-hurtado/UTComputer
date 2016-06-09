@@ -86,7 +86,7 @@ Litterale* OperateurUserMade::traitementOperateur(){
         }
         }
         catch (LitteraleException e) {
-            Expression* exp = new Expression("\""+at->toString()+"\"");
+            Expression* exp = new Expression("\'"+at->toString()+"\'");
             Pile::donnerInstance()<<*exp;
             return nullptr;
         }

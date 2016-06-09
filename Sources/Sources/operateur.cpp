@@ -108,12 +108,12 @@ Litterale* OperateurInfixe::traitementExpression(){
         QString symbol= bin->getSymbole();
         if(ex1 && !ex2)
         {
-            ex2= new Expression("\""+bin->getl2()->toString()+"\"");
+            ex2= new Expression("\'"+bin->getl2()->toString()+"\'");
 
         }
         if(ex2 && !ex1)
         {
-            ex1= new Expression("\""+bin->getl1()->toString()+"\"");
+            ex1= new Expression("\'"+bin->getl1()->toString()+"\'");
 
         }
         if(ex1 && ex2)
@@ -124,7 +124,7 @@ Litterale* OperateurInfixe::traitementExpression(){
            QString secondPart="("+ex2->getExpressionNoBorders()+")";
            secondPart = Controleur::ParenthesisCleaner(secondPart,bin->getPriority());
 
-           QString newExp = "\""+firstPart+symbol+secondPart+"\"";
+           QString newExp = "\'"+firstPart+symbol+secondPart+"\'";
 
            return new Expression(newExp);
         }

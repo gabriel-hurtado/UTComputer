@@ -268,7 +268,11 @@ QString Expression::readToken(QString s) const{
             }
             else if(isVariable(tmp)){
                 found=true;
-                QString rep = VariablesManager::getVariable(tmp)->toString();
+                Litterale* l = VariablesManager::getVariable(tmp);
+                if(estdeType<Programme>(l))
+                    throw OperateurException("Un programme est dans l'expression !");
+
+                QString rep = l->toString();
                 int length_it = s.indexOf(tmp);
                 s.replace(tmp,rep);
                 it = s.begin();
