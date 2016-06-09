@@ -188,6 +188,8 @@ public:
 
     bool isOperator(QString) const;
 
+    bool isVariable(QString s) const ;
+
     Expression(QString v):value(v){}
     QString getExpression() const {return value;}
     const QString toString() const {return getExpression();}

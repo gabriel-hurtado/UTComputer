@@ -255,7 +255,9 @@ Litterale* Expression::evaluer() const{
     */
     //newVal de la forme 2*8+3 (pas de parenthèses), plus qu'a l'interpréter
     //Partie interprétation
-    return new Expression(readToken(newVal));
+    QString result = readToken(newVal);
+    Controleur::donnerInstance().commande(result);
+    return nullptr;
 
 
 /*
@@ -325,12 +327,14 @@ QString Expression::readToken(QString s) const{
     QString tmp;
     while(it!=s.end()){
 
-        if(*it==' ')
+        if(*it==' '){
+            it++;
             continue;
+        }
 
 //4+4*7 4 4 7 * +
         //On tombe dans le cas ou on a une valeur
-        while(it!=s.end() && ((*it<'9' && *it>'0') || (litterale_map.find(*it))!=litterale_map.end())){
+        while(it!=s.end() && ((*it<='9' && *it>='0') || (litterale_map.find(*it))!=litterale_map.end())){
               tmp+=*it;
               if(it!=s.end())
                   it++;
@@ -354,8 +358,8 @@ QString Expression::readToken(QString s) const{
 
 
         //On tombe dans le cas d'un morçeau de texte
-        if((*it<='Z' && *it>'A')){
-            while(it!=s.end() && ((*it<='Z' && *it>'A') || (*it<'9' && *it>'0'))){
+        if((*it<='Z' && *it>='A')){
+            while(it!=s.end() && ((*it<='Z' && *it>='A') || (*it<='9' && *it>='0'))){
                 tmp+=* it;
                 if(it!=s.end())
                     it++;
@@ -366,6 +370,16 @@ QString Expression::readToken(QString s) const{
                     stack.pop();
                 }
             stack.push(tmp);
+            tmp.clear();
+            }
+            else if(isVariable(tmp)){
+                QString rep = VariablesManager::getVariable(tmp)->toString();
+                int length_it = s.indexOf(tmp);
+                s.replace(tmp,rep);
+                it = s.begin();
+                for(int i=0; i<length_it;i++,it++);
+                tmp.clear();
+
             }
 
         }
@@ -410,6 +424,14 @@ bool Expression::isOperator(QString s) const {
         return true;
     return false;
 }
+
+bool Expression::isVariable(QString s) const {
+    VariablesManager& varMan = VariablesManager::donnerInstance();
+    varMan.getVariable(s);
+    return true;
+}
+
+
 
 /*------------Définition des méthodes de la classe Programme------------*/
 
