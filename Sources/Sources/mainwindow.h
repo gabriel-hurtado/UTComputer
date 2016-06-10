@@ -11,6 +11,7 @@ class Pile;
 class gestionvariableWindow;
 class ParameterWindow;
 class Controleur;
+class LitteraleFactory;
 
 
 namespace Ui {
@@ -23,6 +24,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     Pile& pile;
     Controleur& controleur;
+    LitteraleFactory& lf;
     static MainWindow* InstanceMainWindow;
     QMediaPlayer* soundBell;
     static bool keyboard;

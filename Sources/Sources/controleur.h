@@ -12,7 +12,13 @@ class Controleur
         car on en a besoin que d'un seul.
     */
     static Controleur* instanceControleur;
+    /*
+        Map qui contient tous les symboles connus
+    */
     static QMap<QString,QString> symbolMap;
+    /*
+        Map qui contient les pointeurs sur la class d'interprétation du mot
+    */
     static QMap<QString,WordIdentifier*> interpretationMap;
 
 
@@ -39,7 +45,7 @@ public:
             -lorsque toutes les actions se sont correctement éffectuées : true
             -sinon false et s contient seulement l'action non comprise
     */
-    bool commande(QString& s);
+    bool commande(QString& s,QString litterale_mode = "RPN");
 
     /*
         Permet d'extraire le premier mot (première action) à traiter.

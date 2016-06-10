@@ -75,7 +75,7 @@ public:
     void chargerContexte();
 
     void resetContexte();
-    virtual ~OperateurBinaire(){delete l1;delete l2;}
+    virtual ~OperateurBinaire();
 
     OperateurBinaire():Operateur(){}
     OperateurBinaire(Litterale* lit1, Litterale* lit2):Operateur(),l1(lit1),l2(lit2){}
@@ -87,7 +87,7 @@ class OperateurUnaire  : public virtual Operateur{
 protected:
    Litterale* l1=nullptr;
 public:
-   virtual ~OperateurUnaire(){delete l1;}
+   virtual ~OperateurUnaire();
    void chargerContexte();
    void resetContexte();
    OperateurUnaire():Operateur(){}

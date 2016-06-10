@@ -26,8 +26,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     pile(Pile::donnerInstance()),
     controleur(Controleur::donnerInstance()),
+    lf(LitteraleFactory::donnerInstance()),
     soundBell(new QMediaPlayer),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    parameterIwindow(nullptr),
+    variableIwindow(nullptr)
+
 
 
 {
@@ -77,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent) :
         QSettings settings("CosteHurtado", "UTComputer");
 
         int nb_items = settings.value("nb_item_affiche", 10).toInt();
-        Pile::donnerInstance().setNbToAffiche(nb_items);
+        pile.setNbToAffiche(nb_items);
 
         //restaurer pile
         int sizePile = settings.value("nb_item_pile",0).toInt();
@@ -103,14 +107,7 @@ MainWindow::MainWindow(QWidget *parent) :
            {
             if(nb!=sizePile){
                 QString pValue = settings.value(pileNb).toString();
-                Litterale* val= LitteraleFactory::donnerInstance().creerRPNLitterale(pValue);
-
-                if(val)
-                Pile::donnerInstance()<<*val;
-                else{
-                     val= LitteraleFactory::donnerInstance().creerInfixLitterale(pValue);                    if(val)
-                        Pile::donnerInstance()<<*val;
-                }
+                controleur.commande(pValue,"INFIX");
                 nb++;
             }
             else
@@ -139,10 +136,10 @@ MainWindow::MainWindow(QWidget *parent) :
         foreach (const QString &varName, groupVars)
            {
               QString varValue = settings.value(varName).toString();
-              Litterale* val=  LitteraleFactory::donnerInstance().creerRPNLitterale(varValue);              if(val)
+              Litterale* val=  lf.creerRPNLitterale(varValue);              if(val)
                VariablesManager::enregistrer(varName,val);
               else{
-                  val = LitteraleFactory::donnerInstance().creerInfixLitterale(varValue);
+                  val = lf.creerInfixLitterale(varValue);
 
                   if(val)
                       VariablesManager::enregistrer(varName,val);
@@ -171,7 +168,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     QSettings settings("CosteHurtado", "UTComputer");
     settings.clear();
 
-    settings.setValue("nb_item_affiche", Pile::donnerInstance().getNbToAffiche());
+    settings.setValue("nb_item_affiche", pile.getNbToAffiche());
 
      settings.setValue("keyboard", keyboard );
      settings.setValue("sound", sound);
@@ -189,13 +186,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
     Pile::iterator beginP;
     int nb=0;
-    for(beginP=Pile::donnerInstance().begin();beginP!=Pile::donnerInstance().end();){
+    for(beginP=pile.begin();beginP!=pile.end();){
         settings.setValue("Pile/"+QString::number(nb), (*beginP).toString());
         ++beginP;
         ++nb;
     }
     settings.setValue("nb_item_pile",QString::number(nb));
        event->accept();
+
     //Fermer les autres fenetres
     if(parameterIwindow){
         parameterIwindow->close();
@@ -235,7 +233,7 @@ void MainWindow::getNextCommande(QString _fromButton){
         sent+=_fromButton;
         if(!controleur.commande(sent)){
             ui->commande->setText(Controleur::SpaceCleaner(sent));
-            throw LitteraleException("Le mot "+ Controleur::donnerInstance().firstWord(sent)+" n'as pas été reconnu");
+            throw LitteraleException("Le mot "+ controleur.firstWord(sent)+" n'as pas été reconnu");
         }
         ui->commande->clear();
     }
@@ -262,16 +260,19 @@ void MainWindow::openVariableWindow(){
 void MainWindow::closeVariableWindow(){
     variableIwindow->close();
     delete variableIwindow;
+    variableIwindow = nullptr;
 }
 
 void MainWindow::openParameterWindow(){
     parameterIwindow = new ParameterWindow();
     parameterIwindow->show();
+
 }
 
 void MainWindow::closeParameterWindow(){
     parameterIwindow->close();
     delete parameterIwindow;
+    parameterIwindow = nullptr;
 }
 
 void MainWindow::regenerateVuePile(){

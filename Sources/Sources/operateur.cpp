@@ -14,6 +14,8 @@ void OperateurBinaire::chargerContexte(){Pile::donnerInstance()>>l2;
 void OperateurBinaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
                      if(l2)  Pile::donnerInstance()<<*l2;}
 
+OperateurBinaire::~OperateurBinaire(){delete l1;delete l2;}
+
 // Définitions de la classe Operateur
 
 void Operateur::pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
@@ -44,6 +46,8 @@ void OperateurUnaire::chargerContexte(){Pile::donnerInstance()>>l1;
                       OperationManager::donnerInstance().add(l1);}
 
 void OperateurUnaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
+
+OperateurUnaire::~OperateurUnaire(){delete l1;}
 
 //fonctions de opération manager
 
@@ -140,7 +144,7 @@ Litterale* OperateurInfixe::traitementExpression(){
         if(ex1)
         {
             QString symbol= un->getSymbole();
-           QString newExp = "\""+symbol+"("+ex1->getExpressionNoBorders()+")"+"\"";
+           QString newExp = "'"+symbol+"("+ex1->getExpressionNoBorders()+")"+"'";
            return new Expression(newExp);
         }
          else
@@ -158,17 +162,17 @@ Litterale* OperateurPrefixe::traitementExpression(){
       QString symbol= bin->getSymbole();
       if(ex1 && !ex2)
       {
-          ex2= new Expression("\""+bin->getl2()->toString()+"\"");
+          ex2= new Expression("'"+bin->getl2()->toString()+"'");
 
       }
       if(ex2 && !ex1)
       {
-          ex1= new Expression("\""+bin->getl1()->toString()+"\"");
+          ex1= new Expression("'"+bin->getl1()->toString()+"'");
 
       }
       if(ex1 && ex2)
       {
-         QString newExp = "\""+symbol+"("+ex1->getExpressionNoBorders()+","+ex2->getExpressionNoBorders()+")"+"\"";
+         QString newExp = "'"+symbol+"("+ex1->getExpressionNoBorders()+","+ex2->getExpressionNoBorders()+")"+"'";
          return new Expression(newExp);
       }
 
@@ -183,7 +187,7 @@ Litterale* OperateurPrefixe::traitementExpression(){
       if(ex1)
       {
           QString symbol= un->getSymbole();
-         QString newExp = "\""+symbol+"("+ex1->getExpressionNoBorders()+")"+"\"";
+         QString newExp = "'"+symbol+"("+ex1->getExpressionNoBorders()+")"+"'";
          return new Expression(newExp);
       }
        else

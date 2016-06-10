@@ -33,7 +33,7 @@ Controleur::~Controleur(){}
 
 
 
-bool Controleur::commande(QString& s){
+bool Controleur::commande(QString& s,QString litterale_mode){
     // On extraie le mot que l'on veut
     QString word = firstWord(s);
 
@@ -43,10 +43,12 @@ bool Controleur::commande(QString& s){
             /*
                 On tente de fabriquer une littérale a partir du mot, si on recoie nullptr alors ce n'en n'est pas une
             */
-            Litterale* l = LitteraleFactory::donnerInstance().creerRPNLitterale(word);
+            Litterale* l;
+            if(litterale_mode == "RPN")
+               l = LitteraleFactory::donnerInstance().creerRPNLitterale(word);
+            else if(litterale_mode == "INFIX")
+                l = LitteraleFactory::donnerInstance().creerInfixLitterale(word);
             if(l){
-
-
                     Atome* a= estdeType<Atome>(l);
                         if(a){
                             expression::OperateurUserMade op = expression::OperateurUserMade(a);

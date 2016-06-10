@@ -126,8 +126,10 @@ void gestionvariableWindow::on_button_add_clicked()
     }
     if(l){
         varMan->enregistrer(id,l);
+        ui->message->setText("Ajout réussi");
+        regenerateVueVariable();
+        return;
     }
-    ui->message->setText("Ajout réussi");
-    regenerateVueVariable();
+    ui->message->setText("Nombre non valide");
     return;
 }

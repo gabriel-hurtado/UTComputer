@@ -182,31 +182,28 @@ QString const Atome::toString() const {
 /*------------Définition des méthodes de la classe Expression------------*/
 
 Litterale* Expression::evaluer() const{
-    QString newVal = value;
-    newVal=newVal.remove(0,1);
-    newVal=newVal.remove(newVal.length()-1,newVal.length());
-    QString result = readToken(newVal);
-    Controleur::donnerInstance().commande(result);
-    return nullptr;
-}
-
-Litterale* Expression::getFromString(QString s){
-    if(s[0]=='\'')
-        return new Expression(s);
-    else return nullptr;
-}
-
-QString Expression::readToken(QString s) const{
+    QString s = value;
+    //On vire les '
+    s=s.remove(0,1);
+    s=s.remove(s.length()-1,s.length());
     QString::iterator it = s.begin();
+    //QString contenant le résultat
     QString postfix;
+
+    //Stack d'opérations
     QStack<QString> stack;
+
+    //Map des opérateurs
     const QMap<QString, Operateur*> op_map = OperateurFactory::getMap();
+
+    //Map de tous les symboles
     const QMap<QString,QString>& symbol_map = Controleur::getSymbolMap();
 
-    bool found;
+    //Traduction de Infix vers Postfix
     QString endTarget;
-
     QString tmp;
+    bool found;
+
     while(it!=s.end()){
         found=false;
 
@@ -215,21 +212,11 @@ QString Expression::readToken(QString s) const{
             continue;
         }
 
+        //Verification que ce n'est pas une litterale avec 2 symboles exemple : Expression ou Programme
         if(tmp == "" && symbol_map.find(*it)!=symbol_map.end()){
             endTarget=symbol_map.find(*it).value();
-            if(endTarget!=""){
-                while(it!=s.end() && *it != endTarget){
-                    tmp+=*it++;
-                }
-                if(*it!=endTarget)
-                    throw LitteraleException("Mot " +endTarget + " non trouvé");
-                tmp+=endTarget;
-                postfix+=tmp+" ";
-                endTarget.clear();
-                tmp.clear();
-                it++;
-                found=true;
-            }
+            if(endTarget!="")
+                    throw LitteraleException("Litterale "+ QString(*it) +"..."+endTarget+" non permise");
         }
 
         //On tombe dans le cas ou on a une valeur
@@ -247,8 +234,6 @@ QString Expression::readToken(QString s) const{
             found=true;
 
         }
-
-
 
         //On tombe dans le cas d'un morçeau de texte
         if((*it<='Z' && *it>='A')){
@@ -321,8 +306,17 @@ QString Expression::readToken(QString s) const{
         postfix+= stack.top() + " ";
         stack.pop();
     }
-    return postfix;
+
+    Controleur::donnerInstance().commande(postfix,"INFIX");
+    return nullptr;
 }
+
+Litterale* Expression::getFromString(QString s){
+    if(s[0]=='\'')
+        return new Expression(s);
+    else return nullptr;
+}
+
 Litterale* Expression::getCopy() const{return new Expression(value);}
 
 int Expression::CompareOperators(QString s1,QString s2) const{

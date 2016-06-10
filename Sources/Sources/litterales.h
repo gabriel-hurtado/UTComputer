@@ -129,7 +129,7 @@ protected:
 public:
     Rationnel(int n, int d=1);
     Rationnel(const Entier& n, const Entier& d) { Rationnel(n.getValeur(), d.getValeur()); }
-    virtual ~Rationnel(){ }
+    virtual ~Rationnel(){}
     Entier getNumerateur() const { return numerateur; }
     Entier getDenominator() const { return denominateur; }
 
@@ -151,6 +151,11 @@ class Complexe : public LitteraleComplexe{
 public:
     /*Le comportement par défaut du constructeur est suffisant car pas de pointeur*/
     Complexe(LitteraleNumerique& pR,LitteraleNumerique& pI):p_reelle(*pR.getNumericCopy()),p_imaginaire(*pI.getNumericCopy()){}
+    virtual ~Complexe(){
+        delete &p_reelle;
+        delete &p_imaginaire;
+    }
+    Complexe(Complexe& e):p_reelle(*e.getPartieReelle()->getNumericCopy()),p_imaginaire(*e.getPartieImaginaire()->getNumericCopy()){}
     LitteraleNumerique* getPartieReelle() const {return p_reelle.getNumericCopy();}
     LitteraleNumerique* getPartieImaginaire() const {return p_imaginaire.getNumericCopy();}
 
@@ -169,6 +174,7 @@ class Atome : public LitteraleSimple{
     QString nom;
 public:
     Atome(QString n);
+    virtual ~Atome(){}
     QString getNom() const {return nom;}
     const QString toString() const;
     Litterale* getCopy() const;
@@ -182,7 +188,6 @@ class Expression : public Litterale{
     QString value;
 
 public:
-    QString readToken(QString) const;
 
     int CompareOperators(QString,QString) const;
 
@@ -191,6 +196,7 @@ public:
     bool isVariable(QString s) const ;
 
     Expression(QString v):value(v){}
+    virtual ~Expression(){}
     QString getExpression() const {return value;}
     const QString toString() const {return getExpression();}
     Litterale* evaluer() const;
@@ -214,6 +220,7 @@ class Programme : public Litterale{
 
 public:
     Programme(QString p):valeur(p){}
+    virtual ~Programme(){}
     QString getProgramme() const {return valeur;}
     const QString toString() const {return getProgramme();}
     Litterale* getCopy() const;
