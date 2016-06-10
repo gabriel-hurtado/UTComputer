@@ -77,7 +77,7 @@ public:
     Entier(int v=0) :valeur(v) {}
     virtual ~Entier() {}
     double getValeur() const { return (double)valeur; }
-    const QString toString() const {QString s; return s.setNum(getValeur());}
+    const QString toString() const {return QString::number(valeur);}
     LitteraleComplexe* neg(){Entier* res =getNumericCopy(); res->valeur=-res->valeur; return res;}
     Entier* getNumericCopy() const{return new Entier(*this);}
     Litterale* getFromString(QString );//Cas spécial impossible normalement

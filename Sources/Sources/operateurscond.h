@@ -10,20 +10,6 @@ public:
 
     OperateurConditionnel(){}
 
-    void operation(){
-                     try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
-                        actualiserContexte(); traitementOperateur(); }
-                        catch(OperateurException op){
-                       resetContexte();
-                       throw OperateurException(op);
-                            }
-                         catch(PileException op){
-                        resetContexte();
-                        throw PileException(op);
-                            }
-                        }
-
-    virtual void traitementOperateur() =0;
 };
 
 
@@ -35,16 +21,16 @@ class OperateurIFT : public OperateurBinaire, public OperateurConditionnel, publ
 
 
 public:
-   void traitementOperateur(); //a faire après avoir géré les expressions
+   Litterale* traitementOperateur(); //a faire après avoir géré les expressions
 
-   void initSymbole() override{symbole="IFT";}
+   void initSymbole() {symbole="IFT";}
 
    OperateurIFT():OperateurBinaire(){}
 
 
 
 };
-
+}
 
 
 

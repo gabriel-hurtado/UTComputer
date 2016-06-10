@@ -43,7 +43,8 @@ SOURCES += \
     Sources/Sources/parameterwindow.cpp \
     Sources/Sources/gestionvariablewindow.cpp \
     Sources/Sources/utils.cpp \
-    Sources/Sources/gestionprogrammes.cpp
+    Sources/Sources/gestionprogrammes.cpp \
+    Sources/Sources/operateurscond.cpp
     Sources/Sources/mainwindow.cpp
 
 FORMS += \

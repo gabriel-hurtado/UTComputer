@@ -9,7 +9,7 @@
 #include "operateurslogiques.h"
 #include "operateursexpressions.h"
 #include "operateurspile.h"
-
+#include "operateurscond.h"
 
 int main(int argc,char* argv[]) {
 
@@ -49,7 +49,7 @@ int main(int argc,char* argv[]) {
     OperateurFactory::enregistrer(">=",new logique::OperateurSupEgal);
     OperateurFactory::enregistrer(">=",new logique::OperateurSupEgal);
     OperateurFactory::enregistrer(">",new logique::OperateurSup);
-    OperateurFactory::enregistrer(">",new logique::OperateurInf);
+    OperateurFactory::enregistrer("<",new logique::OperateurInf);
     OperateurFactory::enregistrer("AND",new logique::OperateurAND);
     OperateurFactory::enregistrer("OR",new logique::OperateurOR);
     OperateurFactory::enregistrer("NOT",new logique::OperateurNOT);
@@ -71,6 +71,8 @@ int main(int argc,char* argv[]) {
     */
     OperateurFactory::enregistrer("EVAL",new expression::OperateurEVAL);
     OperateurFactory::enregistrer("STO",new expression::OperateurSTO);
+
+    OperateurFactory::enregistrer("IFT",new conditionnel::OperateurIFT);
 
 
 
