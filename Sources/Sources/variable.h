@@ -8,7 +8,11 @@
 class gestionvariableWindow;
 class Litterale;
 
-//gère aussi les programmes
+
+/**
+ * @brief Classe de gestion de variables et de programmes
+ *
+ */
 class VariablesManager{
     static QMap<QString, Litterale*> var_map;
     static VariablesManager* instance;
@@ -26,7 +30,11 @@ public:
     static unsigned int getNbProg(){return nb_prog;}
     static unsigned int getNbVar(){return nb_var;}
 
-    //Pour enregistrer des nouvelles variables
+    /**
+     * @brief Pour enregistrer des nouvelles variables
+     * @param nom
+     * @param obj
+     */
     static void enregistrer(const QString& nom,Litterale* obj);
     static void supprimer(const QString& nom);
     static Litterale* getVariable(const QString& nom);

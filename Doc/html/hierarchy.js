@@ -27,6 +27,9 @@ var hierarchy =
         [ "Programme", "class_programme.html", null ]
       ] ],
       [ "Operateur", "class_operateur.html", [
+        [ "conditionnel::OperateurConditionnel", "classconditionnel_1_1_operateur_conditionnel.html", [
+          [ "conditionnel::OperateurIFT", "classconditionnel_1_1_operateur_i_f_t.html", null ]
+        ] ],
         [ "expression::OperateurExpression", "classexpression_1_1_operateur_expression.html", [
           [ "expression::OperateurEVAL", "classexpression_1_1_operateur_e_v_a_l.html", null ],
           [ "expression::OperateurSTO", "classexpression_1_1_operateur_s_t_o.html", null ],
@@ -54,6 +57,7 @@ var hierarchy =
           [ "op_pile::OperateurUNDO", "classop__pile_1_1_operateur_u_n_d_o.html", null ]
         ] ],
         [ "OperateurBinaire", "class_operateur_binaire.html", [
+          [ "conditionnel::OperateurIFT", "classconditionnel_1_1_operateur_i_f_t.html", null ],
           [ "expression::OperateurSTO", "classexpression_1_1_operateur_s_t_o.html", null ],
           [ "logique::OperateurAND", "classlogique_1_1_operateur_a_n_d.html", null ],
           [ "logique::OperateurDiff", "classlogique_1_1_operateur_diff.html", null ],
@@ -87,6 +91,7 @@ var hierarchy =
           [ "numerique::OperateurSoustraction", "classnumerique_1_1_operateur_soustraction.html", null ]
         ] ],
         [ "OperateurPrefixe", "class_operateur_prefixe.html", [
+          [ "conditionnel::OperateurIFT", "classconditionnel_1_1_operateur_i_f_t.html", null ],
           [ "logique::OperateurAND", "classlogique_1_1_operateur_a_n_d.html", null ],
           [ "logique::OperateurNOT", "classlogique_1_1_operateur_n_o_t.html", null ],
           [ "logique::OperateurOR", "classlogique_1_1_operateur_o_r.html", null ],
@@ -134,6 +139,7 @@ var hierarchy =
       [ "Pile", "class_pile.html", null ]
     ] ],
     [ "QWidget", null, [
+      [ "gestionprogrammes", "classgestionprogrammes.html", null ],
       [ "gestionvariableWindow", "classgestionvariable_window.html", null ],
       [ "ParameterWindow", "class_parameter_window.html", null ]
     ] ],

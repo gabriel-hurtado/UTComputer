@@ -1,0 +1,21 @@
+digraph "logique::OperateurInfEgal"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="logique::OperateurInfEgal",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="OperateurBinaire",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_operateur_binaire.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Operateur",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_operateur.html",tooltip="classe la plus abstraite des opérateurs "];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Operande",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_operande.html"];
+  Node5 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" l1\nl2" ,fontname="Helvetica"];
+  Node5 [label="Litterale",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_litterale.html"];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="logique::OperateurLogique",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlogique_1_1_operateur_logique.html"];
+  Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="OperateurInfixe",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_operateur_infixe.html",tooltip="Une classe utile pour les expressions Permet la spécialisation d&#39;un opérateur pour son traitement d&#39;e..."];
+  Node3 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

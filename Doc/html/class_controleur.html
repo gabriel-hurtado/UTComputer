@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>UTComputer: Controleur Class Reference</title>
+<title>My Project: Controleur Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,9 +31,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">UTComputer
+   <div id="projectname">My Project
    </div>
-   <div id="projectbrief">A rpn programable calculator</div>
   </td>
  </tr>
  </tbody>
@@ -47,7 +46,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -114,226 +112,43 @@ $(document).ready(function(){initNavTree('class_controleur.html','');});
 <div class="title">Controleur Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p><code>#include &lt;<a class="el" href="controleur_8h_source.html">controleur.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a26c88182686a8e5410acb5c209471e5a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a26c88182686a8e5410acb5c209471e5a">commande</a> (QString &amp;s)</td></tr>
-<tr class="separator:a26c88182686a8e5410acb5c209471e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adaeee40501f4d19e4c9386354f4b56f0"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#adaeee40501f4d19e4c9386354f4b56f0">firstWord</a> (QString s)</td></tr>
-<tr class="separator:adaeee40501f4d19e4c9386354f4b56f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1bf037a022ac610d6975940c8d4010e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa1bf037a022ac610d6975940c8d4010e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>commande</b> (QString &amp;s, QString litterale_mode=&quot;RPN&quot;)</td></tr>
+<tr class="separator:aa1bf037a022ac610d6975940c8d4010e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ab6c050fe11428524057d35a72d734fa3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_controleur.html">Controleur</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#ab6c050fe11428524057d35a72d734fa3">donnerInstance</a> ()</td></tr>
+<tr class="memitem:ab6c050fe11428524057d35a72d734fa3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab6c050fe11428524057d35a72d734fa3"></a>
+static <a class="el" href="class_controleur.html">Controleur</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>donnerInstance</b> ()</td></tr>
 <tr class="separator:ab6c050fe11428524057d35a72d734fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7b7110debfe566ab628c37c0a0a17cc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#ad7b7110debfe566ab628c37c0a0a17cc">libererInstance</a> ()</td></tr>
+<tr class="memitem:ad7b7110debfe566ab628c37c0a0a17cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad7b7110debfe566ab628c37c0a0a17cc"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>libererInstance</b> ()</td></tr>
 <tr class="separator:ad7b7110debfe566ab628c37c0a0a17cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b233f34b52133264a822218cdbdb7e6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a7b233f34b52133264a822218cdbdb7e6">enregistrerSymbole</a> (QString, QString rtok=&quot;&quot;, <a class="el" href="class_word_identifier.html">WordIdentifier</a> *W=nullptr)</td></tr>
+<tr class="memitem:adaeee40501f4d19e4c9386354f4b56f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adaeee40501f4d19e4c9386354f4b56f0"></a>
+static QString&#160;</td><td class="memItemRight" valign="bottom"><b>firstWord</b> (QString s)</td></tr>
+<tr class="separator:adaeee40501f4d19e4c9386354f4b56f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b233f34b52133264a822218cdbdb7e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b233f34b52133264a822218cdbdb7e6"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>enregistrerSymbole</b> (QString, QString rtok=&quot;&quot;, <a class="el" href="class_word_identifier.html">WordIdentifier</a> *W=nullptr)</td></tr>
 <tr class="separator:a7b233f34b52133264a822218cdbdb7e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8ac58979ccd10c5feee4770392ce558"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#ae8ac58979ccd10c5feee4770392ce558">SpaceCleaner</a> (QString)</td></tr>
+<tr class="memitem:ae8ac58979ccd10c5feee4770392ce558"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8ac58979ccd10c5feee4770392ce558"></a>
+static QString&#160;</td><td class="memItemRight" valign="bottom"><b>SpaceCleaner</b> (QString)</td></tr>
 <tr class="separator:ae8ac58979ccd10c5feee4770392ce558"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a632e50ad328bba4e1b888da36710fe00"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a632e50ad328bba4e1b888da36710fe00">ParenthesisCleaner</a> (QString s, unsigned int priority)</td></tr>
+<tr class="memitem:a632e50ad328bba4e1b888da36710fe00"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a632e50ad328bba4e1b888da36710fe00"></a>
+static QString&#160;</td><td class="memItemRight" valign="bottom"><b>ParenthesisCleaner</b> (QString s, unsigned int priority)</td></tr>
 <tr class="separator:a632e50ad328bba4e1b888da36710fe00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab41f453370b29273d539a04afbecb1d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab41f453370b29273d539a04afbecb1d9"></a>
+static const QMap&lt; QString, <a class="el" href="class_word_identifier.html">WordIdentifier</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getInterpretationMap</b> ()</td></tr>
+<tr class="separator:ab41f453370b29273d539a04afbecb1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68f10f8569879cf993de491784102ed0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a68f10f8569879cf993de491784102ed0"></a>
+static const QMap&lt; QString, QString &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSymbolMap</b> ()</td></tr>
+<tr class="separator:a68f10f8569879cf993de491784102ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="controleur_8h_source.html#l00008">8</a> of file <a class="el" href="controleur_8h_source.html">controleur.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a26c88182686a8e5410acb5c209471e5a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Controleur::commande </td>
-          <td>(</td>
-          <td class="paramtype">QString &amp;&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="controleur_8cpp_source.html#l00035">35</a> of file <a class="el" href="controleur_8cpp_source.html">controleur.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab6c050fe11428524057d35a72d734fa3"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_controleur.html">Controleur</a> &amp; Controleur::donnerInstance </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="controleur_8cpp_source.html#l00017">17</a> of file <a class="el" href="controleur_8cpp_source.html">controleur.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7b233f34b52133264a822218cdbdb7e6"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Controleur::enregistrerSymbole </td>
-          <td>(</td>
-          <td class="paramtype">QString&#160;</td>
-          <td class="paramname"><em>ltok</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QString&#160;</td>
-          <td class="paramname"><em>rtok</em> = <code>&quot;&quot;</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_word_identifier.html">WordIdentifier</a> *&#160;</td>
-          <td class="paramname"><em>W</em> = <code>nullptr</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="controleur_8cpp_source.html#l00199">199</a> of file <a class="el" href="controleur_8cpp_source.html">controleur.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="adaeee40501f4d19e4c9386354f4b56f0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QString Controleur::firstWord </td>
-          <td>(</td>
-          <td class="paramtype">QString&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="controleur_8cpp_source.html#l00216">216</a> of file <a class="el" href="controleur_8cpp_source.html">controleur.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad7b7110debfe566ab628c37c0a0a17cc"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Controleur::libererInstance </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="controleur_8cpp_source.html#l00023">23</a> of file <a class="el" href="controleur_8cpp_source.html">controleur.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a632e50ad328bba4e1b888da36710fe00"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QString Controleur::ParenthesisCleaner </td>
-          <td>(</td>
-          <td class="paramtype">QString&#160;</td>
-          <td class="paramname"><em>s</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>priority</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="controleur_8cpp_source.html#l00116">116</a> of file <a class="el" href="controleur_8cpp_source.html">controleur.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae8ac58979ccd10c5feee4770392ce558"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QString Controleur::SpaceCleaner </td>
-          <td>(</td>
-          <td class="paramtype">QString&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="controleur_8cpp_source.html#l00207">207</a> of file <a class="el" href="controleur_8cpp_source.html">controleur.cpp</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Sources/Sources/<a class="el" href="controleur_8h_source.html">controleur.h</a></li>
-<li>Sources/Sources/<a class="el" href="controleur_8cpp_source.html">controleur.cpp</a></li>
+<li>Sources/Sources/controleur.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
