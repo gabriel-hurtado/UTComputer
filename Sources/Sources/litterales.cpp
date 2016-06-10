@@ -53,12 +53,20 @@ const QString Reelle::toString() const {
     return s;
 }
 Litterale* Reelle::getFromString(QString s){
-    QStringList Ql = s.split('.');
+   /* QStringList Ql = s.split('.');
     LitteraleFactory& LF = LitteraleFactory::donnerInstance();
     Entier* l1 = estdeType<Entier>(LF.creerRPNLitterale(Ql.at(0)));
     Entier* l2 = estdeType<Entier>(LF.creerRPNLitterale(Ql.at(1)));
+
     if(l1 && l2)
         return new Reelle(*l1,*l2);
+    else
+        throw LitteraleException(s+" n'est pas une Réelle valide","Reelle");
+    */
+    bool* ok;
+    double res= (s.toDouble(ok));
+    if(*ok)
+        return new Reelle(res);
     else
         throw LitteraleException(s+" n'est pas une Réelle valide","Reelle");
 }
