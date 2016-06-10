@@ -8,8 +8,8 @@
 
 void OperateurBinaire::chargerContexte(){Pile::donnerInstance()>>l2;
                        Pile::donnerInstance()>>l1;
-                      OperationManager::donnerInstance().add(l1);
-                      OperationManager::donnerInstance().add(l2);
+                      OperationManager::donnerInstance().add(l1->getCopy());
+                      OperationManager::donnerInstance().add(l2->getCopy());
 }
 void OperateurBinaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
                      if(l2)  Pile::donnerInstance()<<*l2;}
@@ -52,7 +52,7 @@ void Operateur::operation(){
 
 //Définitions de la classe OperateurUnaire
 void OperateurUnaire::chargerContexte(){Pile::donnerInstance()>>l1;
-                      OperationManager::donnerInstance().add(l1);}
+                      OperationManager::donnerInstance().add(l1->getCopy());}
 
 void OperateurUnaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
 
