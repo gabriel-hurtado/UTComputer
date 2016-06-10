@@ -97,6 +97,14 @@ bool Controleur::commande(QString& s,QString litterale_mode){
         }
 }
 
+/**
+ * @brief Permet de sauter le contenu des parenthèses
+ * Utile lors d'opérations entre expressions
+ * @param start indice du début de la partie de la chaine s à considérer
+ * @param s la chaine dont il faut ignorer une partie
+ * @return l'indice à partir duquel la parenthèse est fermée (si il y en avait), start sinon
+ */
+
 int skipParentheses(int start,QString s){
     int temp=start;
 
@@ -115,6 +123,7 @@ int skipParentheses(int start,QString s){
     }
     return temp;
 }
+
 
 QString Controleur::ParenthesisCleaner(QString s, unsigned int priority){
     //  s="(5+8+9-7)" ici avoir d'une manière ou d'une autre la première littérale dans word
@@ -144,16 +153,18 @@ QString Controleur::ParenthesisCleaner(QString s, unsigned int priority){
             l = LitteraleFactory::donnerInstance().creerInfixLitterale(sub);
             }
             catch (LitteraleException e){
-                if(e.getType()!="Reelle" && e.getType()!="Complexe")
+                if(e.getType()!="Reelle" && e.getType()!="Complexe" && e.getType()!="Rationnel")
                     throw e;
                 l=nullptr;
+                if( e.getType()=="Rationnel")
+                    break;
             }
             if(!l){
                 int j=i+1;
                 try{
                 l2 = LitteraleFactory::donnerInstance().creerInfixLitterale(s.mid( start, j));}
                 catch (LitteraleException e){
-                    if(e.getType()!="Reelle" && e.getType()!="Complexe")
+                    if(e.getType()!="Reelle" && e.getType()!="Complexe" && e.getType()!="Rationnel")
                         throw e;
                     l2=nullptr;
                 }

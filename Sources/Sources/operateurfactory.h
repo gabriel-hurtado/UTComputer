@@ -31,9 +31,19 @@ public:
     static void libererInstance();
 
     //Pour enregistrer de nouveaux objets
+    /**
+     * @brief enregistrer de nouveaux opérateurs
+     * @param cle symbole de l'opérateur
+     * @param obj patron vers l'opérateur
+     */
     static void enregistrer(const QString& cle,Operateur* obj);
 
     //Pour créer des objets à partir de la factory
+    /**
+     * @brief creer des objets à partir de la factory
+     * @param cle nom du patron
+     * @return nouvel opérateur, copie du patron
+     */
     Operateur* creer(const QString& cle);
 
     //Pour acceder à la qmap dans atome

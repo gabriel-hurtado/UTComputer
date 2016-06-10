@@ -62,6 +62,13 @@ public:
 
     static QString SpaceCleaner(QString);
 
+    /**
+     * @brief Supprime les parenthèses inutiles
+     * Sert pour des opérations entre deux expressions
+     * @param s chaine de caractères de l'expression
+     * @param priority priorité de l'opérateur utilisé lors de l'opération entre expressions
+     * @return la chaine de caractères, de l'expression, sans parenthèses si elles sont inutiles
+     */
     static QString ParenthesisCleaner(QString s, unsigned int priority);
 
     static const QMap<QString,WordIdentifier*>& getInterpretationMap(){return interpretationMap;}
