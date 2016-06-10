@@ -37,10 +37,9 @@ Litterale* OperateurAddition::traitementOperateur(){
 
         if(r1 && e2) //si il y a un rationel et un entier
         {
-           Litterale* temp = r1->getCopy();
+           Rationnel* temp = new Rationnel(e2->getValeur());
            OperateurAddition ad = OperateurAddition(r1,temp);
            return ad.traitementOperateur();
-           return r1;
         }
         if(r2 && e1){ //idem
            OperateurAddition ad = OperateurAddition(r2,e1);
