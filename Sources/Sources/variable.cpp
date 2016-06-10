@@ -45,15 +45,17 @@ Litterale* VariablesManager::getVariable(const QString& nom){
     throw LitteraleException(nom + " ne référence pas de variable ou programme","Variable");
 }
 
-QMap<QString, Litterale*>::iterator VariablesManager::getVariablesBegin(){
+QMap<QString, Litterale*>::const_iterator VariablesManager::getVariablesBegin(){
     return var_map.begin();
 }
 
-QMap<QString, Litterale*>::iterator VariablesManager::getVariablesEnd(){
+QMap<QString, Litterale*>::const_iterator VariablesManager::getVariablesEnd(){
      return var_map.end();
 }
 
 void VariablesManager::clearVariables(){
+    foreach(Litterale* l,var_map)
+        delete l;
     var_map.clear();
     nb_var=0;
     nb_prog=0;

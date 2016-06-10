@@ -216,7 +216,7 @@ Litterale* Expression::evaluer() const{
     while(it!=s.end()){
         found=false;
 
-        if(*it==' '){
+        if(*it==' ' || *it==','){
             it++;
             continue;
         }

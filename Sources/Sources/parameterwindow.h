@@ -18,6 +18,9 @@ signals :
     void sendHideKeyboard(int);
     void sendMuteError(int);
 
+protected:
+    void closeEvent(QCloseEvent *event);
+
 private slots:
     void on_button_validate_clicked();
 

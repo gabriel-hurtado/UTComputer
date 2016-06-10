@@ -163,7 +163,7 @@ MainWindow::~MainWindow()
 /*
     Méthodes
 */
-   const MainWindow* MainWindow::getInstanceMainWindow(){return InstanceMainWindow;}
+   MainWindow* MainWindow::getInstanceMainWindow(){return InstanceMainWindow;}
 
    //Settings saver
 
@@ -177,8 +177,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
      settings.setValue("keyboard", keyboard );
      settings.setValue("sound", sound);
-    QMap<QString, Litterale*>::iterator begin;
-    QMap<QString, Litterale*>::iterator end=VariablesManager::getVariablesEnd();
+    QMap<QString, Litterale*>::const_iterator begin;
+    QMap<QString, Litterale*>::const_iterator end=VariablesManager::getVariablesEnd();
     for(begin=VariablesManager::getVariablesBegin();begin!=end;begin++){
         const QString name=begin.key();
         Programme* p =estdeType<Programme>(begin.value());
@@ -197,7 +197,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
         ++nb;
     }
     settings.setValue("nb_item_pile",QString::number(nb));
-       event->accept();
 
     //Fermer les autres fenetres
     if(parameterIwindow){
@@ -205,6 +204,13 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
     if(variableIwindow)
         variableIwindow->close();
+
+    if(programmeIwindow)
+        programmeIwindow->close();
+
+    event->accept();
+
+
 }
 
 

@@ -37,7 +37,7 @@ protected:
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    static const MainWindow* getInstanceMainWindow();
+    static MainWindow* getInstanceMainWindow();
 public slots:
 
 

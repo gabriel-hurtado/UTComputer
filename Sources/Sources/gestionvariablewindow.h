@@ -26,6 +26,9 @@ private:
     VariablesManager * varMan;
     QString selectedIdentifierName;
 
+protected:
+    void closeEvent(QCloseEvent *event);
+
 public slots:
     void refreshVueVariable();
     void regenerateVueVariable();
