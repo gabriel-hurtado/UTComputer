@@ -53,3 +53,5 @@ FORMS += \
     Sources/Sources/gestionvariablewindow.ui \
     Sources/Sources/gestionprogrammes.ui
 QT += widgets
+
+DISTFILES +=

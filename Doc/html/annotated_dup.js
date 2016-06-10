@@ -1,9 +1,53 @@
 var annotated_dup =
 [
-    [ "expression", "namespaceexpression.html", "namespaceexpression" ],
-    [ "logique", "namespacelogique.html", "namespacelogique" ],
-    [ "numerique", "namespacenumerique.html", "namespacenumerique" ],
-    [ "op_pile", "namespaceop__pile.html", "namespaceop__pile" ],
+    [ "conditionnel", null, [
+      [ "OperateurConditionnel", "classconditionnel_1_1_operateur_conditionnel.html", "classconditionnel_1_1_operateur_conditionnel" ],
+      [ "OperateurIFT", "classconditionnel_1_1_operateur_i_f_t.html", "classconditionnel_1_1_operateur_i_f_t" ]
+    ] ],
+    [ "expression", null, [
+      [ "OperateurEVAL", "classexpression_1_1_operateur_e_v_a_l.html", "classexpression_1_1_operateur_e_v_a_l" ],
+      [ "OperateurExpression", "classexpression_1_1_operateur_expression.html", "classexpression_1_1_operateur_expression" ],
+      [ "OperateurSTO", "classexpression_1_1_operateur_s_t_o.html", "classexpression_1_1_operateur_s_t_o" ],
+      [ "OperateurUserMade", "classexpression_1_1_operateur_user_made.html", "classexpression_1_1_operateur_user_made" ]
+    ] ],
+    [ "logique", null, [
+      [ "OperateurAND", "classlogique_1_1_operateur_a_n_d.html", "classlogique_1_1_operateur_a_n_d" ],
+      [ "OperateurDiff", "classlogique_1_1_operateur_diff.html", "classlogique_1_1_operateur_diff" ],
+      [ "OperateurEgal", "classlogique_1_1_operateur_egal.html", "classlogique_1_1_operateur_egal" ],
+      [ "OperateurInf", "classlogique_1_1_operateur_inf.html", "classlogique_1_1_operateur_inf" ],
+      [ "OperateurInfEgal", "classlogique_1_1_operateur_inf_egal.html", "classlogique_1_1_operateur_inf_egal" ],
+      [ "OperateurLogique", "classlogique_1_1_operateur_logique.html", "classlogique_1_1_operateur_logique" ],
+      [ "OperateurNOT", "classlogique_1_1_operateur_n_o_t.html", "classlogique_1_1_operateur_n_o_t" ],
+      [ "OperateurOR", "classlogique_1_1_operateur_o_r.html", "classlogique_1_1_operateur_o_r" ],
+      [ "OperateurSup", "classlogique_1_1_operateur_sup.html", "classlogique_1_1_operateur_sup" ],
+      [ "OperateurSupEgal", "classlogique_1_1_operateur_sup_egal.html", "classlogique_1_1_operateur_sup_egal" ]
+    ] ],
+    [ "numerique", null, [
+      [ "Operateur", "classnumerique_1_1_operateur.html", "classnumerique_1_1_operateur" ],
+      [ "OperateurAddition", "classnumerique_1_1_operateur_addition.html", "classnumerique_1_1_operateur_addition" ],
+      [ "OperateurDEN", "classnumerique_1_1_operateur_d_e_n.html", "classnumerique_1_1_operateur_d_e_n" ],
+      [ "OperateurDIV", "classnumerique_1_1_operateur_d_i_v.html", "classnumerique_1_1_operateur_d_i_v" ],
+      [ "OperateurDivision", "classnumerique_1_1_operateur_division.html", "classnumerique_1_1_operateur_division" ],
+      [ "OperateurIM", "classnumerique_1_1_operateur_i_m.html", "classnumerique_1_1_operateur_i_m" ],
+      [ "OperateurMOD", "classnumerique_1_1_operateur_m_o_d.html", "classnumerique_1_1_operateur_m_o_d" ],
+      [ "OperateurMultiplication", "classnumerique_1_1_operateur_multiplication.html", "classnumerique_1_1_operateur_multiplication" ],
+      [ "OperateurNEG", "classnumerique_1_1_operateur_n_e_g.html", "classnumerique_1_1_operateur_n_e_g" ],
+      [ "OperateurNUM", "classnumerique_1_1_operateur_n_u_m.html", "classnumerique_1_1_operateur_n_u_m" ],
+      [ "OperateurNumerique", "classnumerique_1_1_operateur_numerique.html", "classnumerique_1_1_operateur_numerique" ],
+      [ "OperateurRE", "classnumerique_1_1_operateur_r_e.html", "classnumerique_1_1_operateur_r_e" ],
+      [ "OperateurSoustraction", "classnumerique_1_1_operateur_soustraction.html", "classnumerique_1_1_operateur_soustraction" ]
+    ] ],
+    [ "op_pile", null, [
+      [ "OperateurCLEAR", "classop__pile_1_1_operateur_c_l_e_a_r.html", "classop__pile_1_1_operateur_c_l_e_a_r" ],
+      [ "OperateurDROP", "classop__pile_1_1_operateur_d_r_o_p.html", "classop__pile_1_1_operateur_d_r_o_p" ],
+      [ "OperateurDUP", "classop__pile_1_1_operateur_d_u_p.html", "classop__pile_1_1_operateur_d_u_p" ],
+      [ "OperateurLASTARGS", "classop__pile_1_1_operateur_l_a_s_t_a_r_g_s.html", "classop__pile_1_1_operateur_l_a_s_t_a_r_g_s" ],
+      [ "OperateurLASTOP", "classop__pile_1_1_operateur_l_a_s_t_o_p.html", "classop__pile_1_1_operateur_l_a_s_t_o_p" ],
+      [ "OperateurPile", "classop__pile_1_1_operateur_pile.html", "classop__pile_1_1_operateur_pile" ],
+      [ "OperateurREDO", "classop__pile_1_1_operateur_r_e_d_o.html", "classop__pile_1_1_operateur_r_e_d_o" ],
+      [ "OperateurSWAP", "classop__pile_1_1_operateur_s_w_a_p.html", "classop__pile_1_1_operateur_s_w_a_p" ],
+      [ "OperateurUNDO", "classop__pile_1_1_operateur_u_n_d_o.html", "classop__pile_1_1_operateur_u_n_d_o" ]
+    ] ],
     [ "Atome", "class_atome.html", "class_atome" ],
     [ "Complexe", "class_complexe.html", "class_complexe" ],
     [ "Controleur", "class_controleur.html", "class_controleur" ],
@@ -11,6 +55,7 @@ var annotated_dup =
     [ "Entier", "class_entier.html", "class_entier" ],
     [ "Expression", "class_expression.html", "class_expression" ],
     [ "GerantPile", "class_gerant_pile.html", "class_gerant_pile" ],
+    [ "gestionprogrammes", "classgestionprogrammes.html", "classgestionprogrammes" ],
     [ "gestionvariableWindow", "classgestionvariable_window.html", "classgestionvariable_window" ],
     [ "Litterale", "class_litterale.html", "class_litterale" ],
     [ "LitteraleComplexe", "class_litterale_complexe.html", "class_litterale_complexe" ],
@@ -25,8 +70,8 @@ var annotated_dup =
     [ "OperateurBinaire", "class_operateur_binaire.html", "class_operateur_binaire" ],
     [ "OperateurException", "class_operateur_exception.html", "class_operateur_exception" ],
     [ "OperateurFactory", "class_operateur_factory.html", "class_operateur_factory" ],
-    [ "OperateurInfixe", "class_operateur_infixe.html", null ],
-    [ "OperateurPrefixe", "class_operateur_prefixe.html", null ],
+    [ "OperateurInfixe", "class_operateur_infixe.html", "class_operateur_infixe" ],
+    [ "OperateurPrefixe", "class_operateur_prefixe.html", "class_operateur_prefixe" ],
     [ "OperateurUnaire", "class_operateur_unaire.html", "class_operateur_unaire" ],
     [ "OperationManager", "class_operation_manager.html", null ],
     [ "ParameterWindow", "class_parameter_window.html", "class_parameter_window" ],
@@ -37,6 +82,6 @@ var annotated_dup =
     [ "RecursiveEncapsulatorIdentifier", "class_recursive_encapsulator_identifier.html", "class_recursive_encapsulator_identifier" ],
     [ "Reelle", "class_reelle.html", "class_reelle" ],
     [ "SelectedPosition", "struct_selected_position.html", "struct_selected_position" ],
-    [ "VariablesManager", "class_variables_manager.html", "class_variables_manager" ],
+    [ "VariablesManager", "class_variables_manager.html", null ],
     [ "WordIdentifier", "class_word_identifier.html", "class_word_identifier" ]
 ];

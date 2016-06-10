@@ -24,6 +24,9 @@ public:
     L'objet de type T est-il de type L ?
 */
 
+/** \brief template pour simplifier les dynamic cast, tout en les limitant à des opérandes.
+  *
+ */
 template<typename L> L* estdeType(Operande* Tobj){
     L* Lobj;
     if(Tobj==nullptr)

@@ -22,8 +22,8 @@ OperateurFactory::~OperateurFactory(){
 
 void OperateurFactory::enregistrer(const QString& cle, Operateur* l){
     if(of_map.find(cle)==of_map.end()) //Si pas déja la clé
-        l->setSymbole(cle);
-        of_map[cle]=l;
+       { l->setSymbole(cle);
+        of_map[cle]=l;}
 
 }
 

@@ -16,13 +16,16 @@ bool MainWindow::keyboard=true;
 bool MainWindow::sound=true;
 
 MainWindow* MainWindow::InstanceMainWindow = nullptr;
-/*
-    Constructeur de la MAINWINDOW
-        Initialisation de la vuePile
-        Initialisation du Player de Son
-        Création des connections entres signaux et slots
 
-*/
+
+/**
+ * @brief  Constructeur de la MAINWINDOW
+ *  Initialisation de la vuePile
+ *   Initialisation du Player de Son
+ *  Création des connections entres signaux et slots
+ *   Restauration des paramètres, de la pile, des programmes et des variables
+ * @param parent
+ */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     pile(Pile::donnerInstance()),
@@ -156,6 +159,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
+/**
+ * @brief Destructeur de mainWindow
+ * Ferme les fenêtres filles éventuellement ouvertes,
+ * sauvegarde contexte, pile et paramètre
+ */
 MainWindow::~MainWindow()
 {
     delete ui;

@@ -23,7 +23,6 @@ class OperateurIFT : public OperateurBinaire, public OperateurConditionnel, publ
 public:
    Litterale* traitementOperateur(); //a faire après avoir géré les expressions
 
-   void initSymbole() {symbole="IFT";}
 
    OperateurIFT():OperateurBinaire(){}
 
