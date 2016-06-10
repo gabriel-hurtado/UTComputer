@@ -133,3 +133,13 @@ void gestionvariableWindow::on_button_add_clicked()
     ui->message->setText("Nombre non valide");
     return;
 }
+
+void gestionvariableWindow::on_button_delete_clicked()
+{
+    QList<QTableWidgetItem *> list = ui->vueVariable->selectedItems();
+    QTableWidgetItem* l;
+    foreach(l,list){
+        varMan->supprimer(ui->vueVariable->item(l->row(),0)->text());
+    }
+    delete l;
+}

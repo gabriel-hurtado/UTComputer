@@ -33,6 +33,7 @@ public slots:
     void saveIdentifierName(int,int);
 private slots:
     void on_button_add_clicked();
+    void on_button_delete_clicked();
 };
 
 #endif // GESTIONVARIABLEWINDOW_H
