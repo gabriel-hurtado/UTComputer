@@ -96,7 +96,7 @@ LitteraleNumerique& Rationnel::Simplification(){
 
 Reelle Rationnel::roundValue() const{
      double rounded= (numerateur.getValeur()/(double)(denominateur.getValeur()));
-     return Reelle(0,(int)(rounded));
+     return Reelle(rounded);
 }
 
 Litterale* Rationnel::getFromString(QString s){
