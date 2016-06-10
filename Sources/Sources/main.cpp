@@ -47,7 +47,6 @@ int main(int argc,char* argv[]) {
     OperateurFactory::enregistrer("!=",new logique::OperateurDiff);
     OperateurFactory::enregistrer("<=",new logique::OperateurInfEgal);
     OperateurFactory::enregistrer(">=",new logique::OperateurSupEgal);
-    OperateurFactory::enregistrer(">=",new logique::OperateurSupEgal);
     OperateurFactory::enregistrer(">",new logique::OperateurSup);
     OperateurFactory::enregistrer("<",new logique::OperateurInf);
     OperateurFactory::enregistrer("AND",new logique::OperateurAND);

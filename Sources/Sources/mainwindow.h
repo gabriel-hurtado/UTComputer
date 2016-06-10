@@ -176,6 +176,18 @@ private slots:
 
     void on_button_neg_clicked();
 
+    void on_button_egal_clicked();
+
+    void on_button_diff_clicked();
+
+    void on_button_infegal_clicked();
+
+    void on_button_supegal_clicked();
+
+    void on_button_inf_clicked();
+
+    void on_button_sup_clicked();
+
 private:
     Ui::MainWindow *ui;
     ParameterWindow* parameterIwindow; //I stand for instansciated
