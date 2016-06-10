@@ -63,9 +63,9 @@ Litterale* Reelle::getFromString(QString s){
     else
         throw LitteraleException(s+" n'est pas une Réelle valide","Reelle");
     */
-    bool* ok;
-    double res= (s.toDouble(ok));
-    if(*ok)
+    bool ok;
+    double res= (s.toDouble(&ok));
+    if(ok)
         return new Reelle(res);
     else
         throw LitteraleException(s+" n'est pas une Réelle valide","Reelle");

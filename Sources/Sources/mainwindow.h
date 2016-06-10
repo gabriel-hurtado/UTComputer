@@ -188,6 +188,8 @@ private slots:
 
     void on_button_sup_clicked();
 
+    void on_button_suppr_clicked();
+
 private:
     Ui::MainWindow *ui;
     ParameterWindow* parameterIwindow; //I stand for instansciated

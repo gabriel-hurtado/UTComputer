@@ -554,3 +554,10 @@ void MainWindow::on_button_sup_clicked()
 {
     getNextCommande(" >");
 }
+
+void MainWindow::on_button_suppr_clicked()
+{
+   QString tmp = ui->commande->text();
+   tmp.chop(1);
+   ui->commande->setText(tmp);
+}

@@ -141,7 +141,9 @@ void gestionvariableWindow::on_button_delete_clicked()
     foreach(l,list){
         varMan->supprimer(ui->vueVariable->item(l->row(),0)->text());
     }
-    delete l;
+
+    regenerateVueVariable();
+
 }
 
 void gestionvariableWindow::closeEvent(QCloseEvent *event){
