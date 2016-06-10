@@ -6,7 +6,9 @@
 
 // Définitions de la classe OperateurBinaire
 
-void OperateurBinaire::chargerContexte(){Pile::donnerInstance()>>l2;
+void OperateurBinaire::chargerContexte(){
+                        l1=nullptr;l2=nullptr;
+                       Pile::donnerInstance()>>l2;
                        Pile::donnerInstance()>>l1;
                       OperationManager::donnerInstance().add(l1->getCopy());
                       OperationManager::donnerInstance().add(l2->getCopy());
@@ -29,7 +31,8 @@ OperateurBinaire& OperateurBinaire::operator =(const OperateurBinaire& b){
 
 void Operateur::pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
 void Operateur::operation(){
-                 try{OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
+                 try{
+                        OperationManager::donnerInstance().sauvegarder(estdeType<Operateur>(this));
                         chargerContexte();Litterale* resExp = traitementExpression();
                         Litterale* res;
                         if(!resExp) res =traitementOperateur();
@@ -51,7 +54,9 @@ void Operateur::operation(){
 }
 
 //Définitions de la classe OperateurUnaire
-void OperateurUnaire::chargerContexte(){Pile::donnerInstance()>>l1;
+void OperateurUnaire::chargerContexte(){
+                      l1=nullptr;
+                      Pile::donnerInstance()>>l1;
                       OperationManager::donnerInstance().add(l1->getCopy());}
 
 void OperateurUnaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
