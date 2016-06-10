@@ -130,7 +130,7 @@ QString Controleur::ParenthesisCleaner(QString s, unsigned int priority){
 
     do{
          start= skipParentheses(start,s);
-         Litterale* l ;
+         Litterale* l=nullptr,* l2=nullptr ;
 
          Operateur* op;
          i=0;
@@ -140,12 +140,32 @@ QString Controleur::ParenthesisCleaner(QString s, unsigned int priority){
             do{
             i++;
             sub= s.mid( start, i);
-
+            try{
             l = LitteraleFactory::donnerInstance().creerInfixLitterale(sub);
+            }
+            catch (LitteraleException e){
+                if(e.getType()!="Reelle" && e.getType()!="Complexe")
+                    throw e;
+                l=nullptr;
+            }
+            if(!l){
+                int j=i+1;
+                try{
+                l2 = LitteraleFactory::donnerInstance().creerInfixLitterale(s.mid( start, j));}
+                catch (LitteraleException e){
+                    if(e.getType()!="Reelle" && e.getType()!="Complexe")
+                        throw e;
+                    l2=nullptr;
+                }
+                if(l2){
+                    i=j;
+                    l=l2;
+                }
+            }
 
+            }while(l && s.length()-2>start+i);
 
-            if( s.length()-2<=start) break;
-            }while(l);
+         if( s.length()-2<=start+i) break;
 
             op = OperateurFactory::donnerInstance().creer(sub);
             if(op) //si c'était en fait un opérateur
