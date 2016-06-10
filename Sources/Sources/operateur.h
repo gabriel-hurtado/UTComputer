@@ -79,6 +79,8 @@ public:
 
     OperateurBinaire():Operateur(){}
     OperateurBinaire(Litterale* lit1, Litterale* lit2):Operateur(),l1(lit1),l2(lit2){}
+    OperateurBinaire(const OperateurBinaire& b);
+    OperateurBinaire& operator=(const OperateurBinaire&);
     Litterale* getl1(){return l1;}
     Litterale* getl2(){return l2;}
 };
@@ -92,6 +94,8 @@ public:
    void resetContexte();
    OperateurUnaire():Operateur(){}
    OperateurUnaire(Litterale* lit1):Operateur(),l1(lit1){}
+   OperateurUnaire(const OperateurUnaire&);
+   OperateurUnaire& operator=(const OperateurUnaire&);
    Litterale* getl1(){return l1;}
 };
 

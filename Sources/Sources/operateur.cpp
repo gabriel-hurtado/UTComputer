@@ -16,6 +16,15 @@ void OperateurBinaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
 
 OperateurBinaire::~OperateurBinaire(){delete l1;delete l2;}
 
+OperateurBinaire::OperateurBinaire(const OperateurBinaire &b){
+    l1=b.l1->getCopy();
+    l2=b.l2->getCopy();
+}
+OperateurBinaire& OperateurBinaire::operator =(const OperateurBinaire& b){
+    l1=b.l1->getCopy();
+    l2=b.l2->getCopy();
+    return *this;
+}
 // Définitions de la classe Operateur
 
 void Operateur::pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
@@ -48,6 +57,14 @@ void OperateurUnaire::chargerContexte(){Pile::donnerInstance()>>l1;
 void OperateurUnaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
 
 OperateurUnaire::~OperateurUnaire(){delete l1;}
+
+OperateurUnaire::OperateurUnaire(const OperateurUnaire &b){
+    l1=b.l1->getCopy();
+}
+OperateurUnaire& OperateurUnaire::operator =(const OperateurUnaire& b){
+    l1=b.l1->getCopy();
+    return *this;
+}
 
 //fonctions de opération manager
 
