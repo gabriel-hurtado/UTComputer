@@ -10,8 +10,9 @@
 class LitteraleException : public std::exception
 {
     QString info;
+    QString litType;
 public:
-    LitteraleException (QString in) : info(in) {}
+    LitteraleException (QString in,QString type) : info(in),litType(type) {}
     QString getInfo(){return info;}
     virtual const char* what() const throw()
     {

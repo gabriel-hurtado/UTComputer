@@ -15,7 +15,7 @@ Litterale* Litterale::traitement(){return nullptr;}
 
 Reelle::Reelle(const Entier& p,const Entier& m){
     /*Un réel ne peut pas être construit avec une mantisse nulle*/
-    if(m.getValeur()==0){LitteraleException("Construction: Mantisse nulle !");}
+    if(m.getValeur()==0){LitteraleException("Construction: Mantisse nulle !","Reelle");}
     else{value=p.getValeur();
             double mantisse=(double)m.getValeur();
            while(mantisse>=1)
@@ -48,7 +48,8 @@ LitteraleComplexe& Complexe::Simplification(){
 
 const QString Reelle::toString() const {
     QString s;
-        s.setNum(getValeur());
+       s= s.number(getValeur());
+
     return s;
 }
 Litterale* Reelle::getFromString(QString s){
@@ -59,7 +60,7 @@ Litterale* Reelle::getFromString(QString s){
     if(l1 && l2)
         return new Reelle(*l1,*l2);
     else
-        throw LitteraleException(s+" n'est pas une Réelle valide");
+        throw LitteraleException(s+" n'est pas une Réelle valide","Reelle");
 }
 
 
@@ -69,7 +70,7 @@ Litterale* Reelle::getFromString(QString s){
 
 Rationnel::Rationnel(int n, int d){
     if (d == 0)
-        throw LitteraleException("Le dénominateur ne peut être nul !");
+        throw LitteraleException("Le dénominateur ne peut être nul !","Rationnel");
     else {
         int pg = pgcd(n, d);
         n = n / pg;
@@ -128,7 +129,7 @@ Litterale* Complexe::getFromString(QString s){
     if(l1 && l2)
         return new Complexe(*l1,*l2);
     else
-        throw LitteraleException(s+" n'est pas un Complexe valide");
+        throw LitteraleException(s+" n'est pas un Complexe valide","Complexe");
 }
 
 
@@ -138,7 +139,7 @@ Atome::Atome(QString n){
     if(isValidAtomeName(n))
         nom=n;
     else
-        throw LitteraleException("Nom d'atome invalide");
+        throw LitteraleException("Nom d'atome invalide","Atome");
 }
 
 
@@ -216,7 +217,7 @@ Litterale* Expression::evaluer() const{
         if(tmp == "" && symbol_map.find(*it)!=symbol_map.end()){
             endTarget=symbol_map.find(*it).value();
             if(endTarget!="")
-                    throw LitteraleException("Litterale "+ QString(*it) +"..."+endTarget+" non permise");
+                    throw LitteraleException("Litterale "+ QString(*it) +"..."+endTarget+" non permise","Inconnu");
         }
 
         //On tombe dans le cas ou on a une valeur
@@ -266,7 +267,7 @@ Litterale* Expression::evaluer() const{
 
             }
             else
-                throw(LitteraleException("Le mot "+tmp+" est inconnu"));
+                throw(LitteraleException("Le mot "+tmp+" est inconnu","Inconnu"));
 
         }
 
@@ -292,7 +293,7 @@ Litterale* Expression::evaluer() const{
                 tmp+=*it++;
             }
             if(it==s.end() && !op_map.contains(tmp))
-                throw LitteraleException("Expression non valide dès "+tmp);
+                throw LitteraleException("Expression non valide dès "+tmp,"Expression");
             while(!stack.empty() && stack.top() != "(" && CompareOperators(stack.top(),tmp)<=0){
                 postfix += stack.top()+" ";
                 stack.pop();

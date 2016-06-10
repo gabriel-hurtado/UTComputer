@@ -233,7 +233,7 @@ void MainWindow::getNextCommande(QString _fromButton){
         sent+=_fromButton;
         if(!controleur.commande(sent)){
             ui->commande->setText(Controleur::SpaceCleaner(sent));
-            throw LitteraleException("Le mot "+ controleur.firstWord(sent)+" n'as pas été reconnu");
+            throw LitteraleException("Le mot "+ controleur.firstWord(sent)+" n'as pas été reconnu","Inconnu");
         }
         ui->commande->clear();
     }

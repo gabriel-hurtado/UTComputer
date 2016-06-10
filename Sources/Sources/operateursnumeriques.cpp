@@ -109,7 +109,7 @@ Litterale* OperateurAddition::traitementOperateur(){
 
 
             LitteraleNumerique* im=c1->getPartieImaginaire();
-             return (&(new Complexe(*reel,*im))->Simplification());
+             return &((new Complexe(*reel,*im))->Simplification());
 
         }
 

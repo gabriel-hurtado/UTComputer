@@ -165,7 +165,7 @@ GerantPile& GerantPile::push_back_undo(MementoPile* l){
  */
 MementoPile* GerantPile::pop_back_undo(){
     if(nombreDeMementoUNDO==0)
-        throw LitteraleException("Impossible de UNDO : Pas de sauvegarde de la pile !");
+        throw LitteraleException("Impossible de UNDO : Pas de sauvegarde de la pile !","Pile");
     return savedMementoUNDO[--nombreDeMementoUNDO];
 }
  /*
@@ -191,7 +191,7 @@ GerantPile& GerantPile::push_back_redo(MementoPile* l){
 */
 MementoPile* GerantPile::pop_back_redo(){
     if(nombreDeMementoREDO==0)
-        throw LitteraleException("Impossible de REDO : Pas de sauvegarde de la pile !");
+        throw LitteraleException("Impossible de REDO : Pas de sauvegarde de la pile !","Pile");
     return savedMementoREDO[--nombreDeMementoREDO];
 }
  /*

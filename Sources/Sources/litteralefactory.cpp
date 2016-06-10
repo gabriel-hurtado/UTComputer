@@ -31,10 +31,10 @@ void LitteraleFactory::enregistrer(unsigned int prio,QString ltok, Litterale* l,
             Controleur::enregistrerSymbole(ltok,rtok,W);
         }
         else
-            throw LitteraleException("Token déja pris");
+            throw LitteraleException("Token déja pris","Enregistrement");
     }
     else
-        throw LitteraleException("Priorité déja prise");
+        throw LitteraleException("Priorité déja prise","Enregistrement");
 
 }
 
@@ -48,10 +48,10 @@ void LitteraleFactory::enregistrerInfix(unsigned int prio,QString ltok, Litteral
             Controleur::enregistrerSymbole(ltok,rtok,W);
         }
         else
-            throw LitteraleException("Token déja pris");
+            throw LitteraleException("Token déja pris","Enregistrement");
     }
     else
-        throw LitteraleException("Priorité déja prise");
+        throw LitteraleException("Priorité déja prise","Enregistrement");
 
 }
 /*

@@ -110,7 +110,7 @@ int skipParentheses(int start,QString s){
             temp++;
         }while(nb!=0 && temp<500);
         if(temp>=500)
-            throw LitteraleException("Erreur de parenthèses");
+            throw LitteraleException("Erreur de parenthèses","Expression");
         temp+=1;
     }
     return temp;
@@ -140,7 +140,10 @@ QString Controleur::ParenthesisCleaner(QString s, unsigned int priority){
             do{
             i++;
             sub= s.mid( start, i);
-            l = LitteraleFactory::donnerInstance().creerRPNLitterale(sub);
+
+            l = LitteraleFactory::donnerInstance().creerInfixLitterale(sub);
+
+
             if( s.length()-2<=start) break;
             }while(l);
 
@@ -178,7 +181,7 @@ QString Controleur::ParenthesisCleaner(QString s, unsigned int priority){
              if( s.length()-2<=start) break;
             }while(!op && i<20);
 
-            if (i>=20) throw LitteraleException("Expression invalide !");
+            if (i>=20) throw LitteraleException("Expression invalide !","Expression");
 
             if(priority!=op->getPriority()){
                 can_clear=false;

@@ -42,7 +42,7 @@ VariablesManager::~VariablesManager(){
 Litterale* VariablesManager::getVariable(const QString& nom){
     if(var_map.contains(nom))
     return (var_map.find(nom)).value()->getCopy();
-    throw LitteraleException(nom + " ne référence pas de variable ou programme");
+    throw LitteraleException(nom + " ne référence pas de variable ou programme","Variable");
 }
 
 QMap<QString, Litterale*>::iterator VariablesManager::getVariablesBegin(){

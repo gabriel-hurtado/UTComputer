@@ -12,7 +12,7 @@ bool WordIdentifier::WordGuesser(QString){return true;}
 void EncapsulatorIdentifier::WordPosition(QString& s,SelectedPosition& select){
     while(*select.it_fin!=leftDelimiter){
         if(select.it_fin==s.end())
-            throw LitteraleException("Impossible de trouver la fin de l'Expression");
+            throw LitteraleException("Impossible de trouver la fin de l'Expression","Expression");
         select.it_fin++;
     }
     select.it_fin++; //On avance de 1 car le suivant marquera la fin
@@ -29,7 +29,7 @@ void RecursiveEncapsulatorIdentifier::WordPosition(QString& s, SelectedPosition&
     unsigned int _nbLDelimitor = 0;
     while(!(_nbLDelimitor==0 && *select.it_fin==rightDelimiter)){
         if(select.it_fin==s.end())
-            throw LitteraleException("Impossible de trouver la fin du Programme");
+            throw LitteraleException("Impossible de trouver la fin du Programme","Programme");
         if(*select.it_fin==leftDelimiter)
             _nbLDelimitor++;
         if(*select.it_fin==rightDelimiter)
