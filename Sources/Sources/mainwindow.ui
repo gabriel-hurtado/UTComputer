@@ -226,7 +226,7 @@
                <bool>true</bool>
               </property>
               <property name="text">
-               <string>=&lt;</string>
+               <string>&lt;=</string>
               </property>
              </widget>
             </item>

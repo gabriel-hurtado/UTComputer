@@ -171,7 +171,7 @@ MainWindow::~MainWindow()
 /*
     Méthodes
 */
-   const MainWindow* MainWindow::getInstanceMainWindow(){return InstanceMainWindow;}
+   MainWindow* MainWindow::getInstanceMainWindow(){return InstanceMainWindow;}
 
    //Settings saver
 
@@ -185,8 +185,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
      settings.setValue("keyboard", keyboard );
      settings.setValue("sound", sound);
-    QMap<QString, Litterale*>::iterator begin;
-    QMap<QString, Litterale*>::iterator end=VariablesManager::getVariablesEnd();
+    QMap<QString, Litterale*>::const_iterator begin;
+    QMap<QString, Litterale*>::const_iterator end=VariablesManager::getVariablesEnd();
     for(begin=VariablesManager::getVariablesBegin();begin!=end;begin++){
         const QString name=begin.key();
         Programme* p =estdeType<Programme>(begin.value());
@@ -205,7 +205,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
         ++nb;
     }
     settings.setValue("nb_item_pile",QString::number(nb));
-       event->accept();
 
     //Fermer les autres fenetres
     if(parameterIwindow){
@@ -213,6 +212,13 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
     if(variableIwindow)
         variableIwindow->close();
+
+    if(programmeIwindow)
+        programmeIwindow->close();
+
+    event->accept();
+
+
 }
 
 
@@ -241,9 +247,9 @@ void MainWindow::refreshVuePile(){
 void MainWindow::getNextCommande(QString _fromButton){
     //pile->setMessage("");
     QString _fromCommand = ui->commande->text();
+    QString& sent(_fromCommand);
+    sent+=_fromButton;
     try{
-        QString& sent(_fromCommand);
-        sent+=_fromButton;
         if(!controleur.commande(sent)){
             ui->commande->setText(Controleur::SpaceCleaner(sent));
             throw LitteraleException("Le mot "+ controleur.firstWord(sent)+" n'as pas été reconnu","Inconnu");
@@ -262,6 +268,7 @@ void MainWindow::getNextCommande(QString _fromButton){
         soundBell->play();
         SendException("Pile :"+e.getInfo());
     }
+    ui->commande->setText(Controleur::SpaceCleaner(sent));
 
 }
 
@@ -516,4 +523,34 @@ void MainWindow::on_button_lastargs_clicked()
 void MainWindow::on_button_neg_clicked()
 {
     getNextCommande(" NEG");
+}
+
+void MainWindow::on_button_egal_clicked()
+{
+    getNextCommande(" +");
+}
+
+void MainWindow::on_button_diff_clicked()
+{
+    getNextCommande(" !=");
+}
+
+void MainWindow::on_button_infegal_clicked()
+{
+    getNextCommande(" <=");
+}
+
+void MainWindow::on_button_supegal_clicked()
+{
+    getNextCommande(" >=");
+}
+
+void MainWindow::on_button_inf_clicked()
+{
+    getNextCommande(" <");
+}
+
+void MainWindow::on_button_sup_clicked()
+{
+    getNextCommande(" >");
 }

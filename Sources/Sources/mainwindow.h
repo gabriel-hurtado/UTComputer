@@ -37,7 +37,7 @@ protected:
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    static const MainWindow* getInstanceMainWindow();
+    static MainWindow* getInstanceMainWindow();
 public slots:
 
 
@@ -175,6 +175,18 @@ private slots:
     void on_button_lastargs_clicked();
 
     void on_button_neg_clicked();
+
+    void on_button_egal_clicked();
+
+    void on_button_diff_clicked();
+
+    void on_button_infegal_clicked();
+
+    void on_button_supegal_clicked();
+
+    void on_button_inf_clicked();
+
+    void on_button_sup_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -40,7 +40,7 @@ void gestionvariableWindow::refreshVueVariable(){
     }
     unsigned int nb = 0;
 
-    for(QMap<QString,Litterale*>::iterator it=varMan->getVariablesBegin() ; it!=varMan->getVariablesEnd() && nb!=varMan->getNbVar();++it){
+    for(QMap<QString,Litterale*>::const_iterator it=varMan->getVariablesBegin() ; it!=varMan->getVariablesEnd() && nb!=varMan->getNbVar();++it){
        if(!estdeType<Programme>(it.value())){
         ++nb;
         ui->vueVariable->item(nb-1,0)->setText(it.key());
@@ -142,4 +142,10 @@ void gestionvariableWindow::on_button_delete_clicked()
         varMan->supprimer(ui->vueVariable->item(l->row(),0)->text());
     }
     delete l;
+}
+
+void gestionvariableWindow::closeEvent(QCloseEvent *event){
+    MainWindow* main = MainWindow::getInstanceMainWindow();
+    main->closeVariableWindow();
+    event->ignore();
 }

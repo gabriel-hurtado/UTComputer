@@ -68,3 +68,9 @@ void ParameterWindow::on_button_variable_remove_clicked()
 {
     VariablesManager::clearVariables();
 }
+
+void ParameterWindow::closeEvent(QCloseEvent *event){
+    MainWindow* main = MainWindow::getInstanceMainWindow();
+    main->closeParameterWindow();
+    event->ignore();
+}

@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>727</width>
+    <width>580</width>
     <height>322</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTextEdit" name="textEdit">
+  <widget class="QTextEdit" name="text_program">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -23,11 +23,11 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="button_new">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>60</y>
+     <x>360</x>
+     <y>80</y>
      <width>80</width>
      <height>22</height>
     </rect>
@@ -36,12 +36,12 @@
     <string>Nouveau</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="nom">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>30</y>
-     <width>141</width>
+     <x>360</x>
+     <y>50</y>
+     <width>181</width>
      <height>22</height>
     </rect>
    </property>
@@ -50,7 +50,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>10</y>
+     <y>20</y>
      <width>71</width>
      <height>16</height>
     </rect>
@@ -62,24 +62,50 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>10</y>
-     <width>59</width>
-     <height>14</height>
+     <x>360</x>
+     <y>20</y>
+     <width>181</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>Nom</string>
+    <string>Nom du nouveau programme</string>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox">
+  <widget class="QComboBox" name="combo_programmes">
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>10</y>
+     <y>20</y>
      <width>241</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_save">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>290</y>
+     <width>80</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sauver</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>290</y>
+     <width>80</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Supprimer</string>
    </property>
   </widget>
  </widget>
