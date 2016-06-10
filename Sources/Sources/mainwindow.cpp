@@ -10,6 +10,7 @@
 #include "operateur.h"
 #include "controleur.h"
 #include "litteralefactory.h"
+#include "gestionprogrammes.h"
 
 bool MainWindow::keyboard=true;
 bool MainWindow::sound=true;
@@ -30,7 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
     soundBell(new QMediaPlayer),
     ui(new Ui::MainWindow),
     parameterIwindow(nullptr),
-    variableIwindow(nullptr)
+    variableIwindow(nullptr),
+    programmeIwindow(nullptr)
 
 
 
@@ -73,6 +75,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionEdition_des_param_tres,SIGNAL(triggered(bool)),this,SLOT(openParameterWindow()));
     //Pour afficher la fenetre de gestion des variables
     connect(ui->actionGestion_des_variables,SIGNAL(triggered(bool)),this,SLOT(openVariableWindow()));
+    //Pour afficher la fenetre de gestion des programmes
+    connect(ui->actionGestion_des_programmes,SIGNAL(triggered(bool)),this,SLOT(openProgramWindow()));
     //Pour regenerer la vue de la pile
     connect(&pile,SIGNAL(sendRegenerateVuePile()),this,SLOT(regenerateVuePile()));
 
@@ -136,7 +140,8 @@ MainWindow::MainWindow(QWidget *parent) :
         foreach (const QString &varName, groupVars)
            {
               QString varValue = settings.value(varName).toString();
-              Litterale* val=  lf.creerRPNLitterale(varValue);              if(val)
+              Litterale* val=  lf.creerRPNLitterale(varValue);
+              if(val)
                VariablesManager::enregistrer(varName,val);
               else{
                   val = lf.creerInfixLitterale(varValue);
@@ -253,27 +258,52 @@ void MainWindow::getNextCommande(QString _fromButton){
 }
 
 void MainWindow::openVariableWindow(){
+   if(!variableIwindow){
     variableIwindow = new gestionvariableWindow;
     variableIwindow->show();
+   }
 }
 
 void MainWindow::closeVariableWindow(){
+   if(variableIwindow){
     variableIwindow->close();
     delete variableIwindow;
     variableIwindow = nullptr;
+   }
 }
 
 void MainWindow::openParameterWindow(){
+   if(!parameterIwindow){
     parameterIwindow = new ParameterWindow();
     parameterIwindow->show();
+   }
 
 }
 
 void MainWindow::closeParameterWindow(){
+   if(parameterIwindow){
     parameterIwindow->close();
     delete parameterIwindow;
     parameterIwindow = nullptr;
+   }
 }
+
+void MainWindow::openProgramWindow(){
+   if(!programmeIwindow){
+    programmeIwindow = new gestionprogrammes();
+    programmeIwindow->show();
+   }
+
+}
+
+void MainWindow::closeProgramWindow(){
+   if(programmeIwindow){
+    programmeIwindow->close();
+    delete programmeIwindow;
+    programmeIwindow = nullptr;
+   }
+}
+
 
 void MainWindow::regenerateVuePile(){
     for(int i=0;ui->vuePile->rowCount()>i;i++)

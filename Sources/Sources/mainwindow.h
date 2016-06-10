@@ -10,6 +10,7 @@
 class Pile;
 class gestionvariableWindow;
 class ParameterWindow;
+class gestionprogrammes;
 class Controleur;
 class LitteraleFactory;
 
@@ -51,9 +52,12 @@ public slots:
     */
 
     //########################## GESTION DE LA FENETRE DE VARIABLES ##########################//
+    /*
+        Pour ouvrir la fenetre de variables
+    */
     void openVariableWindow();
     /*
-        Pour fermer la fenetre de parametre
+        Pour fermer la fenetre de variables
     */
     void closeVariableWindow();
 
@@ -66,6 +70,16 @@ public slots:
         Pour fermer la fenetre de parametre
     */
     void closeParameterWindow();
+
+    //########################## GESTION DE LA FENETRE DE PROGRAMMES ##########################//
+    /*
+        Pour ouvrir la fenetre de programmes
+    */
+    void openProgramWindow();
+    /*
+        Pour fermer la fenetre de programmes
+    */
+    void closeProgramWindow();
 
     //########################## GESTION DE LA VUE DE LA PILE ##########################//
     /*
@@ -166,6 +180,7 @@ private:
     Ui::MainWindow *ui;
     ParameterWindow* parameterIwindow; //I stand for instansciated
     gestionvariableWindow* variableIwindow;
+    gestionprogrammes* programmeIwindow;
 
 
 };
