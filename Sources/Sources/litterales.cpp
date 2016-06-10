@@ -131,7 +131,7 @@ Litterale* Complexe::getFromString(QString s){
     else
         throw LitteraleException(s+" n'est pas un Complexe valide","Complexe");
 }
-
+Complexe Complexe::operator=(Complexe& e){delete &p_reelle;delete &p_imaginaire;p_reelle=*e.getPartieReelle();p_imaginaire=*e.getPartieImaginaire();return *this;}
 
 /*------------Définition des méthodes de la classe Atome------------*/
 
