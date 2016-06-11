@@ -74,7 +74,8 @@ OperateurUnaire::OperateurUnaire(Litterale* lit1):Operateur(),l1(lit1->getCopy()
 OperateurUnaire::~OperateurUnaire(){delete l1;}
 
 OperateurUnaire::OperateurUnaire(const OperateurUnaire &b){
-    l1=b.l1->getCopy();
+    if(b.l1)
+        l1=b.l1->getCopy();
 }
 OperateurUnaire& OperateurUnaire::operator =(const OperateurUnaire& b){
     l1=b.l1->getCopy();

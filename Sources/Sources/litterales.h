@@ -160,7 +160,12 @@ public:
     LitteraleNumerique* getPartieReelle() const {return p_reelle.getNumericCopy();}
     LitteraleNumerique* getPartieImaginaire() const {return p_imaginaire.getNumericCopy();}
 
-    LitteraleComplexe* neg() const{Complexe* res=getCopy(); res->p_reelle.neg();return res;}
+    LitteraleComplexe* neg() const{
+        LitteraleNumerique* tmp = estdeType<LitteraleNumerique>(p_reelle.neg());
+        LitteraleComplexe* res = new Complexe(*tmp,p_imaginaire);
+        delete tmp;
+        return res;
+    }
     Complexe* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
     const QString toString() const;
     Litterale* getFromString(QString s) const;

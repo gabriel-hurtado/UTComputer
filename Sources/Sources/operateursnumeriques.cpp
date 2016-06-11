@@ -141,8 +141,11 @@ Litterale* OperateurAddition::traitementOperateur(){
 
 Litterale* OperateurNEG::traitementOperateur(){
     LitteraleComplexe* lit=estdeType<LitteraleComplexe>(l1);
-    if(lit)
-        return lit->neg();
+    if(lit){
+        LitteraleComplexe* tmp = lit->neg();
+        return tmp;
+    }
+
     else throw OperateurException("Error in NEG");
 }
 
