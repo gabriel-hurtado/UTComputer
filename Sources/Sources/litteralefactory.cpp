@@ -105,7 +105,7 @@ Litterale* LitteraleFactory::getInfixExampleOf(QString litt_str) const{
     return nullptr;
 }
 
-Litterale* LitteraleFactory::creerRPNLitterale(QString litt_str){
+Litterale* LitteraleFactory::creerRPNLitterale(QString litt_str) const{
        Litterale* l1 = getRPNExampleOf(litt_str);
        if(l1)
            return l1->getFromString(litt_str);
@@ -113,7 +113,7 @@ Litterale* LitteraleFactory::creerRPNLitterale(QString litt_str){
 
 }
 
-Litterale* LitteraleFactory::creerInfixLitterale(QString litt_str){
+Litterale* LitteraleFactory::creerInfixLitterale(QString litt_str) const{
        Litterale* l1 = getInfixExampleOf(litt_str);
        if(l1)
            return l1->getFromString(litt_str);

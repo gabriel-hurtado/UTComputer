@@ -79,7 +79,7 @@ public:
 
         Attention : la méthode ne s'attend qu'a recevoir 1 SEUL mot, c'est à dire sans espaces !
     */
-    Litterale* creerRPNLitterale(QString);
+    Litterale* creerRPNLitterale(QString) const;
 
     /*
         Cette méthode cree des Litterales en fonction des symboles enregistrés dans la priority_infix_map,
@@ -87,7 +87,7 @@ public:
 
         Attention : la méthode ne s'attend qu'a recevoir 1 SEUL mot, c'est à dire sans espaces !
     */
-    Litterale* creerInfixLitterale(QString);
+    Litterale* creerInfixLitterale(QString) const;
 
     Litterale* getRPNExampleOf(QString s) const;
 

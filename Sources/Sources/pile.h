@@ -42,7 +42,7 @@ class Pile : public QObject{
     /*made those method in private so the user can't use them*/
     Pile():nbLitteraletoAffiche(10){}
     Pile(const Pile& p);
-    ~Pile(){}
+    virtual ~Pile(){}
     void operator=(const Pile&);
 
 public:
@@ -113,7 +113,7 @@ class GerantPile{
     static GerantPile *instanceGerantPile;
 
     GerantPile(unsigned int nbMaxUNDO = 1,unsigned int nbMaxREDO=1);
-    ~GerantPile();
+    virtual ~GerantPile();
     GerantPile(const GerantPile&);
     void operator=(const GerantPile& g);
 

@@ -21,7 +21,7 @@ class OperateurFactory
     */
     static QMap<QString, Operateur*> of_map;
     OperateurFactory();
-    ~OperateurFactory();
+    virtual ~OperateurFactory();
     void operator=(OperateurFactory& l);
     OperateurFactory(OperateurFactory& l);
 

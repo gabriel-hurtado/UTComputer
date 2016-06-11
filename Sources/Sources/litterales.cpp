@@ -8,7 +8,7 @@
 #include <QVector>
 
 /*Définition des méthodes de la classe Litterale*/
-Litterale* Litterale::traitement(){return nullptr;}
+Litterale* Litterale::traitement() const {return nullptr;}
 
 
 /*------------Définition des méthodes de la classe Réelle------------*/
@@ -52,7 +52,7 @@ const QString Reelle::toString() const {
 
     return s;
 }
-Litterale* Reelle::getFromString(QString s){
+Litterale* Reelle::getFromString(QString s) const{
    /* QStringList Ql = s.split('.');
     LitteraleFactory& LF = LitteraleFactory::donnerInstance();
     Entier* l1 = estdeType<Entier>(LF.creerRPNLitterale(Ql.at(0)));
@@ -108,14 +108,14 @@ Reelle Rationnel::roundValue() const{
      return Reelle(rounded);
 }
 
-Litterale* Rationnel::getFromString(QString s){
+Litterale* Rationnel::getFromString(QString s) const{
     QStringList Ql = s.split('/');
     return new Rationnel(Ql.at(0).toInt(),Ql.at(1).toInt());
 }
 
 
 /*------------Définition des méthodes de la classe Entier------------*/
-Litterale* Entier::getFromString(QString s){
+Litterale* Entier::getFromString(QString s) const{
     return new Entier(s.toInt());
 }
 
@@ -129,7 +129,7 @@ const QString Complexe::toString() const{
     s+=p_imaginaire.toString();
     return s;
 }
-Litterale* Complexe::getFromString(QString s){
+Litterale* Complexe::getFromString(QString s) const{
     QStringList Ql = s.split('$');
     LitteraleFactory& LF = LitteraleFactory::donnerInstance();
     LitteraleNumerique* l1 = estdeType<LitteraleNumerique>(LF.creerInfixLitterale(Ql.at(0)));
@@ -320,7 +320,7 @@ Litterale* Expression::evaluer() const{
     return nullptr;
 }
 
-Litterale* Expression::getFromString(QString s){
+Litterale* Expression::getFromString(QString s) const{
     if(s[0]=='\'')
         return new Expression(s);
     else return nullptr;
@@ -356,7 +356,7 @@ bool Expression::isVariable(QString s) const {
 /*------------Définition des méthodes de la classe Programme------------*/
 
 Litterale* Programme::getCopy() const{return new Programme(valeur);}
-Litterale* Programme::traitement(){
+Litterale* Programme::traitement() const{
     QString tmp = valeur;
     tmp=tmp.remove(0,1);
     tmp=tmp.remove(tmp.length()-1,tmp.length());

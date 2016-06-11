@@ -17,7 +17,7 @@ class VariablesManager{
     static QMap<QString, Litterale*> var_map;
     static VariablesManager* instance;
     VariablesManager(){}
-    ~VariablesManager();
+    virtual ~VariablesManager();
     void operator=(VariablesManager& l);
     VariablesManager(VariablesManager& l);
     static unsigned int nb_prog;

@@ -45,7 +45,7 @@ public:
             -lorsque toutes les actions se sont correctement éffectuées : true
             -sinon false et s contient seulement l'action non comprise
     */
-    bool commande(QString& s,QString litterale_mode = "RPN");
+    bool commande(QString& s,QString litterale_mode = "RPN") const;
 
     /*
         Permet d'extraire le premier mot (première action) à traiter.

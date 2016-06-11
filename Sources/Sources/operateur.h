@@ -29,7 +29,7 @@ class OperationManager
     static Operateur* lastOp;
     static std::vector<Litterale*> lastLits;
     OperationManager(){}
-    ~OperationManager();
+    virtual ~OperationManager();
     void operator=(OperationManager& l);
     OperationManager(OperationManager& l);
 public:

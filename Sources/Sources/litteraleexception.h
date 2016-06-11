@@ -13,9 +13,9 @@ class LitteraleException : public std::exception
     QString litType;
 public:
     LitteraleException (QString in,QString type) : info(in),litType(type) {}
-    QString getInfo(){return info;}
+    QString getInfo() const {return info;}
 
-    QString getType(){return litType;}
+    QString getType() const {return litType;}
     virtual const char* what() const throw()
     {
       return info.toStdString().c_str();

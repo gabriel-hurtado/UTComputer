@@ -21,8 +21,8 @@ public:
     std::ostream& afficher(std::ostream& f=std::cout){f<<toString().toStdString();return f;}
     virtual const QString toString() const = 0;
     virtual Litterale* getCopy() const = 0;
-    virtual Litterale* getFromString(QString s) = 0;
-    virtual Litterale* traitement();
+    virtual Litterale* getFromString(QString s) const = 0;
+    virtual Litterale* traitement() const;
 
 private:
 
@@ -44,7 +44,7 @@ public:
     LitteraleComplexe() {}
     virtual ~LitteraleComplexe() {}
 
-    virtual LitteraleComplexe* neg() =0;
+    virtual LitteraleComplexe* neg() const =0;
 
 
 private:
@@ -78,9 +78,9 @@ public:
     virtual ~Entier() {}
     double getValeur() const { return (double)valeur; }
     const QString toString() const {return QString::number(valeur);}
-    LitteraleComplexe* neg(){Entier* res =getNumericCopy(); res->valeur=-res->valeur; return res;}
+    LitteraleComplexe* neg() const {Entier* res =getNumericCopy(); res->valeur=-res->valeur; return res;}
     Entier* getNumericCopy() const{return new Entier(*this);}
-    Litterale* getFromString(QString );//Cas spécial impossible normalement
+    Litterale* getFromString(QString) const;//Cas spécial impossible normalement
 
 };
 
@@ -111,10 +111,10 @@ public:
                            return Entier((int)res);}
     LitteraleNumerique& Simplification();
     double  getValeur()const {return value;}
-    LitteraleComplexe* neg(){Reelle* res=getNumericCopy(); res->value=-res->value;return res;}
+    LitteraleComplexe* neg() const{Reelle* res=getNumericCopy(); res->value=-res->value;return res;}
     Reelle* getNumericCopy() const{return new Reelle(*this);}
     const QString toString() const;
-    Litterale* getFromString(QString s);
+    Litterale* getFromString(QString s) const;
 
 
 };
@@ -133,13 +133,13 @@ public:
     Entier getNumerateur() const { return numerateur; }
     Entier getDenominator() const { return denominateur; }
 
-    LitteraleComplexe* neg(){Rationnel* res=getNumericCopy(); res->numerateur.neg();return res;}
+    LitteraleComplexe* neg() const{Rationnel* res=getNumericCopy(); res->numerateur.neg();return res;}
     Rationnel* getNumericCopy() const{return new Rationnel(*this);}
     const QString toString() const;
     LitteraleNumerique& Simplification();
     Reelle roundValue() const;
     double getValeur() const{return roundValue().getValeur();}
-    Litterale* getFromString(QString s);
+    Litterale* getFromString(QString s) const;
 
 };
 
@@ -160,10 +160,10 @@ public:
     LitteraleNumerique* getPartieReelle() const {return p_reelle.getNumericCopy();}
     LitteraleNumerique* getPartieImaginaire() const {return p_imaginaire.getNumericCopy();}
 
-    LitteraleComplexe* neg(){Complexe* res=getCopy(); res->p_reelle.neg();return res;}
+    LitteraleComplexe* neg() const{Complexe* res=getCopy(); res->p_reelle.neg();return res;}
     Complexe* getCopy() const {return new Complexe(p_reelle,p_imaginaire);}
     const QString toString() const;
-    Litterale* getFromString(QString s);
+    Litterale* getFromString(QString s) const;
     LitteraleComplexe& Simplification();
 
 };
@@ -180,7 +180,7 @@ public:
     const QString toString() const;
     Litterale* getCopy() const;
     static bool isValidAtomeName(QString s);
-    Litterale* getFromString(QString s){return new Atome(s);}
+    Litterale* getFromString(QString s) const{return new Atome(s);}
 };
 
 /*------------Classe Litterale Expression------------*/
@@ -202,7 +202,7 @@ public:
     const QString toString() const {return getExpression();}
     Litterale* evaluer() const;
     Litterale* getCopy() const;
-    Litterale* getFromString(QString s);
+    Litterale* getFromString(QString s) const;
     const QString getExpressionNoBorders() const{
 
                                                     QString tmp = QString(value);
@@ -225,14 +225,14 @@ public:
     QString getProgramme() const {return valeur;}
     const QString toString() const {return getProgramme();}
     Litterale* getCopy() const;
-    Litterale* getFromString(QString s){
+    Litterale* getFromString(QString s) const{
         if(s[0]=='[')
             return new Programme(s);
         else
             return nullptr;
     }
 
-    Litterale* traitement() override; //parse le programme et fait les différentes opérations, par ex + avec un élément de la pile
+    Litterale* traitement() const override; //parse le programme et fait les différentes opérations, par ex + avec un élément de la pile
 };
 
 #endif

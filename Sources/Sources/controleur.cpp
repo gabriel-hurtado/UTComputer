@@ -33,7 +33,7 @@ Controleur::~Controleur(){}
 
 
 
-bool Controleur::commande(QString& s,QString litterale_mode){
+bool Controleur::commande(QString& s,QString litterale_mode) const{
     // On extraie le mot que l'on veut
     QString word = firstWord(s);
 
