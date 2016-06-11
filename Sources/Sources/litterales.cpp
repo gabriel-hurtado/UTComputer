@@ -38,11 +38,16 @@ LitteraleNumerique& Reelle::Simplification(){
 
 LitteraleComplexe& Complexe::Simplification(){
     LitteraleComplexe* ptr;
-    if(getPartieImaginaire()->getValeur()==0)
-         ptr = estdeType<LitteraleComplexe>(getPartieReelle()->getCopy());
+    LitteraleNumerique* xpI = getPartieImaginaire();
+    LitteraleNumerique* xpR = getPartieReelle();
+
+    if(xpI->getValeur()==0)
+         ptr = estdeType<LitteraleComplexe>(xpR);
     else{
              ptr=this->getCopy();
+             delete xpR;
     }
+    delete xpI;
     return *ptr;
 }
 
