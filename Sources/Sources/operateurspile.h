@@ -3,6 +3,9 @@
 
 #include"operateur.h"
 #include "pile.h"
+#include "mainwindow.h"
+#include "litterales.h"
+#include "operateursexpressions.h"
 
 namespace op_pile{
 
@@ -106,6 +109,22 @@ public:
 
     OperateurCLEAR():OperateurPile(){}
     Operateur* getCopy() const{return new OperateurCLEAR(*this);}
+
+};
+
+class OperateurEDIT : public Operateur{
+
+public:
+   Litterale* traitementOperateur(){
+                                       MainWindow::getInstanceMainWindow()->openProgramWindow();
+                                        return nullptr;
+                                     }
+
+   OperateurEDIT():Operateur(){}
+   Operateur* getCopy() const{return new OperateurEDIT(*this);}
+   void chargerContexte(){}
+   void resetContexte(){}
+
 
 };
 
