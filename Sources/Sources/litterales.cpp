@@ -30,7 +30,7 @@ LitteraleNumerique& Reelle::Simplification(){
     if(getMantisse().getValeur()==0)
          ptr = new Entier(getPartieEntiere());
     else{
-             ptr=this;
+             ptr=this->getNumericCopy();
     }
     return *ptr;
 }
@@ -41,7 +41,7 @@ LitteraleComplexe& Complexe::Simplification(){
     if(getPartieImaginaire()->getValeur()==0)
          ptr = estdeType<LitteraleComplexe>(getPartieReelle()->getCopy());
     else{
-             ptr=this;
+             ptr=this->getCopy();
     }
     return *ptr;
 }
@@ -98,7 +98,7 @@ LitteraleNumerique& Rationnel::Simplification(){
     if(denominateur.getValeur()==1)
         ptr= new Entier(numerateur.getValeur());
     else
-        ptr=this;
+        ptr=this->getNumericCopy();
     return *ptr;
 }
 

@@ -155,7 +155,7 @@ public:
         delete &p_reelle;
         delete &p_imaginaire;
     }
-    Complexe(Complexe& e):p_reelle(*e.getPartieReelle()->getNumericCopy()),p_imaginaire(*e.getPartieImaginaire()->getNumericCopy()){}
+    Complexe(Complexe& e):p_reelle(*e.getPartieReelle()),p_imaginaire(*e.getPartieImaginaire()){}
     Complexe operator=(Complexe& e);
     LitteraleNumerique* getPartieReelle() const {return p_reelle.getNumericCopy();}
     LitteraleNumerique* getPartieImaginaire() const {return p_imaginaire.getNumericCopy();}

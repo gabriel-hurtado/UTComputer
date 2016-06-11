@@ -153,7 +153,7 @@ Litterale* OperateurInfixe::traitementExpression(){
         }
         if(ex2 && !ex1)
         {
-            delete ex2;
+            delete ex1;
             ex1= new Expression("\'"+bin->getl1()->toString()+"\'");
 
         }

@@ -151,7 +151,7 @@ GerantPile& GerantPile::push_back_undo(MementoPile* l){
         //On doit reconstruire un savedMemento plus grand
         MementoPile** newsavedMemento = new MementoPile*[nombreMaxDeMementoUNDO*2];
         for(unsigned int i = 0; i < nombreMaxDeMementoUNDO*2;i++)
-            newsavedMemento[i]=savedMementoUNDO[i]; //Trasnfert des pointeurs
+            newsavedMemento[i]=savedMementoUNDO[i]; //Transfert des pointeurs
         delete savedMementoUNDO;
         savedMementoUNDO= newsavedMemento;
         nombreMaxDeMementoUNDO*=2;

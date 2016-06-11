@@ -16,7 +16,7 @@ class Operande
     static unsigned int nb_alloc;
 public:
     Operande() {
-        std::cout << nb_alloc << "allocating " << static_cast<void*>(this)<<std::endl;
+        std::cout << nb_alloc << "allocating operande " << static_cast<void*>(this)<<std::endl;
 
         nb_alloc++;
 
