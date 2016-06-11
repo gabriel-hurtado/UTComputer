@@ -33,7 +33,6 @@ public:
 class Pile : public QObject{
     Q_OBJECT
 
-    std::vector<Litterale*> emP;//emP stands for "embedded Pile"
 
     static Pile* instancePile;
     static bool atomic_lock; //When true, no save of the pile, when false it save
@@ -45,7 +44,10 @@ class Pile : public QObject{
     virtual ~Pile(){}
     void operator=(const Pile&);
 
+
 public:
+    std::vector<Litterale*> emP;//emP stands for "embedded Pile"
+
     friend class MementoPile; //Help for the constructor of a MementoPile
     Pile& operator<<(Litterale& l);
     Pile& operator>>(Litterale*& l);
