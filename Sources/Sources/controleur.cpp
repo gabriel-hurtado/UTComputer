@@ -62,7 +62,6 @@ bool Controleur::commande(QString& s,QString litterale_mode) const{
                         }
 
                 }
-
             /*
                 Idem, mais avec un opérateur. Si on reçoit null c'est que ce n'est pas un opérateur
                 Il faut bien faire attention à vérrouiler la pile pour éviter les sauvegardes

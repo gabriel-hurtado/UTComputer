@@ -11,7 +11,7 @@ Litterale* conditionnel::OperateurIFT::traitementOperateur(){
 
     }
     else{
-        return expression::OperateurEVAL(l2).traitementOperateur();
+        return expression::OperateurEVAL(l2->getCopy()).traitementOperateur();
 
 
     }
