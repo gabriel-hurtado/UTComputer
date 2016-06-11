@@ -7,15 +7,24 @@
 #include <vector>
 #include <QStack>
 #include "utils.h"
-
+#include <iostream>
+#include <typeinfo>
 class Litterale;
 
 class Operande
 {
-
+    static unsigned int nb_alloc;
 public:
-    Operande() {}
-    virtual ~Operande() {}
+    Operande() {
+        std::cout << nb_alloc << "allocating " << static_cast<void*>(this)<<std::endl;
+
+        nb_alloc++;
+
+    }
+    virtual ~Operande() {
+        std::cout << nb_alloc << "destroying " << static_cast<void*>(this)<<std::endl;
+        nb_alloc--;
+    }
 
 };
 

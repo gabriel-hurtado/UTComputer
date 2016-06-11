@@ -9,6 +9,7 @@ class OperateurConditionnel : public virtual Operateur
 public:
 
     OperateurConditionnel(){}
+    Operateur* getCopy() const = 0;
 
 };
 
@@ -25,7 +26,7 @@ public:
 
 
    OperateurIFT():OperateurBinaire(){}
-
+   Operateur* getCopy() const{return new OperateurIFT(*this);}
 
 
 };

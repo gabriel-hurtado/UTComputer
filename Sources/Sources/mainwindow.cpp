@@ -40,6 +40,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 {
+    //Pour capter le clavier
+    //this->installEventFilter();
+
     //On initialise la fenetre dans une ref static pour la connaitre dans les fenetres filles;
     InstanceMainWindow=this;
 
@@ -238,10 +241,10 @@ void MainWindow::refreshVuePile(){
         ui->vuePile->item(nb,0)->setText((*it).toString());
 
     //FOR DEBUG
-    pile.voirPile();
+    //pile.voirPile();
 
-    std::cout<<std::endl;
-    GerantPile::donnerInstance().seeUNDOList();
+    //std::cout<<std::endl;
+    //GerantPile::donnerInstance().seeUNDOList();
 }
 
 void MainWindow::getNextCommande(QString _fromButton){
@@ -560,4 +563,9 @@ void MainWindow::on_button_suppr_clicked()
    QString tmp = ui->commande->text();
    tmp.chop(1);
    ui->commande->setText(tmp);
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    if(event->key()==Qt::Key_Plus)
+        on_button_plus_clicked();
 }

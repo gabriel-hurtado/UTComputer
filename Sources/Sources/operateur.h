@@ -103,6 +103,8 @@ public:
     void setPriority(unsigned int p){priority=p;}
 
     unsigned int getPriority()  const {return priority;}
+
+    virtual Operateur* getCopy() const = 0;
 };
 
 
@@ -119,11 +121,12 @@ public:
     virtual ~OperateurBinaire();
 
     OperateurBinaire():Operateur(){}
-    OperateurBinaire(Litterale* lit1, Litterale* lit2):Operateur(),l1(lit1),l2(lit2){}
+    OperateurBinaire(Litterale* lit1, Litterale* lit2);
     OperateurBinaire(const OperateurBinaire& b);
     OperateurBinaire& operator=(const OperateurBinaire&);
     Litterale* getl1(){return l1;}
     Litterale* getl2(){return l2;}
+    Operateur* getCopy() const = 0;
 };
 
 class OperateurUnaire  : public virtual Operateur{
@@ -134,10 +137,13 @@ public:
    void chargerContexte();
    void resetContexte();
    OperateurUnaire():Operateur(){}
-   OperateurUnaire(Litterale* lit1):Operateur(),l1(lit1){}
+   OperateurUnaire(Litterale* lit1);
    OperateurUnaire(const OperateurUnaire&);
    OperateurUnaire& operator=(const OperateurUnaire&);
    Litterale* getl1(){return l1;}
+
+   Operateur* getCopy() const = 0;
+
 };
 
 /*• On peut également appliquer l’ensemble des opérateurs numériques et logiques s’écrivant sous forme de lettres
@@ -162,6 +168,7 @@ class OperateurPrefixe : public virtual Operateur{
    Litterale* traitementExpression();
 public:
    virtual ~OperateurPrefixe(){}
+   Operateur* getCopy() const = 0;
 
 };
 
@@ -173,6 +180,7 @@ class OperateurInfixe : public virtual Operateur{
     Litterale* traitementExpression();
 public:
     virtual ~OperateurInfixe(){}
+    Operateur* getCopy() const = 0;
 };
 
 

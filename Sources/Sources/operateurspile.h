@@ -11,6 +11,7 @@ class OperateurPile : public virtual Operateur
 public:
 
     OperateurPile():Operateur(){}
+    Operateur* getCopy() const = 0;
 
 };
 
@@ -28,7 +29,7 @@ public:
 
 
    OperateurDUP():OperateurUnaire(){}
-
+   Operateur* getCopy() const{return new OperateurDUP(*this);}
 
 };
 
@@ -40,6 +41,7 @@ public:
                                      return nullptr;}
 
    OperateurDROP():OperateurUnaire(){}
+   Operateur* getCopy() const{return new OperateurDROP(*this);}
 
 
 };
@@ -52,6 +54,7 @@ public:
                                     return nullptr;}
 
    OperateurSWAP():OperateurBinaire(){}
+   Operateur* getCopy() const{return new OperateurSWAP(*this);}
 
 };
 
@@ -68,6 +71,7 @@ public:
     void resetContexte(){}
 
     OperateurUNDO():OperateurPile(){}
+    Operateur* getCopy() const{return new OperateurUNDO(*this);}
 
 };
 
@@ -84,6 +88,7 @@ public:
     void resetContexte(){}
 
     OperateurREDO():OperateurPile(){}
+    Operateur* getCopy() const{return new OperateurREDO(*this);}
 
 };
 
@@ -100,6 +105,7 @@ public:
     void resetContexte(){}
 
     OperateurCLEAR():OperateurPile(){}
+    Operateur* getCopy() const{return new OperateurCLEAR(*this);}
 
 };
 
@@ -130,6 +136,7 @@ public:
                          throw PileException(op);
                              }
                          }
+     Operateur* getCopy() const{return new OperateurLASTOP(*this);}
 
 };
 
@@ -164,6 +171,7 @@ public:
                         throw PileException(op);
                             }
                         }
+    Operateur* getCopy() const{return new OperateurLASTARGS(*this);}
 
 
     OperateurLASTARGS():Operateur(){}

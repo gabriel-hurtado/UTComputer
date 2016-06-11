@@ -74,7 +74,9 @@ bool Controleur::commande(QString& s,QString litterale_mode) const{
                 //Seul morçeau de code statique [A CHANGER SI POSSIBLE]
                 if(word!="UNDO" && word!= "REDO")Pile::donnerInstance().sauverPile();
 
-                op->operation();}
+                op->operation();
+                delete op;
+            }
             Pile::donnerInstance().setAtomicLock(false);
 
             /*

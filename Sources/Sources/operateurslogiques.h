@@ -22,6 +22,7 @@ public:
     OperateurLogique(){setPriority(1);}
 
     virtual Litterale* traitementOperateur() =0;
+    Operateur* getCopy() const = 0;
 
 };
 
@@ -33,6 +34,7 @@ public:
 
    OperateurEgal():OperateurBinaire(){}
    OperateurEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+   Operateur* getCopy() const{return new OperateurEgal(*this);}
 
 
 };
@@ -45,6 +47,7 @@ public:
 
 OperateurDiff():OperateurBinaire(){}
    OperateurDiff(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+   Operateur* getCopy() const{return new OperateurDiff(*this);}
 
 
 };
@@ -56,6 +59,7 @@ public:
 
    OperateurInfEgal():OperateurBinaire(){}
    OperateurInfEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
+   Operateur* getCopy() const{return new OperateurInfEgal(*this);}
 
 
 };
@@ -68,7 +72,7 @@ public:
 
    OperateurSupEgal():OperateurBinaire(){}
    OperateurSupEgal(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
+   Operateur* getCopy() const{return new OperateurSupEgal(*this);}
 
 };
 
@@ -79,7 +83,7 @@ public:
 
    OperateurSup():OperateurBinaire(){}
    OperateurSup(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
+   Operateur* getCopy() const{return new OperateurSup(*this);}
 
 };
 
@@ -91,7 +95,7 @@ public:
 
    OperateurInf():OperateurBinaire(){}
    OperateurInf(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
+   Operateur* getCopy() const{return new OperateurInf(*this);}
 
 };
 
@@ -103,7 +107,7 @@ public:
 
    OperateurAND():OperateurBinaire(){}
    OperateurAND(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
+   Operateur* getCopy() const{return new OperateurAND(*this);}
 
 };
 
@@ -114,7 +118,7 @@ public:
 
    OperateurOR():OperateurBinaire(){}
    OperateurOR(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
+   Operateur* getCopy() const{return new OperateurOR(*this);}
 
 };
 
@@ -125,7 +129,7 @@ public:
 
    OperateurNOT():OperateurBinaire(){}
    OperateurNOT(Litterale* lit1, Litterale* lit2):OperateurBinaire(lit1,lit2){}
-
+   Operateur* getCopy() const{return new OperateurNOT(*this);}
 
 };
 }

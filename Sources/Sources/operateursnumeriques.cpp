@@ -135,8 +135,8 @@ Litterale* OperateurSoustraction::traitementOperateur(){
     LitteraleComplexe* li2=estdeType<LitteraleComplexe>(l2);
     if(li1 && li2)
     {
-        OperateurNEG ng = OperateurNEG(li2);
-        OperateurAddition addTemp = OperateurAddition(li1,ng.traitementOperateur());
+        OperateurNEG ng(li2);
+        OperateurAddition addTemp(li1,ng.traitementOperateur());
         return addTemp.traitementOperateur();
     }
     throw OperateurException("Error in soustraction");

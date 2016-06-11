@@ -6,27 +6,35 @@
 
 // Définitions de la classe OperateurBinaire
 
+unsigned int Operande::nb_alloc=0;
+
+OperateurBinaire::OperateurBinaire(Litterale* lit1, Litterale* lit2):Operateur(),l1(lit1->getCopy()),l2(lit2->getCopy()){}
+
 void OperateurBinaire::chargerContexte(){
                         l1=nullptr;l2=nullptr;
-                       Pile::donnerInstance()>>l2;
-                       Pile::donnerInstance()>>l1;
-                      OperationManager::donnerInstance().add(l1->getCopy());
-                      OperationManager::donnerInstance().add(l2->getCopy());
+                        Pile::donnerInstance()>>l2;
+                        Pile::donnerInstance()>>l1;
+                        OperationManager::donnerInstance().add(l1->getCopy());
+                        OperationManager::donnerInstance().add(l2->getCopy());
 }
+
 void OperateurBinaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
                      if(l2)  Pile::donnerInstance()<<*l2;}
 
 OperateurBinaire::~OperateurBinaire(){delete l1;delete l2;}
 
 OperateurBinaire::OperateurBinaire(const OperateurBinaire &b){
-    l1=b.l1->getCopy();
-    l2=b.l2->getCopy();
+    if(b.l1)
+        l1=estdeType<Litterale>(b.l1->getCopy());
+    if(b.l2)
+        l2=estdeType<Litterale>(b.l2->getCopy());
 }
 OperateurBinaire& OperateurBinaire::operator =(const OperateurBinaire& b){
     l1=b.l1->getCopy();
     l2=b.l2->getCopy();
     return *this;
 }
+
 // Définitions de la classe Operateur
 
 void Operateur::pushResultat(Litterale* res) {Pile::donnerInstance()<<(*res);}
@@ -61,6 +69,8 @@ void OperateurUnaire::chargerContexte(){
 
 void OperateurUnaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
 
+OperateurUnaire::OperateurUnaire(Litterale* lit1):Operateur(),l1(lit1->getCopy()){}
+
 OperateurUnaire::~OperateurUnaire(){delete l1;}
 
 OperateurUnaire::OperateurUnaire(const OperateurUnaire &b){
@@ -93,7 +103,10 @@ void OperationManager::libererInstance(){
 }
 
 void OperationManager::sauvegarder( Operateur* o){
-    lastOp= o;
+    lastOp = o->getCopy();
+    for(Litterale* l : lastLits){
+        delete l;
+    }
     lastLits.clear();
 }
 
@@ -128,17 +141,19 @@ std::vector<Litterale*>::const_iterator OperationManager::getLastLitsEnd(){
 Litterale* OperateurInfixe::traitementExpression(){
     OperateurBinaire* bin = estdeType<OperateurBinaire>(this);
     if(bin){
-        Expression* ex1 = estdeType<Expression>(bin->getl1());
-        Expression* ex2 = estdeType<Expression>(bin->getl2());
+        Expression* ex1 = estdeType<Expression>(bin->getl1()->getCopy());
+        Expression* ex2 = estdeType<Expression>(bin->getl2()->getCopy());
 
         QString symbol= bin->getSymbole();
         if(ex1 && !ex2)
         {
+            delete ex2;
             ex2= new Expression("\'"+bin->getl2()->toString()+"\'");
 
         }
         if(ex2 && !ex1)
         {
+            delete ex2;
             ex1= new Expression("\'"+bin->getl1()->toString()+"\'");
 
         }
@@ -151,6 +166,9 @@ Litterale* OperateurInfixe::traitementExpression(){
            secondPart = Controleur::ParenthesisCleaner(secondPart,bin->getPriority());
 
            QString newExp = "\'"+firstPart+symbol+secondPart+"\'";
+
+           delete ex1;
+           delete ex2;
 
            return new Expression(newExp);
         }
@@ -165,7 +183,7 @@ Litterale* OperateurInfixe::traitementExpression(){
         Expression* ex1 = estdeType<Expression>(un->getl1());
         if(ex1)
         {
-            QString symbol= un->getSymbole();
+           QString symbol= un->getSymbole();
            QString newExp = "'"+symbol+"("+ex1->getExpressionNoBorders()+")"+"'";
            return new Expression(newExp);
         }
@@ -178,23 +196,27 @@ Litterale* OperateurInfixe::traitementExpression(){
 Litterale* OperateurPrefixe::traitementExpression(){
   OperateurBinaire* bin = estdeType<OperateurBinaire>(this);
   if(bin){
-      Expression* ex1 = estdeType<Expression>(bin->getl1());
-      Expression* ex2 = estdeType<Expression>(bin->getl2());
+      Expression* ex1 = estdeType<Expression>(bin->getl1()->getCopy());
+      Expression* ex2 = estdeType<Expression>(bin->getl2()->getCopy());
 
       QString symbol= bin->getSymbole();
       if(ex1 && !ex2)
       {
+          delete ex2;
           ex2= new Expression("'"+bin->getl2()->toString()+"'");
 
       }
       if(ex2 && !ex1)
       {
+          delete ex2;
           ex1= new Expression("'"+bin->getl1()->toString()+"'");
 
       }
       if(ex1 && ex2)
       {
          QString newExp = "'"+symbol+"("+ex1->getExpressionNoBorders()+","+ex2->getExpressionNoBorders()+")"+"'";
+         delete ex1;
+         delete ex2;
          return new Expression(newExp);
       }
 
@@ -208,7 +230,7 @@ Litterale* OperateurPrefixe::traitementExpression(){
       Expression* ex1 = estdeType<Expression>(un->getl1());
       if(ex1)
       {
-          QString symbol= un->getSymbole();
+         QString symbol= un->getSymbole();
          QString newExp = "'"+symbol+"("+ex1->getExpressionNoBorders()+")"+"'";
          return new Expression(newExp);
       }

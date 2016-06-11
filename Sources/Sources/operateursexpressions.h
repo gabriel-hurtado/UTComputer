@@ -11,6 +11,7 @@ class OperateurExpression : public virtual Operateur
 public:
 
     OperateurExpression(){}
+    Operateur* getCopy() const = 0;
 
 
 
@@ -36,7 +37,7 @@ public:
    OperateurEVAL():OperateurUnaire(){}
 
    OperateurEVAL(Litterale* l1):OperateurUnaire(l1){}
-
+   Operateur* getCopy() const{return new OperateurEVAL(*this);}
 
 };
 
@@ -50,7 +51,7 @@ public:
    OperateurSTO():OperateurBinaire(){}
 
    OperateurSTO(Litterale* l1, Litterale* l2):OperateurBinaire(l1,l2){}
-
+   Operateur* getCopy() const{return new OperateurSTO(*this);}
 };
 
 
@@ -63,7 +64,7 @@ public:
 
    OperateurUserMade():OperateurUnaire(){}
    OperateurUserMade(Litterale* l1):OperateurUnaire(l1){}
-
+   Operateur* getCopy() const{return new OperateurUserMade(*this);}
 
 };
 

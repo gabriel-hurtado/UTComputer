@@ -33,6 +33,7 @@ class MainWindow : public QMainWindow
 
 protected:
     void closeEvent(QCloseEvent *event);
+    void keyPressEvent(QKeyEvent *event);
 
 public:
     explicit MainWindow(QWidget *parent = 0);
