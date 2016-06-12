@@ -2,7 +2,7 @@ var class_operateur =
 [
     [ "~Operateur", "class_operateur.html#a091211894e2e0d1fb22e7aeb164de041", null ],
     [ "chargerContexte", "class_operateur.html#ac27c7f726cb6650cda2c755585ce250f", null ],
-    [ "getCopy", "class_operateur.html#a67cc6c83f738403e96c59b0cbf3e1f3e", null ],
+    [ "getCopy", "class_operateur.html#a13d5d7d7fd1a4a00c0089e3923062b2f", null ],
     [ "getPriority", "class_operateur.html#a7719ae9144c02c1fcac563f83a8aaea6", null ],
     [ "getSymbole", "class_operateur.html#aacf7df62f43d3972fb2f9c2fe03be37a", null ],
     [ "operation", "class_operateur.html#ace6e5b576aa258862b04bd958f613523", null ],

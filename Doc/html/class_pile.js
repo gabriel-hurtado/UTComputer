@@ -15,7 +15,6 @@ var class_pile =
     [ "setNbToAffiche", "class_pile.html#ad93ed20079652b1c5a9da8828bd60378", null ],
     [ "UNDO", "class_pile.html#a3f8c26b7d83591f473c0a950b07ad317", null ],
     [ "viderPile", "class_pile.html#a3429b0db007e8268ffe9954b8df749ef", null ],
-    [ "voirPile", "class_pile.html#a956e594651f62ff5537ca90986763a78", null ],
     [ "MementoPile", "class_pile.html#a7aed6c62b0cfac7d4797290288fcb92b", null ],
     [ "savedMementoUNDO", "class_pile.html#aa7c6806caee747eacec7a990dca6f94c", null ]
 ];

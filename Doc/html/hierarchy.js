@@ -113,7 +113,8 @@ var hierarchy =
           [ "numerique::OperateurNUM", "classnumerique_1_1_operateur_n_u_m.html", null ],
           [ "numerique::OperateurRE", "classnumerique_1_1_operateur_r_e.html", null ],
           [ "op_pile::OperateurDROP", "classop__pile_1_1_operateur_d_r_o_p.html", null ],
-          [ "op_pile::OperateurDUP", "classop__pile_1_1_operateur_d_u_p.html", null ]
+          [ "op_pile::OperateurDUP", "classop__pile_1_1_operateur_d_u_p.html", null ],
+          [ "op_pile::OperateurFORGET", "classop__pile_1_1_operateur_f_o_r_g_e_t.html", null ]
         ] ]
       ] ]
     ] ],
