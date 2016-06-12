@@ -1,0 +1,19 @@
+Au niveau de l'adaptabilité, il était nécessaire de faire un choix. Nous avons considéré que l'ajout de nouveaux opérateurs était bien plus fréquent que l'ajout de nouvelles littérales. Nous avons donc mis l'accent sur la flexibilité des opérateurs, parfois au détriment de celle des littérales.
+
+\section{Adaptabilité des littérales}
+La création de littérale peut se faire en héritant au minimum de la classe littérale. Pour enregistrer une nouvelle littérale, il faudra donc définir son comportement pour quelques méthodes comme getFromString(), getCopy(),etc et enregistrer la littérale auprès de la litteraleFactory avec la méthode enregistrer() (ou enregistrerInfix(), si l'on veut qu'elle ne soit comprise que dans des expressions.). L'enregistrement requiert au minimum un symbole et une priorité différente de celles définies de base (visibles dans le fichier main.cpp), mais l'on peut aussi définir la façon dont la littérale est détectée dans le contrôleur, en définissant une classe héritant de WordIdentifier, qui redéfinit les méthodes wordGuesser() qui vérifie que le mot est bon et wordPosition() qui permet l'extraction du mot. On peut bien entendu omettre ce paramètre et le comportement par défaut fait que le mot se fini au prochain espace (ou fin de la ligne de commande).
+Ainsi, ces littérales nouvellement ajoutées seront comprises partout. Le seul problème est la compatibilité de celles-ci avec les opérateurs. Leur comportement n'étant pas défini, il faudra modifier directement les opérateurs en question.
+
+\section{Adaptabilité des opérateurs}
+
+L'adaptabilité est l'avantage principal de notre choix d'architecture, au niveau des opérateurs. En effet, si l'utilisateur souhaite définir un nouvel opérateur, il n'a qu'a le faire hériter des classes qui le constitue, et son comportement sera en très grande partie hérité de ces classes supérieures. Par exemple, pour implémenter un opérateur comme sinus, il suffit de le faire hériter d'opérateur numérique, et d'opérateur préfixe. La seule méthode à définir sera \textit{traitementOperateur()}, définissant ce que l'opérateur doit faire de ses deux littérales. Il faudra par la suite enregistrer cet opérateur auprès de sa factory.
+Grâce à cette architecture, l'opérateur n'a à s'occuper ni de savoir si elles viennent de la pile, ni à les sauvegarder pour la gestion du contexte. Son seul travail sera de définir le comportement, et éventuellement d'émettre une exception si les littérales reçues sont d'un mauvais type, ou si l'opération demandée est sémantiquement incorrecte.
+
+\medskip
+Cependant ce choix d'architecture présente un désavantage. Lors de l'ajout d'une nouvelle littérale, il est nécessaire de modifier une partie des méthodes \textit{traitementOperateur()} des opérateurs pouvant s'appliquer à ce nouveau type de littérale. 
+Le désavantage de ce choix d'architecture est clair, mais nous avons considéré qu'il sera très rarement utile de rajouter de nouvelles littérales, et donc qu'il était justifié de privilégier l'adaptabilité des opérateurs.
+
+
+
+
+
