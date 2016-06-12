@@ -90,14 +90,14 @@ public:
 
     /**
      * @brief Détecte le type de litterale du paramêtre s et renvoie l'exemple de littérale stocké dans la litterale_map correspondant.
-     * @param s littérale sous forme de string.
+     * @param s littérale sous forme de string qui servira à trouver l'exemple correspondant.
      * @return Renvoie l'exemple de littérale stcoké ou nullptr s'il n'a trouvé aucune correspondance
      */
     Litterale* getRPNExampleOf(QString s) const;
 
     /**
      * @brief Idem à getRPNExampleOf avec les littérales paramétrées comme Infix
-     * @param s
+     * @param s littérale sous forme de string qui servira à trouver l'exemple correspondant.
      * @return Renvoie l'exemple de littérale stocké ou nullptr s'il n'a trouvé aucune correspondance.
      */
     Litterale* getInfixExampleOf(QString s) const;

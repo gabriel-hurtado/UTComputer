@@ -40,15 +40,15 @@ public:
     bool commande(QString& s,QString litterale_mode = "RPN") const;
 
     /**
-     *  @brief Permet d'extraire le premier mot (première action) à traiter.
+     *  @brief Permet d'extraire le premier mot (première action) à traiter. \n
      *  Pour trouver le mot on utilise l'objet de type WordIdentifier associé au symbole que l'on trouve dans l'interpretation_map.
-     *  @param s chaine de caratère contenant plusieurs mots
-     *  @return une chaine de caratère contenant le premier mot
+     *  @param s Chaine de caratère contenant plusieurs mots
+     *  @return Une chaine de caratère contenant le premier mot
     */
     static QString firstWord(QString s);
 
     /**
-     *  @brief pour associer un symbole à un WordIdentifier
+     *  @brief Pour associer un symbole à un WordIdentifier \n
      *  Enregistre le symbole et le pointeur sur le WordIdentifier dans l'interpretation_map du controleur
      */
     static void enregistrerSymbole(QString, WordIdentifier* W = nullptr);
@@ -58,9 +58,9 @@ public:
     /**
      * @brief Supprime les parenthèses inutiles
      * Sert pour des opérations entre deux expressions
-     * @param s chaine de caractères de l'expression
-     * @param priority priorité de l'opérateur utilisé lors de l'opération entre expressions
-     * @return la chaine de caractères, de l'expression, sans parenthèses si elles sont inutiles
+     * @param s Chaine de caractères de l'expression
+     * @param Priority priorité de l'opérateur utilisé lors de l'opération entre expressions
+     * @return La chaine de caractères, de l'expression, sans parenthèses si elles sont inutiles
      */
     static QString ParenthesisCleaner(QString s, unsigned int priority);
 

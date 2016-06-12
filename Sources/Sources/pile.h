@@ -9,10 +9,6 @@ class Litterale;
 
 class MementoPile;
 /*
-    Manuel pour utiliser un objet "deque" :
-    http://en.cppreference.com/w/cpp/container/deque
-*/
-/*
     Pile est l'Originator du Memento
 */
 class GerantPile;
