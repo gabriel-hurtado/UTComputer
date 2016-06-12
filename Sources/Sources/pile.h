@@ -43,18 +43,14 @@ class Pile : public QObject{
     virtual ~Pile(){}
     void operator=(const Pile&);
 
-<<<<<<< HEAD
-=======
     /**
      * @brief le vector emP contient les litterales*
      *
     */
     std::vector<Litterale*> emP;//emP stands for "embedded Pile"
->>>>>>> a213724647143e7a4ec9c66baab10b8d6fe676e6
 
 public:
 
-    std::vector<Litterale*> emP;//emP stands for "embedded Pile"
     friend class MementoPile; //Help for the constructor of a MementoPile
 
     /**
