@@ -68,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent) :
     /*
         On initialise le son
     */
-    soundBell->setMedia(QUrl::fromLocalFile(QFileInfo("bell.wav").absoluteFilePath()));
+    soundBell->setMedia(QUrl);
     soundBell->setVolume(50);
 
     /*

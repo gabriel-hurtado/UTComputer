@@ -54,3 +54,6 @@ FORMS += \
 QT += widgets
 
 DISTFILES +=
+
+RESOURCES += \
+    Sources/Sources/ressources.qrc
