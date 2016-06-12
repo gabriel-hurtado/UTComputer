@@ -49,10 +49,9 @@ bool Controleur::commande(QString& s,QString litterale_mode) const{
             if(l){
                     Atome* a= estdeType<Atome>(l);
                         if(a){
-                            expression::OperateurUserMade op = expression::OperateurUserMade(a);
+                            expression::OperateurUserMade op = expression::OperateurUserMade(a->getCopy());
 
                              op.traitementOperateur();
-
 
                         }
                         else{
@@ -72,7 +71,6 @@ bool Controleur::commande(QString& s,QString litterale_mode) const{
                 if(word!="UNDO" && word!= "REDO")Pile::donnerInstance().sauverPile();
 
                 op->operation();
-                delete op;
             }
             Pile::donnerInstance().setAtomicLock(false);
 
