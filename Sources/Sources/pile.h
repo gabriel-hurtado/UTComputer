@@ -31,7 +31,10 @@ class Pile : public QObject{
 
 
     static Pile* instancePile;
-    static bool atomic_lock; //When true, no save of the pile, when false it save
+    /**
+     * @brief Permet de bloquer la sauvegarde de la pile si à true
+    */
+    static bool atomic_lock;
 
     unsigned int nbLitteraletoAffiche;
     /*made those method in private so the user can't use them*/
@@ -40,12 +43,31 @@ class Pile : public QObject{
     virtual ~Pile(){}
     void operator=(const Pile&);
 
+    /**
+     * @brief le vector emP contient les litterales*
+     *
+    */
     std::vector<Litterale*> emP;//emP stands for "embedded Pile"
 
 public:
 
     friend class MementoPile; //Help for the constructor of a MementoPile
+
+    /**
+     * @brief Unique méthode pour push une littérale* dans la pile.
+     * @details Provoque une copie de la pile avant ajout, afin de pouvoir effectuer la commande UNDO\n
+     * Enlève aussi tout les REDO, car ils ne sont plus cohérents après un ajout\n
+     * Attention : La sauvegarde fonctionne uniquement si atomic_lock est à false;
+     * @return Retourne une référence sur la pile pour effectuer des ajouts les uns à la suite des autres
+     */
     Pile& operator<<(Litterale& l);
+
+    /**
+     * @brief Unique méthode pour pop une littérale* dans la pile.
+     * @details Provoque une copie de la pile avant ajout, afin de pouvoir effectuer la commande UNDO\n
+     * Attention : La sauvegarde fonctionne uniquement si atomic_lock est à false;
+     * @return Retourne une référence sur la pile pour effectuer des retraits les uns à la suite des autres
+     */
     Pile& operator>>(Litterale*& l);
     void voirPile() const;
     void viderPile(){emP.clear();
@@ -55,15 +77,24 @@ public:
     //Méthodes pour le Memento
     MementoPile* saveInMemento() const;
     void restoreFromMemento(MementoPile* m);
+
+    /**
+     * @brief Appelle la méthode UNDO du gérant de la pile, qui elle restaure l'état précédant de la pile
+    */
     void UNDO();
+
+    /**
+     * @brief Appelle la méthode REDO du gérant de la pile, qui elle restaure l'état de la pile suivant le dernier UNDO
+    */
     void REDO();
     void sauverPile();
 
     unsigned int getNbToAffiche(){return nbLitteraletoAffiche;}
     void setNbToAffiche(unsigned int i){nbLitteraletoAffiche=i;sendRegenerateVuePile();}
 
-    /*
-        Méthodes pour le verrou de sauvegarde
+    /**
+     * @brief Permet de selectionner l'état du verrou de la pile
+     * @details true pour empécher la sauvegarde et false pour l'autoriser
     */
     static void setAtomicLock(bool v){atomic_lock = v;}
     MementoPile** savedMementoUNDO;
@@ -82,15 +113,23 @@ public:
         iterator end() { return emP.end(); }
 
 signals:
+        /**
+         * @brief Permet de signaler à la mainWindow un changement d'état de la pile, afin qu'elle puisse rafraichir l'affichage
+         */
         void modificationEtat();
+
+        /**
+         * @brief Permet de signal à la mainWindow que le nombre d'objets à afficher à changé, et qu'il faut recréer la vue de la pile
+        */
         void sendRegenerateVuePile();
 
 };
 
 
-/*
-    Classe MementoPile :
-        crée des objets qui contiennent une sauvegarde de la pile
+/**
+ * @class MementoPile
+ * @brief Encapsule un vector de littérale, qui décrit un état de la pile
+ *
 */
 class MementoPile{
     std::vector<Litterale*> saved_emP;
@@ -100,6 +139,11 @@ public:
     MementoPile(const std::vector<Litterale* >& emP);
 };
 
+/**
+ * @class GerantPile
+ * @brief Classe gérant les différentes sauvegardes de la pile,
+ * @details L'objet GerantPile est singleton et s'occupe de fonctionner les opérations UNO et REDO correctement sur la pile.
+*/
 class GerantPile{
     unsigned int nombreMaxDeMementoUNDO;
     unsigned int nombreDeMementoUNDO;

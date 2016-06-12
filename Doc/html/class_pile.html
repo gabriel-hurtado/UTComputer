@@ -46,6 +46,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -133,19 +134,21 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
 <tr class="memitem:ac55a0afb626baffd1019567cbaa7f4b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac55a0afb626baffd1019567cbaa7f4b2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>modificationEtat</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pile.html#ac55a0afb626baffd1019567cbaa7f4b2">modificationEtat</a> ()</td></tr>
+<tr class="memdesc:ac55a0afb626baffd1019567cbaa7f4b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de signaler à la mainWindow un changement d'état de la pile, afin qu'elle puisse rafraichir l'affichage. <br /></td></tr>
 <tr class="separator:ac55a0afb626baffd1019567cbaa7f4b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa49dcf1de18ffe4b5e6fb9b4a198edf3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa49dcf1de18ffe4b5e6fb9b4a198edf3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>sendRegenerateVuePile</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pile.html#aa49dcf1de18ffe4b5e6fb9b4a198edf3">sendRegenerateVuePile</a> ()</td></tr>
+<tr class="memdesc:aa49dcf1de18ffe4b5e6fb9b4a198edf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de signal à la mainWindow que le nombre d'objets à afficher à changé, et qu'il faut recréer la vue de la pile. <br /></td></tr>
 <tr class="separator:aa49dcf1de18ffe4b5e6fb9b4a198edf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a10a188476db3fe6efc8b459b57610ae8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a10a188476db3fe6efc8b459b57610ae8"></a>
-<a class="el" href="class_pile.html">Pile</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (<a class="el" href="class_litterale.html">Litterale</a> &amp;l)</td></tr>
+<tr class="memitem:a10a188476db3fe6efc8b459b57610ae8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_pile.html">Pile</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pile.html#a10a188476db3fe6efc8b459b57610ae8">operator&lt;&lt;</a> (<a class="el" href="class_litterale.html">Litterale</a> &amp;l)</td></tr>
+<tr class="memdesc:a10a188476db3fe6efc8b459b57610ae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique méthode pour push une littérale* dans la pile.  <a href="#a10a188476db3fe6efc8b459b57610ae8">More...</a><br /></td></tr>
 <tr class="separator:a10a188476db3fe6efc8b459b57610ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc050e79dd6c066309b3c6966a535f20"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc050e79dd6c066309b3c6966a535f20"></a>
-<a class="el" href="class_pile.html">Pile</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;&gt;</b> (<a class="el" href="class_litterale.html">Litterale</a> *&amp;l)</td></tr>
+<tr class="memitem:acc050e79dd6c066309b3c6966a535f20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_pile.html">Pile</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pile.html#acc050e79dd6c066309b3c6966a535f20">operator&gt;&gt;</a> (<a class="el" href="class_litterale.html">Litterale</a> *&amp;l)</td></tr>
+<tr class="memdesc:acc050e79dd6c066309b3c6966a535f20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique méthode pour pop une littérale* dans la pile.  <a href="#acc050e79dd6c066309b3c6966a535f20">More...</a><br /></td></tr>
 <tr class="separator:acc050e79dd6c066309b3c6966a535f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a956e594651f62ff5537ca90986763a78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a956e594651f62ff5537ca90986763a78"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>voirPile</b> () const </td></tr>
@@ -160,10 +163,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>viderPile</b> ()</td>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>restoreFromMemento</b> (<a class="el" href="class_memento_pile.html">MementoPile</a> *m)</td></tr>
 <tr class="separator:a8c82a00731df2f7b14168dcd59a3373f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f8c26b7d83591f473c0a950b07ad317"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f8c26b7d83591f473c0a950b07ad317"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>UNDO</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pile.html#a3f8c26b7d83591f473c0a950b07ad317">UNDO</a> ()</td></tr>
+<tr class="memdesc:a3f8c26b7d83591f473c0a950b07ad317"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appelle la méthode UNDO du gérant de la pile, qui elle restaure l'état précédant de la pile. <br /></td></tr>
 <tr class="separator:a3f8c26b7d83591f473c0a950b07ad317"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65f08de2d8ca29b578eafb3f7c2825be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65f08de2d8ca29b578eafb3f7c2825be"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>REDO</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pile.html#a65f08de2d8ca29b578eafb3f7c2825be">REDO</a> ()</td></tr>
+<tr class="memdesc:a65f08de2d8ca29b578eafb3f7c2825be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appelle la méthode REDO du gérant de la pile, qui elle restaure l'état de la pile suivant le dernier UNDO. <br /></td></tr>
 <tr class="separator:a65f08de2d8ca29b578eafb3f7c2825be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9888d57b2b8acabc42b3579799f03529"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9888d57b2b8acabc42b3579799f03529"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sauverPile</b> ()</td></tr>
@@ -189,8 +194,8 @@ static <a class="el" href="class_pile.html">Pile</a> &amp;&#160;</td><td class="
 <tr class="memitem:ac3868cf82736d86edfe47034393bbd76"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3868cf82736d86edfe47034393bbd76"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>libererInstance</b> ()</td></tr>
 <tr class="separator:ac3868cf82736d86edfe47034393bbd76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8123a7f743a2955b46d3691e400e49a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8123a7f743a2955b46d3691e400e49a5"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>setAtomicLock</b> (bool v)</td></tr>
+<tr class="memitem:a8123a7f743a2955b46d3691e400e49a5"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pile.html#a8123a7f743a2955b46d3691e400e49a5">setAtomicLock</a> (bool v)</td></tr>
+<tr class="memdesc:a8123a7f743a2955b46d3691e400e49a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de selectionner l'état du verrou de la pile.  <a href="#a8123a7f743a2955b46d3691e400e49a5">More...</a><br /></td></tr>
 <tr class="separator:a8123a7f743a2955b46d3691e400e49a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -205,6 +210,75 @@ Friends</h2></td></tr>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>MementoPile</b></td></tr>
 <tr class="separator:a7aed6c62b0cfac7d4797290288fcb92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a10a188476db3fe6efc8b459b57610ae8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_pile.html">Pile</a> &amp; Pile::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_litterale.html">Litterale</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unique méthode pour push une littérale* dans la pile. </p>
+<p>Provoque une copie de la pile avant ajout, afin de pouvoir effectuer la commande UNDO<br />
+Enlève aussi tout les REDO, car ils ne sont plus cohérents après un ajout<br />
+Attention : La sauvegarde fonctionne uniquement si atomic_lock est à false; </p><dl class="section return"><dt>Returns</dt><dd>Retourne une référence sur la pile pour effectuer des ajouts les uns à la suite des autres </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acc050e79dd6c066309b3c6966a535f20"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_pile.html">Pile</a> &amp; Pile::operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_litterale.html">Litterale</a> *&amp;&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unique méthode pour pop une littérale* dans la pile. </p>
+<p>Provoque une copie de la pile avant ajout, afin de pouvoir effectuer la commande UNDO<br />
+Attention : La sauvegarde fonctionne uniquement si atomic_lock est à false; </p><dl class="section return"><dt>Returns</dt><dd>Retourne une référence sur la pile pour effectuer des retraits les uns à la suite des autres </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8123a7f743a2955b46d3691e400e49a5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Pile::setAtomicLock </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Permet de selectionner l'état du verrou de la pile. </p>
+<p>true pour empécher la sauvegarde et false pour l'autoriser </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Sources/Sources/<a class="el" href="pile_8h_source.html">pile.h</a></li>
 <li>Sources/Sources/pile.cpp</li>

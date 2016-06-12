@@ -5,5 +5,6 @@ var searchData=
   ['enregistrerinfix',['enregistrerInfix',['../class_litterale_factory.html#a0f0a724990c30e7aa168bb09395237a4',1,'LitteraleFactory']]],
   ['enregistrersymbole',['enregistrerSymbole',['../class_controleur.html#a59ddac9125a9ca88a5a4ac20737069c2',1,'Controleur']]],
   ['entier',['Entier',['../class_entier.html',1,'']]],
+  ['evaluer',['evaluer',['../class_expression.html#a63fc885dc0c00aa16f1f7e1abf366c01',1,'Expression']]],
   ['expression',['Expression',['../class_expression.html',1,'']]]
 ];

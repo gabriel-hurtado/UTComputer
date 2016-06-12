@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7emainwindow',['~MainWindow',['../class_main_window.html#ae98d00a93bc118200eeef9f9bba1dba7',1,'MainWindow']]]
+  ['parenthesiscleaner',['ParenthesisCleaner',['../class_controleur.html#a632e50ad328bba4e1b888da36710fe00',1,'Controleur']]]
 ];
