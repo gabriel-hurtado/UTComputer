@@ -168,7 +168,8 @@ public:
 
         std::vector<Litterale*>::const_iterator it2= OperationManager::donnerInstance().getLastLitsEnd();
         do{
-            Pile::donnerInstance()<<*(*it1);
+            Litterale* tmp = *it1;
+            Pile::donnerInstance()<<*(tmp->getCopy());
             it1++;
         }while(it1!=it2);
          return nullptr;
