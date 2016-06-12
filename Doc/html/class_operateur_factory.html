@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>My Project: OperateurFactory Class Reference</title>
+<title>UTComputer: OperateurFactory Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">UTComputer
    </div>
   </td>
  </tr>
@@ -115,8 +115,8 @@ $(document).ready(function(){initNavTree('class_operateur_factory.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3b915ca86d2ad5f810875ef373e7351c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b915ca86d2ad5f810875ef373e7351c"></a>
-<a class="el" href="class_operateur.html">Operateur</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>creer</b> (const QString &amp;cle)</td></tr>
+<tr class="memitem:a3b915ca86d2ad5f810875ef373e7351c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_operateur.html">Operateur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_operateur_factory.html#a3b915ca86d2ad5f810875ef373e7351c">creer</a> (const QString &amp;cle)</td></tr>
+<tr class="memdesc:a3b915ca86d2ad5f810875ef373e7351c"><td class="mdescLeft">&#160;</td><td class="mdescRight">creer des objets à partir de la factory  <a href="#a3b915ca86d2ad5f810875ef373e7351c">More...</a><br /></td></tr>
 <tr class="separator:a3b915ca86d2ad5f810875ef373e7351c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
@@ -127,13 +127,82 @@ static <a class="el" href="class_operateur_factory.html">OperateurFactory</a> &a
 <tr class="memitem:ac3b4a47ebb2ca5ed1eedd3d2b37e3a5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3b4a47ebb2ca5ed1eedd3d2b37e3a5d"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>libererInstance</b> ()</td></tr>
 <tr class="separator:ac3b4a47ebb2ca5ed1eedd3d2b37e3a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05dc8a5c25393276fda8d4ddf585cbce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05dc8a5c25393276fda8d4ddf585cbce"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>enregistrer</b> (const QString &amp;cle, <a class="el" href="class_operateur.html">Operateur</a> *obj)</td></tr>
+<tr class="memitem:a05dc8a5c25393276fda8d4ddf585cbce"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_operateur_factory.html#a05dc8a5c25393276fda8d4ddf585cbce">enregistrer</a> (const QString &amp;cle, <a class="el" href="class_operateur.html">Operateur</a> *obj)</td></tr>
+<tr class="memdesc:a05dc8a5c25393276fda8d4ddf585cbce"><td class="mdescLeft">&#160;</td><td class="mdescRight">enregistrer de nouveaux opérateurs  <a href="#a05dc8a5c25393276fda8d4ddf585cbce">More...</a><br /></td></tr>
 <tr class="separator:a05dc8a5c25393276fda8d4ddf585cbce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe0503ac058fb51950c48bf0069ce4a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe0503ac058fb51950c48bf0069ce4a9"></a>
 static const QMap&lt; QString, <a class="el" href="class_operateur.html">Operateur</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getMap</b> ()</td></tr>
 <tr class="separator:abe0503ac058fb51950c48bf0069ce4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a3b915ca86d2ad5f810875ef373e7351c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_operateur.html">Operateur</a> * OperateurFactory::creer </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>cle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>creer des objets à partir de la factory </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cle</td><td>nom du patron </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>nouvel opérateur, copie du patron </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a05dc8a5c25393276fda8d4ddf585cbce"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OperateurFactory::enregistrer </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>cle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_operateur.html">Operateur</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>enregistrer de nouveaux opérateurs </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cle</td><td>symbole de l'opérateur </td></tr>
+    <tr><td class="paramname">obj</td><td>patron vers l'opérateur </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Sources/Sources/<a class="el" href="operateurfactory_8h_source.html">operateurfactory.h</a></li>
 <li>Sources/Sources/operateurfactory.cpp</li>

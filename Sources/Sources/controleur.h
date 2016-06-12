@@ -14,7 +14,7 @@ class Controleur
     static Controleur* instanceControleur;
     /**
      * @brief Map qui contient les pointeurs sur l'objet d'interpretation du mot
-    */
+     */
     static QMap<QString,WordIdentifier*> interpretationMap;
 
 
@@ -32,26 +32,25 @@ public:
     static void libererInstance();
 
     /**
-     *  @brief Lit une suite d'opérations à effectuer : empilement de littérale sur la pile ou execution d'opérateur.
-     *  @param s chaine de caractère qui contient les différentes opérations à effectuer
-     *  @param litterale_mode mode de construction des littérales dans la litteralefactory
-     *  Valeur de retour :
-     *      -lorsque toutes les actions se sont correctement éffectuées : true
-     *      -sinon false et s contient seulement l'action non comprise
-    */
+     *  @brief Lit une suite d'opérations à effectuer : empilement de littérale (2 modes) sur la pile ou execution d'opérateur.
+     *  @param s chaine de caractère qui contient les différentes opérations à effectuer.
+     *  @param litterale_mode mode de construction des littérales dans la litteralefactory.
+     *  @return true si toutes les opérations ont été comprises, false sinon et s contient les instructions restantes.
+     */
     bool commande(QString& s,QString litterale_mode = "RPN") const;
 
-    /*
-        Permet d'extraire le premier mot (première action) à traiter.
-        Les programmes et expressions pouvant contenir des espaces,
-        leur détection à été écrite en dur dans cette méthode.
-        L'idéal serait de trouver une autre façon de faire mais celà est difficile par manque de temps
+    /**
+     *  @brief Permet d'extraire le premier mot (première action) à traiter.
+     *  Pour trouver le mot on utilise l'objet de type WordIdentifier associé au symbole que l'on trouve dans l'interpretation_map.
+     *  @param s chaine de caratère contenant plusieurs mots
+     *  @return une chaine de caratère contenant le premier mot
     */
     static QString firstWord(QString s);
-    /*
-        Méthode pour enregistrer un symbole pour le WordFinder
-    */
-    //static void enregistrerSymbole(QString,QString rtok ="");
+
+    /**
+     *  @brief pour associer un symbole à un WordIdentifier
+     *  Enregistre le symbole et le pointeur sur le WordIdentifier dans l'interpretation_map du controleur
+     */
     static void enregistrerSymbole(QString, WordIdentifier* W = nullptr);
 
     static QString SpaceCleaner(QString);

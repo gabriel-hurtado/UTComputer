@@ -46,6 +46,7 @@ var hierarchy =
           [ "logique::OperateurSup", "classlogique_1_1_operateur_sup.html", null ],
           [ "logique::OperateurSupEgal", "classlogique_1_1_operateur_sup_egal.html", null ]
         ] ],
+        [ "op_pile::OperateurEDIT", "classop__pile_1_1_operateur_e_d_i_t.html", null ],
         [ "op_pile::OperateurLASTARGS", "classop__pile_1_1_operateur_l_a_s_t_a_r_g_s.html", null ],
         [ "op_pile::OperateurLASTOP", "classop__pile_1_1_operateur_l_a_s_t_o_p.html", null ],
         [ "op_pile::OperateurPile", "classop__pile_1_1_operateur_pile.html", [

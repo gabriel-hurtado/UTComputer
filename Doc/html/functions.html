@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>My Project: Class Members</title>
+<title>UTComputer: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">UTComputer
    </div>
   </td>
  </tr>
@@ -84,9 +84,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_e"><span>e</span></a></li>
+      <li><a href="#index_f"><span>f</span></a></li>
+      <li><a href="#index_g"><span>g</span></a></li>
+      <li><a href="#index_m"><span>m</span></a></li>
       <li><a href="#index_o"><span>o</span></a></li>
+      <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_r"><span>r</span></a></li>
-      <li class="current"><a href="#index_t"><span>t</span></a></li>
+      <li><a href="#index_t"><span>t</span></a></li>
+      <li class="current"><a href="#index_0x7e"><span>~</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -124,6 +129,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
 <li>chargerContexte()
 : <a class="el" href="classop__pile_1_1_operateur_c_l_e_a_r.html#a9150ee9405a2c25479a97da856cdeeed">op_pile::OperateurCLEAR</a>
+, <a class="el" href="classop__pile_1_1_operateur_e_d_i_t.html#a910be243daf72575244ab64c846549f1">op_pile::OperateurEDIT</a>
 , <a class="el" href="classop__pile_1_1_operateur_l_a_s_t_a_r_g_s.html#a80f1569ad4d2fc753af3303a9e4e5966">op_pile::OperateurLASTARGS</a>
 , <a class="el" href="classop__pile_1_1_operateur_l_a_s_t_o_p.html#a6554a8ca17e7825341630a8a6dca762c">op_pile::OperateurLASTOP</a>
 , <a class="el" href="classop__pile_1_1_operateur_r_e_d_o.html#aac58b8957ba7df12d49c266f8e255be6">op_pile::OperateurREDO</a>
@@ -132,12 +138,56 @@ $(document).ready(function(){initNavTree('functions.html','');});
 , <a class="el" href="class_operateur_binaire.html#af5b6039483d317c3dea8101ecba3f428">OperateurBinaire</a>
 , <a class="el" href="class_operateur_unaire.html#a93cb8fddf30e0cf0eee514d66048dfbf">OperateurUnaire</a>
 </li>
+<li>commande()
+: <a class="el" href="class_controleur.html#ad73009db4ec7598da2f67b153458e749">Controleur</a>
+</li>
+<li>creer()
+: <a class="el" href="class_operateur_factory.html#a3b915ca86d2ad5f810875ef373e7351c">OperateurFactory</a>
+</li>
+<li>creerInfixLitterale()
+: <a class="el" href="class_litterale_factory.html#a0e0827c44770abb3bd67fd399ce08a36">LitteraleFactory</a>
+</li>
+<li>creerRPNLitterale()
+: <a class="el" href="class_litterale_factory.html#acdb7eab200f899d45a647f342a686ae3">LitteraleFactory</a>
+</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
 <li>enregistrer()
-: <a class="el" href="class_variables_manager.html#af96a1a2d49706805a1eb23732c92d173">VariablesManager</a>
+: <a class="el" href="class_litterale_factory.html#a6e6724f8051c5d876561c8911b5eac65">LitteraleFactory</a>
+, <a class="el" href="class_operateur_factory.html#a05dc8a5c25393276fda8d4ddf585cbce">OperateurFactory</a>
+, <a class="el" href="class_variables_manager.html#af96a1a2d49706805a1eb23732c92d173">VariablesManager</a>
+</li>
+<li>enregistrerInfix()
+: <a class="el" href="class_litterale_factory.html#a0f0a724990c30e7aa168bb09395237a4">LitteraleFactory</a>
+</li>
+<li>enregistrerSymbole()
+: <a class="el" href="class_controleur.html#a59ddac9125a9ca88a5a4ac20737069c2">Controleur</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>firstWord()
+: <a class="el" href="class_controleur.html#adaeee40501f4d19e4c9386354f4b56f0">Controleur</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
+<li>getInfixExampleOf()
+: <a class="el" href="class_litterale_factory.html#abaa762959a7d27e00f2de2092de03974">LitteraleFactory</a>
+</li>
+<li>getRPNExampleOf()
+: <a class="el" href="class_litterale_factory.html#a28dd2737d628982cf3e100397cf0b7b2">LitteraleFactory</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
+<li>MainWindow()
+: <a class="el" href="class_main_window.html#a8b244be8b7b7db1b08de2a2acb9409db">MainWindow</a>
 </li>
 </ul>
 
@@ -151,9 +201,17 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </ul>
 
 
+<h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
+<li>ParenthesisCleaner()
+: <a class="el" href="class_controleur.html#a632e50ad328bba4e1b888da36710fe00">Controleur</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
 <li>resetContexte()
 : <a class="el" href="classop__pile_1_1_operateur_c_l_e_a_r.html#a99479f701f02596c22de300648bf980a">op_pile::OperateurCLEAR</a>
+, <a class="el" href="classop__pile_1_1_operateur_e_d_i_t.html#acbe109e44b6e780abf49e5805a9e94cc">op_pile::OperateurEDIT</a>
 , <a class="el" href="classop__pile_1_1_operateur_l_a_s_t_a_r_g_s.html#a815d011328ac53da6a98417c844ac9d9">op_pile::OperateurLASTARGS</a>
 , <a class="el" href="classop__pile_1_1_operateur_l_a_s_t_o_p.html#af87ee1e2241253d1178f47fd7017bc96">op_pile::OperateurLASTOP</a>
 , <a class="el" href="classop__pile_1_1_operateur_r_e_d_o.html#a68f5b120f32817bc6a140970427ddbae">op_pile::OperateurREDO</a>
@@ -187,12 +245,20 @@ $(document).ready(function(){initNavTree('functions.html','');});
 , <a class="el" href="classop__pile_1_1_operateur_c_l_e_a_r.html#a8453920d0a2b76fef6a471209a74741b">op_pile::OperateurCLEAR</a>
 , <a class="el" href="classop__pile_1_1_operateur_d_r_o_p.html#afaa22e7e8935aae96b7bffc30a9d7e19">op_pile::OperateurDROP</a>
 , <a class="el" href="classop__pile_1_1_operateur_d_u_p.html#a7f6db1107c48a84e742dfec2ebf1b80c">op_pile::OperateurDUP</a>
+, <a class="el" href="classop__pile_1_1_operateur_e_d_i_t.html#a1d951009d74964c447958b6df2bc0017">op_pile::OperateurEDIT</a>
 , <a class="el" href="classop__pile_1_1_operateur_l_a_s_t_a_r_g_s.html#afc4dbe4a7826f8a41e08f2fb3bb331eb">op_pile::OperateurLASTARGS</a>
 , <a class="el" href="classop__pile_1_1_operateur_l_a_s_t_o_p.html#a6b2faf2db2da962d17f2f39fb20e0acd">op_pile::OperateurLASTOP</a>
 , <a class="el" href="classop__pile_1_1_operateur_r_e_d_o.html#a4c5b46b60bb20881c0c6075ee59cc13b">op_pile::OperateurREDO</a>
 , <a class="el" href="classop__pile_1_1_operateur_s_w_a_p.html#aab3b30b5b345f5017cc855ed087baa9d">op_pile::OperateurSWAP</a>
 , <a class="el" href="classop__pile_1_1_operateur_u_n_d_o.html#a2240e0c77bc5b6659d45bdd619e097f2">op_pile::OperateurUNDO</a>
 , <a class="el" href="class_operateur.html#abeed26cc53c47de1f6aa85d4fbe8f2ba">Operateur</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_0x7e"></a>- ~ -</h3><ul>
+<li>~MainWindow()
+: <a class="el" href="class_main_window.html#ae98d00a93bc118200eeef9f9bba1dba7">MainWindow</a>
 </li>
 </ul>
 </div><!-- contents -->

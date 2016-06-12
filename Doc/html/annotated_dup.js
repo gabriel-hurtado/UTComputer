@@ -41,6 +41,7 @@ var annotated_dup =
       [ "OperateurCLEAR", "classop__pile_1_1_operateur_c_l_e_a_r.html", "classop__pile_1_1_operateur_c_l_e_a_r" ],
       [ "OperateurDROP", "classop__pile_1_1_operateur_d_r_o_p.html", "classop__pile_1_1_operateur_d_r_o_p" ],
       [ "OperateurDUP", "classop__pile_1_1_operateur_d_u_p.html", "classop__pile_1_1_operateur_d_u_p" ],
+      [ "OperateurEDIT", "classop__pile_1_1_operateur_e_d_i_t.html", "classop__pile_1_1_operateur_e_d_i_t" ],
       [ "OperateurLASTARGS", "classop__pile_1_1_operateur_l_a_s_t_a_r_g_s.html", "classop__pile_1_1_operateur_l_a_s_t_a_r_g_s" ],
       [ "OperateurLASTOP", "classop__pile_1_1_operateur_l_a_s_t_o_p.html", "classop__pile_1_1_operateur_l_a_s_t_o_p" ],
       [ "OperateurPile", "classop__pile_1_1_operateur_pile.html", "classop__pile_1_1_operateur_pile" ],

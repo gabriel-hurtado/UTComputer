@@ -14,6 +14,7 @@ var searchData=
   ['operateurdivision',['OperateurDivision',['../classnumerique_1_1_operateur_division.html',1,'numerique']]],
   ['operateurdrop',['OperateurDROP',['../classop__pile_1_1_operateur_d_r_o_p.html',1,'op_pile']]],
   ['operateurdup',['OperateurDUP',['../classop__pile_1_1_operateur_d_u_p.html',1,'op_pile']]],
+  ['operateuredit',['OperateurEDIT',['../classop__pile_1_1_operateur_e_d_i_t.html',1,'op_pile']]],
   ['operateuregal',['OperateurEgal',['../classlogique_1_1_operateur_egal.html',1,'logique']]],
   ['operateureval',['OperateurEVAL',['../classexpression_1_1_operateur_e_v_a_l.html',1,'expression']]],
   ['operateurexception',['OperateurException',['../class_operateur_exception.html',1,'']]],

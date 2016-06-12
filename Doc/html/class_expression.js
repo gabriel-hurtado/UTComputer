@@ -7,7 +7,7 @@ var class_expression =
     [ "getCopy", "class_expression.html#a09c4994da84c5774b1aeab91adce6330", null ],
     [ "getExpression", "class_expression.html#a35f091d9409cecf152c2c92ba5c01afb", null ],
     [ "getExpressionNoBorders", "class_expression.html#a70fe8c7f2ab0a7bf9566cb60fc690cef", null ],
-    [ "getFromString", "class_expression.html#a63148358d6a9e186350ce7653cc57987", null ],
+    [ "getFromString", "class_expression.html#a3fb8ac2c140848283fb632025c57022b", null ],
     [ "isOperator", "class_expression.html#af23dcbb4364bb9ed3941289bb5b68430", null ],
     [ "isVariable", "class_expression.html#ab1084f2722dff1f54a9566aa6fd1e4b5", null ],
     [ "toString", "class_expression.html#a2e31f53de4a2a5cf4ccc0e5496c8129d", null ]

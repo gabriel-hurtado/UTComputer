@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wordidentifier',['WordIdentifier',['../class_word_identifier.html',1,'']]]
+  ['variablesmanager',['VariablesManager',['../class_variables_manager.html',1,'']]]
 ];

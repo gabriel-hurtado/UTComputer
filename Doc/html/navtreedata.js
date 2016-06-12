@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "My Project", "index.html", [
+  [ "UTComputer", "index.html", [
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -19,7 +19,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classconditionnel_1_1_operateur_i_f_t.html#a4101f18153035eae2fb2b2057998b6d8"
+"class_word_identifier.html#a5cb9a5381c3e79a93b8ad4fb6d0f7722"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
