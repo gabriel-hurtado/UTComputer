@@ -83,7 +83,6 @@ public:
     virtual ~LitteraleNumerique() {}
 
     /**
-     * @todo Enlever cette méthode, car getCopy() suffit.
      * @return Une copie de la littérale
     */
     virtual LitteraleNumerique* getNumericCopy() const =0;
@@ -306,8 +305,7 @@ public:
 
     /**
      * @brief Traite l'expression
-     * @todo Faire en sorte que évaluer renvoie une string postfixé, ou une littérale, qui ensuite sera empilée par l'operateur EVAL
-     * @details Transforme l'expression en une string postfixée avec les littérales infixes, qu'elle fait traiter directement par la mainWindow en appelant getNextCommand avec le paramêtre INFIX pour permettre le traitement des littérales infixes
+    * @details Transforme l'expression en une string postfixée avec les littérales infixes, qu'elle fait traiter directement par la mainWindow en appelant getNextCommand avec le paramêtre INFIX pour permettre le traitement des littérales infixes
      * @return Renvoie nullptr
     */
     Litterale* evaluer() const;
