@@ -39,6 +39,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     static MainWindow* getInstanceMainWindow();
+
 public slots:
 
 
@@ -47,7 +48,7 @@ public slots:
         Informe du traitement de la commande contenue dans le QLineEdit commande.
         En supplément de la commande, on peut rajouter q (utile pour les boutons)
     */
-    void getNextCommande(QString q="");
+    void getNextCommande(QString q="",QString litterale_mode="RPN");
     /*
         Pour ouvrir la fenetre de parametre
     */

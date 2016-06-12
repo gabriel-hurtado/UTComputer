@@ -5,6 +5,7 @@
 #include "operateur.h"
 #include "controleur.h"
 #include "variable.h"
+#include "mainwindow.h"
 #include <QVector>
 
 /*Définition des méthodes de la classe Litterale*/
@@ -211,10 +212,10 @@ Litterale* Expression::evaluer() const{
     const QMap<QString, Operateur*> op_map = OperateurFactory::getMap();
 
     //Map de tous les symboles
-    const QMap<QString,QString>& symbol_map = Controleur::getSymbolMap();
+    const QMap<QString,WordIdentifier*>& interpretation_map = Controleur::getInterpretationMap();
 
     //Traduction de Infix vers Postfix
-    QString endTarget;
+
     QString tmp;
     bool found;
 
@@ -227,16 +228,21 @@ Litterale* Expression::evaluer() const{
         }
 
         //Verification que ce n'est pas une litterale avec 2 symboles exemple : Expression ou Programme
-        if(tmp == "" && symbol_map.find(*it)!=symbol_map.end()){
-            endTarget=symbol_map.find(*it).value();
-            if(endTarget!="")
-                    throw LitteraleException("Litterale "+ QString(*it) +"..."+endTarget+" non permise","Inconnu");
+        if(tmp == "" && interpretation_map.find(*it)!=interpretation_map.end()){
+            WordIdentifier *identifier = interpretation_map.find(*it).value();
+            WordIdentifier *try1;
+            WordIdentifier *try2;
+
+            try1=dynamic_cast<RecursiveEncapsulatorIdentifier*>(identifier);
+            try2=dynamic_cast<EncapsulatorIdentifier*>(identifier);
+            if(try1 || try2)
+            {
+                    throw LitteraleException("Litterale "+ QString(*it) +" non permise","Inconnu");
+            }
         }
 
         //On tombe dans le cas ou on a une valeur
-        while(it!=s.end() && ((*it<='9' && *it>='0') || (symbol_map.find(*it)!=symbol_map.end()))){
-
-
+        while(it!=s.end() && ((*it<='9' && *it>='0') || (interpretation_map.find(*it)!=interpretation_map.end()))){
               tmp+=*it;
               if(it!=s.end())
                   it++;
@@ -321,7 +327,7 @@ Litterale* Expression::evaluer() const{
         stack.pop();
     }
 
-    Controleur::donnerInstance().commande(postfix,"INFIX");
+    MainWindow::getInstanceMainWindow()->getNextCommande(postfix,"INFIX");
     return nullptr;
 }
 

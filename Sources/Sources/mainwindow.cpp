@@ -225,8 +225,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 }
 
 
-
-
 /*
     SLOTS
 */
@@ -247,17 +245,16 @@ void MainWindow::refreshVuePile(){
     //GerantPile::donnerInstance().seeUNDOList();
 }
 
-void MainWindow::getNextCommande(QString _fromButton){
-    //pile->setMessage("");
+void MainWindow::getNextCommande(QString _fromButton,QString litterale_mode){
     QString _fromCommand = ui->commande->text();
+    ui->commande->clear();
     QString& sent(_fromCommand);
     sent+=_fromButton;
     try{
-        if(!controleur.commande(sent)){
-            ui->commande->setText(Controleur::SpaceCleaner(sent));
+        if(!controleur.commande(sent,litterale_mode)){
             throw LitteraleException("Le mot "+ controleur.firstWord(sent)+" n'as pas été reconnu","Inconnu");
         }
-        ui->commande->clear();
+
     }
     catch(LitteraleException& e){
         soundBell->play();
@@ -270,8 +267,11 @@ void MainWindow::getNextCommande(QString _fromButton){
     catch(PileException & e){
         soundBell->play();
         SendException("Pile :"+e.getInfo());
+
     }
-    ui->commande->setText(Controleur::SpaceCleaner(sent));
+    if(sent!=""){
+        ui->commande->setText(Controleur::SpaceCleaner(sent));
+    }
 
 }
 

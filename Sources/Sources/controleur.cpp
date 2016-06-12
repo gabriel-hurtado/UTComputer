@@ -10,8 +10,6 @@
 Controleur* Controleur::instanceControleur=nullptr;
 
 //Map qui contient les symboles des opérateurs
-QMap<QString,QString> Controleur::symbolMap = QMap<QString,QString>();
-
 QMap<QString,WordIdentifier*> Controleur::interpretationMap = QMap<QString,WordIdentifier*>();
 
 
@@ -234,12 +232,9 @@ QString Controleur::ParenthesisCleaner(QString s, unsigned int priority){
 }
 
 
-void Controleur::enregistrerSymbole(QString ltok, QString rtok, WordIdentifier* W){
-    QMap<QString,QString>::iterator it_map = symbolMap.find(ltok);
-    if(it_map==symbolMap.end()){
-        symbolMap[ltok]=rtok;
+void Controleur::enregistrerSymbole(QString ltok, WordIdentifier* W){
+    if(interpretationMap.find(ltok)==interpretationMap.end())
         interpretationMap[ltok]=W;
-    }
 }
 
 QString Controleur::SpaceCleaner(QString s){

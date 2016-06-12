@@ -21,14 +21,14 @@ LitteraleFactory::LitteraleFactory(){}
 
 LitteraleFactory::~LitteraleFactory(){}
 
-void LitteraleFactory::enregistrer(unsigned int prio,QString ltok, Litterale* l,QString rtok, WordIdentifier* W){
+void LitteraleFactory::enregistrer(unsigned int prio,QString ltok, Litterale* l, WordIdentifier* W){
     QMap<unsigned int,QString>::iterator it_prio = priority_map_infix.find(prio);
     if(it_prio==priority_map_infix.end()){            //Si la priorité n'est pas déja prise
         if(litterale_map.find(ltok)==litterale_map.end()){//Si le token n'est pas déja pris
             priority_map_basic[prio]=ltok;       //On enregistre le token dans la priority_map des litterales interpretables
             priority_map_infix[prio]=ltok;       //On enregistre le token dans la priority_map des littérales infixe utilisables
             litterale_map[ltok]=l;               //On enregistre le pointeur sur litterale dans la base
-            Controleur::enregistrerSymbole(ltok,rtok,W);
+            Controleur::enregistrerSymbole(ltok,W);
         }
         else
             throw LitteraleException("Token déja pris","Enregistrement");
@@ -38,14 +38,13 @@ void LitteraleFactory::enregistrer(unsigned int prio,QString ltok, Litterale* l,
 
 }
 
-void LitteraleFactory::enregistrerInfix(unsigned int prio,QString ltok, Litterale* l,QString rtok,WordIdentifier* W){
+void LitteraleFactory::enregistrerInfix(unsigned int prio,QString ltok, Litterale* l,WordIdentifier* W){
     QMap<unsigned int,QString>::iterator it_prio = priority_map_infix.find(prio);
     if(it_prio==priority_map_infix.end()){            //Si la priorité n'est pas déja prise
         if(litterale_map.find(ltok)==litterale_map.end()){//Si le token n'est pas déja pris
             priority_map_infix[prio]=ltok;
-
             litterale_map[ltok]=l;               //On enregistre le pointeur sur litterale dans la base
-            Controleur::enregistrerSymbole(ltok,rtok,W);
+            Controleur::enregistrerSymbole(ltok,W);
         }
         else
             throw LitteraleException("Token déja pris","Enregistrement");
