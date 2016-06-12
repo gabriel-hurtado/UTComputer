@@ -1,47 +1,46 @@
-entier
-entier
-div 
-entier
- mod
-rationnel
-num
-rationnel 
-den
-reel
-complexe
-re
-complexe 
-im
-and
-or
-not
+entier 77
+entier 7
+div =11
+entier 3
+ mod =2
+rationnel 24 48 /
+num = 24
+rationnel 17 5 / 
+den = 5
+reel 17.52
+complexe = 5.01$17.52
+re 5.01
+complexe 5.17 7 $ 
+im =7
+and 1
+or 0 = 1
+not 0
 addition avec clavier numerique
-tenter de dépiler plus que prévu
-division avec clavier num
-tenter de diviser par 0 
-entrer nombres
-lastargs
-multiplication
-lastop
-lastop
-neg
+tenter de dÃ©piler plus que prÃ©vu CLEAR DROP +
+division avec clavier num 5 7 /
+tenter de diviser par 0 5 0 /
+entrer nombres 7 2 *
+lastargs 
+multiplication 17 5.21 
+lastop 
+lastop 
+neg 
 dup
 drop
 swap
 clear
-entier
-entier
+entier 9.25
+entier 8 5 / 47 $
 +
 undo
 redo
-expression
-additionner 2 expressions
-diviser
-entrer une variable
-entrer un prog
-edit
-entrer la variable
-entrer le prog stocké
+expression  17 'A' STO 'A'
+additionner 2 expressions * '15+82*3'
+diviser '128*82+45' 
+entrer une variable 
+entrer un prog [DUP 0 < [NEG] IFT] 'ABS' STO
+entrer la variable dans menu
+evaleur le prog stockÃ© EVAL
 Evaluer un pro sur la pile
 editer des variables
 changer les params
@@ -49,7 +48,5 @@ editer des programmes
 quitter la calculette et revenir
 clear
 56
-neg
-prog du sujet
-sto abs
-entrer abs
+NEG
+ABS
