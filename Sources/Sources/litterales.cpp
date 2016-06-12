@@ -371,6 +371,8 @@ Litterale* Programme::traitement() const{
     QString tmp = valeur;
     tmp=tmp.remove(0,1);
     tmp=tmp.remove(tmp.length()-1,tmp.length());
+    tmp.replace('\n',' ');
+    tmp.replace(';',' ');
     Controleur::donnerInstance().commande(tmp);
     return nullptr;
 }
