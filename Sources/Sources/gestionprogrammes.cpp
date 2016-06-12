@@ -36,14 +36,19 @@ void gestionprogrammes::closeEvent(QCloseEvent *event){
 }
 
 void gestionprogrammes::on_button_save_clicked(){
-    Litterale* l = LitteraleFactory::donnerInstance().creerRPNLitterale(ui->text_program->toPlainText());
+    Litterale* l = nullptr;
+    QString tmp = ui->text_program->toPlainText();
+    if(tmp[0]=='[' && tmp[tmp.length()-1]==']')
+        l = LitteraleFactory::donnerInstance().creerRPNLitterale(tmp);
     if(estdeType<Programme>(l)){
         QString c = ui->combo_programmes->currentText();
         c.remove(0,1);
         varMan.supprimer(c);
         varMan.enregistrer(c,l);
+        ui->line_back->setText("Sauvegarde réussie");
     }
-
+    else
+        ui->line_back->setText("Erreur de sauvegarde");
 }
 
 void gestionprogrammes::on_pushButton_clicked()
