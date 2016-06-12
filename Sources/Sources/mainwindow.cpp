@@ -429,7 +429,7 @@ void MainWindow::on_button_fois_clicked()
 
 void MainWindow::on_button_diviser_clicked()
 {
-    getNextCommande(" -");
+    getNextCommande(" /");
 }
 
 void MainWindow::on_button_space_clicked()
