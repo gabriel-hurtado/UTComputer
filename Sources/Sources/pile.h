@@ -40,10 +40,10 @@ class Pile : public QObject{
     virtual ~Pile(){}
     void operator=(const Pile&);
 
-    std::vector<Litterale*> emP;//emP stands for "embedded Pile"
 
 public:
 
+    std::vector<Litterale*> emP;//emP stands for "embedded Pile"
     friend class MementoPile; //Help for the constructor of a MementoPile
     Pile& operator<<(Litterale& l);
     Pile& operator>>(Litterale*& l);
