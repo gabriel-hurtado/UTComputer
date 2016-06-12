@@ -68,8 +68,8 @@ MainWindow::MainWindow(QWidget *parent) :
     /*
         On initialise le son
     */
-    soundBell->setMedia(QUrl);
-    soundBell->setVolume(50);
+    soundBell->setMedia(QUrl("qrc:/sound/bell.wav"));
+    soundBell->setVolume(100);
 
     /*
         Création des connexions

@@ -280,7 +280,6 @@ Litterale* OperateurMultiplication::traitementOperateur(){
             delete resmult3;
             delete resmult4;
             delete ressub;
-            delete real;
             delete img;
 
             return &tmp.Simplification();
@@ -464,7 +463,9 @@ Litterale* OperateurDIV::traitementOperateur(){
     Entier* e2=estdeType<Entier>(l2);
     if(e1 && e2)
     {
+        if(e2->getValeur()!=0)
         return (new Entier(e1->getValeur()/e2->getValeur()));
+
     }
     throw OperateurException("Error in DIV");
 }
@@ -474,6 +475,7 @@ Litterale* OperateurMOD::traitementOperateur(){
     Entier* e2=estdeType<Entier>(l2);
     if(e1 && e2)
     {
+        if(e2->getValeur()!=0)
         return (new Entier((int)e1->getValeur()%(int)e2->getValeur()));
     }
     throw OperateurException("Error in MOD");

@@ -51,10 +51,8 @@ Litterale* OperateurSTO::traitementOperateur(){
         tmp=tmp.remove(tmp.length()-1,tmp.length());
 
         if(Atome::isValidAtomeName(tmp)){
-        Atome* at = new Atome(tmp);
-
-        VariablesManager::donnerInstance().enregistrer(at->getNom(),l1);
-         return nullptr;
+             VariablesManager::donnerInstance().enregistrer(tmp,l1->getCopy());
+        return nullptr;
        }
     }
     throw OperateurException("Impossible de stocker dans cette littérale");

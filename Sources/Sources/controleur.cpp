@@ -49,10 +49,9 @@ bool Controleur::commande(QString& s,QString litterale_mode) const{
             if(l){
                     Atome* a= estdeType<Atome>(l);
                         if(a){
-                            expression::OperateurUserMade op = expression::OperateurUserMade(a->getCopy());
+                            expression::OperateurUserMade op(a->getCopy());
 
                              op.traitementOperateur();
-
                         }
                         else{
                             Pile::donnerInstance()<<*l;
@@ -78,7 +77,7 @@ bool Controleur::commande(QString& s,QString litterale_mode) const{
                 Dans le cas ou ce n'était ni l'un ni l'autre, alors l'execution du mot a échoué
             */
             if(!op && !l){return false;}
-
+            delete op;
             /*
                 On peut en fin se permettre d'enlever le mot de la string vu que celui-ci à bien été executé.
             */

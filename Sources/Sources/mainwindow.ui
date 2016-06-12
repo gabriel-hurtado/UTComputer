@@ -529,12 +529,6 @@
      <height>19</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFichier">
-    <property name="title">
-     <string>Fichier</string>
-    </property>
-    <addaction name="actionOuvrir"/>
-   </widget>
    <widget class="QMenu" name="menuVues">
     <property name="title">
      <string>Options</string>
@@ -543,7 +537,6 @@
     <addaction name="actionGestion_des_programmes"/>
     <addaction name="actionEdition_des_param_tres"/>
    </widget>
-   <addaction name="menuFichier"/>
    <addaction name="menuVues"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

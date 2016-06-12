@@ -66,6 +66,8 @@ int main(int argc,char* argv[]) {
     OperateurFactory::enregistrer("LASTARGS",new op_pile::OperateurLASTARGS);
 
     OperateurFactory::enregistrer("EDIT",new op_pile::OperateurEDIT);
+    OperateurFactory::enregistrer("FORGET",new op_pile::OperateurFORGET);
+
 
     /*
         Opérateurs EXpression Updated on 5/06/16

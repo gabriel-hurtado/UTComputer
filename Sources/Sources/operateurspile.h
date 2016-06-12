@@ -6,6 +6,7 @@
 #include "mainwindow.h"
 #include "litterales.h"
 #include "operateursexpressions.h"
+#include "variable.h"
 
 namespace op_pile{
 
@@ -25,7 +26,7 @@ class OperateurDUP : public OperateurUnaire, public OperateurPile{
 
 public:
    Litterale* traitementOperateur(){Litterale* l2= l1->getCopy();
-                              Pile::donnerInstance()<<*l1;
+                              Pile::donnerInstance()<<*l1->getCopy();
                               Pile::donnerInstance()<<*l2;
                               return nullptr;
                              }
@@ -53,7 +54,7 @@ public:
 class OperateurSWAP : public OperateurBinaire, public OperateurPile{
 
 public:
-   Litterale* traitementOperateur(){Pile::donnerInstance()<<*l2; Pile::donnerInstance()<<*l1;
+   Litterale* traitementOperateur(){Pile::donnerInstance()<<*l2->getCopy(); Pile::donnerInstance()<<*l1->getCopy();
                                     return nullptr;}
 
    OperateurSWAP():OperateurBinaire(){}
@@ -109,6 +110,29 @@ public:
 
     OperateurCLEAR():OperateurPile(){}
     Operateur* getCopy() const{return new OperateurCLEAR(*this);}
+
+};
+
+//dépile la littérale au sommet de la pile.
+class OperateurFORGET : public OperateurUnaire{
+
+public:
+   Litterale* traitementOperateur(){  Expression* p=estdeType<Expression>(l1);
+
+                                        if(p){
+                                            QString val =p->getExpressionNoBorders();
+                                            if(VariablesManager::getVariable(val))
+                                            VariablesManager::donnerInstance().supprimer(val);
+
+                                        }
+                                        else{
+                                            throw OperateurException("Error in forget");
+                                        }
+                                     return nullptr;}
+
+   OperateurFORGET():OperateurUnaire(){}
+   Operateur* getCopy() const{return new OperateurFORGET(*this);}
+
 
 };
 

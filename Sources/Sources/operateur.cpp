@@ -18,8 +18,8 @@ void OperateurBinaire::chargerContexte(){
                         OperationManager::donnerInstance().add(l2->getCopy());
 }
 
-void OperateurBinaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;
-                     if(l2)  Pile::donnerInstance()<<*l2;}
+void OperateurBinaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1->getCopy();
+                     if(l2)  Pile::donnerInstance()<<*l2->getCopy();}
 
 OperateurBinaire::~OperateurBinaire(){delete l1;delete l2;}
 
@@ -67,7 +67,7 @@ void OperateurUnaire::chargerContexte(){
                       Pile::donnerInstance()>>l1;
                       OperationManager::donnerInstance().add(l1->getCopy());}
 
-void OperateurUnaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1;}
+void OperateurUnaire::resetContexte(){if(l1) Pile::donnerInstance()<<*l1->getCopy();}
 
 OperateurUnaire::OperateurUnaire(Litterale* lit1):Operateur(),l1(lit1->getCopy()){}
 

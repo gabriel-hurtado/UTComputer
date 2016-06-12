@@ -15,7 +15,7 @@ void VariablesManager::libererInstance(){
     instance=nullptr;
 }
 
-void VariablesManager::enregistrer(const QString& nom,Litterale* obj){
+void VariablesManager::enregistrer(QString nom,Litterale* obj){
     if(estdeType<Programme>(obj))
         nb_prog++;
     else
