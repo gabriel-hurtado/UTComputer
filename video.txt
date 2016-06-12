@@ -3,10 +3,10 @@ entier 7
 div =11
 entier 3
  mod =2
-rationnel 2.38 57 /
-num = 2.38
-rationnel 17 5.01 / 
-den = 5.01
+rationnel 24 48 /
+num = 24
+rationnel 17 5 / 
+den = 5
 reel 17.52
 complexe = 5.01$17.52
 re 5.01
