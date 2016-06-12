@@ -69,7 +69,6 @@ public:
      * @return Retourne une référence sur la pile pour effectuer des retraits les uns à la suite des autres
      */
     Pile& operator>>(Litterale*& l);
-    void voirPile() const;
     void viderPile(){emP.clear();
                      modificationEtat();}
     static Pile& donnerInstance();

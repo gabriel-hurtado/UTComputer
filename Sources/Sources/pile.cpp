@@ -41,7 +41,7 @@ Pile& Pile::operator<<(Litterale& l){
         sauverPile();
 
     emP.push_back(&l);
-    std::cout<<"PUSHED "+l.toString().toStdString()+"\n";
+    //std::cout<<"PUSHED "+l.toString().toStdString()+"\n";
     modificationEtat();
     return *this;
 }
@@ -60,10 +60,7 @@ Pile& Pile::operator>>(Litterale*& l){
     else throw PileException("Pile vide, impossible de dépiler");
 }
 
-void Pile::voirPile() const {
-    for(Litterale* n : emP)
-        std::cout<<n->toString().toStdString()<<std::endl;
-}
+
 
 MementoPile* Pile::saveInMemento() const{
     return new MementoPile(emP);
