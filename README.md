@@ -6,7 +6,7 @@ __TODO :__
 A faire:
 
   1. ~~Afficher , modifier  programmes~~ J 
-  2. Les opérateurs logiques (<= et compagnie) ne sont pas linkés sur le clavier numérique
+  2. ~~Les opérateurs logiques (<= et compagnie) ne sont pas linkés sur le clavier numérique~~
   3. Rapport
   4. Vidéo 
 
